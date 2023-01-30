@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 import { MainMenuButton } from "../buttons";
+import Header from "../header";
 
 interface Props {}
   
@@ -11,7 +12,8 @@ const div = styled.div``;
 const Home: React.FC<Props> = ({}) => { 
   return (
     <div>
-      <Link to="/Settings">
+      <Header/>
+      <Link to="/multiradical">
         <MainMenuButton>Multi-Radical Search</MainMenuButton>
       </Link>
     </div>

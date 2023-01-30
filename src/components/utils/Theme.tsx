@@ -1,6 +1,8 @@
 import React from "react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
+import Roboto from "../../assets/fonts/Roboto/Roboto-Regular.ttf";
+
 interface Props {
   children?: React.ReactNode;
 }
@@ -8,9 +10,12 @@ interface Props {
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Roboto';
-    font-weight: normal;
-    font-style: normal;
-    src: url('./fonts/roboto-v27-latin-300.eot');
+    src: url(${Roboto});
+  }
+
+  * {
+    font-family: 'Roboto';
+    font-size: 62.5%;
   }
 `;
 

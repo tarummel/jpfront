@@ -16,7 +16,7 @@ const Button = styled.button`
   justify-content: center;
   border: none;
   &:hover {
-    background: ${props => props.theme.colors.buttonHover};;
+    background: ${props => props.theme.colors.buttonHover};
   }
 `;
 

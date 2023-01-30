@@ -9,6 +9,7 @@ function AppRouter() {
       <Route path="/about" element={<About />} />
       <Route path="/help" element={<Help />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/multiradical" element={<Settings />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
