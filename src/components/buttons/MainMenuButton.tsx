@@ -2,26 +2,27 @@ import React from "react";
 import styled from "styled-components"
 
 interface Props {
-  text: string;
-//   color: string;
   children?: React.ReactNode;
-//   height: string;
-//   width: string
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = styled.button`
-  background: black;
-  color: white;
-  border-radius: 7px;
-  padding: 20px;
-  margin: 10px;
-  font-size: 16px;
+  background: ${props => props.theme.colors.buttonPrimary};
+  color: ${props => props.theme.colors.textPrimary};
+  font-size: ${props => props.theme.fontSizes.large};
+  height: 40px;
+  width: 240px;
+  border-radius: 32px;
+  justify-content: center;
+  border: none;
+  &:hover {
+    background: ${props => props.theme.colors.buttonHover};;
+  }
 `;
 
-const MainMenuButton: React.FC<Props> = ({ onClick, text }) => { 
+const MainMenuButton: React.FC<Props> = ({ onClick, children }) => { 
   return (
-    <Button onClick={onClick}>{text}</Button>
+    <Button onClick={onClick}>{children}</Button>
   );
 }
 

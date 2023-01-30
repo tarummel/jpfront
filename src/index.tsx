@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import AppRouter from './components/utils/AppRouter';
 import reportWebVitals from './reportWebVitals';
-import Theme from "./components/utils/Theme";
+import { App, Theme } from "./components/utils";
 import './i18n';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -14,9 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Theme>
-        <AppRouter />
-      </Theme>
+        <Theme>
+          <App>
+            <AppRouter />
+          </App>
+        </Theme>
     </BrowserRouter>
   </React.StrictMode>
 );
