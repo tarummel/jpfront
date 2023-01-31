@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 import { MainMenuButton } from "../buttons";
-import Header from "../header";
+import Header from "../Header";
 
 interface Props {}
   
