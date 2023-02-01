@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-interface Props {
-  children?: React.ReactNode;
-}
+interface Props {}
 
 const Container = styled.div`
   display: flex;
@@ -21,7 +19,7 @@ const Box = styled.div`
   justify-content: center;
   height: 36px;
   width: 36px;
-  padding: 10px 10px 10px;
+  padding: 10px;
   border-top: 1px solid ${props => props.theme.colors.textPrimary};
   &:hover {
     background-color: ${props => props.theme.colors.buttonHover};
@@ -33,7 +31,7 @@ const Icon = styled.svg`
   fill: white;
 `;
 
-const Header: React.FC<Props> = ({}) => { 
+const Header: React.FC<Props> = () => {
   return (
     <Container>
       <Link to="/">
@@ -46,14 +44,14 @@ const Header: React.FC<Props> = ({}) => {
       <Link to="/about">
         <span title="About">
           <Box>
-            <Icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="40" d="M196 220h64v172"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="40" d="M187 396h138"/><path d="M256 160a32 32 0 1132-32 32 32 0 01-32 32z"/></Icon>
+            <Icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="40" d="M196 220h64v172"/><path fill="none" stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="40" d="M187 396h138"/><path d="M256 160a32 32 0 1132-32 32 32 0 01-32 32z"/></Icon>
           </Box>
         </span>
       </Link>
       <Link to="/help">
         <span title="Help">
           <Box>
-            <Icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160 164s1.44-33 33.54-59.46C212.6 88.83 235.49 84.28 256 84c18.73-.23 35.47 2.94 45.48 7.82C318.59 100.2 352 120.6 352 164c0 45.67-29.18 66.37-62.35 89.18S248 298.36 248 324" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-width="40"/><circle cx="248" cy="399.99" r="32" fill="currentColor"/></Icon>
+            <Icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160 164s1.44-33 33.54-59.46C212.6 88.83 235.49 84.28 256 84c18.73-.23 35.47 2.94 45.48 7.82C318.59 100.2 352 120.6 352 164c0 45.67-29.18 66.37-62.35 89.18S248 298.36 248 324" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeWidth="40"/><circle cx="248" cy="399.99" r="32" fill="currentColor"/></Icon>
           </Box>
         </span>
       </Link>

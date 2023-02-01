@@ -12,7 +12,7 @@ const Button = styled.button`
   font-size: ${props => props.theme.fontSizes.large};
   height: 40px;
   width: 240px;
-  border-radius: 32px;
+  border-radius: 40px;
   justify-content: center;
   border: none;
   &:hover {

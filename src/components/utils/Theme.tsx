@@ -29,7 +29,7 @@ const theme = {
     buttonSecondary: "#000000",
     buttonDisabled: "#878787",
     buttonSelected: "#D4AF37",
-    buttonHover: "#280C75",
+    buttonHover: "#3E15B0",
   },
   fontSizes: {
     small: "1.6rem",
