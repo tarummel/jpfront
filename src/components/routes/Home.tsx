@@ -8,17 +8,22 @@ import SearchBar from "../SearchBar";
 
 interface Props {}
   
-const div = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+`;
 
 const Home: React.FC<Props> = () => { 
   return (
-    <div>
-      <Header/>
+    <Container>
       <SearchBar />
       <Link to="/multiradical">
         <MainMenuButton>Multi-Radical Search</MainMenuButton>
       </Link>
-    </div>
+    </Container>
   );
 }
 

@@ -7,15 +7,15 @@ interface Props {}
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   position: absolute;
-  top: 0;
+  top: 55px;
   right: 0;
   border-left: 1px solid ${props => props.theme.colors.textPrimary};
   border-bottom: 1px solid ${props => props.theme.colors.textPrimary};
 `;
 
 const Box = styled.div`
+  background: ${props => props.theme.colors.buttonPrimary};
   justify-content: center;
   height: 36px;
   width: 36px;

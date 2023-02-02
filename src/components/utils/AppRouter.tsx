@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import { About, Error, Help, Home, Settings} from "../routes";
+import { About, Error, Help, Home, Multiradical, Settings} from "../routes";
 
 function AppRouter() {
   return (
@@ -9,7 +9,7 @@ function AppRouter() {
       <Route path="/about" element={<About />} />
       <Route path="/help" element={<Help />} />
       <Route path="/settings" element={<Settings />} />
-      <Route path="/multiradical" element={<Settings />} />
+      <Route path="/multiradical" element={<Multiradical />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

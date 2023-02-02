@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components"
+import Header from "./Header"
 
 interface Props {
   children?: React.ReactNode;
@@ -18,7 +19,10 @@ const Container = styled.div`
 
 const App: React.FC<Props> = ({ children }) => { 
   return (
-    <Container className="App">{children}</Container>
+    <Container className="App">
+      <Header />
+      {children}
+    </Container>
   );
 }
 
