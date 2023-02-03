@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components"
+import { isPropertySignature } from "typescript";
 
 interface Props {
+  display: string;
   radical: string;
   state: number;
   handleClick: (radical: string) => void;
@@ -21,9 +23,9 @@ const Button = styled.button`
   }
 `;
 
-const StateButton: React.FC<Props> = ({ radical, state, handleClick }) => { 
+const StateButton: React.FC<Props> = ({ display, radical, handleClick }) => {
   return (
-    <Button onClick={() => handleClick(radical)}>{radical}</Button>
+    <Button onClick={() => handleClick(radical)}>{display}</Button>
   );
 }
 

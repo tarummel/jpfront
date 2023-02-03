@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import Roboto from "../../assets/fonts/Roboto/Roboto-Regular.ttf";
+import NotoSansJP from "../../assets/fonts/NotoSansJP/NotoSansJP-Regular.otf";
 
 interface Props {
   children?: React.ReactNode;
@@ -12,9 +13,12 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto';
     src: url(${Roboto});
   }
-
+  @font-face {
+    font-family: 'NotoSansJP';
+    src: url(${NotoSansJP});
+  }
   * {
-    font-family: 'Roboto';
+    font-family: 'NotoSansJP', 'Roboto';
     font-size: 62.5%;
   }
 `;

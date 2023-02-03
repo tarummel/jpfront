@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { App, Theme } from "./components/utils";
 import './i18n';
 import { BrowserRouter } from 'react-router-dom';
+<script src="/js/intlTelInput.min.js" charSet="utf-8"></script>
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

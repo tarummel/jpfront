@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components"
 import StateButton from "../buttons/StateButton"
+
+interface Props {}
+
+interface RadicalData {
+  [key: number]: string;
+}
+
+interface RadicalState {
+  [key: string]: number;
+}
 
 const radicals:RadicalData = {
   1:	"一｜丶ノ乙亅",
@@ -20,16 +29,6 @@ const radicals:RadicalData = {
   17:	"龠"
 }
 
-interface Props {}
-
-interface RadicalData {
-  [key: number]: string;
-}
-
-interface RadicalState {
-  [key: string]: number;
-}
-
 const Multiradical: React.FC<Props> = () => {
   // 0 = disabled, 1 = unselected, 2 = selected
   const [radicalState, setRadicalState] = useState<RadicalState>({})
@@ -37,38 +36,83 @@ const Multiradical: React.FC<Props> = () => {
 
   useEffect(() => {
     const state:RadicalState = {}
-    console.log('loading radical state')
     for (const key in radicals) {
-      state[radicals[key] as keyof RadicalState] = 1
+      const value = radicals[key]
+      for (var i = 0; i < value.length; i++) {
+        const pair = getPair(value, i)
+        if (pair) {
+          state[pair as keyof RadicalState] = 1
+          // skip the next element since its been consumed
+          i++
+        } else {
+          state[value[i] as keyof RadicalState] = 1
+        }
+      }
     };
-
     setRadicalState(state)
   }, []);
 
-  function arrayRemove(arr: string[], val: string): string[] { 
+  const arrayRemove = (arr: string[], val: string): string[] => { 
     return arr.filter(function(ele) {
         return ele !== val; 
     });
   }
 
-  function handleSelection(radical: string): void {
-    if (selectedRadicals.includes(radical)) {
-      setSelectedRadicals(arrayRemove(selectedRadicals, radical))
+  const getPair = (chars: string, index: number): string | null => {
+    if (index === chars.length - 1) {
+      return null
     }
-    const newSelected = selectedRadicals.concat(radical)
-    console.log(`newSelected: ${newSelected}`)
-    setSelectedRadicals(newSelected)
+  
+    const left = chars[index].charCodeAt(0)
+    const right = chars[index+1].charCodeAt(0)
+
+    let char = null
+    if ((55296 <= left && left <= 57343) && (55296 <= right && right <= 57343) ) {
+      // left/right surrogate pair
+      char = String.fromCharCode(left) + String.fromCharCode(right);
+    }
+    return char
   }
 
-  const buttonList = Object.entries(radicals).map(([key, value], i) => {
-    return value.split("").map((r: string, j: number) => {
-      return <StateButton key={`${i+j}`} radical={r} state={radicalState[r]} handleClick={() => handleSelection} />
-    })
-  });
+  const handleSelection = (radical: string): void => {
+    
+    if (selectedRadicals.includes(radical)) {
+      const newSelected = arrayRemove(selectedRadicals, radical)
+      setSelectedRadicals(newSelected)
+      setRadicalState({...radicalState, [radical]: 1})
+    } else {
+      const newSelected = selectedRadicals.concat(radical)
+      setSelectedRadicals(newSelected)
+      setRadicalState({...radicalState, [radical]: 2})
+    }
+    console.log(`handleSelection: ${radical} ${radicalState[radical]}`)
+    console.log(radicalState)
+  }
+
+  const radicalButtonsArray = (): React.ReactElement[] => {
+    let buttons: React.ReactElement[] = []
+
+    for (const key in radicals) {
+      const rads = radicals[key]
+      for (var i = 0; i < rads.length; i++) {
+        const eKey = `${key}${i}`
+        const pair = getPair(rads, i)
+        if (pair) {
+          buttons.push(<StateButton key={eKey} display={pair} radical={pair} state={radicalState[pair]} handleClick={handleSelection} />)
+          // skip the next element since its been consumed
+          i++
+        } else {
+          buttons.push(<StateButton key={eKey} display={rads[i]} radical={rads[i]} state={radicalState[rads[i]]} handleClick={handleSelection} />)
+        }
+      }
+    }
+
+    return buttons
+  };
 
   return (
     <div>
-      {buttonList}
+      {radicalButtonsArray()}
     </div>
   );
 }
