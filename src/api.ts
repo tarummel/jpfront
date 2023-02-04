@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { AxiosResponse } from "axios";
-import internal from 'stream';
 
 // e.g. localhost:8008/api
 const JPCORE_URL = process.env.JPCORE_URL as string
@@ -62,8 +61,6 @@ async function getRadicalsSimplified(): Promise<AxiosResponse<SimplifiedRadicals
     throw new Error(`Axios - Error with getRadicalsSimplfied: ${error.message}`);
   }
 }
-
-
 
 export default {
   getRadicalsList,
