@@ -1,50 +1,17 @@
 import axios from 'axios';
 import { AxiosResponse } from "axios";
 
-// e.g. localhost:8008/api
-const JPCORE_URL = process.env.JPCORE_URL as string
+// e.g. http://localhost:8008/api
+const JPCORE_URL = process.env.REACT_APP_JPCORE_URL as string
 
-interface RadicalsListResponse {
-  data: {
-    number?: number;
-    radical: string;
-    meaning: string;
-    Reading: string;
-    position?: string;
-    frequency: number;
-    notes?: string;
-  }
-}
-
-interface SimplifiedRadicalsListResponse {
-  data: Map<string, Array<string>>;
-}
-
-// interface KanjiResponse {
-//   data: {
-//     jentry: {
-//       jkanji: {
-//         [
-//           content: string
-//           information: string;
-//           restrictions?: string;
-//         ]
-//       }
-//       jreading: {
-
-//       }
-//       jsense: {
-
-//       }
-//     }
-//   }
-// }
+axios.defaults.baseURL = JPCORE_URL;
+axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
 
 function buildUrl(path: string): string {
   return `${JPCORE_URL}/${path}`;
 }
 
-async function getRadicalsList(): Promise<AxiosResponse<RadicalsListResponse>> {
+async function getRadicalsList(): Promise<AxiosResponse<any>> {
   try {
     const response = await axios.get(buildUrl('radicals/'));
     return response.data;
@@ -53,16 +20,35 @@ async function getRadicalsList(): Promise<AxiosResponse<RadicalsListResponse>> {
   }
 }
 
-async function getRadicalsSimplified(): Promise<AxiosResponse<SimplifiedRadicalsListResponse>> {
+async function getRadicalsSimplified(): Promise<AxiosResponse<any>> {
   try {
-    const response = await axios.get(buildUrl('radicals'), { params: { option: 'strokes' }})
-    return response.data
+    return await axios.get(buildUrl('radicals'), { params: { option: 'by_stroke_count' }});
   } catch (error: any) {
-    throw new Error(`Axios - Error with getRadicalsSimplfied: ${error.message}`);
+    throw new Error(`Axios - Error with getRadicalsSimplified: ${error.message}`);
   }
 }
 
-export default {
+async function getMatchingKanjiByRadical(radicals: string[]): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji`));
+  } catch (error: any) {
+    throw new Error(`Axios - Error with getMatchingKanjiByRadical: ${error.message}`)
+  }
+}
+
+async function getMatchingKanjiByRadicalSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji`), { params: { option: 'by_stroke_count' }});
+  } catch (error: any) {
+    throw new Error(`Axios - Error with getRadicalsSimplified: ${error.message}`);
+  }
+}
+
+const API = {
   getRadicalsList,
   getRadicalsSimplified,
-}
+  getMatchingKanjiByRadical,
+  getMatchingKanjiByRadicalSimplified,
+};
+
+export default API;

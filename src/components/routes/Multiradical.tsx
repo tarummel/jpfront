@@ -1,36 +1,21 @@
 import React, { useEffect, useState } from "react";
-// import api from "../../api";
+import { Link } from "react-router-dom"
+import API from "../../api";
 import styled from "styled-components";
 import StateButton from "../buttons/StateButton"
 
 interface Props {}
 
-interface RowCharacterData {
-  [key: number]: string[];
+interface RowDataI {
+  [index: string]: string[];
 }
 
 // 0 = disabled, 1 = unselected, 2 = selected
-interface RadicalState {
-  [key: string]: number;
+interface RadicalsStateI {
+  [radical: string]: number;
 }
 
-const kanjiData:RowCharacterData = {
-  8: ["\u600d", "\u577e", "\u5e2b", "\u4e74", "\u6935", "\u4f9f", "\u5937", "\u5388", "\u5bb1", "\u601c", "\u5cef", "\u75c4", "\u7146", "\u6ccd", "\u5947", "\u4f8c", "\u5cb3", "\u80b1", "\u9637", "\u6c5b", "\u6046", "\u59b0", "\u7573", "\u4fd2", "\u74b5", "\u5de9", "\u5777", "\u62ba", "\u518d", "\u550f", "\u830a", "\u547d", "\u541b", "\u739e", "\u82ef", "\u5cbb", "\u533c", "\u4f84", "\u90b1", "\u5629", "\u5275", "\u4f39", "\u6614", "\u6238", "\u5c2d", "\u5ff5", "\u6216", "\u5775", "\u5ba3", "\u56f9", "\u9063", "\u6060", "\u6052", "\u79e1", "\u7761", "\u5ca2", "\u4f6e", "\u8350", "\u519d", "\u5142", "\u6d39", "\u4f91", "\u4fc5", "\u5178", "\u59e4", "\u692a", "\u57a3", "\u565e", "\u7230", "\u770a", "\u4e55", "\u751a", "\u7599", "\u7506", "\u6c5a", "\u5c9d", "\u6cc6", "\u62f5", "\u793f", "\u52a5", "\u4f70", "\u5fb0", "\u753b", "\u4f97", "\u52b6", "\u5ef6", "\u5cb4", "\u59ee", "\u9763", "\u80da", "\u59c3", "\u82e5", "\u4f69", "\u5ea6", "\u4f9b"],
-  39: ["鸝", "爚", "齵", "鞼", "欛", "顧"],
-  40: ["髕", "鱃", "夒", "鬒", "籥"],
-  41: ["鯿", "巘"],
-  42: ["龣", "鑰", "夓", "禴"],
-  43: ["龡", "黮", "巎"],
-  44: ["夔"],
-  45: ["龢"],
-  46: ["齇", "齄"],
-  49: ["黰"],
-  50: ["虁", "鸙"],
-  58: ["龥"],
-  64: ["籲"]
-}
-
-const radicalsData:RowCharacterData = {
+const ALL_RADICALS:RowDataI = {
   1: ["\u4e00", "\uff5c", "\u4e36", "\u30ce", "\u4e59", "\u4e85"],
   2: ["\ud840\udc89", "\u4e5d", "\u4e8c", "\u4ea0", "\u4eba", "\u2e85", "\ud840\udda2", "\u513f", "\u5165", "\u30cf", "\u4e37", "\u5182", "\u5196", "\u51ab", "\u51e0", "\u51f5", "\u5200", "\u2e89", "\u529b", "\u52f9", "\u5315", "\u531a", "\u5341", "\u535c", "\u5369", "\u5382", "\u53b6", "\u53c8", "\u30de", "\u30e6", "\u4e43"],
   3: ["\u4ea1", "\u53e3", "\u56d7", "\u571f", "\u58eb", "\u5902", "\u590a", "\u5915", "\u5927", "\u5973", "\u5b50", "\u5b80", "\u5bf8", "\u5c0f", "\u2e8c", "\u5c22", "\u5c38", "\u5c6e", "\u5c71", "\u5ddb", "\u5ddd", "\u5de5", "\u5df2", "\u5dfe", "\u5e72", "\u5e7a", "\u5e7f", "\u5ef4", "\u5efe", "\u5f0b", "\u5f13", "\u30e8", "\u5f51", "\u5f61", "\u5f73", "\u2e96", "\u624c", "\u2ea1", "\u2ea8", "\u2ebe", "\u2ecc", "\u2ecf", "\u2ed6", "\u4e5f", "\u53ca", "\u4e45"],
@@ -72,39 +57,59 @@ const RowNumber = styled.div`
   text-align: center;
   justify-content: center;
   width: 36px;
+  min-height: 36px;
   border-radius: 5px;
   margin: 2px;
 `;
 
-const RowRadical = styled.div`
+const RowElements = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-const RowKanji = styled.a`
+const KanjiLink = styled(Link)`
   font-size: ${props => props.theme.fontSizes.large};
+  color: white;
+  text-decoration: none;
+  :link {
+    color: white;
+  }
+  visited {
+    color: hotpink;
+  }
 `;
 
 const Multiradical: React.FC<Props> = () => {
   
-  const [radicalState, setRadicalState] = useState<RadicalState>({})
+  const [kanjiData, setKanjiData] = useState<RowDataI>({})
+  const [radicalsState, setRadicalsState] = useState<RadicalsStateI>({})
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([])
-  // const [kanji, setKanji] = useState<RowCharacterData>([])
 
   useEffect(() => {
-    const state:RadicalState = {}
-    for (const key in radicalsData) {
-      const value = radicalsData[key]
+    const state:RadicalsStateI = {}
+    for (const key in ALL_RADICALS) {
+      const value = ALL_RADICALS[key]
       for (var i = 0; i < value.length; i++) {
         state[value[i]] = 1
       }
     };
-    setRadicalState(state)
+    setRadicalsState(state)
   }, []);
+
+  useEffect(() => {
+    if (selectedRadicals.length) {
+      API.getMatchingKanjiByRadicalSimplified(selectedRadicals).then((response) => {
+        console.log(response.data.data)
+        setKanjiData(response.data.data)
+      });
+    } else {
+      setKanjiData({})
+    }
+  }, [selectedRadicals]);
 
   const arrayRemove = (arr: string[], val: string): string[] => { 
     return arr.filter(function(ele) {
-        return ele !== val; 
+        return ele !== val;
     });
   };
 
@@ -112,47 +117,45 @@ const Multiradical: React.FC<Props> = () => {
     if (selectedRadicals.includes(radical)) {
       const newSelected = arrayRemove(selectedRadicals, radical)
       setSelectedRadicals(newSelected)
-      setRadicalState({...radicalState, [radical]: 1})
+      setRadicalsState({...radicalsState, [radical]: 1})
     } else {
       const newSelected = selectedRadicals.concat(radical)
       setSelectedRadicals(newSelected)
-      setRadicalState({...radicalState, [radical]: 2})
+      setRadicalsState({...radicalsState, [radical]: 2})
     }
-    console.log(`handleSelection: ${radical} ${radicalState[radical]}`)
-    console.log(radicalState)
   };
 
   const buildRadicalRows = (): React.ReactElement[] => {
     const rows: React.ReactElement[] = []
 
-    for (const key in radicalsData) {
-      const buttons = radicalsData[key].map((rad, i) => {
-        return <StateButton key={`${key}${i}`} radical={rad} state={radicalState[rad]} handleClick={handleSelection} />
+    for (const key in ALL_RADICALS) {
+      const buttons = ALL_RADICALS[key].map((rad,i) => {
+        return <StateButton key={`rb${i}`} radical={rad} state={radicalsState[rad]} handleClick={handleSelection} />
       });
 
       rows.push((
-        <Row>
-          <RowNumber>{key}</RowNumber>
-          <RowRadical>{buttons}</RowRadical>
+        <Row key={`r${key}`}>
+          <RowNumber key={`rn${key}`}>{key}</RowNumber>
+          <RowElements key={`re${key}`}>{buttons}</RowElements>
         </Row>
       ))
     };
 
     return rows
-  }
+  };
 
   const buildKanjiRows = (): React.ReactElement[] => {
     const rows: React.ReactElement[] = []
 
     for (const key in kanjiData) {
-      const buttons = kanjiData[key].map((kanji, i) => {
-        return <RowKanji>{kanji}</RowKanji>
+      const buttons = kanjiData[key].map((kanji,i) => {
+        return <KanjiLink key={`rk${i}`} to={`/kanji/${kanji}`}>{kanji}</KanjiLink>
       });
 
       rows.push((
-        <Row>
-          <RowNumber>{key}</RowNumber>
-          {buttons}
+        <Row key={`r${key}`}>
+          <RowNumber key={`rn${key}`}>{key}</RowNumber>
+          <RowElements key={`re`}>{buttons}</RowElements>
         </Row>
       ))
     };
@@ -170,6 +173,6 @@ const Multiradical: React.FC<Props> = () => {
       </Card>
     </Container>
   );
-}
+};
 
 export default Multiradical;
