@@ -8,17 +8,20 @@ interface Props {
 }
 
 const Button = styled.button<Pick<Props, "state">>`
-  background: ${(props) => props.state === 2 ? props.theme.colors.buttonSelected : props.theme.colors.buttonPrimary};
+  
   color: ${props => props.theme.colors.textPrimary};
-  font-size: ${props => props.theme.fontSizes.large};
+  font-size: ${props => props.theme.fontSizes.xlarge};
   height: 36px;
   width: 36px;
   border-radius: 5px;
-  justify-content: center;
+  text-align: center;
   border: none;
   margin: 1px;
   &:hover:enabled {
     background: ${props => props.theme.colors.buttonHover};
+  }
+  &:enabled {
+    background: ${(props) => props.state === 2 ? props.theme.colors.buttonSelected : props.theme.colors.buttonPrimary};
   }
   &:disabled {
     pointer-events: none;
@@ -28,7 +31,7 @@ const Button = styled.button<Pick<Props, "state">>`
 
 const StateButton: React.FC<Props> = ({ radical, state, handleClick }) => {
   return (
-    <Button state={state} disabled={!state} onClick={() => handleClick(radical)}>{radical}</Button>
+    <Button disabled={!state} state={state} onClick={() => handleClick(radical)}>{radical}</Button>
   );
 }
 

@@ -33,33 +33,48 @@ const ALL_RADICALS:RowDataI = {
   17: ["\u9fa0"]
 }
 
+const getDefaultRadicalsState = (): RadicalsStateI => {
+  const state:RadicalsStateI = {}
+  for (const key in ALL_RADICALS) {
+    const radicals = ALL_RADICALS[key]
+    for (let i = 0; i < radicals.length; i++) {
+      state[radicals[i]] = 1
+    }
+  };
+  return state
+}
+
+const DEFAULT_STATE = getDefaultRadicalsState()
+
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: row;  
 `;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;  
   background: ${props => props.theme.colors.elementPrimary};
-  width: 700px;
-  margin-right: 20px;
+  margin-right: 40px;
 `;
 
 const Row = styled.div`
   display: flex;
   flex-direction: row;
+  width: 650px;
+  
 `;
 
 const RowNumber = styled.div`
+  display: flex;
+  flex-shrink: 0;
   background: ${props => props.theme.colors.buttonDisabled};
-  font-size: ${props => props.theme.fontSizes.large};
-  text-align: center;
+  font-size: ${props => props.theme.fontSizes.xlarge};
   justify-content: center;
   width: 36px;
   min-height: 36px;
   border-radius: 5px;
-  margin: 2px;
+  margin: 1px;
 `;
 
 const RowElements = styled.div`
@@ -68,7 +83,7 @@ const RowElements = styled.div`
 `;
 
 const KanjiLink = styled(Link)`
-  font-size: ${props => props.theme.fontSizes.large};
+  font-size: ${props => props.theme.fontSizes.xlarge};
   color: white;
   text-decoration: none;
   :link {
@@ -80,32 +95,47 @@ const KanjiLink = styled(Link)`
 `;
 
 const Multiradical: React.FC<Props> = () => {
-  
-  const [kanjiData, setKanjiData] = useState<RowDataI>({})
-  const [radicalsState, setRadicalsState] = useState<RadicalsStateI>({})
+
+  const [radicalsState, setRadicalsState] = useState<RadicalsStateI>({...DEFAULT_STATE})
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([])
+  const [kanjiData, setKanjiData] = useState<RowDataI>({})
 
   useEffect(() => {
-    const state:RadicalsStateI = {}
-    for (const key in ALL_RADICALS) {
-      const value = ALL_RADICALS[key]
-      for (var i = 0; i < value.length; i++) {
-        state[value[i]] = 1
-      }
-    };
-    setRadicalsState(state)
-  }, []);
+    let newState = {...DEFAULT_STATE}
 
-  useEffect(() => {
     if (selectedRadicals.length) {
-      API.getMatchingKanjiByRadicalSimplified(selectedRadicals).then((response) => {
-        console.log(response.data.data)
-        setKanjiData(response.data.data)
-      });
+      // add selected state
+      for (let i = 0; i < selectedRadicals.length; i++) {
+        newState[selectedRadicals[i]] = 2
+      }
+
+      const applyInvertedList = async () => {
+        const response = await API.getInvertedRadicalsSimplified(selectedRadicals)
+        const data = response.data.data
+
+        for (let i = 0; i < data.length; i++) {
+          newState[data[i]] = 0
+        }
+      };
+
+      // add disabled state
+      applyInvertedList()
+    }
+
+    setRadicalsState(newState)
+
+    const getAndSetMatchingKanji = async () => {
+      const response = await API.getMatchingKanjiByRadicalSimplified(selectedRadicals)
+      setKanjiData(response.data.data)
+    }
+
+    // update shown kanji
+    if (selectedRadicals.length) {
+      getAndSetMatchingKanji()
     } else {
       setKanjiData({})
-    }
-  }, [selectedRadicals]);
+    }    
+  }, [selectedRadicals]);  
 
   const arrayRemove = (arr: string[], val: string): string[] => { 
     return arr.filter(function(ele) {
@@ -114,15 +144,11 @@ const Multiradical: React.FC<Props> = () => {
   };
 
   const handleSelection = (radical: string): void => {
-    if (selectedRadicals.includes(radical)) {
-      const newSelected = arrayRemove(selectedRadicals, radical)
-      setSelectedRadicals(newSelected)
-      setRadicalsState({...radicalsState, [radical]: 1})
-    } else {
-      const newSelected = selectedRadicals.concat(radical)
-      setSelectedRadicals(newSelected)
-      setRadicalsState({...radicalsState, [radical]: 2})
-    }
+    const newSelected = selectedRadicals.includes(radical) 
+      ? arrayRemove(selectedRadicals, radical) 
+      : selectedRadicals.concat(radical)
+
+    setSelectedRadicals(newSelected)
   };
 
   const buildRadicalRows = (): React.ReactElement[] => {

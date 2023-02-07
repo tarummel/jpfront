@@ -22,7 +22,7 @@ async function getRadicalsList(): Promise<AxiosResponse<any>> {
 
 async function getRadicalsSimplified(): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get(buildUrl('radicals'), { params: { option: 'by_stroke_count' }});
+    return await axios.get(buildUrl('radicals/'), { params: { simple: true }});
   } catch (error: any) {
     throw new Error(`Axios - Error with getRadicalsSimplified: ${error.message}`);
   }
@@ -30,7 +30,7 @@ async function getRadicalsSimplified(): Promise<AxiosResponse<any>> {
 
 async function getMatchingKanjiByRadical(radicals: string[]): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji`));
+    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji/`));
   } catch (error: any) {
     throw new Error(`Axios - Error with getMatchingKanjiByRadical: ${error.message}`)
   }
@@ -38,9 +38,25 @@ async function getMatchingKanjiByRadical(radicals: string[]): Promise<AxiosRespo
 
 async function getMatchingKanjiByRadicalSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji`), { params: { option: 'by_stroke_count' }});
+    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji/`), { params: { simple: true }});
   } catch (error: any) {
-    throw new Error(`Axios - Error with getRadicalsSimplified: ${error.message}`);
+    throw new Error(`Axios - Error with getMatchingKanjiByRadicalSimplified: ${error.message}`);
+  }
+}
+
+async function getRelatedRadicalsSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/related/`), { params: { simple: true }});
+  } catch (error: any) {
+    throw new Error(`Axios - Error with getRelatedRadicalsSimplified: ${error.message}`);
+  }
+}
+
+async function getInvertedRadicalsSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(buildUrl(`radicals/${radicals.join(",")}/related/`), { params: { simple: true, invert: true }});
+  } catch (error: any) {
+    throw new Error(`Axios - Error with getInvertedRadicalsSimplified: ${error.message}`);
   }
 }
 
@@ -49,6 +65,8 @@ const API = {
   getRadicalsSimplified,
   getMatchingKanjiByRadical,
   getMatchingKanjiByRadicalSimplified,
+  getRelatedRadicalsSimplified,
+  getInvertedRadicalsSimplified,
 };
 
 export default API;

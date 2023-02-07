@@ -15,6 +15,7 @@ const Container = styled.div`
   top: 0;
   z-index: 10;
   background: ${props => props.theme.colors.background};
+  overflow-y: scroll;
 `;
 
 const App: React.FC<Props> = ({ children }) => { 
