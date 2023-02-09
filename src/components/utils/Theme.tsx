@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     src: url(${NotoSansJP});
   }
   * {
-    font-family: 'NotoSansJP', 'Roboto';
+    font-family: 'Roboto', 'NotoSansJP';
     font-size: 62.5%;
   }
 `;
@@ -29,11 +29,12 @@ const theme = {
     elementPrimary: "#1E0959",
     textPrimary: "#FFFFFF",
     textSecondary: "#C3BCD6",
+    buttonDisabled: "#878787",
+    buttonHover: "#3E15B0",
     buttonPrimary: "#623DCA",
     buttonSecondary: "#000000",
-    buttonDisabled: "#878787",
     buttonSelected: "#D4AF37",
-    buttonHover: "#3E15B0",
+    buttonSelectedHover: "#B0912C",
   },
   fontSizes: {
     small: "1.6rem",
@@ -41,7 +42,7 @@ const theme = {
     large: "2.0rem",
     xlarge: "2.2rem",
     header: "2.4rem"
-  }
+  },
 };
 
 const Theme: React.FC<Props> = ({ children }) => (

@@ -10,38 +10,37 @@ const Container = styled.div`
 `;
 
 const Search = styled.input`
-  font-size: ${props => props.theme.fontSizes.large};
-  padding-left: 20px;
-  outline: none;
   border: none;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  font-size: ${props => props.theme.fontSizes.large};
+  outline: none;
+  padding-left: 20px;
   width: 200px;
 `;
 
 const IconContainer = styled.button`
-  display: flex;
-  background: ${props => props.theme.colors.buttonPrimary};
-  width: 40px;
+  background: ${({theme}) => theme.colors.buttonPrimary};  
   border: none;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  display: flex;
   justify-content: center;
   padding: 8px;
+  width: 40px;
   &:hover {
-    background-color: ${props => props.theme.colors.buttonHover};
+    background-color: ${({theme}) => theme.colors.buttonHover};
   }
 `;
 
 const Icon = styled.svg`
-  color: ${props => props.theme.colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
 `;
 
 const SearchBar: React.FC<Props> = () => {
   const [searchInput, setSearchInput] = useState("");
 
   let handleChange = (e: any) => {
-    console.log(e.target.value)
     setSearchInput(e.target.value);
   };
 

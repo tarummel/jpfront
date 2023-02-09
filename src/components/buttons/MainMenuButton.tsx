@@ -7,16 +7,16 @@ interface Props {
 }
 
 const Button = styled.button`
-  background: ${props => props.theme.colors.buttonPrimary};
-  color: ${props => props.theme.colors.textPrimary};
-  font-size: ${props => props.theme.fontSizes.large};
-  height: 40px;
-  width: 240px;
-  border-radius: 40px;
-  justify-content: center;
+  background: ${({theme}) => theme.colors.buttonPrimary};
   border: none;
+  border-radius: 40px;
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.large};
+  height: 40px;
+  justify-content: center;
+  width: 240px;
   &:hover {
-    background: ${props => props.theme.colors.buttonHover};
+    background: ${({theme}) => theme.colors.buttonHover};
   }
 `;
 

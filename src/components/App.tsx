@@ -6,16 +6,15 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Container = styled.div`  
-  font-size: 62.5%;
-  position: fixed;
-  width: 100%;
+const Container = styled.div`
+  background: ${props => props.theme.colors.background};
   height: 100%;
   left: 0;
   top: 0;
-  z-index: 10;
-  background: ${props => props.theme.colors.background};
   overflow-y: scroll;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 `;
 
 const App: React.FC<Props> = ({ children }) => { 
@@ -25,6 +24,6 @@ const App: React.FC<Props> = ({ children }) => {
       {children}
     </Container>
   );
-}
+};
 
 export default App;

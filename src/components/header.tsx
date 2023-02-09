@@ -5,24 +5,24 @@ import styled from "styled-components"
 interface Props {}
 
 const Container = styled.div`
+  border-left: 1px solid ${({theme}) => theme.colors.textPrimary};
+  border-bottom: 1px solid ${({theme}) => theme.colors.textPrimary};  
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 55px;
   right: 0;
-  border-left: 1px solid ${props => props.theme.colors.textPrimary};
-  border-bottom: 1px solid ${props => props.theme.colors.textPrimary};
+  top: 55px;
 `;
 
 const Box = styled.div`
-  background: ${props => props.theme.colors.buttonPrimary};
-  justify-content: center;
+  background: ${({theme}) => theme.colors.buttonPrimary};
+  border-top: 1px solid ${({theme}) => theme.colors.textPrimary};
   height: 36px;
-  width: 36px;
+  justify-content: center;
   padding: 10px;
-  border-top: 1px solid ${props => props.theme.colors.textPrimary};
+  width: 36px;
   &:hover {
-    background-color: ${props => props.theme.colors.buttonHover};
+    background-color: ${({theme}) => theme.colors.buttonHover};
   }
 `;
 
