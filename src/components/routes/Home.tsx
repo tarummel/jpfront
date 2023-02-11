@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import { MainMenuButton } from "../buttons";
 import Header from "../Header";
-import SearchBar from "../SearchBar";
+import SearchBar from "../common/SearchBar";
 
 interface Props {}
   

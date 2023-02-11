@@ -60,6 +60,14 @@ async function getInvertedRadicalsSimplified(radicals: string[]): Promise<AxiosR
   }
 }
 
+async function getKanjiInfo(kanji: string): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(buildUrl(`kanji/${kanji}/`));
+  } catch (error: any) {
+    throw new Error(`Axios - Error with getKanjiInfo: ${error.message}`);
+  }
+}
+
 const API = {
   getRadicalsList,
   getRadicalsSimplified,
@@ -67,6 +75,7 @@ const API = {
   getMatchingKanjiByRadicalSimplified,
   getRelatedRadicalsSimplified,
   getInvertedRadicalsSimplified,
+  getKanjiInfo,
 };
 
 export default API;

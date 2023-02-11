@@ -7,12 +7,12 @@ interface Props {
 
 const Spacer = styled.div<Props>`
 	flex-shrink: 0;
-	width: ${({width}) => width ? width : 60}px;
+	width: ${({width}) => width ? width : 70}px;
 `;
 
-const ColumnSpacer: React.FC<Props> = () => {
+const ColumnSpacer: React.FC<Props> = ({width}) => {
 	return (
-		<Spacer />
+		<Spacer width={width}/>
 	);
 };
 

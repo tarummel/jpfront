@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { StrokeCharactersMap, RadicalsState } from "dataTypes";
 import API from "../../api";
-import NumberedRadicalRow from "../NumberedRadicalRow";
+import ColumnSpacer from "../common/ColumnSpacer";
+import GenericButton from "../buttons/GenericButton";
 import NumberedKanjiRow from "../NumberedKanjiRow";
-import ColumnSpacer from "../ColumnSpacer";
+import NumberedRadicalRow from "../NumberedRadicalRow";
+import { RadicalsState, StrokeCharactersMap } from "dataTypes";
+import Text from "../common/Text";
 
 interface Props {}
 
@@ -43,13 +45,29 @@ const DEFAULT_STATE = getDefaultRadicalsState()
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  height: 90%;
+  padding-top: 2.5%;
+`;
+
+const RadicalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const RadicalHeadersContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2px;
 `;
 
 const RowContainer = styled.div`
+  background: ${({theme}) => theme.colors.elementPrimary};  
   display: flex;
   flex: 1;
   flex-direction: column;
-  background: ${({theme}) => theme.colors.elementPrimary};
+  overflow-y: scroll;
 `;
 
 const Multiradical: React.FC<Props> = () => {
@@ -71,11 +89,10 @@ const Multiradical: React.FC<Props> = () => {
     };
 
     if (selectedRadicals.length) {
-      // add selected radicals
       for (let i = 0; i < selectedRadicals.length; i++) {
         newState[selectedRadicals[i]] = 2
       }
-      // add disabled radicals
+
       getAndSetDisabledRadicals()
     } else {
       setRadicalsState(newState)
@@ -86,7 +103,6 @@ const Multiradical: React.FC<Props> = () => {
       setKanjiData(response.data.data)
     }
 
-    // update shown kanji
     if (selectedRadicals.length) {
       getAndSetMatchingKanji()
     } else {
@@ -100,6 +116,12 @@ const Multiradical: React.FC<Props> = () => {
     });
   };
 
+  const handleClickReset = (): void => {
+    setRadicalsState({...DEFAULT_STATE})
+    setKanjiData({})
+    setSelectedRadicals([])
+  };
+
   const handleSelection = (radical: string): void => {
     const newSelected = selectedRadicals.includes(radical) 
       ? arrayRemove(selectedRadicals, radical) 
@@ -111,17 +133,26 @@ const Multiradical: React.FC<Props> = () => {
   return (
     <Container>
       <ColumnSpacer />
-      <RowContainer>
-        {Object.keys(ALL_RADICALS).map((s, i) => {
-          return <NumberedRadicalRow key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} handleClick={handleSelection} />
-        })};
-      </RowContainer>
-      <ColumnSpacer />
+      <RadicalContainer>
+        <RadicalHeadersContainer>
+          <Text>Stroke #</Text>
+          <GenericButton height={32} onClick={handleClickReset} width={80} >Reset</GenericButton>
+        </RadicalHeadersContainer>
+        <RowContainer>
+          {Object.keys(ALL_RADICALS).map((s, i) => {
+            return <NumberedRadicalRow key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} handleClick={handleSelection} />
+          })};
+        </RowContainer>
+      </RadicalContainer>
+
+      <ColumnSpacer width={40} />
+      
       <RowContainer>
         {Object.keys(kanjiData).map((s, i) => {
           return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
         })};
       </RowContainer>
+
       <ColumnSpacer />
     </Container>
   );

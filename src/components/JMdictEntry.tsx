@@ -1,0 +1,61 @@
+import React, { useEffect } from "react";
+import styled from "styled-components";
+
+import { JEntry, JGlossary, JKanji, JReading, JSense, JSource } from "dataTypes";
+
+interface Props {
+    entry: JEntry;
+    num: number;
+}
+
+const EntryRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 8px;
+`;
+
+const RowNum = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.medium};
+`;
+
+const Content = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.medium};
+  padding-left: 20px;
+`;
+
+const JEntryDisplay: React.FC<Props> = ({entry, num}) => {
+
+  const getProperty = (name: string, data: [JKanji]|[JReading]|[JSense]|[JGlossary]|[JSource]|undefined, delimiter: string): any => {
+    let values = null
+    if (data) {
+      values = data.map((e) => {
+        return e[name as keyof typeof e]
+      }).join(delimiter);
+    }
+    return values
+  }
+
+  const kcontents = getProperty('content', entry.jkanji, "; ")
+  const rcontents = getProperty('content', entry.jreading, "; ")
+  const glosses = entry.jsense?.map((js) => {
+    return getProperty('gloss', js.jglossary, ' / ')
+  }).join(", ");
+
+  useEffect(() => {
+
+  }, []);
+
+  return (
+    <EntryRow>
+      <RowNum>{num+1}.</RowNum>
+      <Content>(漢字): {kcontents}</Content>
+      <Content>(意味): {rcontents}</Content>
+      <Content>(英): {glosses}</Content>
+    </EntryRow>
+  );
+};
+
+export default JEntryDisplay;

@@ -5,8 +5,8 @@ import styled from "styled-components"
 interface Props {}
 
 const Container = styled.div`
-  border-left: 1px solid ${({theme}) => theme.colors.textPrimary};
-  border-bottom: 1px solid ${({theme}) => theme.colors.textPrimary};  
+  border-left: 1px solid ${({theme}) => theme.colors.textSecondary};
+  border-bottom: 1px solid ${({theme}) => theme.colors.textSecondary};  
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const Box = styled.div`
   background: ${({theme}) => theme.colors.buttonPrimary};
-  border-top: 1px solid ${({theme}) => theme.colors.textPrimary};
+  border-top: 1px solid ${({theme}) => theme.colors.textSecondary};
   height: 36px;
   justify-content: center;
   padding: 10px;

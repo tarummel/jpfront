@@ -11,7 +11,6 @@ const Container = styled.div`
   height: 100%;
   left: 0;
   top: 0;
-  overflow-y: scroll;
   position: fixed;
   width: 100%;
   z-index: 10;
