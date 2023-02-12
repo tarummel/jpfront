@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import AppRouter from './components/utils/AppRouter';
-import reportWebVitals from './reportWebVitals';
-import { App, Theme } from "./components/utils";
-import './i18n';
 import { BrowserRouter } from 'react-router-dom';
+
+import App from "./components/App";
+import AppRouter from './AppRouter';
+import './i18n';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import Theme from "./components/utils/Theme";
+
 <script src="/js/intlTelInput.min.js" charSet="utf-8"></script>
 
 const root = ReactDOM.createRoot(

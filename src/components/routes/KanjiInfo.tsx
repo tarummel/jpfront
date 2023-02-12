@@ -11,6 +11,9 @@ import HorizontalDivider from "../common/HorizontalDivider";
 import JMdictEntry from "../JMdictEntry"
 import Text from "../common/Text";
 
+const HISTORY_LC = "history"
+const HISTORY_SIZE = 20
+
 interface Props {}
   
 const Container = styled.div`
@@ -58,16 +61,28 @@ const KanjiInfo: React.FC<Props> = () => {
   useEffect(() => {
     const getAndSetKanji = async (kanji: string) => {
       const response = await API.getKanjiInfo(kanji)
-      console.log('response', response.data.data)
       setKanjiData(response.data.data)
     }
 
-    if (kanji) {
-      getAndSetKanji(kanji)  
+    if (typeof kanji === 'string') {
+      getAndSetKanji(kanji) 
+
+      const localHistory = localStorage.getItem(HISTORY_LC)
+      if (typeof localHistory === 'string') {
+        let historyArray = JSON.parse(localHistory)
+        
+        if (!historyArray.includes(kanji)) {
+          historyArray.push(kanji)
+          if (historyArray.length > HISTORY_SIZE) {
+            historyArray = historyArray.slice(-HISTORY_SIZE)
+          }
+          localStorage.setItem(HISTORY_LC, JSON.stringify(historyArray));
+        }
+      } else {
+        localStorage.setItem(HISTORY_LC, JSON.stringify([kanji]));
+      }
     }
   }, []);
-
-  console.log(kanjiData)
 
   return (
     <Container>
@@ -94,10 +109,10 @@ const KanjiInfo: React.FC<Props> = () => {
           : (
             kanjiData.map((entry, i) => {
               return (
-                <>
+                <div key={i}>
                   <HorizontalDivider />
-                  <JMdictEntry key={i} entry={entry} num={i} />
-                </>
+                  <JMdictEntry entry={entry} num={i} />
+                </div>
               )
             })
           )

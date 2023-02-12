@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import API from "../../api";
-import ColumnSpacer from "../common/ColumnSpacer";
-import GenericButton from "../buttons/GenericButton";
+import { ColumnSpacer, Text } from "../common";
+import { GenericButton } from "../buttons";
+import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import NumberedRadicalRow from "../NumberedRadicalRow";
 import { RadicalsState, StrokeCharactersMap } from "dataTypes";
-import Text from "../common/Text";
 
 interface Props {}
 
@@ -42,7 +42,7 @@ const getDefaultRadicalsState = (): RadicalsState => {
 
 const DEFAULT_STATE = getDefaultRadicalsState()
 
-const Container = styled.div`
+const Page = styled.div`
   display: flex;
   flex-direction: row;
   height: 90%;
@@ -55,7 +55,13 @@ const RadicalContainer = styled.div`
   flex: 1;
 `;
 
-const RadicalHeadersContainer = styled.div`
+const KanjiContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const RadicalHeaders = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -131,30 +137,30 @@ const Multiradical: React.FC<Props> = () => {
   };
 
   return (
-    <Container>
+    <Page>
       <ColumnSpacer />
       <RadicalContainer>
-        <RadicalHeadersContainer>
+        <RadicalHeaders>
           <Text>Stroke #</Text>
           <GenericButton height={32} onClick={handleClickReset} width={80} >Reset</GenericButton>
-        </RadicalHeadersContainer>
+        </RadicalHeaders>
         <RowContainer>
           {Object.keys(ALL_RADICALS).map((s, i) => {
             return <NumberedRadicalRow key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} handleClick={handleSelection} />
           })};
         </RowContainer>
       </RadicalContainer>
-
       <ColumnSpacer width={40} />
-      
-      <RowContainer>
-        {Object.keys(kanjiData).map((s, i) => {
-          return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
-        })};
-      </RowContainer>
-
+      <KanjiContainer>
+        <History />
+        <RowContainer>
+          {Object.keys(kanjiData).map((s, i) => {
+            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
+          })};
+        </RowContainer>
+      </KanjiContainer>
       <ColumnSpacer />
-    </Container>
+    </Page>
   );
 };
 

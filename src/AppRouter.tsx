@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import { About, Error, Help, Home, Multiradical, Settings, KanjiInfo} from "../routes";
+import { About, Error, Help, Home, Multiradical, Settings, KanjiInfo } from "./components/routes";
 
 function AppRouter() {
   return (
