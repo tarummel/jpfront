@@ -36,8 +36,6 @@ const History: React.FC = () => {
     }
   }, []);
 
-  console.log(history)
-
   return (
     <HistoryContainer>
       <Text>History:</Text>

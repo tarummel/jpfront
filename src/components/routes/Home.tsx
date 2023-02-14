@@ -1,28 +1,38 @@
-import React from "react";
 import { Link } from "react-router-dom"
+import React from "react";
 import styled from "styled-components"
 
 import { MainMenuButton } from "../buttons";
-import Header from "../Header";
 import SearchBar from "../common/SearchBar";
 
 interface Props {}
   
 const Container = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5%;
+`;
+
+const MultiradicalContainer = styled.div`
+  display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 138px;
   justify-content: space-between;
-  height: 90px;
 `;
 
 const Home: React.FC<Props> = () => { 
   return (
     <Container>
-      <SearchBar />
-      <Link to="/multiradical">
-        <MainMenuButton>Multi-Radical Search</MainMenuButton>
-      </Link>
+      <MultiradicalContainer>
+        <SearchBar />
+        <Link to="/multiradical">
+          <MainMenuButton>Radical Search</MainMenuButton>
+        </Link>
+        <Link to="/multiradicaltype">
+          <MainMenuButton>Radical Search by Type</MainMenuButton>
+        </Link>
+      </MultiradicalContainer>
     </Container>
   );
 }

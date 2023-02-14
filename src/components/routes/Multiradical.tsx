@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../api";
 import { ColumnSpacer, Text } from "../common";
@@ -38,27 +39,21 @@ const getDefaultRadicalsState = (): RadicalsState => {
     }
   };
   return state
-}
+};
 
 const DEFAULT_STATE = getDefaultRadicalsState()
 
 const Page = styled.div`
   display: flex;
   flex-direction: row;
-  height: 90%;
-  padding-top: 2.5%;
+  height: 84%;
+  margin: 4%;
 `;
 
-const RadicalContainer = styled.div`
+const ContentContainer = styled.div`
   display: flex;
-  flex-direction: column;
   flex: 1;
-`;
-
-const KanjiContainer = styled.div`
-  display: flex;
   flex-direction: column;
-  flex: 1;
 `;
 
 const RadicalHeaders = styled.div`
@@ -70,14 +65,16 @@ const RadicalHeaders = styled.div`
 
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};  
-  display: flex;
-  flex: 1;
   flex-direction: column;
   overflow-y: scroll;
 `;
 
-const Multiradical: React.FC<Props> = () => {
+const Disclaimer = styled.p`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.large};
+`;
 
+const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE})
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([])
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({})
@@ -138,30 +135,29 @@ const Multiradical: React.FC<Props> = () => {
 
   return (
     <Page>
-      <ColumnSpacer />
-      <RadicalContainer>
+      <ContentContainer>
         <RadicalHeaders>
-          <Text>Stroke #</Text>
-          <GenericButton height={32} onClick={handleClickReset} width={80} >Reset</GenericButton>
+          <Text>Strokes</Text>
+          <GenericButton height={32} onClick={handleClickReset} width={80}>Reset</GenericButton>
         </RadicalHeaders>
         <RowContainer>
           {Object.keys(ALL_RADICALS).map((s, i) => {
             return <NumberedRadicalRow key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} handleClick={handleSelection} />
           })};
         </RowContainer>
-      </RadicalContainer>
-      <ColumnSpacer width={40} />
-      <KanjiContainer>
+        <Disclaimer>{t('legal.kradfile')}</Disclaimer>
+      </ContentContainer>
+      <ColumnSpacer width={30} />
+      <ContentContainer>
         <History />
         <RowContainer>
           {Object.keys(kanjiData).map((s, i) => {
             return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
           })};
         </RowContainer>
-      </KanjiContainer>
-      <ColumnSpacer />
+      </ContentContainer>
     </Page>
   );
 };
 
-export default Multiradical;
+export default withTranslation()(Multiradical);

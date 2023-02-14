@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from "./components/App";
 import AppRouter from './AppRouter';
-import './i18n';
+import i18n from './i18n';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Theme from "./components/utils/Theme";
 
-<script src="/js/intlTelInput.min.js" charSet="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js"></script>
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,11 +19,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-        <Theme>
-          <App>
-            <AppRouter />
-          </App>
-        </Theme>
+      <Theme>
+        <Suspense fallback={<div />}>
+          <I18nextProvider i18n={i18n}>
+            <App>
+              <AppRouter />
+            </App>
+          </I18nextProvider>
+        </Suspense>
+      </Theme>
     </BrowserRouter>
   </React.StrictMode>
 );
