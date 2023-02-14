@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 interface Props { 
   children?: React.ReactNode;
+  fontSize?: string;
   href?: string;
   target?: string;
-}
+  to: string;
+};
 
-const StyledAnchor = styled.a`
-  font-size: ${({theme}) => theme.fontSizes.medium};
+const StyledLink = styled(Link)<Props>`
+  font-size: ${({fontSize, theme}) => fontSize ? theme.fontSizes[fontSize] : theme.fontSizes.medium};
   margin: 1px;
+  text-decoration: none;
   :link {
     color: ${({theme}) => theme.colors.link};
   }
@@ -21,9 +25,9 @@ const StyledAnchor = styled.a`
   }
 `;
 
-const Anchor: React.FC<Props> = ({children, href, target}) => {
+const Anchor: React.FC<Props> = ({ children, fontSize, target, to }) => {
 	return (
-		<StyledAnchor target={target} href={href}>{children}</StyledAnchor>
+		<StyledLink fontSize={fontSize} target={target} to={to}>{children}</StyledLink>
 	);
 };
 

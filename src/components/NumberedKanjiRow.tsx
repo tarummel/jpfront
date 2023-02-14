@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+import { StyledLink } from "./common"
 
 interface Props {
   kanji: string[];
@@ -29,26 +30,13 @@ const RowContents = styled.div`
   flex-wrap: wrap;
 `;
 
-const KanjiLink = styled(Link)`
-  color: white;
-  font-size: ${({theme}) => theme.fontSizes.xlarge};
-  margin: 1px;
-  text-decoration: none;
-  :link {
-    color: white;
-  }
-  :visited {
-    color: hotpink;
-  }
-`;
-
 const NumberedKanjiRow: React.FC<Props> = ({kanji, rowNumber}) => {
   return (
     <Row>
       <RowNumber>{rowNumber}</RowNumber>
       <RowContents>
         {kanji.map((k, i) => {
-          return <KanjiLink key={i} to={`/kanji/${k}`}>{k}</KanjiLink>
+          return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>
         })};
       </RowContents>
     </Row>

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react"
 import styled from "styled-components";
+import { WithTranslation, withTranslation } from "react-i18next";
 
-import { Text } from "./common";
+import { StyledLink } from "./common";
 
 const HISTORY_LC = "history"
 
@@ -12,20 +12,12 @@ const HistoryContainer = styled.div`
   margin-bottom: 16px;
 `;
 
-const KanjiLink = styled(Link)`
-  color: white;
-  font-size: ${({theme}) => theme.fontSizes.xlarge};
-  margin: 1px;
-  text-decoration: none;
-  :link {
-    color: white;
-  }
-  :visited {
-    color: hotpink;
-  }
+const SearchHistoryText = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.large};
 `;
 
-const History: React.FC = () => {
+const History: React.FC<WithTranslation> = ({ t }) => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -38,12 +30,12 @@ const History: React.FC = () => {
 
   return (
     <HistoryContainer>
-      <Text>History:</Text>
+      <SearchHistoryText>{t("multi.searchHistory")}:</SearchHistoryText>
       {history.map((k, i) => {
-        return <KanjiLink key={i} to={`/kanji/${k}`}>{k}</KanjiLink>
+        return <StyledLink key={i} to={`/kanji/${k}`}>{k}</StyledLink>
       })}
     </HistoryContainer>
   );
 };
 
-export default History;
+export default withTranslation()(History);

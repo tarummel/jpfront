@@ -6,8 +6,7 @@ interface Props {
 
 const StyledText = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};  
-  font-size: ${({theme}) => theme.fontSizes.large};
-  padding: 2px;
+  font-size: ${({theme}) => theme.fontSizes.medium};
 `;
 
 const Text: React.FC<Props> = ({ children }) => { 

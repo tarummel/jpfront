@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 import { MainMenuButton } from "../buttons";
 import SearchBar from "../common/SearchBar";
 
-interface Props {}
-  
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -21,20 +20,20 @@ const MultiradicalContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Home: React.FC<Props> = () => { 
+const Home: React.FC<WithTranslation> = ({ t }) => { 
   return (
     <Container>
       <MultiradicalContainer>
-        <SearchBar />
+        <SearchBar text={`${t("mainMenu.searchKanji")}...`}/>
         <Link to="/multiradical">
-          <MainMenuButton>Radical Search</MainMenuButton>
+          <MainMenuButton>{t("mainMenu.multiradicalSearch")}</MainMenuButton>
         </Link>
         <Link to="/multiradicaltype">
-          <MainMenuButton>Radical Search by Type</MainMenuButton>
+          <MainMenuButton>{t("mainMenu.multiradicalSearchByType")}</MainMenuButton>
         </Link>
       </MultiradicalContainer>
     </Container>
   );
-}
+};
 
-export default Home;
+export default withTranslation()(Home);

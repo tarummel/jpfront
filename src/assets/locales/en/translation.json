@@ -1,10 +1,32 @@
 {
-  "test": "this is a test",
-  "legal": {
-    "kradfile": "KRADFILE and RADKFILE files are copyright under the EDRDG licence. (http://www.edrdg.org/edrdg/licence.html)",
-    "jmdict": "JMdict is copyright under the EDRDG licence. (https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project)"
+  "header": {
+    "about": "About",
+    "help": "Help",
+    "home": "Home",
+    "settings": "Settings"
   },
-  "keyDeep": {
-    "inner": "value"
+  "kanjiInfo": {
+    "externalLinks": "External Links",
+    "jishoLink": "https://jisho.org/search/{{kanji}}",
+    "noEntryFound": "No entry found :(",
+    "wiktionaryLink": "https://en.wiktionary.org/wiki/{{kanji}}",
+    "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}"
+  },
+  "legal": {
+    "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG licence.",
+    "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
+    "jmdict": "JMdict is copyright under the EDRDG licence.",
+    "jmdictLink": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project"
+  },
+  "mainMenu": {
+    "multiradicalSearch": "Multi-Radical Search",
+    "multiradicalSearchByType": "Search by Type",
+    "searchKanji": "Search Kanji"
+  },
+  "multi": {
+    "instructions": "Click a radical to get started, kanji composed of selected radicals will appear on the right",
+    "reset": "Reset",
+    "searchHistory": "Search History",
+    "strokes": "Strokes"
   }
 }

@@ -1,20 +1,19 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components"
+import styled from "styled-components";
+import { withTranslation, WithTranslation } from "react-i18next";
 
 import API from "../../api";
 import Anchor from "../common/Anchor";
 import ColumnSpacer from "../common/ColumnSpacer";
 import { JEntry } from "dataTypes";
 import HorizontalDivider from "../common/HorizontalDivider";
-import JMdictEntry from "../JMdictEntry"
+import JMdictEntry from "../JMdictEntry";
 import Text from "../common/Text";
 
-const HISTORY_LC = "history"
-const HISTORY_SIZE = 20
-
-interface Props {}
+const HISTORY_LC = "history";
+const HISTORY_SIZE = 20;
   
 const Container = styled.div`
   display: flex;
@@ -50,11 +49,7 @@ const ExternalLinks = styled.div`
   padding: 16px;
 `;
 
-const error = styled.div`
-
-`;
-
-const KanjiInfo: React.FC<Props> = () => {
+const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const { kanji } = useParams();
   const [kanjiData, setKanjiData] = useState<JEntry[]>([])
 
@@ -82,7 +77,7 @@ const KanjiInfo: React.FC<Props> = () => {
         localStorage.setItem(HISTORY_LC, JSON.stringify([kanji]));
       }
     }
-  }, []);
+  }, [kanji]);
 
   return (
     <Container>
@@ -91,21 +86,21 @@ const KanjiInfo: React.FC<Props> = () => {
         <MetaContainer>
           <KanjiLarge>{kanji}</KanjiLarge>
           <ExternalLinks>
-            <Text>External Links:</Text>
+            <Text>{t("kanjiInfo.externalLinks")}:</Text>
             <Text>
-              {"--> "}<Anchor target="_blank" href={`https://en.wiktionary.org/wiki/${kanji}`}>Wiktionary</Anchor>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji })}`}>Wiktionary</Anchor>
             </Text>
             <Text>
-              {"--> "}<Anchor target="_blank" href={`https://jisho.org/search/${kanji}`}>Jisho</Anchor>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji })}`}>Jisho</Anchor>
             </Text>
             <Text>
-              {"--> "}<Anchor target="_blank" href={`http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ${kanji}`}>WWWJDIC</Anchor>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji })}`}>WWWJDIC</Anchor>
             </Text>
           </ExternalLinks>
         </MetaContainer>
         
         { !kanjiData.length
-          ? (<Text>No entry found for the given kanji :(</Text>)
+          ? (<Text>{t("kanjiInfo.noEntryFound")}</Text>)
           : (
             kanjiData.map((entry, i) => {
               return (
@@ -121,6 +116,6 @@ const KanjiInfo: React.FC<Props> = () => {
       <ColumnSpacer />
     </Container>
   );
-}
+};
 
-export default KanjiInfo;
+export default withTranslation()(KanjiInfo);

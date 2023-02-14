@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../api";
-import { ColumnSpacer, Text } from "../common";
+import { Anchor, ColumnSpacer, Text } from "../common";
 import { GenericButton } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -60,6 +60,7 @@ const RadicalHeaders = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
   margin-bottom: 2px;
 `;
 
@@ -71,7 +72,7 @@ const RowContainer = styled.div`
 
 const Disclaimer = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.large};
+  font-size: ${({theme}) => theme.fontSizes.small};
 `;
 
 const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
@@ -136,16 +137,17 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
   return (
     <Page>
       <ContentContainer>
+        <Text>*{t("multi.instructions")}*</Text>
         <RadicalHeaders>
-          <Text>Strokes</Text>
-          <GenericButton height={32} onClick={handleClickReset} width={80}>Reset</GenericButton>
+          <Text>{t("multi.strokes")}</Text>
+          <GenericButton height={32} onClick={handleClickReset} width={80}>{t("multi.reset")}</GenericButton>
         </RadicalHeaders>
         <RowContainer>
           {Object.keys(ALL_RADICALS).map((s, i) => {
             return <NumberedRadicalRow key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} handleClick={handleSelection} />
           })};
         </RowContainer>
-        <Disclaimer>{t('legal.kradfile')}</Disclaimer>
+        <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
       </ContentContainer>
       <ColumnSpacer width={30} />
       <ContentContainer>
