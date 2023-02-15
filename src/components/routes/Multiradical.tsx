@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import API from "../../api";
-import { Anchor, ColumnSpacer, Text } from "../common";
+import API from "../../API";
+import { Anchor, ColumnSpacer, Spinner } from "../common";
 import { GenericButton } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -60,14 +60,28 @@ const RadicalHeaders = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
+`;
+
+const StrokesText = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.small};
+  padding-top: 13px;
 `;
 
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};  
   flex-direction: column;
   overflow-y: scroll;
+`;
+
+const SpinnerContainer = styled.div`
+  height: 32px;
+`;
+
+const Instructions = styled.h1`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.small};
 `;
 
 const Disclaimer = styled.p`
@@ -79,17 +93,22 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE})
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([])
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({})
+  const [radicalsLoading, setRadicalsLoading] = useState(false)
+  const [kanjiLoading, setKanjiLoading] = useState(false)
 
   useEffect(() => {
     let newState = {...DEFAULT_STATE}
     const getAndSetDisabledRadicals = async () => {
+      setRadicalsLoading(true)
       const response = await API.getInvertedRadicalsSimplified(selectedRadicals)
       const data = response.data.data
-
+      
       for (let i = 0; i < data.length; i++) {
         newState[data[i]] = 0
       }
+
       setRadicalsState({...newState})
+      setRadicalsLoading(false)
     };
 
     if (selectedRadicals.length) {
@@ -103,8 +122,10 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
     }
 
     const getAndSetMatchingKanji = async () => {
+      setKanjiLoading(true)
       const response = await API.getMatchingKanjiByRadicalSimplified(selectedRadicals)
       setKanjiData(response.data.data)
+      setKanjiLoading(false)
     }
 
     if (selectedRadicals.length) {
@@ -137,14 +158,19 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
   return (
     <Page>
       <ContentContainer>
-        <Text>*{t("multi.instructions")}*</Text>
+        <Instructions>*{t("multi.instructions")}*</Instructions>
         <RadicalHeaders>
-          <Text>{t("multi.strokes")}</Text>
+          <StrokesText>{t("multi.strokes")}</StrokesText>
+          { radicalsLoading && (
+            <SpinnerContainer>
+              <Spinner enabled={true} />
+            </SpinnerContainer>
+          )}
           <GenericButton height={32} onClick={handleClickReset} width={80}>{t("multi.reset")}</GenericButton>
         </RadicalHeaders>
         <RowContainer>
           {Object.keys(ALL_RADICALS).map((s, i) => {
-            return <NumberedRadicalRow key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} handleClick={handleSelection} />
+            return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} />
           })};
         </RowContainer>
         <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
@@ -153,7 +179,12 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
       <ContentContainer>
         <History />
         <RowContainer>
-          {Object.keys(kanjiData).map((s, i) => {
+          { kanjiLoading && !kanjiData && (
+            <SpinnerContainer>
+              <Spinner enabled={true} />
+            </SpinnerContainer>
+          )}
+          { Object.keys(kanjiData).map((s, i) => {
             return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
           })};
         </RowContainer>

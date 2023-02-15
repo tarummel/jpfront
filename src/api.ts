@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { AxiosResponse } from "axios";
 
-// e.g. http://localhost:8008/api
-const JPCORE_URL = process.env.REACT_APP_JPCORE_URL as string
+import config from "./constants/Config";
 
-axios.defaults.baseURL = JPCORE_URL;
+// e.g. http://localhost:8008/api
 axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
 
 function buildUrl(path: string): string {
-  return `${JPCORE_URL}/${path}`;
+  return `${config.backend.jpcoreUrl}/${path}`;
 }
 
 async function getRadicalsList(): Promise<AxiosResponse<any>> {
@@ -16,7 +15,8 @@ async function getRadicalsList(): Promise<AxiosResponse<any>> {
     const response = await axios.get(buildUrl('radicals/'));
     return response.data;
   } catch (error: any) {
-    throw new Error(`Axios - Error with getRadicalsList: ${error.message}`);
+    console.log(error.code, error.message)
+    throw error;
   }
 }
 
@@ -24,7 +24,8 @@ async function getRadicalsSimplified(): Promise<AxiosResponse<any>> {
   try {
     return await axios.get(buildUrl('radicals/'), { params: { simple: true }});
   } catch (error: any) {
-    throw new Error(`Axios - Error with getRadicalsSimplified: ${error.message}`);
+    console.log(error.code, error.message)
+    throw error;
   }
 }
 
@@ -32,7 +33,8 @@ async function getMatchingKanjiByRadical(radicals: string[]): Promise<AxiosRespo
   try {
     return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji/`));
   } catch (error: any) {
-    throw new Error(`Axios - Error with getMatchingKanjiByRadical: ${error.message}`)
+    console.log(error.code, error.message)
+    throw error;
   }
 }
 
@@ -40,7 +42,8 @@ async function getMatchingKanjiByRadicalSimplified(radicals: string[]): Promise<
   try {
     return await axios.get(buildUrl(`radicals/${radicals.join(",")}/kanji/`), { params: { simple: true }});
   } catch (error: any) {
-    throw new Error(`Axios - Error with getMatchingKanjiByRadicalSimplified: ${error.message}`);
+    console.log(error.code, error.message)
+    throw error;
   }
 }
 
@@ -48,7 +51,8 @@ async function getRelatedRadicalsSimplified(radicals: string[]): Promise<AxiosRe
   try {
     return await axios.get(buildUrl(`radicals/${radicals.join(",")}/related/`), { params: { simple: true }});
   } catch (error: any) {
-    throw new Error(`Axios - Error with getRelatedRadicalsSimplified: ${error.message}`);
+    console.log(error.code, error.message)
+    throw error;
   }
 }
 
@@ -56,7 +60,8 @@ async function getInvertedRadicalsSimplified(radicals: string[]): Promise<AxiosR
   try {
     return await axios.get(buildUrl(`radicals/${radicals.join(",")}/related/`), { params: { simple: true, invert: true }});
   } catch (error: any) {
-    throw new Error(`Axios - Error with getInvertedRadicalsSimplified: ${error.message}`);
+    console.log(error.code, error.message)
+    throw error;
   }
 }
 
@@ -64,7 +69,8 @@ async function getKanjiInfo(kanji: string): Promise<AxiosResponse<any>> {
   try {
     return await axios.get(buildUrl(`kanji/${kanji}/`));
   } catch (error: any) {
-    throw new Error(`Axios - Error with getKanjiInfo: ${error.message}`);
+    console.log(error.code, error.message)
+    throw error;
   }
 }
 

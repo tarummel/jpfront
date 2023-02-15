@@ -13,6 +13,8 @@ const Theme = {
     linkHover: "#FFEBA8",
     textPrimary: "#FFFFFF",
     textSecondary: "#C3BCD6",
+    spinnerPrimary: "#C3BCD6",
+    spinnerSecondary: "#FFFFFF",
   },
   fontSizes: {
     small: "1.6rem",

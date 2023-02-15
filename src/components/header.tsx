@@ -45,7 +45,7 @@ const Header: React.FC<WithTranslation> = ({ t }) => {
       </Link>
       <Link to="/help">
           <Box title={`${t("header.help")}`}>
-            <Icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160 164s1.44-33 33.54-59.46C212.6 88.83 235.49 84.28 256 84c18.73-.23 35.47 2.94 45.48 7.82C318.59 100.2 352 120.6 352 164c0 45.67-29.18 66.37-62.35 89.18S248 298.36 248 324" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeWidth="40"/><circle cx="248" cy="399.99" r="32" fill="currentColor"/></Icon>
+            <Icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 80a176 176 0 10176 176A176 176 0 00256 80z" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32"/><path d="M200 202.29s.84-17.5 19.57-32.57C230.68 160.77 244 158.18 256 158c10.93-.14 20.69 1.67 26.53 4.45 10 4.76 29.47 16.38 29.47 41.09 0 26-17 37.81-36.37 50.8S251 281.43 251 296" fill="none" stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="28"/><circle cx="250" cy="348" r="20"/></Icon>
           </Box>
       </Link>
       <Link to="/settings">

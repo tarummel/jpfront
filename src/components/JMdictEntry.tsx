@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { withTranslation, WithTranslation } from "react-i18next";
 
 import { JEntry, JGlossary, JKanji, JReading, JSense, JSource } from "dataTypes";
 
@@ -26,7 +27,7 @@ const Content = styled.div`
   padding-left: 20px;
 `;
 
-const JEntryDisplay: React.FC<Props> = ({entry, num}) => {
+const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => {
 
   const getProperty = (name: string, data: [JKanji]|[JReading]|[JSense]|[JGlossary]|[JSource]|undefined, delimiter: string): any => {
     let values = null
@@ -51,11 +52,11 @@ const JEntryDisplay: React.FC<Props> = ({entry, num}) => {
   return (
     <EntryRow>
       <RowNum>{num+1}.</RowNum>
-      <Content>(漢字): {kcontents}</Content>
-      <Content>(意味): {rcontents}</Content>
-      <Content>(英): {glosses}</Content>
+      <Content>({t("kanjiInfo.kanji")}): {kcontents}</Content>
+      <Content>({t("kanjiInfo.meaning")}): {rcontents}</Content>
+      <Content>({t("kanjiInfo.english")}): {glosses}</Content>
     </EntryRow>
   );
 };
 
-export default JEntryDisplay;
+export default withTranslation()(JEntryDisplay);
