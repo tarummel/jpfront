@@ -37,5 +37,18 @@
     "reset": "Reset",
     "searchHistory": "Search History",
     "strokes": "Strokes"
+  },
+  "settings": {
+    "dark": "Dark",
+    "history": "History",
+    "historySizeDesc": "Sets maximum history size",
+    "historyClear": "Clear",
+    "historyClearDesc": "Clears your previously searched kanji",
+    "language": "Language",
+    "languageDesc": "Changes the display language",
+    "light": "Light",
+    "settings": "Settings",
+    "theme": "Theme",
+    "themeDesc": "Changes the display theme (requires refresh for now)"
   }
 }

@@ -4,11 +4,11 @@ import styled from "styled-components"
 interface Props {
   children?: React.ReactNode;
   height?: number;
-  onClick?: () => void;
+  onClick: () => void;
   width?: number;
 }
 
-const Button = styled.button<Props>`
+const StyledButton = styled.button<Props>`
   background: ${({theme}) => theme.colors.buttonPrimary};
   border: none;
   border-radius: 40px;
@@ -22,10 +22,10 @@ const Button = styled.button<Props>`
   }
 `;
 
-const GenericButton: React.FC<Props> = ({ children, height, onClick, width }) => { 
+const Button: React.FC<Props> = ({ children, height, onClick, width }) => { 
   return (
-    <Button height={height} onClick={onClick} width={width}>{children}</Button>
+    <StyledButton height={height} onClick={onClick} width={width}>{children}</StyledButton>
   );
 }
 
-export default GenericButton;
+export default Button;

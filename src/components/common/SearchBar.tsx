@@ -10,6 +10,7 @@ interface ContainerProps {
   textLength: number;
 }
 
+
 const Container = styled.div<ContainerProps>`
   border-radius: 40px;
   display: flex;
@@ -60,7 +61,7 @@ const SearchBar: React.FC<Props> = ({ text }) => {
     }
   };
 
-  const handleClick = (e: any) => {
+  const handleClick = () => {
     if (searchInput.length === 1) {
       navigate(`/kanji/${searchInput}`);
     }
