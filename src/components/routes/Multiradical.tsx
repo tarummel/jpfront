@@ -79,6 +79,16 @@ const SpinnerContainer = styled.div`
   height: 32px;
 `;
 
+const SpinnerButtonPair = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const MiniSpinner = styled.div`
+  padding-top: 4px;
+  padding-right: 10px;
+`;
+
 const Instructions = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.small};
@@ -161,12 +171,14 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
         <Instructions>*{t("multi.instructions")}*</Instructions>
         <RadicalHeaders>
           <StrokesText>{t("multi.strokes")}</StrokesText>
-          { radicalsLoading && (
-            <SpinnerContainer>
-              <Spinner enabled={true} />
-            </SpinnerContainer>
-          )}
-          <GenericButton height={32} onClick={handleClickReset} width={80}>{t("multi.reset")}</GenericButton>
+          <SpinnerButtonPair>
+            { radicalsLoading && (
+              <MiniSpinner>
+                <Spinner size={20} />
+              </MiniSpinner>
+            )}
+            <GenericButton height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</GenericButton>
+          </SpinnerButtonPair>
         </RadicalHeaders>
         <RowContainer>
           {Object.keys(ALL_RADICALS).map((s, i) => {
@@ -179,11 +191,6 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
       <ContentContainer>
         <History />
         <RowContainer>
-          { kanjiLoading && !kanjiData && (
-            <SpinnerContainer>
-              <Spinner enabled={true} />
-            </SpinnerContainer>
-          )}
           { Object.keys(kanjiData).map((s, i) => {
             return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
           })};

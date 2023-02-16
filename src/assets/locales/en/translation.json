@@ -9,7 +9,6 @@
     "english": "Engl/英",
     "error400": "Err 400: Bad Request to backend (try refreshing the page?)",
     "error404": "Err 404: Entry not found (is there a typo in the URL?)",
-    "errorMessage": "Something went wrong",
     "externalLinks": "External Links",
     "kanji": "Kanji/漢字",
     "jisho": "Jisho",

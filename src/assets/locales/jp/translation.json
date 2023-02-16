@@ -1,10 +1,53 @@
 {
-  "test": "this is a test",
+  "header": {
+    "about": "よくある質問",
+    "help": "ヘルプ",
+    "home": "ホーム",
+    "settings": "設定"
+  },
+  "kanjiInfo": {
+    "english": "Engl/英",
+    "error400": "エラー 400：バックエンドへの不正なリクエスト",
+    "error404": "エラー 404：エントリーが見つかりません",
+    "externalLinks": "外部リンク",
+    "kanji": "Kanji/漢字",
+    "jisho": "Jisho",
+    "jishoLink": "https://jisho.org/search/{{kanji}}",
+    "meaning": "Mean/意味",
+    "noEntryFound": "エントリが見つかりません :(",
+    "wiktionary": "Wiktionary",
+    "wiktionaryLink": "https://en.wiktionary.org/wiki/{{kanji}}",
+    "wwwjdic": "WWWJDIC",
+    "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}"
+  },
   "legal": {
-    "kradfile": "change me in jp translation",
-    "jmdict": "change me in jp translation"
+    "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG licence.",
+    "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
+    "jmdict": "JMdict is copyright under the EDRDG licence.",
+    "jmdictLink": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project"
+  },
+  "mainMenu": {
+    "multiradicalSearch": "マルチ部首検索",
+    "multiradicalSearchByType": "タイプ別検索",
+    "searchKanji": "漢字検索"
+  },
+  "multi": {
+    "instructions": "部首をクリックすると、選択された部首からなる漢字が右側に表示される",
+    "reset": "リセット",
+    "searchHistory": "検索履歴",
+    "strokes": "行数"
   },
   "settings": {
-    "settings": "設定"
+    "dark": "ダーク",
+    "history": "検索履歴",
+    "historySizeDesc": "履歴の最大サイズを設定",
+    "historyClear": "クリア",
+    "historyClearDesc": "過去に検索した漢字をクリアします",
+    "language": "言語",
+    "languageDesc": "表示言語を変更します",
+    "light": "ライト",
+    "settings": "設定",
+    "theme": "テーマ",
+    "themeDesc": "表示テーマを変更する(現時点ではリフレッシュが必要)"
   }
 }
