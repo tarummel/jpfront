@@ -26,11 +26,9 @@ const Button = styled.button<Pick<Props, "state">>`
   }
 `;
 
-// pointer-events: ${({state}) => state === 0 ? 'none' : 'initial'};
-
-const StateButton: React.FC<Props> = ({ radical, state, handleClick }) => {
+const StateButton: React.FC<Props> = ({ handleClick, radical, state }) => {
   return (
-    <Button disabled={!state} state={state} onClick={() => handleClick(radical)}>{radical}</Button>
+    <Button disabled={!state} onClick={() => handleClick(radical)} state={state}>{radical}</Button>
   );
 }
 

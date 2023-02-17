@@ -75,8 +75,8 @@ const RowContainer = styled.div`
   overflow-y: scroll;
 `;
 
-const SpinnerContainer = styled.div`
-  height: 32px;
+const BigSpinner = styled.div`
+  padding: 20px;
 `;
 
 const SpinnerButtonPair = styled.div`
@@ -128,7 +128,7 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
 
       getAndSetDisabledRadicals()
     } else {
-      setRadicalsState(newState)
+      setRadicalsState({...newState})
     }
 
     const getAndSetMatchingKanji = async () => {
@@ -191,9 +191,14 @@ const Multiradical: React.FC<Props & WithTranslation> = ({ t }) => {
       <ContentContainer>
         <History />
         <RowContainer>
-          { Object.keys(kanjiData).map((s, i) => {
+          { kanjiLoading && (
+            <BigSpinner>
+              <Spinner size={40} />
+            </BigSpinner>
+          )}
+          { !kanjiLoading && (Object.keys(kanjiData).map((s, i) => {
             return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
-          })};
+          }))};
         </RowContainer>
       </ContentContainer>
     </Page>
