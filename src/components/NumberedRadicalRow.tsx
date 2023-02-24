@@ -19,6 +19,7 @@ const Row = styled.div`
 const RowNumber = styled.div`
   background: ${({theme}) => theme.colors.textSecondary};  
   border-radius: 5px;
+  color: ${({theme}) => theme.colors.textNegative};
   display: flex;
   flex-shrink: 0;
   font-size: ${({theme}) => theme.fontSizes.xlarge};
@@ -40,7 +41,7 @@ const NumberedRadicalRow: React.FC<Props> = ({radicals, radicalsState, rowNumber
       <RowContents>
         {radicals.map((r, i) => {
           return <StateButton key={i} radical={r} state={radicalsState[r]} handleClick={handleClick} />
-        })};
+        })}
       </RowContents>
     </Row>
   );

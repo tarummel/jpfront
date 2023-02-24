@@ -16,6 +16,7 @@ const Row = styled.div`
 const RowNumber = styled.div`
   background: ${({theme}) => theme.colors.textSecondary};
   border-radius: 5px;
+  color: ${({theme}) => theme.colors.textNegative};
   display: flex;
   font-size: ${({theme}) => theme.fontSizes.xlarge};
   flex-shrink: 0;
@@ -37,7 +38,7 @@ const NumberedKanjiRow: React.FC<Props> = ({kanji, rowNumber}) => {
       <RowContents>
         {kanji.map((k, i) => {
           return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>
-        })};
+        })}
       </RowContents>
     </Row>
   );

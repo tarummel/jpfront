@@ -21,6 +21,8 @@
     "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}"
   },
   "legal": {
+    "kanjidic": "KANJIDIC are copyright under the EDRDG license.",
+    "kanjidicLink": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
     "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG licence.",
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
     "jmdict": "JMdict is copyright under the EDRDG licence.",
@@ -36,6 +38,13 @@
     "reset": "Reset",
     "searchHistory": "Search History",
     "strokes": "Strokes"
+  },
+  "multiType": {
+    "enclose": "Enclose",
+    "left": "Left",
+    "right": "Right",
+    "top": "Top",
+    "uncommon": "(91) most infrequently used radicals"
   },
   "settings": {
     "dark": "Dark",

@@ -11,6 +11,7 @@ const darkTheme = {
     link: "#FFF8E0",
     linkVisited: "#F8CD40",
     linkHover: "#FFEBA8",
+    textNegative: "#000000",
     textPrimary: "#FFFFFF",
     textSecondary: "#C3BCD6",
     spinnerPrimary: "#C3BCD6",
