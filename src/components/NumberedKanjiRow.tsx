@@ -14,7 +14,7 @@ const Row = styled.div`
 `;
 
 const RowNumber = styled.div`
-  background: ${({theme}) => theme.colors.textSecondary};
+background: ${({theme}) => theme.colors.rowPrimary};
   border-radius: 5px;
   color: ${({theme}) => theme.colors.textNegative};
   display: flex;

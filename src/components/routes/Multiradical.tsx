@@ -52,6 +52,7 @@ const Page = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
+  border-radius: 5px;
   flex: 1;
   flex-direction: column;
 `;

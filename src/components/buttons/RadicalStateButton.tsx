@@ -10,7 +10,7 @@ interface Props {
 const Button = styled.button<Pick<Props, "state">>`
   background: ${({state, theme}) => state === 2 ? theme.colors.buttonSelected : theme.colors.buttonPrimary};
   border: none;
-  border-radius: 5px;  
+  border-radius: 5px;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
   height: 36px;

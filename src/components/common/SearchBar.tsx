@@ -16,7 +16,9 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
   height: 40px;
-  outline: ${({textLength}) => textLength > 1 ? "2px solid red" : "none"};
+  outline-color: ${({theme, textLength}) => textLength > 1 ? theme.colors.borderError : theme.colors.borderPrimary};
+  outline-width: 2px;
+  outline-style: solid;
 `;
 
 const Search = styled.input`
@@ -31,7 +33,7 @@ const Search = styled.input`
 
 const SearchButton = styled.button`
   background: ${({theme}) => theme.colors.buttonPrimary};  
-  border: none;
+  border: ${({theme}) => "none"};
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   display: flex;
