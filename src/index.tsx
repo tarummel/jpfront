@@ -4,10 +4,11 @@ import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from "./components/App";
-import AppRouter from './AppRouter';
+
 import i18n from './i18n';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Router from './Router';
 import Theme from "./components/utils/Theme";
 
 <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js"></script>
@@ -23,7 +24,7 @@ root.render(
         <Suspense fallback={<div />}>
           <I18nextProvider i18n={i18n}>
             <App>
-              <AppRouter />
+              <Router />
             </App>
           </I18nextProvider>
         </Suspense>

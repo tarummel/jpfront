@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
-import { JEntry, JGlossary, JKanji, JReading, JSense, JSource } from "dataTypes";
+import { JEntry, JGlossary, JKanji, JReading, JSense, JSource } from "jmdict";
 
 interface Props {
     entry: JEntry;

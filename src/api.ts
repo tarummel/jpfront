@@ -62,9 +62,18 @@ async function getInvertedRadicalsSimplified(radicals: string[]): Promise<AxiosR
   }
 };
 
-async function getKanjiInfo(kanji: string): Promise<AxiosResponse<any>> {
+async function getJMdictEntryByKanji(kanji: string): Promise<AxiosResponse<any>> {
   try {
     return await axios.get(`jmdict/kanji/${kanji}/`);
+  } catch (error: any) {
+    console.log(error.code, error.message)
+    throw error
+  }
+};
+
+async function getKDKanjiByKanji(kanji: string): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(`kanjidic/kanji/${kanji}/`);
   } catch (error: any) {
     console.log(error.code, error.message)
     throw error
@@ -78,7 +87,8 @@ const API = {
   getMatchingKanjiByRadicalSimplified,
   getRelatedRadicalsSimplified,
   getInvertedRadicalsSimplified,
-  getKanjiInfo,
+  getJMdictEntryByKanji,
+  getKDKanjiByKanji,
 };
 
 export default API;

@@ -6,24 +6,19 @@ import { withTranslation, WithTranslation } from "react-i18next";
 
 import API from "../../API";
 import Anchor from "../common/Anchor";
-import { JEntry } from "dataTypes";
+import Config from "../../constants/Config";
+import { JEntry } from "jmdict";
+import { KDKanji } from "kanjidic";
 import HorizontalDivider from "../common/HorizontalDivider";
 import JMdictEntry from "../JMdictEntry";
 import Spinner from "../common/Spinner";
 
-const HISTORY_LC = "history";
-const HISTORY_SIZE = 20;
   
-const Container = styled.div`
+const Page = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
   margin: 2.5%;
-`;
-
-const MetaContainer = styled.div`
-  display: flex;
-  flex-direction: row;
 `;
 
 const ContentContainer = styled.div`
@@ -33,11 +28,24 @@ const ContentContainer = styled.div`
   overflow-y: scroll;
 `;
 
+const MetaContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const KanjiSymbol = styled.h1`
-  color: ${({theme}) => theme.colors.textPrimary};
+  background: ${({theme}) => theme.colors.textPrimary};
+  color: ${({theme}) => theme.colors.textNegative};
   font-size: 64px;
   padding: 0px 20px 0px;
   margin: 10px;
+`;
+
+const MiscInformation = styled.div`
+  div {
+    color: ${({theme}) => theme.colors.textPrimary};
+    font-size: ${({theme}) => theme.fontSizes.medium};
+  }
 `;
 
 const ExternalLinks = styled.div`
@@ -48,11 +56,11 @@ const ExternalLinks = styled.div`
   flex-shrink: 0;
   font-size: ${({theme}) => theme.fontSizes.medium};
   padding: 16px;
-`;
 
-const LinkText = styled.div`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.medium};
+  div {
+    color: ${({theme}) => theme.colors.textPrimary};
+    font-size: ${({theme}) => theme.fontSizes.medium};
+  }
 `;
 
 const ErrorContainer = styled.div`
@@ -60,23 +68,24 @@ const ErrorContainer = styled.div`
   flex-direction: column;
   padding: 20px 0px 0px 40px;
   width: 500px;
-`;
 
-const Error = styled.h1`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.xlarge};
+  div {
+    color: ${({theme}) => theme.colors.textPrimary};
+    font-size: ${({theme}) => theme.fontSizes.xlarge};
+  }
 `;
 
 const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
-  const { kanji } = useParams();
+  const { kanjiParam } = useParams();
   const [error, setError] = useState("");
-  const [kanjiData, setKanjiData] = useState<JEntry[]>([]);
+  const [entry, setEntry] = useState<JEntry[]>([]);
+  const [kdk, setKdk] = useState<KDKanji>();
 
   useEffect(() => {
-    const getAndSetKanji = async (kanji: string) => {
+    const getAndSetEntry = async (kanji: string) => {
       try {
-        const response = await API.getKanjiInfo(kanji)
-        setKanjiData(response.data.data)  
+        const response = await API.getJMdictEntryByKanji(kanji)
+        setEntry(response.data.data)  
       } catch (error: any) {
         switch (error.response.status) {
           case 400:
@@ -90,63 +99,93 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
         }
       }
     }
-
-    if (typeof kanji === "string") {
-      getAndSetKanji(kanji)
-
-      const localHistory = localStorage.getItem(HISTORY_LC)
-      if (typeof localHistory === "string") {
-        let historyArray = JSON.parse(localHistory)
-        
-        if (kanji.length === 1 && !historyArray.includes(kanji)) {
-          historyArray.push(kanji)
-          if (historyArray.length > HISTORY_SIZE) {
-            historyArray = historyArray.slice(-HISTORY_SIZE)
-          }
-          localStorage.setItem(HISTORY_LC, JSON.stringify(historyArray));
-        }
-      } else {
-        localStorage.setItem(HISTORY_LC, JSON.stringify([kanji]));
+    
+    const getAndSetKDKanji = async (kanji: string) => {
+      try {
+        const response = await API.getKDKanjiByKanji(kanji)
+        setKdk(response.data.data)  
+      } catch (error: any) {
+        console.log(error)
       }
     }
-  }, [kanji, t]);
+
+    if (typeof kanjiParam !== "string" || kanjiParam.length !== 1) {
+      return
+    }
+
+    getAndSetEntry(kanjiParam)
+    getAndSetKDKanji(kanjiParam)
+
+    const localHistory = localStorage.getItem(Config.localStorage.history)
+    if (typeof localHistory === "string") {
+
+      let historyArray = JSON.parse(localHistory)
+      if (!historyArray.includes(kanjiParam)) {
+
+        historyArray.push(kanjiParam)
+        const historySize = localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault
+        if (historyArray.length > historySize) {
+          historyArray = historyArray.slice(-historySize)
+        }
+        localStorage.setItem(Config.localStorage.history, JSON.stringify(historyArray));
+      }
+    } else {
+      localStorage.setItem(Config.localStorage.history, JSON.stringify([kanjiParam]));
+    }
+    
+  }, [kanjiParam, t]);
+
+  const unicode = kdk?.codepoint?.[0].ucs || ""
+  const grade = kdk?.misc?.[0].grade || ""
+  const jlpt = kdk?.misc?.[0].jlpt || ""
+  const strokes = kdk?.misc?.[0].strokes || ""
+  const frequency = kdk?.misc?.[0].frequency || ""
+  const onyomi = kdk?.reading?.[0].ja_on || ""
+  const kunyomi = kdk?.reading?.[0].ja_kun || ""
 
   return (
-    <Container>
+    <Page>
       <ContentContainer>
         <MetaContainer>
-          <KanjiSymbol>{kanji}</KanjiSymbol>
+          <KanjiSymbol>{kanjiParam}</KanjiSymbol>
+          <MiscInformation>
+            <div>Unicode: {unicode}</div>
+            <div>Grade: {grade}</div>
+            <div>JLPT: {jlpt}</div>
+            <div>Strokes: {strokes}</div>
+            <div>Freq: {frequency}</div>
+          </MiscInformation>
           <ExternalLinks>
-            <LinkText>{t("kanjiInfo.externalLinks")}:</LinkText>
-            <LinkText>
-              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
-            </LinkText>
-            <LinkText>
-              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji })}`}>{t("kanjiInfo.jisho")}</Anchor>
-            </LinkText>
-            <LinkText>
-              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
-            </LinkText>
+            <div>{t("kanjiInfo.externalLinks")}:</div>
+            <div>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
+            </div>
+            <div>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
+            </div>
+            <div>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
+            </div>
           </ExternalLinks>
         </MetaContainer>
 
         { error && (
           <ErrorContainer>
             <HorizontalDivider />
-            <Error>{error}</Error>
+            <div>{error}</div>
           </ErrorContainer>
         )}
-        { !kanjiData && (<Spinner enabled={true}/>) }
-        { kanjiData && (kanjiData.map((entry, i) => {
+        { !entry && (<Spinner />) }
+        { entry && (entry.map((e, i) => {
           return (
             <div key={i}>
               <HorizontalDivider />
-              <JMdictEntry entry={entry} num={i} />
+              <JMdictEntry entry={e} num={i} />
             </div>
           )
         }))}
       </ContentContainer>
-    </Container>
+    </Page>
   );
 };
 
