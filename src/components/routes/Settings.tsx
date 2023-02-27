@@ -19,11 +19,13 @@ const Page = styled.div`
 
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
+  border-radius: 5px;
   padding-top: 1px;
 `;
 
 const Banner = styled.h1`
   background: ${({theme}) => theme.colors.elementPrimary};
+  border-radius: 5px;
   color: ${({theme}) => theme.colors.textSecondary};
   display: flex;
   font-size: ${({theme}) => theme.fontSizes.header};

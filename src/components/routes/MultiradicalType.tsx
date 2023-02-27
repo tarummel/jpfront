@@ -42,8 +42,8 @@ const DEFAULT_STATE = getDefaultRadicalsState()
 const Page = styled.div`
   display: flex;
   flex-direction: row;
-  height: 84% !important;
-  margin: 4% !important;
+  height: 90%;
+  margin: 2.5% 2.5% 2.5% 55px;
 `;
 
 const FlexContainer = styled.div`

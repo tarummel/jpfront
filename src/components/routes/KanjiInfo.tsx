@@ -16,36 +16,59 @@ import Spinner from "../common/Spinner";
   
 const Page = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: row;
-  margin: 2.5%;
+  justify-content: center;
+  margin: 2.5% 2.5% 2.5% 55px;
 `;
 
 const ContentContainer = styled.div`
-  flex: 1;
-  background: ${({theme}) => theme.colors.elementPrimary};
-  padding: 8px;
-  overflow-y: scroll;
+  width: 50%;
 `;
 
-const MetaContainer = styled.div`
+const Card = styled.div`
+  background: ${({theme}) => theme.colors.elementPrimary};
+  border-radius: 5px;
+  padding: 10px;
+`;
+
+const MetaInfoContainer = styled.div`
+  align-content: flex-start;
   display: flex;
   flex-direction: row;
-`;
+  justify-content: space-between;
 
-const KanjiSymbol = styled.h1`
-  background: ${({theme}) => theme.colors.textPrimary};
-  color: ${({theme}) => theme.colors.textNegative};
-  font-size: 64px;
-  padding: 0px 20px 0px;
-  margin: 10px;
-`;
-
-const MiscInformation = styled.div`
   div {
     color: ${({theme}) => theme.colors.textPrimary};
     font-size: ${({theme}) => theme.fontSizes.medium};
   }
+`;
+
+const KanjiSymbol = styled.h1`
+  background: ${({theme}) => theme.colors.textPrimary};
+  border-radius: 5px;
+  color: ${({theme}) => theme.colors.textNegative};
+  display: flex;
+  font-size: 66px;
+  height: 99px;
+  justify-content: center;
+  margin: 10px 20px 10px 10px;
+  width: 99px;
+`;
+
+const YomiInformation = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 10px 20px 10px 20px;
+  width: 150px;
+  word-break: keep-all;
+`;
+
+const MiscInformation = styled.div`
+  align-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px 10px 20px;
 `;
 
 const ExternalLinks = styled.div`
@@ -53,25 +76,32 @@ const ExternalLinks = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding: 16px;
+  margin: 10px 20px 10px 20px;
+`;
 
-  div {
-    color: ${({theme}) => theme.colors.textPrimary};
-    font-size: ${({theme}) => theme.fontSizes.medium};
-  }
+const Entries = styled.div`
+  overflow-y: scroll;
 `;
 
 const ErrorContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 0px 0px 40px;
-  width: 500px;
+  margin: 8px;
 
   div {
     color: ${({theme}) => theme.colors.textPrimary};
     font-size: ${({theme}) => theme.fontSizes.xlarge};
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+`;
+
+const LegalInformation = styled.div`
+  div {
+    color: ${({theme}) => theme.colors.textPrimary};
+    font-size: ${({theme}) => theme.fontSizes.medium};
+    padding-top: 4px;
   }
 `;
 
@@ -135,55 +165,65 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
     
   }, [kanjiParam, t]);
 
-  const unicode = kdk?.codepoint?.[0].ucs || ""
-  const grade = kdk?.misc?.[0].grade || ""
-  const jlpt = kdk?.misc?.[0].jlpt || ""
-  const strokes = kdk?.misc?.[0].strokes || ""
-  const frequency = kdk?.misc?.[0].frequency || ""
+  const unicode = kdk?.codepoint?.[0].ucs || kanjiParam?.charCodeAt(0) || "n/a"
+  const grade = kdk?.misc?.[0].grade || "n/a"
+  const jlpt = kdk?.misc?.[0].jlpt || "n/a"
+  const strokes = kdk?.misc?.[0].strokes || "n/a"
+  const frequency = kdk?.misc?.[0].frequency || "n/a"
   const onyomi = kdk?.reading?.[0].ja_on || ""
-  const kunyomi = kdk?.reading?.[0].ja_kun || ""
+  const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || ""
 
   return (
     <Page>
       <ContentContainer>
-        <MetaContainer>
-          <KanjiSymbol>{kanjiParam}</KanjiSymbol>
-          <MiscInformation>
-            <div>Unicode: {unicode}</div>
-            <div>Grade: {grade}</div>
-            <div>JLPT: {jlpt}</div>
-            <div>Strokes: {strokes}</div>
-            <div>Freq: {frequency}</div>
-          </MiscInformation>
-          <ExternalLinks>
-            <div>{t("kanjiInfo.externalLinks")}:</div>
-            <div>
-              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
-            </div>
-            <div>
-              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
-            </div>
-            <div>
-              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
-            </div>
-          </ExternalLinks>
-        </MetaContainer>
+        <Card>
+          <MetaInfoContainer>
+            <KanjiSymbol>{kanjiParam}</KanjiSymbol>
+            <YomiInformation>
+              <div>On: {onyomi}</div>
+              <div>Kun: {kunyomi}</div>
+            </YomiInformation>
+            <MiscInformation>
+              <div>Grade: {grade}</div>
+              <div>JLPT: {jlpt}</div>
+              <div>Strokes: {strokes}</div>
+              <div>Freq: {frequency}</div>
+              <div>Unicode: {unicode}</div>
+            </MiscInformation>
+            <ExternalLinks>
+              <div>{t("kanjiInfo.externalLinks")}:</div>
+              <div>
+                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
+              </div>
+              <div>
+                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
+              </div>
+              <div>
+                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
+              </div>
+            </ExternalLinks>
+          </MetaInfoContainer>
 
-        { error && (
-          <ErrorContainer>
-            <HorizontalDivider />
-            <div>{error}</div>
-          </ErrorContainer>
-        )}
-        { !entry && (<Spinner />) }
-        { entry && (entry.map((e, i) => {
-          return (
-            <div key={i}>
+          { error && (
+            <ErrorContainer>
               <HorizontalDivider />
-              <JMdictEntry entry={e} num={i} />
-            </div>
-          )
-        }))}
+              <div>{error}</div>
+            </ErrorContainer>
+          )}
+          { !entry && (<Spinner />) }
+          { entry && (entry.map((e, i) => {
+            return (
+              <Entries key={i}>
+                <HorizontalDivider />
+                <JMdictEntry entry={e} num={i} />
+              </Entries>
+            )
+          }))}
+        </Card>
+        <LegalInformation>
+          <div>{t("legal.jmdict")} <Anchor target={"_blank"} href={`${t("legal.jmdictLink")}`}>Link</Anchor></div>
+          <div>{t("legal.kanjidic")} <Anchor target={"_blank"} href={`${t("legal.kanjidicLink")}`}>Link</Anchor></div>
+        </LegalInformation>
       </ContentContainer>
     </Page>
   );

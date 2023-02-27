@@ -7,8 +7,8 @@
   },
   "kanjiInfo": {
     "english": "Engl/英",
-    "error400": "Err 400: Bad Request to backend (try refreshing the page?)",
-    "error404": "Err 404: Entry not found (is there a typo in the URL?)",
+    "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
+    "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
     "externalLinks": "External Links",
     "kanji": "Kanji/漢字",
     "jisho": "Jisho",
@@ -21,7 +21,7 @@
     "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}"
   },
   "legal": {
-    "kanjidic": "KANJIDIC are copyright under the EDRDG license.",
+    "kanjidic": "KANJIDIC is copyright under the EDRDG license.",
     "kanjidicLink": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
     "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG licence.",
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",

@@ -52,9 +52,9 @@ const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => 
   return (
     <EntryRow>
       <RowNum>{num+1}.</RowNum>
-      <Content>({t("kanjiInfo.kanji")}): {kcontents}</Content>
-      <Content>({t("kanjiInfo.meaning")}): {rcontents}</Content>
-      <Content>({t("kanjiInfo.english")}): {glosses}</Content>
+      <Content>{kcontents}</Content>
+      <Content>{rcontents}</Content>
+      <Content>{glosses}</Content>
     </EntryRow>
   );
 };

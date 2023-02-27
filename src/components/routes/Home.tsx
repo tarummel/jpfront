@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 5%;
+  margin: 2.5% 2.5% 2.5% 55px;
 `;
 
 const MultiradicalContainer = styled.div`
