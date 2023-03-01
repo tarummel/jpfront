@@ -107,6 +107,11 @@ const Details = styled.h1`
   font-size: ${({theme}) => theme.fontSizes.small};
 `;
 
+const Disclaimer = styled.p`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.medium};
+`;
+
 const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE})
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([])
@@ -219,6 +224,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
             return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["unc"][s]} radicalsState={radicalsState} rowNumber={s} />
           })}
         </RowContainer>
+        <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
       </FlexContainer>
       <ColumnSpacer width={30} />
       <FlexContainer>

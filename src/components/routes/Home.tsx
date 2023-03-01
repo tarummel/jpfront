@@ -14,10 +14,13 @@ const Container = styled.div`
 `;
 
 const MultiradicalContainer = styled.div`
+  background: ${({theme}) => theme.colors.elementPrimary};
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   height: 138px;
   justify-content: space-between;
+  padding: 10px;
 `;
 
 const Home: React.FC<WithTranslation> = ({ t }) => { 

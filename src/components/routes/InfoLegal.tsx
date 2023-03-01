@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 import { withTranslation, WithTranslation } from "react-i18next";
-  
+
 const Page = styled.div`
   margin: 2.5% 25% 2.5%;
 `;
@@ -34,22 +34,18 @@ const Section = styled.p`
   padding-left: 25px;
 `;
 
-const Help: React.FC<WithTranslation> = ({ t }) => {
+const InfoLegal: React.FC<WithTranslation> = ({ t }) => { 
   return (
     <Page>
-      <Banner>{t("help.help")}</Banner>
+      <Banner>{t("infoLegal.informationAndLegal")}</Banner>
       <Card>
-        <SectionTitle>{t("help.siteTitle")}</SectionTitle>
-        <Section>{t("help.site")}</Section>
-        <SectionTitle>{t("help.dataTitle")}</SectionTitle>
-        <Section>{t("help.data")}</Section>
-        <SectionTitle>{t("help.requestsTitle")}</SectionTitle>
-        <Section>{t("help.requests")}</Section>
-        <SectionTitle>{t("help.suggestionsTitle")}</SectionTitle>
-        <Section>{t("help.suggestions")}</Section>
+        <SectionTitle>{t("infoLegal.codeLegalTitle")}</SectionTitle>
+        <Section>{t("infoLegal.codeLegal")}</Section>
+        <SectionTitle>{t("infoLegal.edrdgLegalTitle")}</SectionTitle>
+        <Section>{t("infoLegal.edrdgLegal")}</Section>
       </Card>
     </Page>
   );
 }
 
-export default withTranslation()(Help);
+export default withTranslation()(InfoLegal);
