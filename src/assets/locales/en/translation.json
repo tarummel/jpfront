@@ -47,6 +47,7 @@
     "jmdictLink": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project"
   },
   "mainMenu": {
+    "random": "I'm feeling lucky",
     "multiradicalSearch": "Multi-Radical Search",
     "multiradicalSearchByType": "Search by Type",
     "searchKanji": "Search Kanji"

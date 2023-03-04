@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
+import API from "../../API";
 import { MainMenuButton } from "../buttons";
 import SearchBar from "../common/SearchBar";
 
@@ -18,16 +19,29 @@ const MultiradicalContainer = styled.div`
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  height: 138px;
+  height: 180px;
   justify-content: space-between;
   padding: 10px;
 `;
 
-const Home: React.FC<WithTranslation> = ({ t }) => { 
+const Home: React.FC<WithTranslation> = ({ t }) => {
+  const navigate = useNavigate();
+
+  const handleRandom = () => {
+    const getAndNavigateRandom = async () => {
+      const response = await API.getKDKanjiRandom(true)
+      const data = response.data.data
+      navigate(`/kanji/${data}`);
+    };
+
+    getAndNavigateRandom()
+  };
+
   return (
     <Container>
       <MultiradicalContainer>
         <SearchBar text={`${t("mainMenu.searchKanji")}...`}/>
+        <MainMenuButton onClick={handleRandom}>{t("mainMenu.random")}</MainMenuButton>
         <Link to="/multiradical">
           <MainMenuButton>{t("mainMenu.multiradicalSearch")}</MainMenuButton>
         </Link>

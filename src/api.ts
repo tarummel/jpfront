@@ -37,7 +37,7 @@ async function getMatchingKanjiByRadical(radicals: string[]): Promise<AxiosRespo
 
 async function getMatchingKanjiByRadicalSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get(`krad/radicals/${radicals.join(",")}/kanji/`, { params: { simple: true }});
+    return await axios.get(`kanjidic/radicals/${radicals.join(",")}/kanji/`, { params: { simple: true }});
   } catch (error: any) {
     console.log(error.code, error.message)
     throw error
@@ -80,6 +80,16 @@ async function getKDKanjiByKanji(kanji: string): Promise<AxiosResponse<any>> {
   }
 };
 
+async function getKDKanjiRandom(kanjiOnly:boolean = false): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(`kanjidic/random/`, { params: (kanjiOnly ? { kanji_only: true } : {}) });
+  } catch (error: any) {
+    console.log(error.code, error.message)
+    throw error
+  }
+};
+
+
 const API = {
   getRadicalsList,
   getRadicalsSimplified,
@@ -89,6 +99,7 @@ const API = {
   getInvertedRadicalsSimplified,
   getJMdictEntryByKanji,
   getKDKanjiByKanji,
+  getKDKanjiRandom,
 };
 
 export default API;
