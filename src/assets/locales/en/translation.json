@@ -1,4 +1,9 @@
 {
+  "error": {
+    "pageNotFound": "Page Not Found",
+    "message": "The page you were looking for may have moved or you may have been redirected here by mistake.",
+    "home": "Go Home"
+  },
   "header": {
     "about": "About",
     "help": "Help",
@@ -48,9 +53,10 @@
   },
   "mainMenu": {
     "random": "I'm feeling lucky",
-    "multiradicalSearch": "Multi-Radical Search",
-    "multiradicalSearchByType": "Search by Type",
-    "searchKanji": "Search Kanji"
+    "multiradicalSearch": "Multiradical Search",
+    "multiradicalSearchByType": "Multiradical Search (Type)",
+    "searchKanji": "Search Kanji",
+    "skip": "SKIP"
   },
   "multi": {
     "instructions": "Click a radical to get started, kanji composed of selected radicals will appear on the right",

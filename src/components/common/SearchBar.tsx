@@ -28,7 +28,7 @@ const Search = styled.input`
   font-size: ${({theme}) => theme.fontSizes.large};
   outline: none;
   padding-left: 20px;
-  width: 200px;
+  width: 210px;
 `;
 
 const SearchButton = styled.button`

@@ -14,7 +14,7 @@ const Button = styled.button`
   font-size: ${({theme}) => theme.fontSizes.large};
   height: 40px;
   justify-content: center;
-  width: 240px;
+  width: 250px;
   &:hover {
     background: ${({theme}) => theme.colors.buttonHover};
   }
