@@ -1,19 +1,33 @@
 import React from "react";
 import styled from "styled-components"
 
+// state:
+// 0 = disabled
+// 1 = unselected
+// 2 = selected
 interface Props {
-  radical: string;
-  state: number;
-  handleClick: (radical: string) => void;
+  callback?: any;
+  children?: React.ReactNode;
+  handleClick: (callback: any) => void;
+  height?: number;
+  onClick?: void;
+  state?: any;
+  width?: number;
 };
 
-const Button = styled.button<Pick<Props, "state">>`
+interface ButtonProps {
+  height?: number;
+  state?: any;
+  width?: number;
+}
+
+const Button = styled.button<ButtonProps>`
   background: ${({state, theme}) => state === 2 ? theme.colors.buttonSelected : theme.colors.buttonPrimary};
   border: none;
   border-radius: 5px;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
-  height: 36px;
+  height: ${({height}) => height ? height : 36}px;
   margin: 1px;
   text-align: center;
   width: 36px;
@@ -26,9 +40,9 @@ const Button = styled.button<Pick<Props, "state">>`
   }
 `;
 
-const StateButton: React.FC<Props> = ({ handleClick, radical, state }) => {
+const StateButton: React.FC<Props> = ({ callback, children, handleClick, height, state, width }) => {
   return (
-    <Button disabled={!state} onClick={() => handleClick(radical)} state={state}>{radical}</Button>
+    <Button disabled={!state} height={height} onClick={() => handleClick(callback)} state={state} width={width}>{children}</Button>
   );
 }
 

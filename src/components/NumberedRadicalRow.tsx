@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { RadicalsState } from "dataTypes";
-import StateButton from "./buttons/RadicalStateButton";
+import StateButton from "./buttons/StateButton";
 
 interface Props {
   radicals: string[];
@@ -40,7 +40,7 @@ const NumberedRadicalRow: React.FC<Props> = ({radicals, radicalsState, rowNumber
       <RowNumber>{rowNumber}</RowNumber>
       <RowContents>
         {radicals.map((r, i) => {
-          return <StateButton key={i} radical={r} state={radicalsState[r]} handleClick={handleClick} />
+          return <StateButton key={i} callback={r} handleClick={handleClick} state={radicalsState[r]}>{r}</StateButton>
         })}
       </RowContents>
     </Row>

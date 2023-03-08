@@ -5,7 +5,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import Button from "../buttons/Button";
 
 import Config from "../../constants/Config";
-import { HorizontalDivider, Input } from "../common";
+import { HorizontalDivider, NumberInput } from "../common";
 
 const DEFAULT_LANGUAGE = "en";
 const DEFAULT_THEME = "dark";
@@ -101,15 +101,23 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
   };
 
   const handleHistorySize = (e: any) => {
-    let val = e.target.value
-    if (val < 0) {
-      val = "0"
+    const value = e.target.value
+    console.log(value, typeof value)
+    const num = parseInt(value)
+    if (!(typeof num === "number")) {
+      setHistorySize(12)
+      return
     }
-    if (val > 100) {
-      val = "100"
+
+    let size = e.target.value
+    if (size < 0) {
+      size = 0
     }
-    localStorage.setItem(Config.localStorage.historySize, val);
-    setHistorySize(val)
+    if (size > 100) {
+      size = 100
+    }
+    localStorage.setItem(Config.localStorage.historySize, String(size));
+    setHistorySize(size)
   };
 
   return (
@@ -145,7 +153,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
         <SettingContainer>
           <Description>- {t("settings.historySizeDesc")}</Description>
           <Setting>
-            <Input height={WIDGET_HEIGHT} onChange={handleHistorySize} placeholder={""} type={"search"} value={historySize} width={WIDGET_WIDTH}/>
+            <NumberInput height={WIDGET_HEIGHT} onChange={handleHistorySize} placeholder={""} value={historySize} width={WIDGET_WIDTH}/>
           </Setting>
         </SettingContainer>
         <SettingContainer>

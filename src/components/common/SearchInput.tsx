@@ -6,8 +6,7 @@ interface Props {
   height?: string|number;
   onChange?: (e: any) => void;
   onKeyDown?: (e: any) => void;
-  placeholder: string;
-  type: string;
+  placeholder?: any;
   value: string|number;
   width?: string|number;
 };
@@ -22,10 +21,10 @@ const StyledInput = styled.input<Props>`
   width: ${({width}) => width ? `${width}px` : "auto"};
 `;
 
-const Input: React.FC<Props> = ({ fontSize, height, onChange, onKeyDown, placeholder, type, value, width }) => {
+const SearchInput: React.FC<Props> = ({ fontSize, height, onChange, onKeyDown, placeholder, value, width }) => {
 	return (
-		<StyledInput fontSize={fontSize} height={height} onChange={onChange} onKeyDown={onKeyDown} placeholder={placeholder} type={type} value={value} width={width} />
+		<StyledInput fontSize={fontSize} height={height} onChange={onChange} onKeyDown={onKeyDown} placeholder={placeholder} type={"search"} value={value} width={width} />
 	);
 };
 
-export default Input;
+export default SearchInput;

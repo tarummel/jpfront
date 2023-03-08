@@ -3,6 +3,13 @@ import { AxiosResponse } from "axios";
 
 import config from "./constants/Config";
 
+
+interface KDKanjiBySkipcodeParams {
+  main_range?: number;
+  sub_range?: number;
+  simple?: boolean;
+}
+
 // e.g. http://localhost:8008/api
 axios.defaults.baseURL = `${config.backend.jpcoreUrl}/`;
 axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
@@ -89,6 +96,19 @@ async function getKDKanjiRandom(kanjiOnly:boolean = false): Promise<AxiosRespons
   }
 };
 
+async function getKDKanjiBySkipcode(skip:string, main:number = 0, sub:number = 0, simple:boolean = false): Promise<AxiosResponse<any>> {
+  const params = as KDKanjiBySkipcodeParams{}
+  if (main) { params.main_range = main };
+  if (sub) { params.sub_range = sub };
+  if (simple) { params.simple = simple };
+
+  try {
+    return await axios.get(`kanjidic/kanji/skipcode/${skip}/`, { params });
+  } catch (error: any) {
+    console.log(error.code, error.message)
+    throw error
+  }
+};
 
 const API = {
   getRadicalsList,
@@ -100,6 +120,7 @@ const API = {
   getJMdictEntryByKanji,
   getKDKanjiByKanji,
   getKDKanjiRandom,
+  getKDKanjiBySkipcode,
 };
 
 export default API;

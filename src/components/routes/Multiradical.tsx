@@ -4,7 +4,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
 import { Anchor, ColumnSpacer, Spinner } from "../common";
-import { GenericButton } from "../buttons";
+import { Button } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import NumberedRadicalRow from "../NumberedRadicalRow";
@@ -111,7 +111,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
       setRadicalsLoading(true)
       const response = await API.getInvertedRadicalsSimplified(selectedRadicals)
       const data = response.data.data
-      
+
       for (let i = 0; i < data.length; i++) {
         newState[data[i]] = 0
       }
@@ -176,7 +176,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
                 <Spinner size={20} />
               </MiniSpinner>
             )}
-            <GenericButton height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</GenericButton>
+            <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
           </SpinnerButtonPair>
         </RadicalHeaders>
         <RowContainer>

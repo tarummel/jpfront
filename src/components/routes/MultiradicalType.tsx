@@ -4,7 +4,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
 import { Anchor, ColumnSpacer, Spinner } from "../common";
-import { GenericButton, RadicalStateButton } from "../buttons";
+import { Button, StateButton } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import NumberedRadicalRow from "../NumberedRadicalRow";
@@ -121,7 +121,6 @@ const TitleContainer = styled.div`
 `;
 
 const SpinnerButtonPair = styled.div`
-  align-items: flex-end;
   display: flex;
   flex-direction: row;
   padding-bottom: 4px;
@@ -236,7 +235,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
               {t("multiType.enclose")}
               <StructuredRow columns={3} rows={5}>
                 {SORTED_RADICALS["e"].map((s, i) => {
-                  return <RadicalStateButton handleClick={handleSelection} key={i} radical={s} state={radicalsState[s]} />
+                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>
                 })}
               </StructuredRow>
             </TitleContainer>
@@ -244,7 +243,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
               {t("multiType.left")}
               <StructuredRow columns={3} rows={6}>
                 {SORTED_RADICALS["l"].map((s, i) => {
-                  return <RadicalStateButton handleClick={handleSelection} key={i} radical={s} state={radicalsState[s]} />
+                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>
                 })}
               </StructuredRow>
             </TitleContainer>
@@ -255,7 +254,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
               {t("multiType.top")}
               <StructuredRow columns={11} rows={1}>
                 {SORTED_RADICALS["t"].map((s, i) => {
-                  return <RadicalStateButton handleClick={handleSelection} key={i} radical={s} state={radicalsState[s]} />
+                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>
                 })}
               </StructuredRow>
             </TitleContainer>
@@ -265,7 +264,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
                   <Spinner size={20} />
                 </MiniSpinner>
               )}
-            <GenericButton height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</GenericButton>
+            <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
           </SpinnerButtonPair>
           </RadicalsHeaders>
           <RowContainer>

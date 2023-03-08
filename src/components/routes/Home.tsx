@@ -29,21 +29,20 @@ const SearchCard = styled.div`
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  height: 140px;
   justify-content: space-between;
-  height: 90px;
   padding: 10px;
   margin: 1%;
-
 `;
 
 const OptionsCard = styled.div`
+  align-items: center;
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   height: 210px;
   justify-content: space-between;
-  align-items: center;
   padding: 10px;
 `;
 
@@ -51,7 +50,6 @@ const OptionsTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.large};
   justify-content: center;
-  padding: -5px;
   margin-top: 0px;
 `;
 
@@ -72,6 +70,7 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
     <Page>
       <Banner>Open Kanji</Banner>
       <SearchCard>
+        <OptionsTitle>Search</OptionsTitle>
         <SearchBar text={`${t("mainMenu.searchKanji")}...`}/>
         <MainMenuButton onClick={handleRandom}>{t("mainMenu.random")}</MainMenuButton>
       </SearchCard>
