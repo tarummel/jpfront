@@ -209,19 +209,19 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
                 {/* Left/Right */}
                 <StateButton callback={1} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 1 ? 2 : 1} width={CATEGORY_WIDTH}>
                   <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                    <path d="M 0 0 L 100 0 L 100 50 L 0 50 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                    <path d="M 0 50 L 5 50 L 5 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                    <path d="M 5 95 L 95 95 L 95 100 L 5 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                    <path d="M 95 50 L 100 50 L 100 100 L 95 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+                    <path d="M 0 0 L 50 0 L 50 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                    <path d="M 50 0 L 95 0 L 95 5 L 50 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                    <path d="M 95 0 L 100 0 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                    <path d="M 50 95 L 95 95 L 100 100 L 50 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
                   </SVG>
                 </StateButton>
                 {/* Up/Down */}
                 <StateButton callback={2} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 2 ? 2 : 1} width={CATEGORY_WIDTH}>
                   <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                    <path d="M 0 0 L 50 0 L 50 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                    <path d="M 50 0 L 95 0 L 95 5 L 50 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                    <path d="M 95 0 L 100 0 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                    <path d="M 50 95 L 95 95 L 100 100 L 50 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                    <path d="M 0 0 L 100 0 L 100 50 L 0 50 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                    <path d="M 0 50 L 5 50 L 5 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                    <path d="M 5 95 L 95 95 L 95 100 L 5 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                    <path d="M 95 50 L 100 50 L 100 100 L 95 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
                   </SVG>
                 </StateButton>
                 {/* Enclose */}
