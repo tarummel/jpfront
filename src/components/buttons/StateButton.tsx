@@ -38,6 +38,7 @@ const Button = styled.button<ButtonProps>`
     background: ${({theme}) => theme.colors.buttonDisabled};
     pointer-events: none;
   }
+  width: ${({width}) => width ? width : 36}px;
 `;
 
 const StateButton: React.FC<Props> = ({ callback, children, handleClick, height, state, width }) => {

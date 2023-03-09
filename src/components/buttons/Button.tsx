@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components"
 
 interface Props {
+  callback?: any;
   children?: React.ReactNode;
   height?: number;
-  onClick: () => void;
+  onClick: (args: any) => void | (() => void);
   width?: number;
 }
 
@@ -22,9 +23,9 @@ const StyledButton = styled.button<Props>`
   }
 `;
 
-const Button: React.FC<Props> = ({ children, height, onClick, width }) => { 
+const Button: React.FC<Props> = ({ callback, children, height, onClick, width }) => { 
   return (
-    <StyledButton height={height} onClick={onClick} width={width}>{children}</StyledButton>
+    <StyledButton height={height} onClick={() => onClick(callback)} width={width}>{children}</StyledButton>
   );
 }
 

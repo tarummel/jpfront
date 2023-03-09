@@ -97,10 +97,10 @@ async function getKDKanjiRandom(kanjiOnly:boolean = false): Promise<AxiosRespons
 };
 
 async function getKDKanjiBySkipcode(skip:string, main:number = 0, sub:number = 0, simple:boolean = false): Promise<AxiosResponse<any>> {
-  const params = as KDKanjiBySkipcodeParams{}
-  if (main) { params.main_range = main };
-  if (sub) { params.sub_range = sub };
-  if (simple) { params.simple = simple };
+  const params = {} as KDKanjiBySkipcodeParams
+  if (main) { params.main_range = main};
+  if (sub) { params.sub_range = sub};
+  if (simple) { params.simple = simple};
 
   try {
     return await axios.get(`kanjidic/kanji/skipcode/${skip}/`, { params });

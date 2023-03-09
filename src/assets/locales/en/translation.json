@@ -83,5 +83,11 @@
     "settings": "Settings",
     "theme": "Theme",
     "themeDesc": "Changes the display theme (requires refresh for now)"
+  },
+  "skip": {
+    "shape": "Shape",
+    "main": "Main",
+    "sub": "Sub",
+    "plusminus": "±"
   }
 }

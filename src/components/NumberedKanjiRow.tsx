@@ -14,7 +14,7 @@ const Row = styled.div`
 `;
 
 const RowNumber = styled.div`
-background: ${({theme}) => theme.colors.rowPrimary};
+  background: ${({theme}) => theme.colors.rowPrimary};
   border-radius: 5px;
   color: ${({theme}) => theme.colors.textNegative};
   display: flex;
@@ -29,6 +29,10 @@ background: ${({theme}) => theme.colors.rowPrimary};
 const RowContents = styled.div`
   display: flex;
   flex-wrap: wrap;
+  a {
+    line-height: 32px;
+    padding: 2px 2px 2px 2px;
+  }
 `;
 
 const NumberedKanjiRow: React.FC<Props> = ({kanji, rowNumber}) => {

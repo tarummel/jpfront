@@ -12,7 +12,6 @@ interface Props {
 
 const StyledLink = styled(Link)<Props>`
   font-size: ${({fontSize, theme}) => fontSize ? theme.fontSizes[fontSize] : theme.fontSizes.medium};
-  margin: 1px;
   text-decoration: none;
   :link {
     color: ${({theme}) => theme.colors.link};

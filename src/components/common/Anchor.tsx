@@ -9,7 +9,6 @@ interface Props {
 
 const StyledAnchor = styled.a`
   font-size: ${({theme}) => theme.fontSizes.medium};
-  margin: 1px;
   :link {
     color: ${({theme}) => theme.colors.link};
   }
