@@ -9,6 +9,7 @@ import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import NumberedRadicalRow from "../NumberedRadicalRow";
 import { RadicalsState, StrokeCharactersMap } from "dataTypes";
+import { MatchingKanjiByRadicalsParams, RelatedRadicalsParams } from "apiParamTypes";
 
 interface Props {}
 
@@ -171,9 +172,11 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
     let newState = {...DEFAULT_STATE}
     const getAndSetDisabledRadicals = async () => {
       setRadicalsLoading(true)
-      const response = await API.getInvertedRadicalsSimplified(selectedRadicals)
+
+      const params = { simple: true, invert: true } as RelatedRadicalsParams
+      const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params)
       const data = response.data.data
-      
+
       for (let i = 0; i < data.length; i++) {
         newState[data[i]] = 0
       }
@@ -187,20 +190,21 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
         newState[selectedRadicals[i]] = 2
       }
 
-      getAndSetDisabledRadicals()
+      getAndSetDisabledRadicals().catch((e) => { console.log(e) })
     } else {
       setRadicalsState(newState)
     }
 
     const getAndSetMatchingKanji = async () => {
       setKanjiLoading(true)
-      const response = await API.getMatchingKanjiByRadicalSimplified(selectedRadicals)
+      const params = { simple: true } as MatchingKanjiByRadicalsParams
+      const response = await API.getMatchingKDKanjiByRadicals(selectedRadicals, params)
       setKanjiData(response.data.data)
       setKanjiLoading(false)
     }
 
     if (selectedRadicals.length) {
-      getAndSetMatchingKanji()
+      getAndSetMatchingKanji().catch((e) => { console.log(e) })
     } else {
       setKanjiData({})
     }

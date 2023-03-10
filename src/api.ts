@@ -2,79 +2,51 @@ import axios from 'axios';
 import { AxiosResponse } from "axios";
 
 import config from "./constants/Config";
+import * as paramTypes from "apiParamTypes";
 
-
-interface KDKanjiBySkipcodeParams {
-  main_range?: number;
-  sub_range?: number;
-  simple?: boolean;
-}
-
-// e.g. http://localhost:8008/api
 axios.defaults.baseURL = `${config.backend.jpcoreUrl}/`;
 axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
 
-async function getRadicalsList(): Promise<AxiosResponse<any>> {
-  try {
-    const response = await axios.get('krad/radicals/');
-    return response.data;
-  } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
+const getPromiseRejection = (error: any): Promise<any> => {
+  if (error.response) {
+    // The request was made and the server responded with a status code that falls out of the range of 2xx
+    // console.log(error.response.status);
+    // console.log(error.response.headers);
+    // console.log(error.response.data);
+    return Promise.reject(error.response)
+  } else if (error.request) {
+    // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser 
+    // and an instance of http.ClientRequest in node.js
+    // console.log(error.request);
+    return Promise.reject(error.request)
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    // console.log('Error', error.message);
+    return Promise.reject(error)
   }
 };
 
-async function getRadicalsSimplified(): Promise<AxiosResponse<any>> {
+async function getRadicalsList(params: paramTypes.RadicalsListParams = {}): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get('krad/radicals/', { params: { simple: true }});
+    return await axios.get('krad/radicals/', { params });
   } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
+    return getPromiseRejection(error)
   }
 };
 
-async function getMatchingKanjiByRadical(radicals: string[]): Promise<AxiosResponse<any>> {
+async function getMatchingKDKanjiByRadicals(radicals: string[], params: paramTypes.MatchingKanjiByRadicalsParams = {}): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get(`krad/radicals/${radicals.join(",")}/kanji/`);
+    return await axios.get(`kanjidic/radicals/${radicals.join(",")}/kanji/`, { params });
   } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
+    return getPromiseRejection(error)
   }
 };
 
-async function getMatchingKanjiByRadicalSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
+async function getRelatedRadicalsByRadicals(radicals: string[], params: paramTypes.RelatedRadicalsParams = {}): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get(`kanjidic/radicals/${radicals.join(",")}/kanji/`, { params: { simple: true }});
+    return await axios.get(`kanjidic/radicals/${radicals.join(",")}/kanji/`, { params });
   } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
-  }
-};
-
-async function getRelatedRadicalsSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`krad/radicals/${radicals.join(",")}/related/`, { params: { simple: true }});
-  } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
-  }
-};
-
-async function getInvertedRadicalsSimplified(radicals: string[]): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`krad/radicals/${radicals.join(",")}/related/`, { params: { simple: true, invert: true }});
-  } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
-  }
-};
-
-async function getJMdictEntryByKanji(kanji: string): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`jmdict/kanji/${kanji}/`);
-  } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
+    return getPromiseRejection(error)
   }
 };
 
@@ -82,45 +54,42 @@ async function getKDKanjiByKanji(kanji: string): Promise<AxiosResponse<any>> {
   try {
     return await axios.get(`kanjidic/kanji/${kanji}/`);
   } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
+    return getPromiseRejection(error)
   }
 };
 
-async function getKDKanjiRandom(kanjiOnly:boolean = false): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`kanjidic/random/`, { params: (kanjiOnly ? { kanji_only: true } : {}) });
-  } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
-  }
-};
-
-async function getKDKanjiBySkipcode(skip:string, main:number = 0, sub:number = 0, simple:boolean = false): Promise<AxiosResponse<any>> {
-  const params = {} as KDKanjiBySkipcodeParams
-  if (main) { params.main_range = main};
-  if (sub) { params.sub_range = sub};
-  if (simple) { params.simple = simple};
-
+async function getKDKanjiBySkipcode(skip:string, params: paramTypes.KDKanjiBySkipcodeParams = {}): Promise<AxiosResponse<any, any>> {
   try {
     return await axios.get(`kanjidic/kanji/skipcode/${skip}/`, { params });
   } catch (error: any) {
-    console.log(error.code, error.message)
-    throw error
+    return getPromiseRejection(error)
+  }
+};
+
+async function getKDKanjiRandom(params: paramTypes.KDKanjiRandomParams = {}): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(`kanjidic/random/`, { params });
+  } catch (error: any) {
+    return getPromiseRejection(error)
+  }
+};
+
+async function getJMdictEntryByKanji(kanji: string): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(`jmdict/kanji/${kanji}/`);
+  } catch (error: any) {
+    return getPromiseRejection(error)
   }
 };
 
 const API = {
   getRadicalsList,
-  getRadicalsSimplified,
-  getMatchingKanjiByRadical,
-  getMatchingKanjiByRadicalSimplified,
-  getRelatedRadicalsSimplified,
-  getInvertedRadicalsSimplified,
-  getJMdictEntryByKanji,
+  getMatchingKDKanjiByRadicals,
+  getRelatedRadicalsByRadicals,
   getKDKanjiByKanji,
-  getKDKanjiRandom,
   getKDKanjiBySkipcode,
+  getKDKanjiRandom,
+  getJMdictEntryByKanji,
 };
 
 export default API;

@@ -6,6 +6,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import API from "../../API";
 import { MainMenuButton } from "../buttons";
 import SearchBar from "../common/SearchBar";
+import { KDKanjiRandomParams } from "apiParamTypes";
 
 const Page = styled.div`
   display: flex;
@@ -18,10 +19,6 @@ const Page = styled.div`
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: 48px;
-`;
-
-const Icon = styled.svg`
-
 `;
 
 const SearchCard = styled.div`
@@ -58,12 +55,15 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
 
   const handleRandom = () => {
     const getAndNavigateRandom = async () => {
-      const response = await API.getKDKanjiRandom(true)
-      const data = response.data.data
+      const params = { kanjiOnly: true } as KDKanjiRandomParams;
+      const response = await API.getKDKanjiRandom(params);
+      const data = response.data.data;
       navigate(`/kanji/${data}`);
     };
 
-    getAndNavigateRandom()
+    getAndNavigateRandom().catch((e) => {
+      console.log(getAndNavigateRandom.name, e);
+    });
   };
 
   return (

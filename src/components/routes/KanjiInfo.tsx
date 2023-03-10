@@ -143,8 +143,12 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
       return
     }
 
-    getAndSetEntry(kanjiParam)
-    getAndSetKDKanji(kanjiParam)
+    getAndSetEntry(kanjiParam).catch((e) => {
+      console.log(getAndSetEntry.name, e);
+    });
+    getAndSetKDKanji(kanjiParam).catch((e) => {
+      console.log(getAndSetKDKanji.name, e);
+    });
 
     const localHistory = localStorage.getItem(Config.localStorage.history)
     if (typeof localHistory === "string") {

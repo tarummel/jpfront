@@ -119,14 +119,17 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
     useEffect(() => {
       const getAndSetKanjiData = async () => {
         setLoading(true)
+
         const skipcode = [category, main, sub].join('-')
-        const response = await API.getKDKanjiBySkipcode(skipcode, mainRange, subRange, true)
+        const params = { main_range: mainRange, sub_range: subRange, simple: true}
+        const response = await API.getKDKanjiBySkipcode(skipcode, params)
         setKanjiData(response.data.data)
+
         setLoading(false)
       }
 
       if (category > 0 && category < 5 && main > 0 && sub > 0 && mainRange > -1 && subRange > -1) {
-        getAndSetKanjiData()
+        getAndSetKanjiData().catch((e) => { console.log(e) })
       } else {
         setKanjiData({})
       }
