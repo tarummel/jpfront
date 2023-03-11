@@ -2,17 +2,20 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  width?: number;
+  minWidth?: string;
+  width?: string;
 }
 
 const Spacer = styled.div<Props>`
+  display: flex;
   flex-shrink: 0;
-  width: ${({width}) => width ? width : 70}px;
+  min-width: ${({minWidth}) => minWidth ? minWidth + "" : "0px"};
+  width: ${({width}) => width ? width + "" : "0px"};
 `;
 
-const ColumnSpacer: React.FC<Props> = ({width}) => {
+const ColumnSpacer: React.FC<Props> = ({ minWidth, width }) => {
   return (
-    <Spacer width={width}/>
+    <Spacer minWidth={minWidth} width={width} />
   );
 };
 

@@ -12,8 +12,13 @@ const DEFAULT_HISTORY_SIZE = 12;
 const WIDGET_HEIGHT = 36;
 const WIDGET_WIDTH = 100;
 
-const Page = styled.div`
-  margin: 2.5% 25% 2.5%;
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-width: 1024px;
+  padding-top: 10px;
+  width: 50%;
 `;
 
 const Card = styled.div`
@@ -108,7 +113,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
   };
 
   return (
-    <Page>
+    <Body>
       <Banner>{t("settings.settings")}</Banner>
       <Card>
         <SettingTitle>{t("settings.language")}</SettingTitle>
@@ -150,7 +155,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
           </Setting>
         </SettingContainer>
       </Card>
-    </Page>
+    </Body>
   );
 };
 

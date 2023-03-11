@@ -3,9 +3,13 @@ import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { Anchor } from "../common";
 
-const Page = styled.div`
-  margin-left: 5%;
-  margin-top: 5%;
+const Body = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-width: 1024px;
+  padding-top: 10px;
   width: 50%;
 `;
 
@@ -14,9 +18,10 @@ const Card = styled.div`
   border-radius: 5px;  
   display: flex;
   flex-direction: column;
-  flex-grow: 0;
-  padding: 10px 20px 20px 20px;
   justify-content: flex-start;
+  padding: 10px 20px 20px 20px;
+  margin-top: 40px;
+  max-width: 676px;
 `;
 
 const Header = styled.h1`
@@ -32,7 +37,7 @@ const Text = styled.h2`
 
 const Error: React.FC<WithTranslation> = ({ t }) => { 
   return (
-    <Page>
+    <Body>
       <Card>
         <Header>
           {t("error.pageNotFound")}
@@ -42,7 +47,7 @@ const Error: React.FC<WithTranslation> = ({ t }) => {
         </Text>
         <Anchor target="_self" href={"/"}>{t("error.home")}</Anchor>
       </Card>
-    </Page>
+    </Body>
   );
 };
 

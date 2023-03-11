@@ -7,8 +7,8 @@ module.exports = {
     "plugin:@typescript-eslint/recommended"
   ],
   rules: {
-    "indent": ["error", 2],
-    "@typescript-eslint/indent": ["error", 2],
+    "indent": ["warn", 2],
+    "@typescript-eslint/indent": ["warn", 2],
     "@typescript-eslint/no-explicit-any": ["off"],
     "no-console": 0,
     "semi": 1

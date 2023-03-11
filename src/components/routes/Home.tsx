@@ -8,17 +8,21 @@ import { MainMenuButton } from "../buttons";
 import SearchBar from "../common/SearchBar";
 import { KDKanjiRandomParams } from "apiParamTypes";
 
-const Page = styled.div`
+const Body = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 2.5% 2.5% 2.5% 55px;
-  align-items: center;
+  margin: 0 auto;
+  min-width: 1024px;
+  padding-top: 20px;
+  width: 50%;
 `;
 
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: 48px;
+  margin-bottom: 20px;
 `;
 
 const SearchCard = styled.div`
@@ -28,8 +32,8 @@ const SearchCard = styled.div`
   flex-direction: column;
   height: 140px;
   justify-content: space-between;
+  margin-bottom: 20px;
   padding: 10px;
-  margin: 1%;
 `;
 
 const OptionsCard = styled.div`
@@ -67,7 +71,7 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
   };
 
   return (
-    <Page>
+    <Body>
       <Banner>Open Kanji</Banner>
       <SearchCard>
         <OptionsTitle>Search</OptionsTitle>
@@ -86,7 +90,7 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
           <MainMenuButton>{t("mainMenu.skip")}</MainMenuButton>
         </Link>
       </OptionsCard>
-    </Page>
+    </Body>
   );
 };
 

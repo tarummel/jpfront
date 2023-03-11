@@ -42,15 +42,16 @@ const getDefaultRadicalsState = (): RadicalsState => {
 
 const DEFAULT_STATE = getDefaultRadicalsState();
 
-const Page = styled.div`
+const Body = styled.div`
   display: flex;
   flex-direction: row;
-  height: 90%;
-  margin: 2.5% 2.5% 2.5% 55px;
+  margin: 0 auto;
+  min-width: 1024px;
+  padding-top: 10px;
+  width: 80%;
 `;
 
 const ContentContainer = styled.div`
-  display: flex;
   border-radius: 5px;
   flex: 1;
   flex-direction: column;
@@ -172,7 +173,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   };
 
   return (
-    <Page>
+    <Body>
       <ContentContainer>
         <Instructions>*{t("multi.instructions")}*</Instructions>
         <RadicalHeaders>
@@ -193,7 +194,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
         </RowContainer>
         <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
       </ContentContainer>
-      <ColumnSpacer width={30} />
+      <ColumnSpacer minWidth={"4px"} width={"1%"} />
       <ContentContainer>
         <History />
         <RowContainer>
@@ -207,7 +208,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
           }))};
         </RowContainer>
       </ContentContainer>
-    </Page>
+    </Body>
   );
 };
 

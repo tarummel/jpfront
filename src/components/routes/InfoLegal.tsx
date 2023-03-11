@@ -2,8 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
-const Page = styled.div`
-  margin: 2.5% 25% 2.5%;
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 1024px;
+  margin: 0 auto;
+  padding-top: 10px;
+  width: 50%;
 `;
 
 const Banner = styled.h1`
@@ -36,7 +41,7 @@ const Section = styled.p`
 
 const InfoLegal: React.FC<WithTranslation> = ({ t }) => { 
   return (
-    <Page>
+    <Body>
       <Banner>{t("infoLegal.informationAndLegal")}</Banner>
       <Card>
         <SectionTitle>{t("infoLegal.codeLegalTitle")}</SectionTitle>
@@ -44,7 +49,7 @@ const InfoLegal: React.FC<WithTranslation> = ({ t }) => {
         <SectionTitle>{t("infoLegal.edrdgLegalTitle")}</SectionTitle>
         <Section>{t("infoLegal.edrdgLegal")}</Section>
       </Card>
-    </Page>
+    </Body>
   );
 };
 

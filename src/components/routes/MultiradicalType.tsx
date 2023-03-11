@@ -71,19 +71,19 @@ const getDefaultRadicalsState = (): RadicalsState => {
 
 const DEFAULT_STATE = getDefaultRadicalsState();
 
-const Page = styled.div`
+const Body = styled.div`
   display: flex;
   flex-direction: row;
-  height: 90%;
-  margin: 2.5% 2.5% 2.5% 55px;
+  min-width: 1024px;
+  margin: 0 auto;
+  padding-top: 10px;
+  width: 80%;
 `;
 
-const FlexContainer = styled.div`
-  color: ${({theme}) => theme.colors.textPrimary};
-  display: flex;
-  flex-direction: column;
+const ContentContainer = styled.div`
+  border-radius: 5px;
   flex: 1;
-  font-size: ${({theme}) => theme.fontSizes.medium};
+  flex-direction: column;
 `;
 
 const RightContainer = styled.div`
@@ -233,8 +233,8 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
   };
 
   return (
-    <Page>
-      <FlexContainer>
+    <Body>
+      <ContentContainer>
         <RadicalsBody>
           <LeftContainer>
             <TitleContainer>
@@ -258,7 +258,7 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
             <RadicalsHeaders>
               <TitleContainer>
                 {t("multiType.top")}
-                <StructuredRow columns={11} rows={1}>
+                <StructuredRow columns={6} rows={2}>
                   {SORTED_RADICALS["t"].map((s, i) => {
                     return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
                   })}
@@ -287,9 +287,9 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
           })}
         </RowContainer>
         <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
-      </FlexContainer>
-      <ColumnSpacer width={30} />
-      <FlexContainer>
+      </ContentContainer>
+      <ColumnSpacer minWidth={"4px"} width={"1%"} />
+      <ContentContainer>
         <History />
         <RowContainer>
           { kanjiLoading && (
@@ -297,12 +297,12 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
               <Spinner size={40} />
             </BigSpinner>
           )}
-          { Object.keys(kanjiData).map((s, i) => {
+          { !kanjiLoading && Object.keys(kanjiData).map((s, i) => {
             return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />;
           })}
         </RowContainer>
-      </FlexContainer>
-    </Page>
+      </ContentContainer>
+    </Body>
   );
 };
 

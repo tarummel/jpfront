@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
-import { NumberInput, Spinner } from "../common";
+import { ColumnSpacer, NumberInput, Spinner } from "../common";
 import { Button, StateButton } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -17,30 +17,20 @@ const INPUT_WIDTH = 60;
 const MATH_BUTTONS_HEIGHT = 30;
 const MATH_BUTTONS_WIDTH = MATH_BUTTONS_HEIGHT;
 
-const Page = styled.div`
+const Body = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 2.5% 2.5% 2.5% 55px;
-`;
-
-const Spacer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  padding-top: 20px;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  border-radius: 5px;
-  flex-direction: column;
+  flex-shrink: 1;
+  flex-grow: 1;
+  min-width: 1024px;
+  margin: 0 auto;
+  padding-top: 10px;
   width: 50%;
 `;
 
 const CodeBuilder = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 5%;
 `;
 
 const CodeBuilderColumn = styled.div`
@@ -85,6 +75,13 @@ const CategoryButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  border-radius: 5px;
+  flex-direction: column;
+  flex-grow: 1;
 `;
 
 const RowContainer = styled.div`
@@ -200,90 +197,89 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
   };
 
   return (
-    <Page>
-      <Spacer>
-        <CodeBuilder>
-          <CodeBuilderColumn>
-            <CodeInputContainer>
-              <Title>{t("skip.shape")}</Title>
-              <NumberInput height={INPUT_HEIGHT} onChange={handleCategoryChange} value={category} width={INPUT_WIDTH}/>
-            </CodeInputContainer>
-            <CategoryButtonContainer>
-              {/* Left/Right */}
-              <StateButton callback={1} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 1 ? 2 : 1} width={CATEGORY_WIDTH}>
-                <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                  <path d="M 0 0 L 50 0 L 50 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                  <path d="M 50 0 L 95 0 L 95 5 L 50 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                  <path d="M 95 0 L 100 0 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                  <path d="M 50 95 L 95 95 L 100 100 L 50 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                </SVG>
-              </StateButton>
-              {/* Up/Down */}
-              <StateButton callback={2} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 2 ? 2 : 1} width={CATEGORY_WIDTH}>
-                <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                  <path d="M 0 0 L 100 0 L 100 50 L 0 50 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                  <path d="M 0 50 L 5 50 L 5 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                  <path d="M 5 95 L 95 95 L 95 100 L 5 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                  <path d="M 95 50 L 100 50 L 100 100 L 95 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                </SVG>
-              </StateButton>
-              {/* Enclose */}
-              <StateButton callback={3} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 3 ? 2 : 1} width={CATEGORY_WIDTH}>
-                <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                  <path d="M 0 0 L 100 0 L 100 5 L 0 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                  <path d="M 95 5 L 100 5 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                  <path d="M 0 95 L 100 95 L 100 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                  <path d="M 0 5 L 5 5 L 5 95 L 0 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                </SVG>
-              </StateButton>
-              {/* Other */}
-              <StateButton callback={4} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 4 ? 2 : 1} width={CATEGORY_WIDTH}>
-                <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                  <path d="M 0 0 L 100 0 L 100 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                </SVG>
-              </StateButton>
-            </CategoryButtonContainer>
-          </CodeBuilderColumn>
-          <Dash>-</Dash>
-          <CodeBuilderColumn>
-            <CodeInputContainer>
-              <Title>{t("skip.main")}</Title>
-              <NumberInput height={INPUT_HEIGHT} onChange={handleMainChange} value={main} width={INPUT_WIDTH}/>
-              <ButtonPair>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractMainClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionMainClick} width={MATH_BUTTONS_WIDTH}>+</Button>
-              </ButtonPair>
-            </CodeInputContainer>
-            <CodeInputContainer>
-              <Title>{t("skip.plusminus")}</Title>
-              <NumberInput height={INPUT_HEIGHT} onChange={handleMainRangeChange} value={mainRange} width={INPUT_WIDTH}/>
-              <ButtonPair>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractMainRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionMainRangeClick} width={MATH_BUTTONS_WIDTH}>+</Button>
-              </ButtonPair>
-            </CodeInputContainer>
-          </CodeBuilderColumn>
-          <Dash>-</Dash>
-          <CodeBuilderColumn>
-            <CodeInputContainer>
-              <Title>{t("skip.sub")}</Title>
-              <NumberInput height={INPUT_HEIGHT} onChange={handleSubChange} value={sub} width={INPUT_WIDTH}/>
-              <ButtonPair>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractSubClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionSubClick} width={MATH_BUTTONS_WIDTH}>+</Button>
-              </ButtonPair>
-            </CodeInputContainer>
-            <CodeInputContainer>
-              <Title>{t("skip.plusminus")}</Title>
-              <NumberInput height={INPUT_HEIGHT} onChange={handleSubRangeChange} value={subRange} width={INPUT_WIDTH}/>
-              <ButtonPair>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractSubRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-                <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionSubRangeClick} width={MATH_BUTTONS_WIDTH}>+</Button>
-              </ButtonPair>
-            </CodeInputContainer>
-          </CodeBuilderColumn>
-        </CodeBuilder>
-      </Spacer>
+    <Body>
+      <CodeBuilder>
+        <CodeBuilderColumn>
+          <CodeInputContainer>
+            <Title>{t("skip.shape")}</Title>
+            <NumberInput height={INPUT_HEIGHT} onChange={handleCategoryChange} value={category} width={INPUT_WIDTH}/>
+          </CodeInputContainer>
+          <CategoryButtonContainer>
+            {/* Left/Right */}
+            <StateButton callback={1} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 1 ? 2 : 1} width={CATEGORY_WIDTH}>
+              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path d="M 0 0 L 50 0 L 50 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                <path d="M 50 0 L 95 0 L 95 5 L 50 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                <path d="M 95 0 L 100 0 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                <path d="M 50 95 L 95 95 L 100 100 L 50 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+              </SVG>
+            </StateButton>
+            {/* Up/Down */}
+            <StateButton callback={2} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 2 ? 2 : 1} width={CATEGORY_WIDTH}>
+              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path d="M 0 0 L 100 0 L 100 50 L 0 50 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                <path d="M 0 50 L 5 50 L 5 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                <path d="M 5 95 L 95 95 L 95 100 L 5 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+                <path d="M 95 50 L 100 50 L 100 100 L 95 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+              </SVG>
+            </StateButton>
+            {/* Enclose */}
+            <StateButton callback={3} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 3 ? 2 : 1} width={CATEGORY_WIDTH}>
+              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path d="M 0 0 L 100 0 L 100 5 L 0 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+                <path d="M 95 5 L 100 5 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+                <path d="M 0 95 L 100 95 L 100 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+                <path d="M 0 5 L 5 5 L 5 95 L 0 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+              </SVG>
+            </StateButton>
+            {/* Other */}
+            <StateButton callback={4} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 4 ? 2 : 1} width={CATEGORY_WIDTH}>
+              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path d="M 0 0 L 100 0 L 100 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+              </SVG>
+            </StateButton>
+          </CategoryButtonContainer>
+        </CodeBuilderColumn>
+        <Dash>-</Dash>
+        <CodeBuilderColumn>
+          <CodeInputContainer>
+            <Title>{t("skip.main")}</Title>
+            <NumberInput height={INPUT_HEIGHT} onChange={handleMainChange} value={main} width={INPUT_WIDTH}/>
+            <ButtonPair>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractMainClick} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionMainClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+            </ButtonPair>
+          </CodeInputContainer>
+          <CodeInputContainer>
+            <Title>{t("skip.plusminus")}</Title>
+            <NumberInput height={INPUT_HEIGHT} onChange={handleMainRangeChange} value={mainRange} width={INPUT_WIDTH}/>
+            <ButtonPair>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractMainRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionMainRangeClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+            </ButtonPair>
+          </CodeInputContainer>
+        </CodeBuilderColumn>
+        <Dash>-</Dash>
+        <CodeBuilderColumn>
+          <CodeInputContainer>
+            <Title>{t("skip.sub")}</Title>
+            <NumberInput height={INPUT_HEIGHT} onChange={handleSubChange} value={sub} width={INPUT_WIDTH}/>
+            <ButtonPair>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractSubClick} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionSubClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+            </ButtonPair>
+          </CodeInputContainer>
+          <CodeInputContainer>
+            <Title>{t("skip.plusminus")}</Title>
+            <NumberInput height={INPUT_HEIGHT} onChange={handleSubRangeChange} value={subRange} width={INPUT_WIDTH}/>
+            <ButtonPair>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractSubRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionSubRangeClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+            </ButtonPair>
+          </CodeInputContainer>
+        </CodeBuilderColumn>
+      </CodeBuilder>
+      <ColumnSpacer minWidth={"4px"} width={"1%"} />
       <ContentContainer>
         <History />
         <RowContainer>
@@ -297,8 +293,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
           }))}
         </RowContainer>
       </ContentContainer>
-      <Spacer />
-    </Page>
+    </Body>
   );
 };
 

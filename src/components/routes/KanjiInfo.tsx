@@ -13,15 +13,12 @@ import HorizontalDivider from "../common/HorizontalDivider";
 import JMdictEntry from "../JMdictEntry";
 import Spinner from "../common/Spinner";
 
-  
-const Page = styled.div`
+const Body = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 2.5% 2.5% 2.5% 55px;
-`;
-
-const ContentContainer = styled.div`
+  flex-direction: column;
+  margin: 0 auto;
+  min-width: 1024px;
+  padding-top: 10px;
   width: 50%;
 `;
 
@@ -169,58 +166,56 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || "";
 
   return (
-    <Page>
-      <ContentContainer>
-        <Card>
-          <MetaInfoContainer>
-            <KanjiSymbol>{kanjiParam}</KanjiSymbol>
-            <YomiInformation>
-              <div>On: {onyomi}</div>
-              <div>Kun: {kunyomi}</div>
-            </YomiInformation>
-            <MiscInformation>
-              <div>Grade: {grade}</div>
-              <div>JLPT: {jlpt}</div>
-              <div>Strokes: {strokes}</div>
-              <div>Freq: {frequency}</div>
-              <div>Unicode: {unicode}</div>
-            </MiscInformation>
-            <ExternalLinks>
-              <div>{t("kanjiInfo.externalLinks")}:</div>
-              <div>
-                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
-              </div>
-              <div>
-                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
-              </div>
-              <div>
-                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
-              </div>
-            </ExternalLinks>
-          </MetaInfoContainer>
+    <Body>
+      <Card>
+        <MetaInfoContainer>
+          <KanjiSymbol>{kanjiParam}</KanjiSymbol>
+          <YomiInformation>
+            <div>On: {onyomi}</div>
+            <div>Kun: {kunyomi}</div>
+          </YomiInformation>
+          <MiscInformation>
+            <div>Grade: {grade}</div>
+            <div>JLPT: {jlpt}</div>
+            <div>Strokes: {strokes}</div>
+            <div>Freq: {frequency}</div>
+            <div>Unicode: {unicode}</div>
+          </MiscInformation>
+          <ExternalLinks>
+            <div>{t("kanjiInfo.externalLinks")}:</div>
+            <div>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
+            </div>
+            <div>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
+            </div>
+            <div>
+              {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
+            </div>
+          </ExternalLinks>
+        </MetaInfoContainer>
 
-          { error && (
-            <ErrorContainer>
+        { error && (
+          <ErrorContainer>
+            <HorizontalDivider />
+            <div>{error}</div>
+          </ErrorContainer>
+        )}
+        { !entry && (<Spinner />) }
+        { entry && (entry.map((e, i) => {
+          return (
+            <Entries key={i}>
               <HorizontalDivider />
-              <div>{error}</div>
-            </ErrorContainer>
-          )}
-          { !entry && (<Spinner />) }
-          { entry && (entry.map((e, i) => {
-            return (
-              <Entries key={i}>
-                <HorizontalDivider />
-                <JMdictEntry entry={e} num={i} />
-              </Entries>
-            );
-          }))}
-        </Card>
-        <LegalInformation>
-          <div>{t("legal.jmdict")} <Anchor target={"_blank"} href={`${t("legal.jmdictLink")}`}>Link</Anchor></div>
-          <div>{t("legal.kanjidic")} <Anchor target={"_blank"} href={`${t("legal.kanjidicLink")}`}>Link</Anchor></div>
-        </LegalInformation>
-      </ContentContainer>
-    </Page>
+              <JMdictEntry entry={e} num={i} />
+            </Entries>
+          );
+        }))}
+      </Card>
+      <LegalInformation>
+        <div>{t("legal.jmdict")} <Anchor target={"_blank"} href={`${t("legal.jmdictLink")}`}>Link</Anchor></div>
+        <div>{t("legal.kanjidic")} <Anchor target={"_blank"} href={`${t("legal.kanjidicLink")}`}>Link</Anchor></div>
+      </LegalInformation>
+    </Body>
   );
 };
 
