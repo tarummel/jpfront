@@ -1,10 +1,8 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { Anchor } from "../common";
 
-interface Props {}
-  
 const Page = styled.div`
   margin-left: 5%;
   margin-top: 5%;

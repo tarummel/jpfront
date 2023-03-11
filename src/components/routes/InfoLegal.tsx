@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 const Page = styled.div`

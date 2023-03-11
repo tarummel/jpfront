@@ -30,6 +30,6 @@ const Theme: React.FC<Props> = ({ children }) => (
     <GlobalStyle />
     <ThemeProvider theme={localStorage.getItem(Config.localStorage.theme) === "light" ? lightTheme : darkTheme}>{children}</ThemeProvider>
   </>
-);
+)
 
 export default Theme;

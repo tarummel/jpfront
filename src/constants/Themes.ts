@@ -3,7 +3,7 @@ const fontSizes = {
   medium: "1.8rem",
   large: "2.0rem",
   xlarge: "2.2rem",
-  header: "2.4rem"
+  header: "2.4rem",
 };
 
 const darkTheme = {
@@ -61,4 +61,4 @@ const lightTheme = {
 export {
   darkTheme,
   lightTheme,
-}
+};

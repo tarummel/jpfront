@@ -64,7 +64,7 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
     getAndNavigateRandom().catch((e) => {
       console.log(getAndNavigateRandom.name, e);
     });
-  };
+  }
 
   return (
     <Page>
@@ -88,6 +88,6 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
       </OptionsCard>
     </Page>
   );
-};
+}
 
 export default withTranslation()(Home);

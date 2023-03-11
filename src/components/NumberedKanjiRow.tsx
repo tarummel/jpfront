@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { StyledLink } from "./common"
+import { StyledLink } from "./common";
 
 interface Props {
   kanji: string[];
@@ -46,6 +46,6 @@ const NumberedKanjiRow: React.FC<Props> = ({kanji, rowNumber}) => {
       </RowContents>
     </Row>
   );
-};
+}
 
 export default NumberedKanjiRow;

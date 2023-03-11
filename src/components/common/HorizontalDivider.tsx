@@ -15,6 +15,6 @@ const HorizontalDivider: React.FC<Props> = ({color, height}) => {
 	return (
 		<Line color={color} height={height}/>
 	);
-};
+}
 
 export default HorizontalDivider;

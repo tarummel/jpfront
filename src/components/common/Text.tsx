@@ -13,6 +13,6 @@ const Text: React.FC<Props> = ({ children }) => {
   return (
     <StyledText>{children}</StyledText>
   );
-};
+}
   
 export default Text;

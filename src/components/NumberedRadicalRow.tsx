@@ -45,6 +45,6 @@ const NumberedRadicalRow: React.FC<Props> = ({radicals, radicalsState, rowNumber
       </RowContents>
     </Row>
   );
-};
+}
 
 export default NumberedRadicalRow;

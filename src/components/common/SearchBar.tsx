@@ -55,19 +55,19 @@ const SearchBar: React.FC<Props> = ({ text }) => {
 
   const handleChange = (e: any) => {
     setSearchInput(e.target.value);
-  };
+  }
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter' && searchInput.length === 1) {
       navigate(`/kanji/${searchInput}`);
     }
-  };
+  }
 
   const handleClick = () => {
     if (searchInput.length === 1) {
       navigate(`/kanji/${searchInput}`);
     }
-  };
+  }
 
   return (
     <>
@@ -81,4 +81,4 @@ const SearchBar: React.FC<Props> = ({ text }) => {
   );
 }
 
-export default SearchBar
+export default SearchBar;

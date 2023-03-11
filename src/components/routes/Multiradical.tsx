@@ -30,17 +30,17 @@ const ALL_RADICALS:StrokeCharactersMap = {
 };
 
 const getDefaultRadicalsState = (): RadicalsState => {
-  const state:RadicalsState = {}
+  const state:RadicalsState = {};
   for (const key in ALL_RADICALS) {
-    const radicals = ALL_RADICALS[key]
+    const radicals = ALL_RADICALS[key];
     for (let i = 0; i < radicals.length; i++) {
-      state[radicals[i]] = 1
+      state[radicals[i]] = 1;
     }
   };
-  return state
+  return state;
 }
 
-const DEFAULT_STATE = getDefaultRadicalsState()
+const DEFAULT_STATE = getDefaultRadicalsState();
 
 const Page = styled.div`
   display: flex;
@@ -158,17 +158,17 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   }
 
   const handleClickReset = (): void => {
-    setRadicalsState({...DEFAULT_STATE})
-    setKanjiData({})
-    setSelectedRadicals([])
+    setRadicalsState({...DEFAULT_STATE});
+    setKanjiData({});
+    setSelectedRadicals([]);
   }
 
   const handleSelection = (radical: string): void => {
     const newSelected = selectedRadicals.includes(radical) 
       ? arrayRemove(selectedRadicals, radical) 
-      : selectedRadicals.concat(radical)
+      : selectedRadicals.concat(radical);
 
-    setSelectedRadicals(newSelected)
+    setSelectedRadicals(newSelected);
   }
 
   return (

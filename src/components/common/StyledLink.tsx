@@ -28,6 +28,6 @@ const Anchor: React.FC<Props> = ({ children, fontSize, target, to }) => {
 	return (
 		<StyledLink fontSize={fontSize} target={target} to={to}>{children}</StyledLink>
 	);
-};
+}
 
 export default Anchor;

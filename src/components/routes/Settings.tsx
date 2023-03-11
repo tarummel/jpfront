@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import Button from "../buttons/Button";
-
 import Config from "../../constants/Config";
 import { HorizontalDivider, NumberInput } from "../common";
 
@@ -74,51 +73,39 @@ const StyledOption = styled.option`
 `;
 
 const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
-
   const [language, setLanguage] = useState(localStorage.getItem(Config.localStorage.language) || DEFAULT_LANGUAGE);
-  const [theme, setTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME)
+  const [theme, setTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME);
   const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || DEFAULT_HISTORY_SIZE);
 
-  useEffect(() => {
-
-  }, []);
-
   const handleLanguage = (e: any) => {
-    const lang = e.target.value
+    const lang = e.target.value;
     localStorage.setItem(Config.localStorage.language, lang);
-    i18n.changeLanguage(lang)
-    setLanguage(lang)
-  };
+    i18n.changeLanguage(lang);
+    setLanguage(lang);
+  }
 
   const handleTheme = (e: any) => {
-    const theme = e.target.value
-    localStorage.setItem(Config.localStorage.theme, theme)
-    setTheme(theme)
-  };
+    const theme = e.target.value;
+    localStorage.setItem(Config.localStorage.theme, theme);
+    setTheme(theme);
+  }
 
   const handleClearHistory = () => {
-    localStorage.removeItem(Config.localStorage.history)
-  };
+    localStorage.removeItem(Config.localStorage.history);
+  }
 
   const handleHistorySize = (e: any) => {
-    const value = e.target.value
-    console.log(value, typeof value)
-    const num = parseInt(value)
+    const value = e.target.value;
+    let num = parseInt(value);
     if (!(typeof num === "number")) {
-      setHistorySize(12)
-      return
+      setHistorySize(12);
+      return;
     }
 
-    let size = e.target.value
-    if (size < 0) {
-      size = 0
-    }
-    if (size > 100) {
-      size = 100
-    }
-    localStorage.setItem(Config.localStorage.historySize, String(size));
-    setHistorySize(size)
-  };
+    num = Math.min(Math.max(num, 0), 100);
+    localStorage.setItem(Config.localStorage.historySize, String(num));
+    setHistorySize(num);
+  }
 
   return (
     <Page>
@@ -165,6 +152,6 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
       </Card>
     </Page>
   );
-};
+}
 
 export default withTranslation()(Settings);

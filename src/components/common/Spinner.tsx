@@ -37,6 +37,6 @@ const Spinner: React.FC<Props> = ({ size }) => (
   <SpinnerContainer>
     <Spin size={size} />
   </SpinnerContainer>
-);
+)
 
 export default Spinner;

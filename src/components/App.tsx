@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components"
-import Header from "./Header"
+import styled from "styled-components";
+import Header from "./Header";
 
 interface Props {
   children?: React.ReactNode;
@@ -23,6 +23,6 @@ const App: React.FC<Props> = ({ children }) => {
       {children}
     </Container>
   );
-};
+}
 
 export default App;

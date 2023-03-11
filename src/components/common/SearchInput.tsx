@@ -25,6 +25,6 @@ const SearchInput: React.FC<Props> = ({ fontSize, height, onChange, onKeyDown, p
 	return (
 		<StyledInput fontSize={fontSize} height={height} onChange={onChange} onKeyDown={onKeyDown} placeholder={placeholder} type={"search"} value={value} width={width} />
 	);
-};
+}
 
 export default SearchInput;

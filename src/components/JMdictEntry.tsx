@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
@@ -30,24 +30,20 @@ const Content = styled.div`
 const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => {
 
   const getProperty = (name: string, data: [JKanji]|[JReading]|[JSense]|[JGlossary]|[JSource]|undefined, delimiter: string): any => {
-    let values = null
+    let values = null;
     if (data) {
       values = data.map((e) => {
-        return e[name as keyof typeof e]
+        return e[name as keyof typeof e];
       }).join(delimiter);
     }
-    return values
+    return values;
   }
 
-  const kcontents = getProperty('content', entry.jkanji, "; ")
-  const rcontents = getProperty('content', entry.jreading, "; ")
+  const kcontents = getProperty('content', entry.jkanji, "; ");
+  const rcontents = getProperty('content', entry.jreading, "; ");
   const glosses = entry.jsense?.map((js) => {
-    return getProperty('gloss', js.jglossary, ' / ')
+    return getProperty('gloss', js.jglossary, ' / ');
   }).join(", ");
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <EntryRow>
@@ -57,6 +53,6 @@ const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => 
       <Content>{glosses}</Content>
     </EntryRow>
   );
-};
+}
 
 export default withTranslation()(JEntryDisplay);

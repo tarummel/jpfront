@@ -162,51 +162,55 @@ const Disclaimer = styled.p`
 `;
 
 const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
-  const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE})
-  const [selectedRadicals, setSelectedRadicals] = useState<string[]>([])
-  const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({})
-  const [radicalsLoading, setRadicalsLoading] = useState(false)
-  const [kanjiLoading, setKanjiLoading] = useState(false)
+  const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE});
+  const [selectedRadicals, setSelectedRadicals] = useState<string[]>([]);
+  const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
+  const [radicalsLoading, setRadicalsLoading] = useState(false);
+  const [kanjiLoading, setKanjiLoading] = useState(false);
 
   useEffect(() => {
-    let newState = {...DEFAULT_STATE}
+    let newState = {...DEFAULT_STATE};
     const getAndSetDisabledRadicals = async () => {
-      setRadicalsLoading(true)
+      setRadicalsLoading(true);
 
-      const params = { simple: true, invert: true } as RelatedRadicalsParams
-      const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params)
-      const data = response.data.data
+      const params = { simple: true, invert: true } as RelatedRadicalsParams;
+      const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params);
+      const data = response.data.data;
 
       for (let i = 0; i < data.length; i++) {
-        newState[data[i]] = 0
+        newState[data[i]] = 0;
       }
 
-      setRadicalsState({...newState})
-      setRadicalsLoading(false)
+      setRadicalsState({...newState});
+      setRadicalsLoading(false);
     };
 
     if (selectedRadicals.length) {
       for (let i = 0; i < selectedRadicals.length; i++) {
-        newState[selectedRadicals[i]] = 2
+        newState[selectedRadicals[i]] = 2;
       }
 
-      getAndSetDisabledRadicals().catch((e) => { console.log(e) })
+      getAndSetDisabledRadicals().catch((e) => {
+          console.log(getAndSetDisabledRadicals.name, e);
+      });
     } else {
-      setRadicalsState(newState)
+      setRadicalsState(newState);
     }
 
     const getAndSetMatchingKanji = async () => {
-      setKanjiLoading(true)
-      const params = { simple: true } as MatchingKanjiByRadicalsParams
-      const response = await API.getMatchingKDKanjiByRadicals(selectedRadicals, params)
-      setKanjiData(response.data.data)
-      setKanjiLoading(false)
+      setKanjiLoading(true);
+      const params = { simple: true } as MatchingKanjiByRadicalsParams;
+      const response = await API.getMatchingKDKanjiByRadicals(selectedRadicals, params);
+      setKanjiData(response.data.data);
+      setKanjiLoading(false);
     }
 
     if (selectedRadicals.length) {
-      getAndSetMatchingKanji().catch((e) => { console.log(e) })
+      getAndSetMatchingKanji().catch((e) => { 
+        console.log(getAndSetMatchingKanji.name, e);
+      });
     } else {
-      setKanjiData({})
+      setKanjiData({});
     }
   }, [selectedRadicals]);
 
@@ -214,21 +218,21 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
     return arr.filter((ele) => {
         return ele !== val;
     });
-  };
+  }
 
   const handleClickReset = (): void => {
-    setRadicalsState({...DEFAULT_STATE})
-    setKanjiData({})
-    setSelectedRadicals([])
-  };
+    setRadicalsState({...DEFAULT_STATE});
+    setKanjiData({});
+    setSelectedRadicals([]);
+  }
 
   const handleSelection = (radical: string): void => {
     const newSelected = selectedRadicals.includes(radical) 
       ? arrayRemove(selectedRadicals, radical) 
-      : selectedRadicals.concat(radical)
+      : selectedRadicals.concat(radical);
 
-    setSelectedRadicals(newSelected)
-  };
+    setSelectedRadicals(newSelected);
+  }
 
   return (
     <Page>
@@ -302,6 +306,6 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
       </FlexContainer>
     </Page>
   );
-};
+}
 
 export default withTranslation()(MultiradicalType);

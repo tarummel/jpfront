@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -28,6 +28,6 @@ const NumberInput: React.FC<Props> = ({ fontSize, height, max, min, onChange, on
 	return (
 		<StyledInput fontSize={fontSize} height={height} onChange={onChange} onKeyDown={onKeyDown} placeholder={placeholder} type={"number"} value={value} width={width} />
 	);
-};
+}
 
 export default NumberInput;

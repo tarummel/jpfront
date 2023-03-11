@@ -118,86 +118,86 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
 
     useEffect(() => {
       const getAndSetKanjiData = async () => {
-        setLoading(true)
+        setLoading(true);
 
-        const skipcode = [category, main, sub].join('-')
-        const params = { main_range: mainRange, sub_range: subRange, simple: true}
-        const response = await API.getKDKanjiBySkipcode(skipcode, params)
-        setKanjiData(response.data.data)
+        const skipcode = [category, main, sub].join('-');
+        const params = { main_range: mainRange, sub_range: subRange, simple: true};
+        const response = await API.getKDKanjiBySkipcode(skipcode, params);
+        setKanjiData(response.data.data);
 
-        setLoading(false)
+        setLoading(false);
       }
 
       if (category > 0 && category < 5 && main > 0 && sub > 0 && mainRange > -1 && subRange > -1) {
-        getAndSetKanjiData().catch((e) => { console.log(e) })
+        getAndSetKanjiData().catch((e) => { console.log(e) });
       } else {
-        setKanjiData({})
+        setKanjiData({});
       }
     }, [category, main, mainRange, sub, subRange]);
 
     const handleSelection = (categoryValue: number): void => {
       if (category === categoryValue) {
-        setCategory(0)
+        setCategory(0);
       } else {
-        setCategory(categoryValue)
+        setCategory(categoryValue);
       }
-    };
+    }
 
     const handleCategoryChange = (e: any): void => {
-      setCategory(parseInput(e.target.value))
-    };
+      setCategory(parseInput(e.target.value));
+    }
 
     const handleMainChange = (e: any): void => {
-      setMain(parseInput(e.target.value))
-    };
+      setMain(parseInput(e.target.value));
+    }
 
     const handleSubChange = (e: any): void => {
-      setSub(parseInput(e.target.value))
-    };
+      setSub(parseInput(e.target.value));
+    }
 
     const handleMainRangeChange = (e: any): void => {
-      setMainRange(parseInput(e.target.value))
-    };
+      setMainRange(parseInput(e.target.value));
+    }
 
     const handleSubRangeChange = (e: any): void => {
-      setSubRange(parseInput(e.target.value))
-    };
+      setSubRange(parseInput(e.target.value));
+    }
 
     const parseInput = (input: string): any => {
-      return input === "" ? "" : parseInt(input) || 0
-    };
+      return input === "" ? "" : parseInt(input) || 0;
+    }
 
     const handleAdditionMainClick = () => {
-      setMain(main + 1)
-    };
+      setMain(main + 1);
+    }
 
     const handleAdditionSubClick = () => {
-      setSub(sub + 1)
-    };
+      setSub(sub + 1);
+    }
 
     const handleAdditionMainRangeClick = () => {
-      setMainRange(mainRange + 1)
-    };
+      setMainRange(mainRange + 1);
+    }
 
     const handleAdditionSubRangeClick = () => {
-      setSubRange(subRange + 1)
-    };
+      setSubRange(subRange + 1);
+    }
 
     const handleSubtractMainClick = () => {
-      setMain(Math.max(main - 1, 1))
-    };
+      setMain(Math.max(main - 1, 1));
+    }
 
     const handleSubtractSubClick = () => {
-      setSub(Math.max(sub - 1, 1))
-    };
+      setSub(Math.max(sub - 1, 1));
+    }
 
     const handleSubtractMainRangeClick = () => {
-      setMainRange(Math.max(mainRange - 1, 0))
-    };
+      setMainRange(Math.max(mainRange - 1, 0));
+    }
 
     const handleSubtractSubRangeClick = () => {
-      setSubRange(Math.max(subRange - 1, 0))
-    };
+      setSubRange(Math.max(subRange - 1, 0));
+    }
 
     return (
       <Page>
@@ -294,12 +294,12 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
             )}
             { !loading && (Object.keys(kanjiData).map((s, i) => {
               return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
-            }))};
+            }))}
           </RowContainer>
         </ContentContainer>
       <Spacer />
     </Page>
   );
-};
+}
 
 export default withTranslation()(Skip);

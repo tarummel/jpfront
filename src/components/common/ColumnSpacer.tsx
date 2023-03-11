@@ -14,6 +14,6 @@ const ColumnSpacer: React.FC<Props> = ({width}) => {
 	return (
 		<Spacer width={width}/>
 	);
-};
+}
 
 export default ColumnSpacer;
