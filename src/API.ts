@@ -38,7 +38,7 @@ async function getMatchingKDKanjiByRadicals(radicals: string[], params: paramTyp
 
 async function getRelatedRadicalsByRadicals(radicals: string[], params: paramTypes.RelatedRadicalsParams = {}): Promise<AxiosResponse<any>> {
   try {
-    return await axios.get(`kanjidic/radicals/${radicals.join(",")}/kanji/`, { params });
+    return await axios.get(`krad/radicals/${radicals.join(",")}/related/`, { params });
   } catch (error: any) {
     return getPromiseRejection(error);
   }
