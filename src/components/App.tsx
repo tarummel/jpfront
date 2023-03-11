@@ -23,6 +23,6 @@ const App: React.FC<Props> = ({ children }) => {
       {children}
     </Container>
   );
-}
+};
 
 export default App;

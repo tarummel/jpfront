@@ -32,8 +32,8 @@ const Search = styled.input`
 `;
 
 const SearchButton = styled.button`
-  background: ${({theme}) => theme.colors.buttonPrimary};  
-  border: ${({theme}) => "none"};
+  background: ${({theme}) => theme.colors.buttonPrimary};
+  border: none;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   display: flex;
@@ -55,19 +55,19 @@ const SearchBar: React.FC<Props> = ({ text }) => {
 
   const handleChange = (e: any) => {
     setSearchInput(e.target.value);
-  }
+  };
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter' && searchInput.length === 1) {
       navigate(`/kanji/${searchInput}`);
     }
-  }
+  };
 
   const handleClick = () => {
     if (searchInput.length === 1) {
       navigate(`/kanji/${searchInput}`);
     }
-  }
+  };
 
   return (
     <>
@@ -79,6 +79,6 @@ const SearchBar: React.FC<Props> = ({ text }) => {
       </Container>
     </>
   );
-}
+};
 
 export default SearchBar;

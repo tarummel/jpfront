@@ -9,7 +9,7 @@ interface Props {
   placeholder?: any;
   value: string|number;
   width?: string|number;
-};
+}
 
 const StyledInput = styled.input<Props>`
   border: none;
@@ -22,9 +22,9 @@ const StyledInput = styled.input<Props>`
 `;
 
 const SearchInput: React.FC<Props> = ({ fontSize, height, onChange, onKeyDown, placeholder, value, width }) => {
-	return (
-		<StyledInput fontSize={fontSize} height={height} onChange={onChange} onKeyDown={onKeyDown} placeholder={placeholder} type={"search"} value={value} width={width} />
-	);
-}
+  return (
+    <StyledInput fontSize={fontSize} height={height} onChange={onChange} onKeyDown={onKeyDown} placeholder={placeholder} type={"search"} value={value} width={width} />
+  );
+};
 
 export default SearchInput;

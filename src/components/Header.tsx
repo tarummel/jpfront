@@ -57,6 +57,6 @@ const Header: React.FC<WithTranslation> = ({ t }) => {
       </Link>
     </Container>
   );
-}
+};
 
 export default withTranslation()(Header);

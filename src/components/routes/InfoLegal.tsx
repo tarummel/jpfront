@@ -46,6 +46,6 @@ const InfoLegal: React.FC<WithTranslation> = ({ t }) => {
       </Card>
     </Page>
   );
-}
+};
 
 export default withTranslation()(InfoLegal);

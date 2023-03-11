@@ -36,9 +36,9 @@ const getDefaultRadicalsState = (): RadicalsState => {
     for (let i = 0; i < radicals.length; i++) {
       state[radicals[i]] = 1;
     }
-  };
+  }
   return state;
-}
+};
 
 const DEFAULT_STATE = getDefaultRadicalsState();
 
@@ -107,9 +107,9 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   const [kanjiLoading, setKanjiLoading] = useState(false);
 
   useEffect(() => {
-    let newState = {...DEFAULT_STATE};
+    const newState = {...DEFAULT_STATE};
     const getAndSetDisabledRadicals = async () => {
-      setRadicalsLoading(true)
+      setRadicalsLoading(true);
       const params = { simple: true, invert: true } as RelatedRadicalsParams;
       const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params);
       const data = response.data.data;
@@ -120,7 +120,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
 
       setRadicalsState({...newState});
       setRadicalsLoading(false);
-    }
+    };
 
     if (selectedRadicals.length) {
       for (let i = 0; i < selectedRadicals.length; i++) {
@@ -129,7 +129,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
 
       getAndSetDisabledRadicals().catch((e) => {
         console.log(getAndSetDisabledRadicals.name, e);
-      })
+      });
     } else {
       setRadicalsState({...newState});
     }
@@ -140,7 +140,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
       const response = await API.getMatchingKDKanjiByRadicals(selectedRadicals, params);
       setKanjiData(response.data.data);
       setKanjiLoading(false);
-    }
+    };
 
     if (selectedRadicals.length) {
       getAndSetMatchingKanji().catch((e) => {
@@ -153,15 +153,15 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
 
   const arrayRemove = (arr: string[], val: string): string[] => { 
     return arr.filter((ele) => {
-        return ele !== val;
+      return ele !== val;
     });
-  }
+  };
 
   const handleClickReset = (): void => {
     setRadicalsState({...DEFAULT_STATE});
     setKanjiData({});
     setSelectedRadicals([]);
-  }
+  };
 
   const handleSelection = (radical: string): void => {
     const newSelected = selectedRadicals.includes(radical) 
@@ -169,7 +169,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
       : selectedRadicals.concat(radical);
 
     setSelectedRadicals(newSelected);
-  }
+  };
 
   return (
     <Page>
@@ -188,7 +188,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
         </RadicalHeaders>
         <RowContainer>
           {Object.keys(ALL_RADICALS).map((s, i) => {
-            return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} />
+            return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} />;
           })};
         </RowContainer>
         <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
@@ -203,12 +203,12 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
             </BigSpinner>
           )}
           { !kanjiLoading && (Object.keys(kanjiData).map((s, i) => {
-            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
+            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />;
           }))};
         </RowContainer>
       </ContentContainer>
     </Page>
   );
-}
+};
 
 export default withTranslation()(Multiradical);

@@ -48,13 +48,13 @@ const History: React.FC<WithTranslation> = ({ t }) => {
           <SearchHistoryText>{t("multi.searchHistory")}:</SearchHistoryText>
           <SearchHistoryContents>
             {history.map((k, i) => {
-              return <StyledLink key={i} to={`/kanji/${k}`}>{k}</StyledLink>
+              return <StyledLink key={i} to={`/kanji/${k}`}>{k}</StyledLink>;
             })}
           </SearchHistoryContents>
         </HistoryContainer>
       )}
     </>
   );
-}
+};
 
 export default withTranslation()(History);

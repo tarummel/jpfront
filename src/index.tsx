@@ -4,14 +4,13 @@ import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from "./components/App";
-
 import i18n from './i18n';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Router from './Router';
 import Theme from "./components/utils/Theme";
 
-<script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js" />;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

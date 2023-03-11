@@ -40,11 +40,11 @@ const NumberedRadicalRow: React.FC<Props> = ({radicals, radicalsState, rowNumber
       <RowNumber>{rowNumber}</RowNumber>
       <RowContents>
         {radicals.map((r, i) => {
-          return <StateButton key={i} callback={r} handleClick={handleClick} state={radicalsState[r]}>{r}</StateButton>
+          return <StateButton key={i} callback={r} handleClick={handleClick} state={radicalsState[r]}>{r}</StateButton>;
         })}
       </RowContents>
     </Row>
   );
-}
+};
 
 export default NumberedRadicalRow;

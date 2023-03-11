@@ -27,6 +27,6 @@ const Button: React.FC<Props> = ({ callback, children, height, onClick, width })
   return (
     <StyledButton height={height} onClick={() => onClick(callback)} width={width}>{children}</StyledButton>
   );
-}
+};
 
 export default Button;

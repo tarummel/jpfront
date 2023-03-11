@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 interface Props {
   enabled?: boolean;
   size?: string|number;
-};
+}
 
 const SpinnerContainer = styled.div`
   display: block;
@@ -37,6 +37,6 @@ const Spinner: React.FC<Props> = ({ size }) => (
   <SpinnerContainer>
     <Spin size={size} />
   </SpinnerContainer>
-)
+);
 
 export default Spinner;

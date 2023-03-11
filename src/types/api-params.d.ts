@@ -21,7 +21,7 @@ declare module 'apiParamTypes' {
     sub_range?: number;
     simple?: boolean;
   }
-};
+}
 
 module.exports = {
   RadicalsListParam,

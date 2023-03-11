@@ -82,17 +82,17 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
     localStorage.setItem(Config.localStorage.language, lang);
     i18n.changeLanguage(lang);
     setLanguage(lang);
-  }
+  };
 
   const handleTheme = (e: any) => {
     const theme = e.target.value;
     localStorage.setItem(Config.localStorage.theme, theme);
     setTheme(theme);
-  }
+  };
 
   const handleClearHistory = () => {
     localStorage.removeItem(Config.localStorage.history);
-  }
+  };
 
   const handleHistorySize = (e: any) => {
     const value = e.target.value;
@@ -105,7 +105,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
     num = Math.min(Math.max(num, 0), 100);
     localStorage.setItem(Config.localStorage.historySize, String(num));
     setHistorySize(num);
-  }
+  };
 
   return (
     <Page>
@@ -152,6 +152,6 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
       </Card>
     </Page>
   );
-}
+};
 
 export default withTranslation()(Settings);

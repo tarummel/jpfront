@@ -11,8 +11,6 @@ import NumberedRadicalRow from "../NumberedRadicalRow";
 import { RadicalsState, StrokeCharactersMap } from "dataTypes";
 import { MatchingKanjiByRadicalsParams, RelatedRadicalsParams } from "apiParamTypes";
 
-interface Props {}
-
 interface RowsColumns {
   rows: number;
   columns: number;
@@ -26,7 +24,7 @@ type SortedRadicals = {
   r: { [stroke: string]: string[]; }
 }
 
-const ALL_RADICALS = ["一", "｜", "丶", "ノ", "𠂉", "乙", "九", "亅", "二", "亠", "人", "⺅", "𠆢", "儿", "入", "ハ", "丷", "冂", "冖", "冫", "几", "凵", "刀", "⺉", "力", "勹", "匕", "匚", "亡", "十", "卜", "卩", "厂", "厶", "又", "口", "品", "囗", "土", "士", "夂", "夊", "夕", "大", "女", "子", "宀", "寸", "小", "⺌", "尢", "尤", "尸", "屮", "山", "巛", "川", "工", "已", "巾", "干", "幺", "广", "廴", "廾", "弋", "弓", "ヨ", "彑", "彡", "彳", "心", "⺖", "戈", "戸", "手", "扌", "支", "攵", "文", "斗", "斤", "方", "无", "無", "日", "曰", "月", "木", "欠", "止", "歹", "殳", "毋", "母", "比", "毛", "氏", "气", "水", "⺡", "火", "⺣", "爪", "父", "爻", "爿", "片", "牙", "牛", "犬", "⺨", "玄", "王", "瓜", "瓦", "甘", "生", "用", "田", "疋", "⽧", "癶", "白", "皮", "皿", "目", "矛", "矢", "石", "示", "⺭", "⽱", "禾", "穴", "立", "竹", "米", "糸", "缶", "⺲", "羊", "羽", "⺹", "而", "耒", "耳", "聿", "肉", "臣", "自", "至", "臼", "舌", "舛", "舟", "艮", "色", "⺾", "虍", "虫", "血", "行", "衣", "⻂", "西", "見", "角", "言", "谷", "豆", "豕", "豸", "貝", "赤", "走", "足", "身", "車", "辛", "辰", "⻌", "邑", "⻏", "酉", "釆", "里", "金", "長", "門", "⻖", "隶", "隹", "雨", "青", "非", "面", "革", "韋", "韭", "音", "頁", "風", "飛", "食", "首", "香", "馬", "骨", "高", "髟", "鬥", "鬯", "鬲", "鬼", "魚", "鳥", "鹵", "鹿", "麦", "麻", "黄", "黍", "黒", "黹", "黽", "鼎", "鼓", "鼠", "鼻", "齊", "斉", "歯", "竜", "亀", "龠", "マ", "ユ", "乃", "也", "及", "久", "元", "井", "勿", "五", "屯", "巴", "世", "巨", "冊", "奄", "岡", "免", "啇"]
+const ALL_RADICALS = ["一", "｜", "丶", "ノ", "𠂉", "乙", "九", "亅", "二", "亠", "人", "⺅", "𠆢", "儿", "入", "ハ", "丷", "冂", "冖", "冫", "几", "凵", "刀", "⺉", "力", "勹", "匕", "匚", "亡", "十", "卜", "卩", "厂", "厶", "又", "口", "品", "囗", "土", "士", "夂", "夊", "夕", "大", "女", "子", "宀", "寸", "小", "⺌", "尢", "尤", "尸", "屮", "山", "巛", "川", "工", "已", "巾", "干", "幺", "广", "廴", "廾", "弋", "弓", "ヨ", "彑", "彡", "彳", "心", "⺖", "戈", "戸", "手", "扌", "支", "攵", "文", "斗", "斤", "方", "无", "無", "日", "曰", "月", "木", "欠", "止", "歹", "殳", "毋", "母", "比", "毛", "氏", "气", "水", "⺡", "火", "⺣", "爪", "父", "爻", "爿", "片", "牙", "牛", "犬", "⺨", "玄", "王", "瓜", "瓦", "甘", "生", "用", "田", "疋", "⽧", "癶", "白", "皮", "皿", "目", "矛", "矢", "石", "示", "⺭", "⽱", "禾", "穴", "立", "竹", "米", "糸", "缶", "⺲", "羊", "羽", "⺹", "而", "耒", "耳", "聿", "肉", "臣", "自", "至", "臼", "舌", "舛", "舟", "艮", "色", "⺾", "虍", "虫", "血", "行", "衣", "⻂", "西", "見", "角", "言", "谷", "豆", "豕", "豸", "貝", "赤", "走", "足", "身", "車", "辛", "辰", "⻌", "邑", "⻏", "酉", "釆", "里", "金", "長", "門", "⻖", "隶", "隹", "雨", "青", "非", "面", "革", "韋", "韭", "音", "頁", "風", "飛", "食", "首", "香", "馬", "骨", "高", "髟", "鬥", "鬯", "鬲", "鬼", "魚", "鳥", "鹵", "鹿", "麦", "麻", "黄", "黍", "黒", "黹", "黽", "鼎", "鼓", "鼠", "鼻", "齊", "斉", "歯", "竜", "亀", "龠", "マ", "ユ", "乃", "也", "及", "久", "元", "井", "勿", "五", "屯", "巴", "世", "巨", "冊", "奄", "岡", "免", "啇"];
 
 const SORTED_RADICALS:SortedRadicals = {
   "t": ["𠂉", "亠", "𠆢", "冖", "宀", "⺌", "⺾", "⺹", "⺲", "竹", "雨"],
@@ -64,14 +62,14 @@ const SORTED_RADICALS:SortedRadicals = {
 };
 
 const getDefaultRadicalsState = (): RadicalsState => {
-  const state:RadicalsState = {}
+  const state:RadicalsState = {};
   for (let i = 0; i < ALL_RADICALS.length; i++) {
-    state[ALL_RADICALS[i]] = 1
+    state[ALL_RADICALS[i]] = 1;
   }
-  return state
+  return state;
 };
 
-const DEFAULT_STATE = getDefaultRadicalsState()
+const DEFAULT_STATE = getDefaultRadicalsState();
 
 const Page = styled.div`
   display: flex;
@@ -161,7 +159,7 @@ const Disclaimer = styled.p`
   font-size: ${({theme}) => theme.fontSizes.medium};
 `;
 
-const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
+const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE});
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([]);
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
@@ -169,7 +167,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
   const [kanjiLoading, setKanjiLoading] = useState(false);
 
   useEffect(() => {
-    let newState = {...DEFAULT_STATE};
+    const newState = {...DEFAULT_STATE};
     const getAndSetDisabledRadicals = async () => {
       setRadicalsLoading(true);
 
@@ -191,7 +189,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
       }
 
       getAndSetDisabledRadicals().catch((e) => {
-          console.log(getAndSetDisabledRadicals.name, e);
+        console.log(getAndSetDisabledRadicals.name, e);
       });
     } else {
       setRadicalsState(newState);
@@ -203,7 +201,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
       const response = await API.getMatchingKDKanjiByRadicals(selectedRadicals, params);
       setKanjiData(response.data.data);
       setKanjiLoading(false);
-    }
+    };
 
     if (selectedRadicals.length) {
       getAndSetMatchingKanji().catch((e) => { 
@@ -216,15 +214,15 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
 
   const arrayRemove = (arr: string[], val: string): string[] => { 
     return arr.filter((ele) => {
-        return ele !== val;
+      return ele !== val;
     });
-  }
+  };
 
   const handleClickReset = (): void => {
     setRadicalsState({...DEFAULT_STATE});
     setKanjiData({});
     setSelectedRadicals([]);
-  }
+  };
 
   const handleSelection = (radical: string): void => {
     const newSelected = selectedRadicals.includes(radical) 
@@ -232,7 +230,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
       : selectedRadicals.concat(radical);
 
     setSelectedRadicals(newSelected);
-  }
+  };
 
   return (
     <Page>
@@ -243,7 +241,7 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
               {t("multiType.enclose")}
               <StructuredRow columns={3} rows={5}>
                 {SORTED_RADICALS["e"].map((s, i) => {
-                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>
+                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
                 })}
               </StructuredRow>
             </TitleContainer>
@@ -251,41 +249,41 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
               {t("multiType.left")}
               <StructuredRow columns={3} rows={6}>
                 {SORTED_RADICALS["l"].map((s, i) => {
-                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>
+                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
                 })}
               </StructuredRow>
             </TitleContainer>
           </LeftContainer>
           <RightContainer>
-          <RadicalsHeaders>
-            <TitleContainer>
-              {t("multiType.top")}
-              <StructuredRow columns={11} rows={1}>
-                {SORTED_RADICALS["t"].map((s, i) => {
-                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>
-                })}
-              </StructuredRow>
-            </TitleContainer>
-            <SpinnerButtonPair>
-              { radicalsLoading && (
-                <MiniSpinner>
-                  <Spinner size={20} />
-                </MiniSpinner>
-              )}
-            <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
-          </SpinnerButtonPair>
-          </RadicalsHeaders>
-          <RowContainer>
-            {Object.keys(SORTED_RADICALS["r"]).map((s, i) => {
-              return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["r"][s]} radicalsState={radicalsState} rowNumber={s} />
-            })}
-          </RowContainer>
-        </RightContainer>
+            <RadicalsHeaders>
+              <TitleContainer>
+                {t("multiType.top")}
+                <StructuredRow columns={11} rows={1}>
+                  {SORTED_RADICALS["t"].map((s, i) => {
+                    return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
+                  })}
+                </StructuredRow>
+              </TitleContainer>
+              <SpinnerButtonPair>
+                { radicalsLoading && (
+                  <MiniSpinner>
+                    <Spinner size={20} />
+                  </MiniSpinner>
+                )}
+                <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
+              </SpinnerButtonPair>
+            </RadicalsHeaders>
+            <RowContainer>
+              {Object.keys(SORTED_RADICALS["r"]).map((s, i) => {
+                return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["r"][s]} radicalsState={radicalsState} rowNumber={s} />;
+              })}
+            </RowContainer>
+          </RightContainer>
         </RadicalsBody>
         <Details>{t("multiType.uncommon")}</Details>
         <RowContainer>
           {Object.keys(SORTED_RADICALS["u"]).map((s, i) => {
-            return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["u"][s]} radicalsState={radicalsState} rowNumber={s} />
+            return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["u"][s]} radicalsState={radicalsState} rowNumber={s} />;
           })}
         </RowContainer>
         <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
@@ -300,12 +298,12 @@ const MultiradicalType: React.FC<Props & WithTranslation> = ({ t }) => {
             </BigSpinner>
           )}
           { Object.keys(kanjiData).map((s, i) => {
-            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />
+            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />;
           })}
         </RowContainer>
       </FlexContainer>
     </Page>
   );
-}
+};
 
 export default withTranslation()(MultiradicalType);

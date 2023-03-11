@@ -7,7 +7,7 @@ declare module 'dataTypes' {
   interface RadicalsState {
     [radical: string]: number;
   }
-};
+}
   
 module.exports = {
   StrokeCharactersMap,

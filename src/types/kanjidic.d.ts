@@ -90,7 +90,7 @@ declare module "kanjidic" {
   interface KDMeaning {
     en?: string;
   }
-};
+}
 
 module.exports = {
   KDKanji,

@@ -41,11 +41,11 @@ const NumberedKanjiRow: React.FC<Props> = ({kanji, rowNumber}) => {
       <RowNumber>{rowNumber}</RowNumber>
       <RowContents>
         {kanji.map((k, i) => {
-          return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>
+          return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>;
         })}
       </RowContents>
     </Row>
   );
-}
+};
 
 export default NumberedKanjiRow;

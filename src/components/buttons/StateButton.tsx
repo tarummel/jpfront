@@ -13,7 +13,7 @@ interface Props {
   onClick?: void;
   state?: any;
   width?: number;
-};
+}
 
 interface ButtonProps {
   height?: number;
@@ -45,6 +45,6 @@ const StateButton: React.FC<Props> = ({ callback, children, handleClick, height,
   return (
     <Button disabled={!state} height={height} onClick={() => handleClick(callback)} state={state} width={width}>{children}</Button>
   );
-}
+};
 
 export default StateButton;

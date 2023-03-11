@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { withTranslation, WithTranslation } from "react-i18next";
 
 import { JEntry, JGlossary, JKanji, JReading, JSense, JSource } from "jmdict";
 
 interface Props {
-    entry: JEntry;
-    num: number;
+  entry: JEntry;
+  num: number;
 }
 
 const EntryRow = styled.div`
@@ -27,7 +26,7 @@ const Content = styled.div`
   padding-left: 20px;
 `;
 
-const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => {
+const JEntryDisplay: React.FC<Props> = ({ entry, num }) => {
 
   const getProperty = (name: string, data: [JKanji]|[JReading]|[JSense]|[JGlossary]|[JSource]|undefined, delimiter: string): any => {
     let values = null;
@@ -37,7 +36,7 @@ const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => 
       }).join(delimiter);
     }
     return values;
-  }
+  };
 
   const kcontents = getProperty('content', entry.jkanji, "; ");
   const rcontents = getProperty('content', entry.jreading, "; ");
@@ -53,6 +52,6 @@ const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => 
       <Content>{glosses}</Content>
     </EntryRow>
   );
-}
+};
 
-export default withTranslation()(JEntryDisplay);
+export default JEntryDisplay;

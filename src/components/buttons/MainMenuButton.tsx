@@ -24,6 +24,6 @@ const MainMenuButton: React.FC<Props> = ({ onClick, children }) => {
   return (
     <Button onClick={onClick}>{children}</Button>
   );
-}
+};
 
 export default MainMenuButton;

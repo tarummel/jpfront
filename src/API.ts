@@ -18,7 +18,7 @@ const getPromiseRejection = (error: any): Promise<any> => {
   }
   // Something happened in setting up the request that triggered an Error
   return Promise.reject(error);
-}
+};
 
 async function getRadicalsList(params: paramTypes.RadicalsListParams = {}): Promise<AxiosResponse<any>> {
   try {
@@ -65,7 +65,7 @@ async function getKDKanjiRandom(params: paramTypes.KDKanjiRandomParams = {}): Pr
     return await axios.get(`kanjidic/random/`, { params });
   } catch (error: any) {
     return getPromiseRejection(error);
-  }
+  } 
 }
 
 async function getJMdictEntryByKanji(kanji: string): Promise<AxiosResponse<any>> {

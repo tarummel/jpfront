@@ -44,6 +44,6 @@ const Error: React.FC<WithTranslation> = ({ t }) => {
       </Card>
     </Page>
   );
-}
+};
 
 export default withTranslation()(Error);

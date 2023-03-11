@@ -114,33 +114,24 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   useEffect(() => {
     const getAndSetEntry = async (kanji: string) => {
       try {
-        const response = await API.getJMdictEntryByKanji(kanji)
-        setEntry(response.data.data)  
+        const response = await API.getJMdictEntryByKanji(kanji);
+        setEntry(response.data.data);  
       } catch (error: any) {
-        switch (error.response.status) {
-          case 400:
-            setError("" + t("kanjiInfo.error400"))
-            break
-          case 404:
-            setError("" + t("kanjiInfo.error404"))
-            break
-          default:
-            setError(error.message)
-        }
+        setError("" + t("kanjiInfo.error404"));
       }
-    }
+    };
     
     const getAndSetKDKanji = async (kanji: string) => {
       try {
-        const response = await API.getKDKanjiByKanji(kanji)
-        setKdk(response.data.data)  
+        const response = await API.getKDKanjiByKanji(kanji);
+        setKdk(response.data.data);  
       } catch (error: any) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
 
     if (typeof kanjiParam !== "string" || kanjiParam.length !== 1) {
-      return
+      return;
     }
 
     getAndSetEntry(kanjiParam).catch((e) => {
@@ -150,16 +141,16 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
       console.log(getAndSetKDKanji.name, e);
     });
 
-    const localHistory = localStorage.getItem(Config.localStorage.history)
+    const localHistory = localStorage.getItem(Config.localStorage.history);
     if (typeof localHistory === "string") {
 
-      let historyArray = JSON.parse(localHistory)
+      let historyArray = JSON.parse(localHistory);
       if (!historyArray.includes(kanjiParam)) {
 
-        historyArray.push(kanjiParam)
-        const historySize = localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault
+        historyArray.push(kanjiParam);
+        const historySize = localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault;
         if (historyArray.length > historySize) {
-          historyArray = historyArray.slice(-historySize)
+          historyArray = historyArray.slice(-historySize);
         }
         localStorage.setItem(Config.localStorage.history, JSON.stringify(historyArray));
       }
@@ -169,13 +160,13 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
     
   }, [kanjiParam, t]);
 
-  const unicode = kdk?.codepoint?.[0].ucs || kanjiParam?.charCodeAt(0) || "n/a"
-  const grade = kdk?.misc?.[0].grade || "n/a"
-  const jlpt = kdk?.misc?.[0].jlpt || "n/a"
-  const strokes = kdk?.misc?.[0].strokes || "n/a"
-  const frequency = kdk?.misc?.[0].frequency || "n/a"
-  const onyomi = kdk?.reading?.[0].ja_on || ""
-  const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || ""
+  const unicode = kdk?.codepoint?.[0].ucs || kanjiParam?.charCodeAt(0) || "n/a";
+  const grade = kdk?.misc?.[0].grade || "n/a";
+  const jlpt = kdk?.misc?.[0].jlpt || "n/a";
+  const strokes = kdk?.misc?.[0].strokes || "n/a";
+  const frequency = kdk?.misc?.[0].frequency || "n/a";
+  const onyomi = kdk?.reading?.[0].ja_on || "";
+  const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || "";
 
   return (
     <Page>
@@ -221,7 +212,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
                 <HorizontalDivider />
                 <JMdictEntry entry={e} num={i} />
               </Entries>
-            )
+            );
           }))}
         </Card>
         <LegalInformation>

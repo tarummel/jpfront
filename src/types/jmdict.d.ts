@@ -43,7 +43,7 @@ declare module "jmdict" {
     partial?: boolean;
     waseieigo?: boolean;
   }
-};
+}
 
 module.exports = {
   JEntry,

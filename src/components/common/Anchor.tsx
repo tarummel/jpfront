@@ -21,9 +21,9 @@ const StyledAnchor = styled.a`
 `;
 
 const Anchor: React.FC<Props> = ({children, href, target}) => {
-	return (
-		<StyledAnchor target={target} href={href}>{children}</StyledAnchor>
-	);
-}
+  return (
+    <StyledAnchor target={target} href={href}>{children}</StyledAnchor>
+  );
+};
 
 export default Anchor;
