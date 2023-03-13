@@ -4,6 +4,15 @@
     "message": "The page you were looking for may have moved or you may have been redirected here by mistake.",
     "home": "Go Home"
   },
+  "home": {
+    "random": "Random Page",
+    "multiradicalSearch": "Multi-Radical",
+    "multiradicalSearchByType": "Multi-Radical (Type)",
+    "openKanji": "Open Kanji",
+    "searchByRadical": "Search by Radicals",
+    "searchKanji": "Search Kanji",
+    "skip": "SKIP"
+  },
   "header": {
     "about": "About",
     "help": "Help",
@@ -11,15 +20,17 @@
     "settings": "Settings"
   },
   "help": {
+    "bugs": "At this time I don't have an official bug tracker. Sorry! This entry will be updated accordingly when it's available.",
+    "bugsTitle": "Found a bug?",
     "data": "From the wonderful people of the Electronic Dictionary Research and Development Group (EDRDG) at Monash University.",
-    "dataTitle": "2. Where does this information come from?",
+    "dataTitle": "Where does this information come from?",
     "help": "Help and FAQ",
-    "requests": "Please do not send me requests. I am NOT qualified.",
-    "requestsTitle": "3. Can you help me with something?",
-    "site": "This site is intended to be a useful asset for Japanese learning. With simple, interactive UI tools, identifying kanji should be an easier and less time consuming affair. Allowing for more time spent learning and less time searching.",
-    "siteTitle": "1. What is this site?",
-    "suggestions": "At this time I'm not accepting feature requests as I already have a lot planned. When I manage to work through it enough I will change this section to include a means of contact. Sorry!",
-    "suggestionsTitle": "4. I have a suggestion for the website!"
+    "requests": "Please do not send me requests. I'm only a software developer.",
+    "requestsTitle": "Can you help me with something?",
+    "site": "I built this website to be a collection of Japanese translation tools I hope will be of use to others as it is for me. Please enjoy.",
+    "siteTitle": "What is this site?",
+    "suggestions": "At this time I'm not accepting feature requests as I already have a lot planned. When that changes I will update this entry with more information. Sorry!",
+    "suggestionsTitle": "I have a suggestion for the website!"
   },
   "kanjiInfo": {
     "english": "Engl/英",
@@ -37,11 +48,13 @@
     "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}"
   },
   "infoLegal": {
-    "codeLegal": "The code that runs this website is under the GNU GENERAL PUBLIC LICENSE (github pending). All other copyrights are their own.",
+    "codeLegal": "The code that runs this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own.",
     "codeLegalTitle": "Code Legal",
     "informationAndLegal": "Information and Legal",
     "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses.",
-    "edrdgLegalTitle": "EDRDG Legal"
+    "edrdgLegalTitle": "EDRDG Legal",
+    "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
+    "edrdg": "To EDRDG Wiki"
   },
   "legal": {
     "kanjidic": "KANJIDIC is copyright under the EDRDG license.",
@@ -50,13 +63,6 @@
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
     "jmdict": "JMdict is copyright under the EDRDG licence.",
     "jmdictLink": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project"
-  },
-  "mainMenu": {
-    "random": "I'm feeling lucky",
-    "multiradicalSearch": "Multiradical Search",
-    "multiradicalSearchByType": "Multiradical Search (Type)",
-    "searchKanji": "Search Kanji",
-    "skip": "SKIP"
   },
   "multi": {
     "instructions": "Click a radical to get started, kanji composed of selected radicals will appear on the right",

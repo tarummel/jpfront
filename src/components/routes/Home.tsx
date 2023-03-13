@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
@@ -10,54 +10,55 @@ import { KDKanjiRandomParams } from "apiParamTypes";
 
 const Body = styled.div`
   align-items: center;
+  background: ${({theme}) => theme.colors.foreground};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 100%;
   margin: 0 auto;
   min-width: 1024px;
-  padding-top: 20px;
   width: 50%;
 `;
 
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: 48px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
-const SearchCard = styled.div`
+const SearchBarWrapper = styled.div`
+  margin-bottom: 10px;
+`;
+
+const RandomButtonWrapper = styled.div`
+  margin-bottom: 40px;
+`;
+
+const RadicalsContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  height: 140px;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 10px;
-`;
-
-const OptionsCard = styled.div`
-  align-items: center;
-  background: ${({theme}) => theme.colors.elementPrimary};
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  height: 210px;
-  justify-content: space-between;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
 `;
 
 const OptionsTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
+  display: flex;
   font-size: ${({theme}) => theme.fontSizes.large};
   justify-content: center;
-  margin-top: 0px;
+  line-height: 40px;
+  margin-top: 5px;
+`;
+
+const OptionButtonWrapper = styled.div`
+  margin-top: 10px;
 `;
 
 const Home: React.FC<WithTranslation> = ({ t }) => {
   const navigate = useNavigate();
 
-  const handleRandom = () => {
+  const handleRandomNav = () => {
     const getAndNavigateRandom = async () => {
       const params = { kanjiOnly: true } as KDKanjiRandomParams;
       const response = await API.getKDKanjiRandom(params);
@@ -70,26 +71,39 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
     });
   };
 
+  const handleMultiradicalNavClick = () => {
+    navigate(`/multiradical`);
+  };
+
+  const handleMultiradicalTypeNavClick = () => {
+    navigate(`/multiradicaltype`);
+  };
+
+  const handleSkipNavClick = () => {
+    navigate(`/skip`);
+  };
+
   return (
     <Body>
-      <Banner>Open Kanji</Banner>
-      <SearchCard>
-        <OptionsTitle>Search</OptionsTitle>
-        <SearchBar text={`${t("mainMenu.searchKanji")}...`}/>
-        <MainMenuButton onClick={handleRandom}>{t("mainMenu.random")}</MainMenuButton>
-      </SearchCard>
-      <OptionsCard>
-        <OptionsTitle>Radicals</OptionsTitle>
-        <Link to="/multiradical">
-          <MainMenuButton>{t("mainMenu.multiradicalSearch")}</MainMenuButton>
-        </Link>
-        <Link to="/multiradicaltype">
-          <MainMenuButton>{t("mainMenu.multiradicalSearchByType")}</MainMenuButton>
-        </Link>
-        <Link to="/skip">
-          <MainMenuButton>{t("mainMenu.skip")}</MainMenuButton>
-        </Link>
-      </OptionsCard>
+      <Banner>{t("home.openKanji")}</Banner>
+      <SearchBarWrapper>
+        <SearchBar text={`${t("home.searchKanji")}...`}/>
+      </SearchBarWrapper>
+      <RandomButtonWrapper>
+        <MainMenuButton onClick={handleRandomNav}>{t("home.random")}</MainMenuButton>
+      </RandomButtonWrapper>
+      <RadicalsContainer>
+        <OptionsTitle>{t("home.searchByRadical")}</OptionsTitle>
+        <OptionButtonWrapper>
+          <MainMenuButton onClick={handleMultiradicalNavClick}>{t("home.multiradicalSearch")}</MainMenuButton>
+        </OptionButtonWrapper>
+        <OptionButtonWrapper>
+          <MainMenuButton onClick={handleMultiradicalTypeNavClick}>{t("home.multiradicalSearchByType")}</MainMenuButton>  
+        </OptionButtonWrapper>
+        <OptionButtonWrapper>
+          <MainMenuButton onClick={handleSkipNavClick}>{t("home.skip")}</MainMenuButton>
+        </OptionButtonWrapper>
+      </RadicalsContainer>
     </Body>
   );
 };

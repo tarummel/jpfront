@@ -26,11 +26,12 @@ const Button = styled.button<ButtonProps>`
   border: none;
   border-radius: 5px;
   color: ${({theme}) => theme.colors.textPrimary};
+  display: flex;
   font-size: ${({theme}) => theme.fontSizes.xlarge};
   height: ${({height}) => height ? height : 36}px;
+  line-height: 36px;
+  justify-content: center;
   margin: 1px;
-  text-align: center;
-  width: 36px;
   &:hover {
     background: ${({state, theme}) => state === 2 ? theme.colors.buttonSelectedHover : theme.colors.buttonHover};
   }

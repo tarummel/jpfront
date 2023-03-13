@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
-import { Anchor, ColumnSpacer, Spinner } from "../common";
+import { Anchor, Spinner } from "../common";
 import { Button } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -43,41 +43,44 @@ const getDefaultRadicalsState = (): RadicalsState => {
 const DEFAULT_STATE = getDefaultRadicalsState();
 
 const Body = styled.div`
+  background: ${({theme}) => theme.colors.foreground};
   display: flex;
   flex-direction: row;
+  height: 100%;
   margin: 0 auto;
-  min-width: 1024px;
   padding-top: 10px;
+  min-width: 1024px;
   width: 80%;
 `;
 
 const ContentContainer = styled.div`
   border-radius: 5px;
-  flex: 1;
   flex-direction: column;
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 const RadicalHeaders = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 3px;
+  height: 32px;
 `;
 
 const StrokesText = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.small};
-  padding-top: 13px;
+  line-height: 48px;
 `;
 
 const RowContainer = styled.div`
-  background: ${({theme}) => theme.colors.elementPrimary};  
+  background: ${({theme}) => theme.colors.elementPrimary};
+  display: flex;
   flex-direction: column;
+  height: 85%;
+  margin-top: 5px;
   overflow-y: scroll;
-`;
-
-const BigSpinner = styled.div`
-  padding: 20px;
 `;
 
 const SpinnerButtonPair = styled.div`
@@ -86,18 +89,25 @@ const SpinnerButtonPair = styled.div`
 `;
 
 const MiniSpinner = styled.div`
-  padding-top: 4px;
-  padding-right: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
 `;
 
-const Instructions = styled.h1`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.small};
+const BigSpinner = styled.div`
+  margin: auto;
 `;
 
-const Disclaimer = styled.p`
+const HistoryWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-grow: 0;
+  min-height: 32px;
+`;
+
+const CopyrightWrapper = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.small};
+  font-size: ${({theme}) => theme.fontSizes.medium};
+  margin-top: 10px;
 `;
 
 const Multiradical: React.FC<WithTranslation> = ({ t }) => {
@@ -175,7 +185,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   return (
     <Body>
       <ContentContainer>
-        <Instructions>*{t("multi.instructions")}*</Instructions>
+        {/* <Instructions>*{t("multi.instructions")}*</Instructions> */}
         <RadicalHeaders>
           <StrokesText>{t("multi.strokes")}</StrokesText>
           <SpinnerButtonPair>
@@ -192,11 +202,14 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
             return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} />;
           })};
         </RowContainer>
-        <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
+        <CopyrightWrapper>
+          <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>{t("legal.kradfile")}</Anchor>
+        </CopyrightWrapper>
       </ContentContainer>
-      <ColumnSpacer minWidth={"4px"} width={"1%"} />
       <ContentContainer>
-        <History />
+        <HistoryWrapper>
+          <History />
+        </HistoryWrapper>
         <RowContainer>
           { kanjiLoading && (
             <BigSpinner>

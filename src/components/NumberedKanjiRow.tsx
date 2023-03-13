@@ -9,26 +9,19 @@ interface Props {
 }
 
 const Row = styled.div`
-  display: flex;
-  flex-direction: row;
+background: ${({theme}) => theme.colors.rowPrimary};
 `;
 
 const RowNumber = styled.div`
-  background: ${({theme}) => theme.colors.rowPrimary};
   border-radius: 5px;
   color: ${({theme}) => theme.colors.textNegative};
-  display: flex;
   font-size: ${({theme}) => theme.fontSizes.xlarge};
-  flex-shrink: 0;
-  justify-content: center;
   line-height: 36px;
   margin: 1px;
   width: 36px;
 `;
 
 const RowContents = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   a {
     line-height: 32px;
     padding: 2px 2px 2px 2px;

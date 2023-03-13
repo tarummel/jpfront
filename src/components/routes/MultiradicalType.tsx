@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
-import { Anchor, ColumnSpacer, Spinner } from "../common";
+import { Anchor, Spinner } from "../common";
 import { Button, StateButton } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -72,46 +72,40 @@ const getDefaultRadicalsState = (): RadicalsState => {
 const DEFAULT_STATE = getDefaultRadicalsState();
 
 const Body = styled.div`
+  background: ${({theme}) => theme.colors.foreground};
   display: flex;
   flex-direction: row;
-  min-width: 1024px;
+  height: 100%;
   margin: 0 auto;
   padding-top: 10px;
+  min-width: 1024px;
   width: 80%;
+  overflow-y: scroll;
 `;
 
 const ContentContainer = styled.div`
+  display: flex;
   border-radius: 5px;
-  flex: 1;
   flex-direction: column;
+  flex-basis: 50%;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
-const RightContainer = styled.div`
+const RadicalsContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
 const LeftContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 41px;
-  padding-right: 2px;
+  padding-top: 79px;
 `;
 
-const RadicalsBody = styled.div`
-  display: flex;
-  flex-direction: row;
+const LeftRowMargin = styled.div`
+  margin-top: 20px
 `;
 
-const RadicalsHeaders = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 2px;
-  margin-left: 37px;
-`;
-
-const TitleContainer = styled.div`
+const TypeRowContainer = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
   display: flex;
   flex-direction: column;
@@ -119,44 +113,86 @@ const TitleContainer = styled.div`
   font-size: ${({theme}) => theme.fontSizes.medium};
 `;
 
+const RightContainer = styled.div`
+  margin-left: 3px;
+`;
+
+const RadicalsHeaders = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 94px;
+  margin-bottom: 5px;
+`;
+
 const SpinnerButtonPair = styled.div`
   display: flex;
   flex-direction: row;
-  padding-bottom: 4px;
+  margin: auto 0 0 0;
 `;
 
 const MiniSpinner = styled.div`
-  padding-bottom: 4px;
-  padding-right: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
+`;
+
+const UncommonContainer = styled.div`
+  align-items: center;
+  color: ${({theme}) => theme.colors.textPrimary};
+  display: flex;
+  flex-direction: column;
+  font-size: ${({theme}) => theme.fontSizes.medium};
+  max-height: 213px;
+  margin-top: 15px;
 `;
 
 const BigSpinner = styled.div`
-  padding: 20px;
+  margin: auto;
 `;
 
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
+  display: flex;
   flex-direction: column;
+  min-height: 300px;
+  height: 100%;
+  max-height: 608px;
+  flex-shrink: 1;
   overflow-y: scroll;
 `;
 
-const StructuredRow = styled.div<RowsColumns>`
+const UncommonRowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
+  display: flex;
+  flex-direction: column;
+  max-height: 213px;
+  overflow-y: scroll;
+`;
+
+const KanjiRowContainer = styled.div`
+  background: ${({theme}) => theme.colors.elementPrimary};
+  margin-top: 5px;
+`;
+
+const StructuredRow = styled.div<RowsColumns>`
   display: flex;
   flex-wrap: wrap;
   height: ${({rows}) => 38 * rows}px;
-  padding: 1px;
   width: ${({columns}) => 38 * columns}px;
 `;
 
-const Details = styled.h1`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.small};
+const HistoryWrapper = styled.div`
+  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 94px;
 `;
 
-const Disclaimer = styled.p`
+const CopyrightWrapper = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
+  margin-top: 10px;
 `;
 
 const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
@@ -235,35 +271,38 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
   return (
     <Body>
       <ContentContainer>
-        <RadicalsBody>
+        <RadicalsContainer>
           <LeftContainer>
-            <TitleContainer>
+            <TypeRowContainer>
               {t("multiType.enclose")}
               <StructuredRow columns={3} rows={5}>
                 {SORTED_RADICALS["e"].map((s, i) => {
                   return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
                 })}
               </StructuredRow>
-            </TitleContainer>
-            <TitleContainer>
-              {t("multiType.left")}
-              <StructuredRow columns={3} rows={6}>
-                {SORTED_RADICALS["l"].map((s, i) => {
-                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
-                })}
-              </StructuredRow>
-            </TitleContainer>
+            </TypeRowContainer>
+            <LeftRowMargin>
+              <TypeRowContainer>
+                {t("multiType.left")}
+                <StructuredRow columns={3} rows={6}>
+                  {SORTED_RADICALS["l"].map((s, i) => {
+                    return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
+                  })}
+                </StructuredRow>
+              </TypeRowContainer>
+            </LeftRowMargin>
           </LeftContainer>
+
           <RightContainer>
             <RadicalsHeaders>
-              <TitleContainer>
+              <TypeRowContainer>
                 {t("multiType.top")}
                 <StructuredRow columns={6} rows={2}>
                   {SORTED_RADICALS["t"].map((s, i) => {
                     return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
                   })}
                 </StructuredRow>
-              </TitleContainer>
+              </TypeRowContainer>
               <SpinnerButtonPair>
                 { radicalsLoading && (
                   <MiniSpinner>
@@ -279,19 +318,25 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
               })}
             </RowContainer>
           </RightContainer>
-        </RadicalsBody>
-        <Details>{t("multiType.uncommon")}</Details>
-        <RowContainer>
-          {Object.keys(SORTED_RADICALS["u"]).map((s, i) => {
-            return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["u"][s]} radicalsState={radicalsState} rowNumber={s} />;
-          })}
-        </RowContainer>
-        <Disclaimer>{t("legal.kradfile")} <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>Link</Anchor></Disclaimer>
+        </RadicalsContainer>
+        <UncommonContainer>
+          {t("multiType.uncommon")}
+          <UncommonRowContainer>
+            {Object.keys(SORTED_RADICALS["u"]).map((s, i) => {
+              return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["u"][s]} radicalsState={radicalsState} rowNumber={s} />;
+            })}
+          </UncommonRowContainer>
+        </UncommonContainer>
+        <CopyrightWrapper>
+          <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>{t("legal.kradfile")}</Anchor>
+        </CopyrightWrapper>
       </ContentContainer>
-      <ColumnSpacer minWidth={"4px"} width={"1%"} />
+
       <ContentContainer>
-        <History />
-        <RowContainer>
+        <HistoryWrapper>
+          <History />
+        </HistoryWrapper>
+        <KanjiRowContainer>
           { kanjiLoading && (
             <BigSpinner>
               <Spinner size={40} />
@@ -300,7 +345,7 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
           { !kanjiLoading && Object.keys(kanjiData).map((s, i) => {
             return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />;
           })}
-        </RowContainer>
+        </KanjiRowContainer>
       </ContentContainer>
     </Body>
   );

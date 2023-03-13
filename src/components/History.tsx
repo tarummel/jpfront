@@ -9,24 +9,20 @@ const HISTORY_LC = "history";
 const HistoryContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   display: flex;
-  flex-direction: column;
-  padding: 16px;
-  margin-bottom: 16px;
-  flex-grow: 0;
+  flex-direction: row;
+  padding: 5px;
+  height: 20px;
 `;
 
-const SearchHistoryText = styled.div`
+const Text = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
-  display: flex;
-  font-size: ${({theme}) => theme.fontSizes.large};
-  padding-bottom: 4px;
+  font-size: ${({theme}) => theme.fontSizes.medium};
 `;
 
-const SearchHistoryContents = styled.div`
-  display: flex;
-
+const Links = styled.div`
+  margin-left: 8px;
   a {
-    margin-right: 3px;
+    margin-right: 4px;
   }
 `;
 
@@ -45,12 +41,12 @@ const History: React.FC<WithTranslation> = ({ t }) => {
     <>
       { history.length && (
         <HistoryContainer>
-          <SearchHistoryText>{t("multi.searchHistory")}:</SearchHistoryText>
-          <SearchHistoryContents>
+          <Text>{t("multi.searchHistory")}:</Text>
+          <Links>
             {history.map((k, i) => {
               return <StyledLink key={i} to={`/kanji/${k}`}>{k}</StyledLink>;
             })}
-          </SearchHistoryContents>
+          </Links>
         </HistoryContainer>
       )}
     </>

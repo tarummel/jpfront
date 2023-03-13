@@ -4,7 +4,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 
 import Button from "../buttons/Button";
 import Config from "../../constants/Config";
-import { HorizontalDivider, NumberInput } from "../common";
+import { NumberInput } from "../common";
 
 const DEFAULT_LANGUAGE = "en";
 const DEFAULT_THEME = "dark";
@@ -13,54 +13,58 @@ const WIDGET_HEIGHT = 36;
 const WIDGET_WIDTH = 100;
 
 const Body = styled.div`
+  background: ${({theme}) => theme.colors.foreground};
   display: flex;
   flex-direction: column;
+  height: 100%;
   margin: 0 auto;
   min-width: 1024px;
-  padding-top: 10px;
   width: 50%;
-`;
-
-const Card = styled.div`
-  background: ${({theme}) => theme.colors.elementPrimary};
-  border-radius: 5px;
-  padding-top: 1px;
 `;
 
 const Banner = styled.h1`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  color: ${({theme}) => theme.colors.textSecondary};
-  display: flex;
+  color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  justify-content: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  margin: 10px auto;
+  padding: 10px 20px 10px 20px;
 `;
 
-const SettingTitle = styled.h1`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.xlarge};
-  padding-left: 30px;
+const Card = styled.div`
+  background: ${({theme}) => theme.colors.elementPrimary};
+  border-radius: 5px;
+  border-bottom: 1px solid ${({theme}) => theme.colors.textSecondary};;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 `;
 
 const SettingContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+`;
+
+const SettingTitle = styled.h2`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.xlarge};
+  margin-top: 5px;
+  margin-left: 20px;
 `;
 
 const Setting = styled.div`
   display: flex;
-  align-items: center;
-  padding-right: 60px;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  height: ${WIDGET_HEIGHT}px;
+  margin: 10px 60px 10px 60px;
 `;
 
 const Description = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding-left: 60px;
+  line-height: ${WIDGET_HEIGHT}px;
 `;
 
 const StyledSelect = styled.select`
@@ -116,41 +120,34 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
     <Body>
       <Banner>{t("settings.settings")}</Banner>
       <Card>
-        <SettingTitle>{t("settings.language")}</SettingTitle>
-        <HorizontalDivider />
         <SettingContainer>
-          <Description>- {t("settings.languageDesc")}</Description>
+          <SettingTitle>{'>'} {t("settings.language")}</SettingTitle>
           <Setting>
+            <Description>- {t("settings.languageDesc")}</Description>
             <StyledSelect onChange={handleLanguage} placeholder={""} value={language}>
               <StyledOption value="en">English</StyledOption>
               <StyledOption value="jp">日本語</StyledOption>
             </StyledSelect>
           </Setting>
         </SettingContainer>
-
-        <SettingTitle>{t("settings.theme")}</SettingTitle>
-        <HorizontalDivider />
         <SettingContainer>
-          <Description>- {t("settings.themeDesc")}</Description>
+          <SettingTitle>{'>'} {t("settings.theme")}</SettingTitle>
           <Setting>
+            <Description>- {t("settings.themeDesc")}</Description>
             <StyledSelect onChange={handleTheme} placeholder={""} value={theme}>
               <StyledOption value="dark">{t("settings.dark")}</StyledOption>
               <StyledOption value="light">{t("settings.light")}</StyledOption>
             </StyledSelect>
           </Setting>
         </SettingContainer>
-
-        <SettingTitle>{t("settings.history")}</SettingTitle>
-        <HorizontalDivider />
         <SettingContainer>
-          <Description>- {t("settings.historySizeDesc")}</Description>
+          <SettingTitle>{'>'} {t("settings.history")}</SettingTitle>
           <Setting>
+            <Description>- {t("settings.historySizeDesc")}</Description>
             <NumberInput height={WIDGET_HEIGHT} onChange={handleHistorySize} placeholder={""} value={historySize} width={WIDGET_WIDTH}/>
           </Setting>
-        </SettingContainer>
-        <SettingContainer>
-          <Description>- {t("settings.historyClearDesc")}</Description>
           <Setting>
+            <Description>- {t("settings.historyClearDesc")}</Description>
             <Button height={WIDGET_HEIGHT} onClick={handleClearHistory} width={WIDGET_WIDTH}>{t("settings.historyClear")}</Button>
           </Setting>
         </SettingContainer>

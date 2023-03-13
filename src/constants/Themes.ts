@@ -9,7 +9,8 @@ const fontSizes = {
 const darkTheme = {
   fontSizes,
   colors: {
-    background: "#180845",
+    background: "#0B0029",
+    foreground: "#180845",
     borderPrimary: "#180845",
     borderError: "#FF0000",
     buttonDisabled: "#878787",
@@ -35,6 +36,7 @@ const lightTheme = {
   fontSizes,
   colors: {
     background: "#FFFFFF",
+    foreground: "#EEEEEE",
     borderPrimary: "#000000",
     borderError: "#FF0000",
     buttonDisabled: "#878787",

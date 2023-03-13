@@ -43,6 +43,6 @@ i18n
       loadPath: `./assets/locales/{{lng}}/{{ns}}.json`,
       addPath: `./assets/locales/add/{{lng}}/{{ns}}`,
     },
-  })
+  });
 
 export default i18n;

@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
-const Container = styled.div`
+const Container = styled.nav`
   background: ${({theme}) => theme.colors.buttonPrimary};
   display: flex;
-  filter: drop-shadow(3px 3px 3px black);
   flex-direction: row;
   justify-content: center;
   height: 24px;
@@ -33,13 +32,13 @@ const ButtonText = styled.div`
   margin: 0 auto;
 `;
 
-const Icon = styled.svg`
-  color: white;
-  fill: white;
-  height: 22px;
-  padding-top: 4px;
-  width: auto;
-`;
+// const Icon = styled.svg`
+//   color: white;
+//   fill: white;
+//   height: 22px;
+//   padding-top: 4px;
+//   width: auto;
+// `;
 
 const Header: React.FC<WithTranslation> = ({ t }) => {
   const navigate = useNavigate();

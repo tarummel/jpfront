@@ -18,13 +18,15 @@ const MATH_BUTTONS_HEIGHT = 30;
 const MATH_BUTTONS_WIDTH = MATH_BUTTONS_HEIGHT;
 
 const Body = styled.div`
+  background: ${({theme}) => theme.colors.foreground};
   display: flex;
   flex-direction: row;
+  height: 100%;
   flex-shrink: 1;
   flex-grow: 1;
   min-width: 1024px;
   margin: 0 auto;
-  padding-top: 10px;
+  padding: 10px;
   width: 50%;
 `;
 

@@ -3,40 +3,44 @@ import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
   
 const Body = styled.div`
+  background: ${({theme}) => theme.colors.foreground};
   display: flex;
   flex-direction: column;
+  height: 100%;
   margin: 0 auto;
   min-width: 1024px;
-  padding-top: 10px;
   width: 50%;
 `;
 
 const Banner = styled.h1`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  color: ${({theme}) => theme.colors.textSecondary};
-  display: flex;
+  color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  justify-content: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  margin: 10px auto;
+  padding: 10px 20px 10px 20px;
 `;
 
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  padding: 10px 20px 10px 20px;
+  border-bottom: 1px solid ${({theme}) => theme.colors.textSecondary};;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 30px;
 `;
 
 const SectionTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
+  margin-left: 20px;
+  margin-right: 45px;
 `;
 
 const Section = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding-left: 25px;
+  margin: 5px 45px 20px 45px;
 `;
 
 const Help: React.FC<WithTranslation> = ({ t }) => {
@@ -44,13 +48,15 @@ const Help: React.FC<WithTranslation> = ({ t }) => {
     <Body>
       <Banner>{t("help.help")}</Banner>
       <Card>
-        <SectionTitle>{t("help.siteTitle")}</SectionTitle>
+        <SectionTitle>1. {t("help.siteTitle")}</SectionTitle>
         <Section>{t("help.site")}</Section>
-        <SectionTitle>{t("help.dataTitle")}</SectionTitle>
+        <SectionTitle>2. {t("help.dataTitle")}</SectionTitle>
         <Section>{t("help.data")}</Section>
-        <SectionTitle>{t("help.requestsTitle")}</SectionTitle>
+        <SectionTitle>3. {t("help.requestsTitle")}</SectionTitle>
         <Section>{t("help.requests")}</Section>
-        <SectionTitle>{t("help.suggestionsTitle")}</SectionTitle>
+        <SectionTitle>4. {t("help.bugsTitle")}</SectionTitle>
+        <Section>{t("help.bugs")}</Section>
+        <SectionTitle>5. {t("help.suggestionsTitle")}</SectionTitle>
         <Section>{t("help.suggestions")}</Section>
       </Card>
     </Body>

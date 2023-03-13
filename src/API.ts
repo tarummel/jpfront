@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios";
 import config from "./constants/Config";
 import * as paramTypes from "apiParamTypes";
 
-axios.defaults.baseURL = `${config.backend.jpcoreUrl}/`;
+axios.defaults.baseURL = `${config.backend.jpcoreUrl}`;
 axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
 
 const getPromiseRejection = (error: any): Promise<any> => {
