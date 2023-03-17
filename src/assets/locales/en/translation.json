@@ -33,6 +33,8 @@
     "suggestionsTitle": "I have a suggestion for the website!"
   },
   "kanjiInfo": {
+    "deepl": "DeepL",
+    "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
     "english": "Engl/英",
     "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
     "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
@@ -57,7 +59,7 @@
     "edrdg": "To EDRDG Wiki"
   },
   "legal": {
-    "kanjidic": "KANJIDIC is copyright under the EDRDG license.",
+    "kanjidic": "KANJIDIC is copyright under the EDRDG licence.",
     "kanjidicLink": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
     "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG licence.",
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",

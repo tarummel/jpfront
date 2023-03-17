@@ -12,7 +12,9 @@ const EntryRow = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 8px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  
 `;
 
 const RowNum = styled.div`
@@ -23,33 +25,45 @@ const RowNum = styled.div`
 const Content = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding-left: 20px;
+  padding-top: 6px;
+  padding-left: 16px;
+`;
+
+const Suffixes = styled.div`
+  color: ${({theme}) => theme.colors.textSecondary};
+  font-size: ${({theme}) => theme.fontSizes.medium};
+  padding-left: 16px;
 `;
 
 const JEntryDisplay: React.FC<Props> = ({ entry, num }) => {
 
-  const getProperty = (name: string, data: [JKanji]|[JReading]|[JSense]|[JGlossary]|[JSource]|undefined, delimiter: string): any => {
+  const getProperty = (name: string, data: [JKanji]|[JReading]|[JSense]|[JGlossary]|[JSource]|undefined): any => {
     let values = null;
     if (data) {
       values = data.map((e) => {
         return e[name as keyof typeof e];
-      }).join(delimiter);
+      });
     }
     return values;
   };
-
-  const kcontents = getProperty('content', entry.jkanji, "; ");
-  const rcontents = getProperty('content', entry.jreading, "; ");
+  console.log(getProperty('parts_of_speech', entry.jsense))
+  // const kcontents = getProperty('content', entry.jkanji).join("; ");
+  const suffixes = getProperty('parts_of_speech', entry.jsense)[0][0] || "";
+  const miscNote = getProperty('misc', entry.jsense)[0] || "";
+  const rcontents = getProperty('content', entry.jreading).join("; ");
   const glosses = entry.jsense?.map((js) => {
-    return getProperty('gloss', js.jglossary, ' / ');
+    return getProperty('gloss', js.jglossary).join(" // ");
   }).join(", ");
 
+  console.log(entry)
   return (
     <EntryRow>
       <RowNum>{num+1}.</RowNum>
-      <Content>{kcontents}</Content>
+      {/* <Content>{kcontents}</Content> */}
+      <Suffixes>[{suffixes}]</Suffixes>
       <Content>{rcontents}</Content>
       <Content>{glosses}</Content>
+      <Content>{miscNote}</Content>
     </EntryRow>
   );
 };
