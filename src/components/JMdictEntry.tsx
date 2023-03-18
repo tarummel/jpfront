@@ -25,13 +25,20 @@ const RowNum = styled.div`
 const Content = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding-top: 6px;
+  padding-top: 8px;
   padding-left: 16px;
 `;
 
 const Suffixes = styled.div`
   color: ${({theme}) => theme.colors.textSecondary};
   font-size: ${({theme}) => theme.fontSizes.medium};
+  padding-left: 16px;
+`;
+
+const Notes = styled.div`
+  color: ${({theme}) => theme.colors.textSecondary};
+  font-size: ${({theme}) => theme.fontSizes.small};
+  padding-top: 8px;
   padding-left: 16px;
 `;
 
@@ -58,12 +65,16 @@ const JEntryDisplay: React.FC<Props> = ({ entry, num }) => {
   console.log(entry)
   return (
     <EntryRow>
-      <RowNum>{num+1}.</RowNum>
+      {/* <RowNum>{num+1}.</RowNum> */}
       {/* <Content>{kcontents}</Content> */}
       <Suffixes>[{suffixes}]</Suffixes>
       <Content>{rcontents}</Content>
       <Content>{glosses}</Content>
-      <Content>{miscNote}</Content>
+      {
+        miscNote.length && (
+          <Notes>Note: {miscNote}</Notes>
+        )
+      }
     </EntryRow>
   );
 };

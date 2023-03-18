@@ -9,22 +9,32 @@ interface Props {
 }
 
 const Row = styled.div`
-background: ${({theme}) => theme.colors.rowPrimary};
+  background: ${({theme}) => theme.colors.elementPrimary};
+  display: flex;
+  flex-direction: row;
 `;
 
 const RowNumber = styled.div`
+  background: ${({theme}) => theme.colors.rowPrimary};
   border-radius: 5px;
   color: ${({theme}) => theme.colors.textNegative};
+  display: flex;
+  flex-shrink: 0;
   font-size: ${({theme}) => theme.fontSizes.xlarge};
+  justify-content: center;
   line-height: 36px;
-  margin: 1px;
+  margin-bottom: 1px;
+  margin-top: 1px;
   width: 36px;
 `;
 
 const RowContents = styled.div`
   a {
-    line-height: 32px;
-    padding: 2px 2px 2px 2px;
+    height: 36px;
+    width: 36px;
+    line-height: 36px;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 `;
 

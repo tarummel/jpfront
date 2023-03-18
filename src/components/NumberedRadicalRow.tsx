@@ -25,7 +25,8 @@ const RowNumber = styled.div`
   font-size: ${({theme}) => theme.fontSizes.xlarge};
   justify-content: center;
   line-height: 36px;
-  margin: 1px;
+  margin-bottom: 1px;
+  margin-top: 1px;
   width: 36px;
 `;
 
