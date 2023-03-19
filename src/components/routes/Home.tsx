@@ -60,7 +60,7 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
 
   const handleRandomNav = () => {
     const getAndNavigateRandom = async () => {
-      const params = { kanjiOnly: true } as KDKanjiRandomParams;
+      const params = { kanji_only: true } as KDKanjiRandomParams;
       const response = await API.getKDKanjiRandom(params);
       const data = response.data.data;
       navigate(`/kanji/${data}`);
