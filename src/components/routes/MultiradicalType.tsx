@@ -31,33 +31,33 @@ const SORTED_RADICALS:SortedRadicals = {
   "e": ["冂", "凵", "勹", "匚", "厂", "囗", "尸", "广", "弋", "⻌", "戈", "⽧", "虍", "門"],
   "l": ["⺅", "冫", "彳", "⺖", "扌", "⺡", "⺨", "⻖", "爿", "⺭", "⻂", "虫", "言", "足", "車", "金", "食", "魚"],
   "r": {
-    "1": ["一", "｜", "丶", "ノ", "乙", "亅"],
-    "2": ["九", "二", "人", "儿", "入", "ハ", "丷", "几", "刀", "⺉", "力", "匕", "十", "卜", "卩", "厶", "又", "マ"],
-    "3": ["口", "土", "士", "夂", "夕", "大", "女", "子", "寸", "小", "屮", "山", "巛", "工", "已", "巾", "干", "幺", "廾", "弓", "ヨ", "彡", "⻏"],
-    "4": ["心", "戸", "手", "支", "攵", "斤", "方", "日", "曰", "月", "木", "欠", "止", "歹", "殳", "比", "氏", "水", "火", "⺣", "爪", "牛", "犬", "王", "勿", "巴"],
-    "5": ["甘", "用", "田", "疋", "白", "皿", "目", "矛", "矢", "石", "示", "⽱", "禾", "穴", "立", "冊"],
-    "6": ["米", "糸", "缶", "羊", "羽", "而", "耳", "聿", "自", "至", "臼", "舟", "艮", "衣", "西"],
-    "7": ["臣", "見", "豆", "豕", "貝", "辛", "酉", "里"],
-    "8": ["長", "隹", "非"],
-    "9": ["革", "音", "頁"],
-    "10": ["馬", "髟"],
-    "11": ["鳥", "鹿"]
+    1: ["一", "｜", "丶", "ノ", "乙", "亅"],
+    2: ["九", "二", "人", "儿", "入", "ハ", "丷", "几", "刀", "⺉", "力", "匕", "十", "卜", "卩", "厶", "又", "マ"],
+    3: ["口", "土", "士", "夂", "夕", "大", "女", "子", "寸", "小", "屮", "山", "巛", "工", "已", "巾", "干", "幺", "廾", "弓", "ヨ", "彡", "⻏"],
+    4: ["心", "戸", "手", "支", "攵", "斤", "方", "日", "曰", "月", "木", "欠", "止", "歹", "殳", "比", "氏", "水", "火", "⺣", "爪", "牛", "犬", "王", "勿", "巴"],
+    5: ["甘", "用", "田", "疋", "白", "皿", "目", "矛", "矢", "石", "示", "⽱", "禾", "穴", "立", "冊"],
+    6: ["米", "糸", "缶", "羊", "羽", "而", "耳", "聿", "自", "至", "臼", "舟", "艮", "衣", "西"],
+    7: ["臣", "見", "豆", "豕", "貝", "辛", "酉", "里"],
+    8: ["長", "隹", "非"],
+    9: ["革", "音", "頁"],
+    10: ["馬", "髟"],
+    11: ["鳥", "鹿"]
   },
   "u": {
-    "2": ["ユ", "乃"],
-    "3": ["亡", "夊", "尢", "川", "廴", "彑", "久", "也", "及"],
-    "4": ["尤", "文", "斗", "无", "毋", "毛", "气", "父", "爻", "片", "牙", "五", "井", "元", "屯"],
-    "5": ["母", "玄", "瓜", "瓦", "生", "癶", "皮", "世", "巨"],
-    "6": ["耒", "肉", "舌", "色", "血", "行"],
-    "7": ["舛", "角", "谷", "豸", "赤", "走", "身", "辰", "邑", "釆", "麦"],
-    "8": ["隶", "青", "斉", "免", "奄", "岡"],
-    "9": ["品", "面", "韋", "韭", "風", "飛", "首", "香"],
-    "10": ["骨", "高", "鬥", "鬯", "鬲", "鬼", "竜"],
-    "11": ["鹵", "麻", "黄", "黒", "亀", "啇"],
-    "12": ["無", "黍", "黹", "歯"],
-    "13": ["黽", "鼎", "鼓", "鼠"],
-    "14": ["鼻", "齊"],
-    "17": ["龠"]
+    2: ["ユ", "乃"],
+    3: ["亡", "夊", "尢", "川", "廴", "彑", "久", "也", "及"],
+    4: ["尤", "文", "斗", "无", "毋", "毛", "气", "父", "爻", "片", "牙", "五", "井", "元", "屯"],
+    5: ["母", "玄", "瓜", "瓦", "生", "癶", "皮", "世", "巨"],
+    6: ["耒", "肉", "舌", "色", "血", "行"],
+    7: ["舛", "角", "谷", "豸", "赤", "走", "身", "辰", "邑", "釆", "麦"],
+    8: ["隶", "青", "斉", "免", "奄", "岡"],
+    9: ["品", "面", "韋", "韭", "風", "飛", "首", "香"],
+    10: ["骨", "高", "鬥", "鬯", "鬲", "鬼", "竜"],
+    11: ["鹵", "麻", "黄", "黒", "亀", "啇"],
+    12: ["無", "黍", "黹", "歯"],
+    13: ["黽", "鼎", "鼓", "鼠"],
+    14: ["鼻", "齊"],
+    17: ["龠"]
   }
 };
 
@@ -80,7 +80,6 @@ const Body = styled.div`
   padding-top: 10px;
   min-width: 1024px;
   width: 80%;
-  overflow-y: scroll;
 `;
 
 const ContentContainer = styled.div`
@@ -88,6 +87,7 @@ const ContentContainer = styled.div`
   border-radius: 5px;
   flex-direction: column;
   flex-basis: 50%;
+  height: 90%;
   margin-left: 10px;
   margin-right: 10px;
 `;
@@ -98,23 +98,53 @@ const RadicalsContainer = styled.div`
 `;
 
 const LeftContainer = styled.div`
-  padding-top: 79px;
+  padding-top: 85px;
 `;
 
-const LeftRowMargin = styled.div`
-  margin-top: 20px
+const LeftSpacer = styled.div`
+  height: 22px
 `;
 
-const TypeRowContainer = styled.div`
-  color: ${({theme}) => theme.colors.textPrimary};
+const EncloseTypeGrid = styled.div`
+  column-gap: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, 36px);
+  grid-template-rows: repeat(5, 36px);
+  row-gap: 2px;
+`;
+
+const TitledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+`;
+
+const Title = styled.h2`
+  color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
+  text-align: center;
+`;
+
+const LeftTypeGrid = styled.div`
+  column-gap: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, 36px);
+  grid-template-rows: repeat(6, 36px);
+  row-gap: 2px;
 `;
 
 const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   margin-left: 3px;
+`;
+
+const TopTypeGrid = styled.div`
+  column-gap: 2px;
+  display: grid;
+  grid-template-columns: repeat(6, 36px);
+  grid-template-rows: repeat(2, 36px);
+  row-gap: 2px;
 `;
 
 const RadicalsHeaders = styled.div`
@@ -136,49 +166,37 @@ const MiniSpinner = styled.div`
   margin-top: 4px;
 `;
 
-const UncommonContainer = styled.div`
-  align-items: center;
-  color: ${({theme}) => theme.colors.textPrimary};
-  display: flex;
-  flex-direction: column;
-  font-size: ${({theme}) => theme.fontSizes.medium};
-  max-height: 213px;
-  margin-top: 15px;
-`;
-
-const BigSpinner = styled.div`
-  margin: auto;
-`;
-
-const RowContainer = styled.div`
+const CommonContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
+  margin-top: 5px;
   height: 100%;
-  max-height: 608px;
-  flex-shrink: 1;
   overflow-y: scroll;
+  max-height: 607px;
+`;
+
+const UncommonContainer = styled.div`
+  text-align: center;
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.medium};
+  margin-top: 15px;
 `;
 
 const UncommonRowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
+  display: grid;
+  height: 100%;
+  max-height: 150px;
+`;
+
+const BigSpinner = styled.div`
   display: flex;
-  flex-direction: column;
-  max-height: 213px;
-  overflow-y: scroll;
+  margin: 20px auto;
 `;
 
 const KanjiRowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   margin-top: 5px;
-`;
-
-const StructuredRow = styled.div<RowsColumns>`
-  display: flex;
-  flex-wrap: wrap;
-  height: ${({rows}) => 38 * rows}px;
-  width: ${({columns}) => 38 * columns}px;
+  height: 90%;
 `;
 
 const HistoryWrapper = styled.div`
@@ -273,36 +291,35 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
       <ContentContainer>
         <RadicalsContainer>
           <LeftContainer>
-            <TypeRowContainer>
-              {t("multiType.enclose")}
-              <StructuredRow columns={3} rows={5}>
+            <TitledContainer>
+              <Title>{t("multiType.enclose")}</Title>
+              <EncloseTypeGrid>
                 {SORTED_RADICALS["e"].map((s, i) => {
                   return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
                 })}
-              </StructuredRow>
-            </TypeRowContainer>
-            <LeftRowMargin>
-              <TypeRowContainer>
-                {t("multiType.left")}
-                <StructuredRow columns={3} rows={6}>
-                  {SORTED_RADICALS["l"].map((s, i) => {
-                    return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
-                  })}
-                </StructuredRow>
-              </TypeRowContainer>
-            </LeftRowMargin>
+              </EncloseTypeGrid>
+            </TitledContainer>
+            <LeftSpacer />
+            <TitledContainer>
+              <Title>{t("multiType.left")}</Title>
+              <LeftTypeGrid>
+                {SORTED_RADICALS["l"].map((s, i) => {
+                  return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
+                })}
+              </LeftTypeGrid>
+            </TitledContainer>
           </LeftContainer>
 
           <RightContainer>
             <RadicalsHeaders>
-              <TypeRowContainer>
-                {t("multiType.top")}
-                <StructuredRow columns={6} rows={2}>
+              <TitledContainer>
+                <Title>{t("multiType.top")}</Title>
+                <TopTypeGrid>
                   {SORTED_RADICALS["t"].map((s, i) => {
                     return <StateButton key={i} callback={s} handleClick={handleSelection} state={radicalsState[s]}>{s}</StateButton>;
                   })}
-                </StructuredRow>
-              </TypeRowContainer>
+                </TopTypeGrid>
+              </TitledContainer>
               <SpinnerButtonPair>
                 { radicalsLoading && (
                   <MiniSpinner>
@@ -312,19 +329,15 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
                 <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
               </SpinnerButtonPair>
             </RadicalsHeaders>
-            <RowContainer>
-              {Object.keys(SORTED_RADICALS["r"]).map((s, i) => {
-                return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["r"][s]} radicalsState={radicalsState} rowNumber={s} />;
-              })}
-            </RowContainer>
+            <CommonContainer>
+              <NumberedRadicalRow handleClick={handleSelection} radicalsData={SORTED_RADICALS["r"]} radicalsState={radicalsState} />
+            </CommonContainer>
           </RightContainer>
         </RadicalsContainer>
         <UncommonContainer>
-          {t("multiType.uncommon")}
+          <Title>{t("multiType.uncommon")}</Title>
           <UncommonRowContainer>
-            {Object.keys(SORTED_RADICALS["u"]).map((s, i) => {
-              return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={SORTED_RADICALS["u"][s]} radicalsState={radicalsState} rowNumber={s} />;
-            })}
+            <NumberedRadicalRow handleClick={handleSelection} radicalsData={SORTED_RADICALS["u"]} radicalsState={radicalsState} />
           </UncommonRowContainer>
         </UncommonContainer>
         <CopyrightWrapper>
@@ -342,9 +355,7 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
               <Spinner size={40} />
             </BigSpinner>
           )}
-          { !kanjiLoading && Object.keys(kanjiData).map((s, i) => {
-            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />;
-          })}
+          { !kanjiLoading && ( <NumberedKanjiRow kanjiData={kanjiData} /> )}
         </KanjiRowContainer>
       </ContentContainer>
     </Body>

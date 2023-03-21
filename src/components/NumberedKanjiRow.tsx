@@ -1,53 +1,58 @@
 import React from "react";
 import styled from "styled-components";
 
+import { StrokeCharactersMap } from "dataTypes";
 import { StyledLink } from "./common";
 
 interface Props {
-  kanji: string[];
-  rowNumber: string;
+  kanjiData: StrokeCharactersMap;
 }
 
-const Row = styled.div`
+const Rows = styled.div`
+  align-content: start;  
   background: ${({theme}) => theme.colors.elementPrimary};
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1;
+  height: 100%;
+  overflow-y: scroll;
+  row-gap: 2px;
+`;
+
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 36px);
+
+  a {
+    line-height: 36px;
+    text-align: center;
+  }
 `;
 
 const RowNumber = styled.div`
   background: ${({theme}) => theme.colors.rowPrimary};
   border-radius: 5px;
   color: ${({theme}) => theme.colors.textNegative};
-  display: flex;
-  flex-shrink: 0;
   font-size: ${({theme}) => theme.fontSizes.xlarge};
-  justify-content: center;
+  height: 36px;
   line-height: 36px;
-  margin-bottom: 1px;
-  margin-top: 1px;
+  text-align: center;
   width: 36px;
 `;
 
-const RowContents = styled.div`
-  a {
-    height: 36px;
-    width: 36px;
-    line-height: 36px;
-    margin-left: 2px;
-    margin-right: 2px;
-  }
-`;
-
-const NumberedKanjiRow: React.FC<Props> = ({kanji, rowNumber}) => {
+const NumberedKanjiRow: React.FC<Props> = ({ kanjiData }) => {
   return (
-    <Row>
-      <RowNumber>{rowNumber}</RowNumber>
-      <RowContents>
-        {kanji.map((k, i) => {
-          return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>;
-        })}
-      </RowContents>
-    </Row>
+    <Rows>
+      {(Object.keys(kanjiData).map((s, i) => {
+        return (
+          <Row>
+            <RowNumber>{s}</RowNumber>
+            {kanjiData[s].map((k, i) => {
+              return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>;
+            })}
+          </Row>
+        )
+      }))}
+    </Rows>
   );
 };
 

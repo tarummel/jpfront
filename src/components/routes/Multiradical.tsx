@@ -76,11 +76,10 @@ const StrokesText = styled.div`
 
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
-  display: flex;
-  flex-direction: column;
   height: 85%;
   margin-top: 5px;
   overflow-y: scroll;
+  padding: 5px;
 `;
 
 const SpinnerButtonPair = styled.div`
@@ -198,9 +197,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
           </SpinnerButtonPair>
         </RadicalHeaders>
         <RowContainer>
-          {Object.keys(ALL_RADICALS).map((s, i) => {
-            return <NumberedRadicalRow handleClick={handleSelection} key={i} radicals={ALL_RADICALS[s]} radicalsState={radicalsState} rowNumber={s} />;
-          })};
+          <NumberedRadicalRow handleClick={handleSelection} radicalsData={ALL_RADICALS} radicalsState={radicalsState} />
         </RowContainer>
         <CopyrightWrapper>
           <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>{t("legal.kradfile")}</Anchor>
@@ -216,9 +213,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
               <Spinner size={40} />
             </BigSpinner>
           )}
-          { !kanjiLoading && (Object.keys(kanjiData).map((s, i) => {
-            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />;
-          }))};
+          { !kanjiLoading && ( <NumberedKanjiRow kanjiData={kanjiData} /> )}
         </RowContainer>
       </ContentContainer>
     </Body>

@@ -80,16 +80,18 @@ const CategoryButtonContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  display: flex;
   border-radius: 5px;
   flex-direction: column;
   flex-grow: 1;
+  height: 85%;
 `;
 
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
-  flex-direction: column;
+  height: 100%;
   overflow-y: scroll;
+  padding: 5px;
+  margin-top: 5px;
 `;
 
 const SVG = styled.svg`
@@ -102,7 +104,14 @@ const SVG = styled.svg`
 `;
 
 const SpinnerWrapper = styled.div`
-  padding: 20px;
+  margin: auto;
+`;
+
+const HistoryWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-grow: 0;
+  min-height: 32px;
 `;
 
 const Skip: React.FC<WithTranslation> = ({ t }) => {
@@ -283,16 +292,16 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
       </CodeBuilder>
       <ColumnSpacer minWidth={"4px"} width={"1%"} />
       <ContentContainer>
-        <History />
+        <HistoryWrapper>
+          <History />
+        </HistoryWrapper>
         <RowContainer>
           { loading && (
             <SpinnerWrapper>
               <Spinner size={40} />
             </SpinnerWrapper>
           )}
-          { !loading && (Object.keys(kanjiData).map((s, i) => {
-            return <NumberedKanjiRow key={i} kanji={kanjiData[s]} rowNumber={s} />;
-          }))}
+          { !loading && kanjiData && ( <NumberedKanjiRow kanjiData={kanjiData} /> )}
         </RowContainer>
       </ContentContainer>
     </Body>
