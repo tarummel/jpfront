@@ -10,6 +10,7 @@ import NumberedKanjiRow from "../NumberedKanjiRow";
 import NumberedRadicalRow from "../NumberedRadicalRow";
 import { RadicalsState, StrokeCharactersMap } from "dataTypes";
 import { MatchingKanjiByRadicalsParams, RelatedRadicalsParams } from "apiParamTypes";
+import LicenseAgreement from "../LicenseAgreement";
 
 const ALL_RADICALS:StrokeCharactersMap = {
   1: ["一", "｜", "丶", "ノ", "乙", "亅"],
@@ -199,9 +200,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
         <RowContainer>
           <NumberedRadicalRow handleClick={handleSelection} radicalsData={ALL_RADICALS} radicalsState={radicalsState} />
         </RowContainer>
-        <CopyrightWrapper>
-          <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>{t("legal.kradfile")}</Anchor>
-        </CopyrightWrapper>
+        <LicenseAgreement krad={true} />
       </ContentContainer>
       <ContentContainer>
         <HistoryWrapper>

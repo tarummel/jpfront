@@ -8,6 +8,7 @@ import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import { StrokeCharactersMap } from "dataTypes";
 import API from "../../API";
+import LicenseAgreement from "../LicenseAgreement";
 
 
 const CATEGORY_HEIGHT = 44;
@@ -303,6 +304,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
           )}
           { !loading && kanjiData && ( <NumberedKanjiRow kanjiData={kanjiData} /> )}
         </RowContainer>
+        <LicenseAgreement krad={true} skip={true} />
       </ContentContainer>
     </Body>
   );

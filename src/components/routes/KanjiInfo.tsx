@@ -12,6 +12,7 @@ import { KDKanji } from "kanjidic";
 import HorizontalDivider from "../common/HorizontalDivider";
 import JMdictEntry from "../JMdictEntry";
 import Spinner from "../common/Spinner";
+import LicenseAgreement from "../LicenseAgreement";
 
 const Body = styled.div`
   background: ${({theme}) => theme.colors.foreground};
@@ -53,14 +54,15 @@ const KanjiSymbol = styled.h1`
 `;
 
 const GridTable = styled.div`
-  column-gap: 2px;
+  column-gap: 6px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(80px, 120px));
-  grid-template-rows: repeat(5, 20px);
+  grid-template-columns: auto minmax(auto, 1fr);
+  grid-template-rows: repeat(5, auto);
+  max-width: 160px;
   row-gap: 1px;
   text-align: end;
   word-wrap: break-word;
-  word-breaK: break-all;
+  word-break: normal;
 `;
 
 const Meta = styled.div`
@@ -68,7 +70,7 @@ const Meta = styled.div`
   font-size: ${({theme}) => theme.fontSizes.medium};
 `;
 
-const Table = styled.ul`
+const ExtLinksTable = styled.ul`
   padding-left: 20px;
   padding-right: 20px;
 
@@ -117,7 +119,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
         const response = await API.getKDKanjiByKanji(kanji);
         setKdk(response.data.data);  
       } catch (error: any) {
-        console.log(error);
+        console.log("Error", error);
       }
     };
 
@@ -167,28 +169,28 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
             <KanjiSymbol>{kanjiParam}</KanjiSymbol>
           </SymbolWrapper>
           <GridTable>
-            <Meta>On: </Meta>
+            <Meta>{t("kanjiInfo.on")}: </Meta>
             <Meta>{onyomi}</Meta>
-            <Meta>Kun: </Meta>
+            <Meta>{t("kanjiInfo.kun")}: </Meta>
             <Meta>{kunyomi}</Meta>
           </GridTable>
           <GridTable>
-            <Meta>Strokes: </Meta>
+            <Meta>{t("kanjiInfo.strokes")}: </Meta>
             <Meta>{strokes}</Meta>
-            <Meta>SKIP: </Meta>
+            <Meta>{t("kanjiInfo.skip")}: </Meta>
             <Meta>{skip}</Meta>
           </GridTable>
           <GridTable>
-            <Meta>Grade: </Meta>
+            <Meta>{t("kanjiInfo.grade")}: </Meta>
             <Meta>{grade}</Meta>
-            <Meta>JLPT: </Meta>
+            <Meta>{t("kanjiInfo.jlpt")}: </Meta>
             <Meta>{jlpt}</Meta>
-            <Meta>Freq: </Meta>
+            <Meta>{t("kanjiInfo.freq")}: </Meta>
             <Meta>{frequency}</Meta>
-            <Meta>Unicode: </Meta>
+            <Meta>{t("kanjiInfo.ucs")}: </Meta>
             <Meta>{unicode}</Meta>
           </GridTable>
-          <Table>
+          <ExtLinksTable>
             <li>{t("kanjiInfo.externalLinks")}</li>
             <li>
               {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
@@ -202,7 +204,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
             <li>
               {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.deepl")}</Anchor>
             </li>
-          </Table>
+          </ExtLinksTable>
         </MetaInfoContainer>
         <EntryContainer>
           { error && (
@@ -222,10 +224,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
           }))}
         </EntryContainer>
       </Card>
-      <Table>
-        <li>{t("legal.jmdict")} <Anchor target={"_blank"} href={`${t("legal.jmdictLink")}`}>Link</Anchor></li>
-        <li>{t("legal.kanjidic")} <Anchor target={"_blank"} href={`${t("legal.kanjidicLink")}`}>Link</Anchor></li>
-      </Table>
+      <LicenseAgreement krad={true} jmdict={true} />
     </Body>
   );
 };

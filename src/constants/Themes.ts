@@ -1,4 +1,5 @@
 const fontSizes = {
+  xsmall: "1.4rem",
   small: "1.6rem",
   medium: "1.8rem",
   large: "2.0rem",

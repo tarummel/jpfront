@@ -53,7 +53,7 @@ const JEntryDisplay: React.FC<Props> = ({ entry, num }) => {
     }
     return values;
   };
-  console.log(getProperty('parts_of_speech', entry.jsense))
+
   // const kcontents = getProperty('content', entry.jkanji).join("; ");
   const suffixes = getProperty('parts_of_speech', entry.jsense)[0][0] || "";
   const miscNote = getProperty('misc', entry.jsense)[0] || "";
@@ -62,7 +62,6 @@ const JEntryDisplay: React.FC<Props> = ({ entry, num }) => {
     return getProperty('gloss', js.jglossary).join(" // ");
   }).join(", ");
 
-  console.log(entry)
   return (
     <EntryRow>
       {/* <RowNum>{num+1}.</RowNum> */}

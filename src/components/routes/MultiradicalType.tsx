@@ -10,6 +10,7 @@ import NumberedKanjiRow from "../NumberedKanjiRow";
 import NumberedRadicalRow from "../NumberedRadicalRow";
 import { RadicalsState, StrokeCharactersMap } from "dataTypes";
 import { MatchingKanjiByRadicalsParams, RelatedRadicalsParams } from "apiParamTypes";
+import LicenseAgreement from "../LicenseAgreement";
 
 interface RowsColumns {
   rows: number;
@@ -340,9 +341,7 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
             <NumberedRadicalRow handleClick={handleSelection} radicalsData={SORTED_RADICALS["u"]} radicalsState={radicalsState} />
           </UncommonRowContainer>
         </UncommonContainer>
-        <CopyrightWrapper>
-          <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}>{t("legal.kradfile")}</Anchor>
-        </CopyrightWrapper>
+        <LicenseAgreement krad={true} />
       </ContentContainer>
 
       <ContentContainer>
