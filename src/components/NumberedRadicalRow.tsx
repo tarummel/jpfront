@@ -14,7 +14,6 @@ const Rows = styled.div`
   align-content: start;  
   background: ${({theme}) => theme.colors.elementPrimary};
   display: grid;
-  grid-template-columns: 1;
   height: 100%;
   overflow-y: scroll;
   row-gap: 2px;
@@ -38,40 +37,18 @@ const RowNumber = styled.div`
   width: 36px;
 `;
 
-const RowContents = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-// const NumberedKanjiRow: React.FC<Props> = ({ kanjiData }) => {
-//   return (
-//     <Rows>
-//       {(Object.keys(kanjiData).map((s, i) => {
-//         return (
-//           <Row>
-//             <RowNumber>{s}</RowNumber>
-//             {kanjiData[s].map((k, i) => {
-//               return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>;
-//             })}
-//           </Row>
-//         )
-//       }))}
-//     </Rows>
-//   );
-// };
-
 const NumberedRadicalRow: React.FC<Props> = ({handleClick, radicalsData, radicalsState}) => {
   return (
     <Rows>
       {(Object.keys(radicalsData).map((s, i) => {
         return (
-          <Row>
+          <Row key={i}>
             <RowNumber>{s}</RowNumber>
-            {radicalsData[s].map((r, i) => {
-              return <StateButton key={i} callback={r} handleClick={handleClick} state={radicalsState[r]}>{r}</StateButton>;
+            {radicalsData[s].map((r, j) => {
+              return <StateButton key={j} callback={r} handleClick={handleClick} state={radicalsState[r]}>{r}</StateButton>;
             })}
           </Row>
-        )
+        );
       }))}
     </Rows>
   );

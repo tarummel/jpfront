@@ -4,16 +4,16 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import Anchor from "./common/Anchor";
 
 interface Props {
-    krad?: boolean;
-    kanjidic?: boolean;
-    jmdict?: boolean;
-    skip?: boolean;
+  krad?: boolean;
+  kanjidic?: boolean;
+  jmdict?: boolean;
+  skip?: boolean;
 }
 
 const Table = styled.ul`
   display: grid;
   row-gap: 4px;
-  margin-top: 10px;
+  padding-top: 10px;
 `;
 
 const Item = styled.li`

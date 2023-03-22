@@ -80,7 +80,7 @@ const CategoryButtonContainer = styled.div`
   align-items: center;
 `;
 
-const ContentContainer = styled.div`
+const KanjiContainer = styled.div`
   border-radius: 5px;
   flex-direction: column;
   flex-grow: 1;
@@ -292,7 +292,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
         </CodeBuilderColumn>
       </CodeBuilder>
       <ColumnSpacer minWidth={"4px"} width={"1%"} />
-      <ContentContainer>
+      <KanjiContainer>
         <HistoryWrapper>
           <History />
         </HistoryWrapper>
@@ -305,7 +305,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
           { !loading && kanjiData && ( <NumberedKanjiRow kanjiData={kanjiData} /> )}
         </RowContainer>
         <LicenseAgreement krad={true} skip={true} />
-      </ContentContainer>
+      </KanjiContainer>
     </Body>
   );
 };

@@ -12,7 +12,6 @@ const Rows = styled.div`
   align-content: start;  
   background: ${({theme}) => theme.colors.elementPrimary};
   display: grid;
-  grid-template-columns: 1;
   height: 100%;
   overflow-y: scroll;
   row-gap: 2px;
@@ -44,13 +43,13 @@ const NumberedKanjiRow: React.FC<Props> = ({ kanjiData }) => {
     <Rows>
       {(Object.keys(kanjiData).map((s, i) => {
         return (
-          <Row>
+          <Row key={i}>
             <RowNumber>{s}</RowNumber>
-            {kanjiData[s].map((k, i) => {
-              return <StyledLink fontSize={"xlarge"} key={i} to={`/kanji/${k}`}>{k}</StyledLink>;
+            {kanjiData[s].map((k, j) => {
+              return <StyledLink fontSize={"xlarge"} key={j} to={`/kanji/${k}`}>{k}</StyledLink>;
             })}
           </Row>
-        )
+        );
       }))}
     </Rows>
   );

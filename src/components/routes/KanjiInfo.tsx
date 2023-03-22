@@ -81,9 +81,7 @@ const ExtLinksTable = styled.ul`
   }
 `;
 
-const Entries = styled.div`
-  
-`;
+const Entries = styled.div``;
 
 const ErrorContainer = styled.div`
   display: flex;

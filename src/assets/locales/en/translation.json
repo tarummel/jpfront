@@ -55,7 +55,12 @@
     "wiktionary": "Wiktionary",
     "wiktionaryLink": "https://en.wiktionary.org/wiki/{{kanji}}",
     "wwwjdic": "WWWJDIC",
-    "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}"
+    "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}",
+    "jmdict": {
+      "notes": "Notes",
+      "contexts": "Contexts",
+      "other": "Other"
+    }
   },
   "infoLegal": {
     "codeLegal": "The code that runs this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own.",
