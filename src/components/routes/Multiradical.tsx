@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
-import { Anchor, Spinner } from "../common";
+import { Spinner } from "../common";
 import { Button } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -102,12 +102,6 @@ const HistoryWrapper = styled.div`
   justify-content: flex-start;
   flex-grow: 0;
   min-height: 32px;
-`;
-
-const CopyrightWrapper = styled.p`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.medium};
-  margin-top: 10px;
 `;
 
 const Multiradical: React.FC<WithTranslation> = ({ t }) => {

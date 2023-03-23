@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
-import { Anchor, Spinner } from "../common";
+import { Spinner } from "../common";
 import { Button, StateButton } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -11,11 +11,6 @@ import NumberedRadicalRow from "../NumberedRadicalRow";
 import { RadicalsState, StrokeCharactersMap } from "dataTypes";
 import { MatchingKanjiByRadicalsParams, RelatedRadicalsParams } from "apiParamTypes";
 import LicenseAgreement from "../LicenseAgreement";
-
-interface RowsColumns {
-  rows: number;
-  columns: number;
-}
 
 type SortedRadicals = {
   t: string[];
@@ -206,12 +201,6 @@ const HistoryWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   min-height: 94px;
-`;
-
-const CopyrightWrapper = styled.p`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.medium};
-  margin-top: 10px;
 `;
 
 const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
