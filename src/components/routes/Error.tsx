@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { Anchor } from "../common";
@@ -23,7 +23,12 @@ const Message = styled.h2`
   font-size: ${({theme}) => theme.fontSizes.medium};
 `;
 
-const Error: React.FC<WithTranslation> = ({ t }) => { 
+const Error: React.FC<WithTranslation> = ({ t }) => {
+
+  useEffect(() => {
+    document.title = t("error.documentTitle");
+  }, []);
+
   return (
     <Body>
       <Title>

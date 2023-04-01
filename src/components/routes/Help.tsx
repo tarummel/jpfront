@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
   
@@ -44,9 +44,14 @@ const Section = styled.p`
 `;
 
 const Help: React.FC<WithTranslation> = ({ t }) => {
+
+  useEffect(() => {
+    document.title = t("help.documentTitle");
+  }, []);
+
   return (
     <Body>
-      <Banner>{t("help.help")}</Banner>
+      <Banner>{t("help.helpAndFaq")}</Banner>
       <Card>
         <SectionTitle>1. {t("help.siteTitle")}</SectionTitle>
         <Section>{t("help.site")}</Section>

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import InfoLegal from "./components/routes/InfoLegal";
+import Legal from "./components/routes/Legal";
 import Error from "./components/routes/Error";
 import Help from "./components/routes/Help";
 import Home from "./components/routes/Home";
@@ -14,7 +14,7 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/about" element={<InfoLegal />} />
+      <Route path="/legal" element={<Legal />} />
       <Route path="/help" element={<Help />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/multiradical" element={<Multiradical />} />

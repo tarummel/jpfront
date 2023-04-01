@@ -112,6 +112,10 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   const [kanjiLoading, setKanjiLoading] = useState(false);
 
   useEffect(() => {
+    document.title = t("multi.documentTitle");
+  }, []);
+
+  useEffect(() => {
     const newState = {...DEFAULT_STATE};
     const getAndSetDisabledRadicals = async () => {
       setRadicalsLoading(true);

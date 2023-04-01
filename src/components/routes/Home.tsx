@@ -1,5 +1,5 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
@@ -57,6 +57,10 @@ const OptionButtonWrapper = styled.div`
 
 const Home: React.FC<WithTranslation> = ({ t }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = t("home.documentTitle");
+  }, []);
 
   const handleRandomNav = () => {
     const getAndNavigateRandom = async () => {

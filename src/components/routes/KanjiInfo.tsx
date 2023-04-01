@@ -103,6 +103,10 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const [kdk, setKdk] = useState<KDKanji>();
 
   useEffect(() => {
+    document.title = kanjiParam || t("kanjiInfo.documentTitle");
+  }, []);
+
+  useEffect(() => {
     const getAndSetEntry = async (kanji: string) => {
       try {
         const response = await API.getJMdictEntryByKanji(kanji);

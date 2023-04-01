@@ -5,6 +5,7 @@
     "home": "Go Home"
   },
   "home": {
+    "documentTitle": "Home",
     "random": "Random Page",
     "multiradicalSearch": "Multi-Radical",
     "multiradicalSearchByType": "Multi-Radical (Type)",
@@ -14,7 +15,7 @@
     "skip": "SKIP"
   },
   "header": {
-    "about": "About",
+    "legal": "Legal",
     "help": "Help",
     "home": "Home",
     "settings": "Settings"
@@ -24,7 +25,8 @@
     "bugsTitle": "Found a bug?",
     "data": "From the wonderful people of the Electronic Dictionary Research and Development Group (EDRDG) at Monash University.",
     "dataTitle": "Where does this information come from?",
-    "help": "Help and FAQ",
+    "documentTitle": "Help and FAQ",
+    "helpAndFaq": "Help and FAQ",
     "requests": "Please do not send me requests. I'm only a software developer.",
     "requestsTitle": "Can you help me with something?",
     "site": "I built this website to be a collection of Japanese translation tools I hope will be of use to others as it is for me. Please enjoy.",
@@ -35,6 +37,7 @@
   "kanjiInfo": {
     "deepl": "DeepL",
     "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
+    "documentTitle": "Kanji Info",
     "english": "Engl/英",
     "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
     "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
@@ -62,16 +65,15 @@
       "other": "Other"
     }
   },
-  "infoLegal": {
+  "legal": {
     "codeLegal": "The code that runs this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own.",
     "codeLegalTitle": "Code Legal",
-    "informationAndLegal": "Information and Legal",
+    "documentTitle": "About and Legal Information",
+    "aboutAndLegalInformation": "About and Legal Information",
     "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses.",
     "edrdgLegalTitle": "EDRDG Legal",
     "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
-    "edrdg": "To EDRDG Wiki"
-  },
-  "legal": {
+    "edrdg": "To EDRDG Wiki",
     "kanjidic": "KANJIDIC is copyright under the EDRDG licence.",
     "kanjidicLink": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
     "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG licence.",
@@ -82,12 +84,14 @@
     "skipLink:": "http://www.kanji.org/"
   },
   "multi": {
+    "documentTitle": "Multiradical Search",
     "instructions": "Click a radical to get started, kanji composed of selected radicals will appear on the right",
     "reset": "Reset",
     "searchHistory": "Search History",
     "strokes": "Strokes"
   },
   "multiType": {
+    "documentTitle": "Multiradical Search by Type",
     "enclose": "Enclose",
     "left": "Left",
     "right": "Right",
@@ -96,6 +100,7 @@
   },
   "settings": {
     "dark": "Dark",
+    "documentTitle": "Settings",
     "history": "History",
     "historySizeDesc": "Sets maximum history size",
     "historyClear": "Clear",
@@ -108,9 +113,10 @@
     "themeDesc": "Changes the display theme (requires refresh for now)"
   },
   "skip": {
-    "shape": "Shape",
+    "documentTitle": "SKIP Code Search",
     "main": "Main",
-    "sub": "Sub",
-    "plusminus": "±"
+    "plusminus": "±",
+    "shape": "Shape",
+    "sub": "Sub"
   }
 }

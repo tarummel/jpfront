@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
@@ -85,6 +85,10 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
   const [language, setLanguage] = useState(localStorage.getItem(Config.localStorage.language) || DEFAULT_LANGUAGE);
   const [theme, setTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME);
   const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || DEFAULT_HISTORY_SIZE);
+
+  useEffect(() => {
+    document.title = t("settings.documentTitle");
+  }, []);
 
   const handleLanguage = (e: any) => {
     const lang = e.target.value;

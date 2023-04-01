@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { Anchor } from "../common";
@@ -49,21 +49,26 @@ const AnchorWrapper = styled.div`
   margin-left: 45px;
 `;
 
-const InfoLegal: React.FC<WithTranslation> = ({ t }) => { 
+const Legal: React.FC<WithTranslation> = ({ t }) => {
+
+  useEffect(() => {
+    document.title = t("legal.documentTitle");
+  }, []);
+
   return (
     <Body>
-      <Banner>{t("infoLegal.informationAndLegal")}</Banner>
+      <Banner>{t("legal.aboutAndLegalInformation")}</Banner>
       <Card>
-        <SectionTitle>- {t("infoLegal.codeLegalTitle")}</SectionTitle>
-        <Section>{t("infoLegal.codeLegal")}</Section>
-        <SectionTitle>- {t("infoLegal.edrdgLegalTitle")}</SectionTitle>
+        <SectionTitle>- {t("legal.codeLegalTitle")}</SectionTitle>
+        <Section>{t("legal.codeLegal")}</Section>
+        <SectionTitle>- {t("legal.edrdgLegalTitle")}</SectionTitle>
         <AnchorWrapper>
-          <Anchor target="_blank" href={`${t("infoLegal.edrdgLink")}`}>{t("infoLegal.edrdgLink")}</Anchor>
+          <Anchor target="_blank" href={`${t("legal.edrdgLink")}`}>{t("legal.edrdgLink")}</Anchor>
         </AnchorWrapper>
-        <Section>{t("infoLegal.edrdgLegal")}</Section>
+        <Section>{t("legal.edrdgLegal")}</Section>
       </Card>
     </Body>
   );
 };
 
-export default withTranslation()(InfoLegal);
+export default withTranslation()(Legal);

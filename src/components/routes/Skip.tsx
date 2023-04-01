@@ -126,6 +126,10 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    document.title = t("skip.documentTitle");
+  }, []);
+
+  useEffect(() => {
     const getAndSetKanjiData = async () => {
       setLoading(true);
 
