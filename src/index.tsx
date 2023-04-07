@@ -9,12 +9,17 @@ import './index.css';
 // import reportWebVitals from './reportWebVitals';
 import Router from './Router';
 import Theme from "./components/utils/Theme";
+import Config from './constants/Config';
 
 <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js" />;
 
 // Stuff any debugging logs in production
-if (process.env.NODE_ENV === "production")
-  console.log = () => {};
+if (Config.env === "production") {
+  window.console = console;
+  // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
+  const noop = () => {};
+  console.log = noop;
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
