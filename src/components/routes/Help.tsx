@@ -53,10 +53,8 @@ const Help: React.FC<WithTranslation> = ({ t }) => {
     <Body>
       <Banner>{t("help.helpAndFaq")}</Banner>
       <Card>
-        <SectionTitle>1. {t("help.siteTitle")}</SectionTitle>
-        <Section>{t("help.site")}</Section>
-        <SectionTitle>2. {t("help.dataTitle")}</SectionTitle>
-        <Section>{t("help.data")}</Section>
+        <SectionTitle>1. {t("help.whatIsThisSiteTitle")}</SectionTitle>
+        <Section>{t("help.whatIsThisSite")}</Section>
         <SectionTitle>3. {t("help.requestsTitle")}</SectionTitle>
         <Section>{t("help.requests")}</Section>
         <SectionTitle>4. {t("help.bugsTitle")}</SectionTitle>

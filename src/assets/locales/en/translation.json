@@ -1,11 +1,12 @@
 {
   "error": {
+    "documentTitle": "Open Kanji | Error",
     "pageNotFound": "Page Not Found",
     "message": "The page you were looking for may have moved or you may have been redirected here by mistake.",
     "home": "Go Home"
   },
   "home": {
-    "documentTitle": "Home",
+    "documentTitle": "Open Kanji",
     "random": "Random Page",
     "multiradicalSearch": "Multi-Radical",
     "multiradicalSearchByType": "Multi-Radical (Type)",
@@ -21,23 +22,21 @@
     "settings": "Settings"
   },
   "help": {
-    "bugs": "At this time I don't have an official bug tracker. Sorry! This entry will be updated accordingly when it's available.",
+    "bugs": "At this time I don't have an official bug tracker to submit to. Sorry! This entry ~will~ be updated accordingly when it's available.",
     "bugsTitle": "Found a bug?",
-    "data": "From the wonderful people of the Electronic Dictionary Research and Development Group (EDRDG) at Monash University.",
-    "dataTitle": "Where does this information come from?",
-    "documentTitle": "Help and FAQ",
+    "documentTitle": "Open Kanji | FAQ",
     "helpAndFaq": "Help and FAQ",
-    "requests": "Please do not send me requests. I'm only a software developer.",
+    "requests": "Please do not send me translation requests. I'm only a software developer and not qualified as a translator.",
     "requestsTitle": "Can you help me with something?",
-    "site": "I built this website to be a collection of Japanese translation tools I hope will be of use to others as it is for me. Please enjoy.",
-    "siteTitle": "What is this site?",
+    "whatIsThisSite": "I built this website to be a collection of Japanese translation tools I hope will be of use to others as it is for me. Please enjoy.",
+    "whatIsThisSiteTitle": "What is this site?",
     "suggestions": "At this time I'm not accepting feature requests as I already have a lot planned. When that changes I will update this entry with more information. Sorry!",
     "suggestionsTitle": "I have a suggestion for the website!"
   },
   "kanjiInfo": {
     "deepl": "DeepL",
     "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
-    "documentTitle": "Kanji Info",
+    "documentTitle": "Open Kanji | Info",
     "english": "Engl/英",
     "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
     "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
@@ -67,11 +66,11 @@
   },
   "legal": {
     "codeLegal": "The code that runs this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own.",
-    "codeLegalTitle": "Code Legal",
-    "documentTitle": "About and Legal Information",
-    "aboutAndLegalInformation": "About and Legal Information",
+    "codeLegalTitle": "Code",
+    "documentTitle": "Open Kanji | Legal",
+    "aboutAndLegalInformation": "Legal Information",
     "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses.",
-    "edrdgLegalTitle": "EDRDG Legal",
+    "edrdgLegalTitle": "EDRDG",
     "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
     "edrdg": "To EDRDG Wiki",
     "kanjidic": "KANJIDIC is copyright under the EDRDG licence.",
@@ -80,18 +79,19 @@
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
     "jmdict": "JMdict is copyright under the EDRDG licence.",
     "jmdictLink": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project",
-    "skip": "The SKIP (System of Kanji Indexing by Patterns) system and codes were developed by Jack Halpern and are used with his permission.",
-    "skipLink:": "http://www.kanji.org/"
+    "skip": "SKIP",
+    "skipLegal": "The SKIP (System of Kanji Indexing by Patterns) system and codes were developed by Jack Halpern and are used with his permission.",
+    "skipLink": "http://www.kanji.org/"
   },
   "multi": {
-    "documentTitle": "Multiradical Search",
+    "documentTitle": "Open Kanji | Multiradical",
     "instructions": "Click a radical to get started, kanji composed of selected radicals will appear on the right",
     "reset": "Reset",
     "searchHistory": "Search History",
     "strokes": "Strokes"
   },
   "multiType": {
-    "documentTitle": "Multiradical Search by Type",
+    "documentTitle": "Open Kanji | Multiradical by Type",
     "enclose": "Enclose",
     "left": "Left",
     "right": "Right",
@@ -100,9 +100,9 @@
   },
   "settings": {
     "dark": "Dark",
-    "documentTitle": "Settings",
+    "documentTitle": "Open Kanji | Settings",
     "history": "History",
-    "historySizeDesc": "Sets maximum history size",
+    "historySizeDesc": "Sets maximum history size (0 - 100)",
     "historyClear": "Clear",
     "historyClearDesc": "Clears your previously searched kanji",
     "language": "Language",
@@ -113,7 +113,7 @@
     "themeDesc": "Changes the display theme (requires refresh for now)"
   },
   "skip": {
-    "documentTitle": "SKIP Code Search",
+    "documentTitle": "Open Kanji | SKIP",
     "main": "Main",
     "plusminus": "±",
     "shape": "Shape",

@@ -82,9 +82,10 @@ const StyledOption = styled.option`
 `;
 
 const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
+  // TODO: use i18n default
   const [language, setLanguage] = useState(localStorage.getItem(Config.localStorage.language) || DEFAULT_LANGUAGE);
   const [theme, setTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME);
-  const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || DEFAULT_HISTORY_SIZE);
+  const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault);
 
   useEffect(() => {
     document.title = t("settings.documentTitle");

@@ -79,7 +79,6 @@ const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   height: 85%;
   margin-top: 5px;
-  overflow-y: scroll;
   padding: 5px;
 `;
 

@@ -4,7 +4,7 @@ const Config = {
   localStorage: {
     history: "history",
     historySize: "historySize",
-    historySizeDefault: 20,
+    historySizeDefault: 24,
     language: "lang",
     theme: "theme",
   },

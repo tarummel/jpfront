@@ -24,9 +24,9 @@ const LicenseAgreement: React.FC<Props & WithTranslation> = ({ krad, kanjidic, j
   return (
     <Table>
       {krad && ( <Anchor target={"_blank"} href={`${t("legal.kradfileLink")}`}><Item>{t("legal.kradfile")}</Item></Anchor>)}
-      {kanjidic && ( <Anchor target={"_blank"} href={`${t("legal.kanjidict")}`}><Item>{t("legal.kanjidic")}</Item></Anchor>)}
-      {jmdict && ( <Anchor target={"_blank"} href={`${t("legal.jmdict")}`}><Item>{t("legal.jmdict")}</Item></Anchor>)}
-      {skip && ( <Anchor target={"_blank"} href={`${t("legal.skip")}`}><Item>{t("legal.skip")}</Item></Anchor>)}
+      {kanjidic && ( <Anchor target={"_blank"} href={`${t("legal.kanjidictLink")}`}><Item>{t("legal.kanjidic")}</Item></Anchor>)}
+      {jmdict && ( <Anchor target={"_blank"} href={`${t("legal.jmdictLink")}`}><Item>{t("legal.jmdict")}</Item></Anchor>)}
+      {skip && ( <Anchor target={"_blank"} href={`${t("legal.skipLink")}`}><Item>{t("legal.skipLegal")}</Item></Anchor>)}
     </Table>
   );
 };

@@ -160,8 +160,8 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const strokes = kdk?.misc?.[0].strokes || "n/a";
   const frequency = kdk?.misc?.[0].frequency || "n/a";
   const skip = kdk?.querycode?.[0].skip || "n/a";
-  const onyomi = kdk?.reading?.[0].ja_on || "";
-  const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || "";
+  const onyomi = kdk?.reading?.[0].ja_on || "n/a";
+  const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || "n/a";
 
   return (
     <Body>
@@ -209,12 +209,12 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
           </ExtLinksTable>
         </MetaInfoContainer>
         <EntryContainer>
-          { error && (
+          {/* { error && (
             <>
               <HorizontalDivider />
               <ErrorContainer>{error}</ErrorContainer>
             </>
-          )}
+          )} */}
           { !entry && (<Spinner />) }
           { entry && (entry.map((e, i) => {
             return (

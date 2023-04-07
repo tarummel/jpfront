@@ -6,11 +6,15 @@ import { BrowserRouter } from 'react-router-dom';
 import App from "./components/App";
 import i18n from './i18n';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
+// import reportWebVitals from './reportWebVitals';
 import Router from './Router';
 import Theme from "./components/utils/Theme";
 
 <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js" />;
+
+// Stuff any debugging logs in production
+if (process.env.NODE_ENV === "production")
+  console.log = () => {};
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -35,4 +39,4 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();

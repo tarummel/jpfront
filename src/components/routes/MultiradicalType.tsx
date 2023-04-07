@@ -132,7 +132,7 @@ const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-left: 3px;
+  margin-left: 10px;
 `;
 
 const TopTypeGrid = styled.div`
@@ -166,7 +166,6 @@ const CommonContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   margin-top: 5px;
   height: 100%;
-  overflow-y: scroll;
   max-height: 607px;
 `;
 
