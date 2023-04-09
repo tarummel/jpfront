@@ -1,12 +1,12 @@
 {
   "error": {
-    "documentTitle": "Open Kanji | Error",
+    "documentTitle": "Error / Open Kanji",
     "pageNotFound": "Page Not Found",
-    "message": "The page you were looking for may have moved or you may have been redirected here by mistake.",
-    "home": "Go Home"
+    "message": "Sorry! The page you were looking for may have moved or you may have been redirected here by mistake.",
+    "goBack": "< Back"
   },
   "home": {
-    "documentTitle": "Open Kanji",
+    "documentTitle": "Home / Open Kanji",
     "random": "Random Page",
     "multiradicalSearch": "Multi-Radical",
     "multiradicalSearchByType": "Multi-Radical (Type)",
@@ -24,7 +24,7 @@
   "help": {
     "bugs": "At this time I don't have an official bug tracker to submit to. Sorry! This entry ~will~ be updated accordingly when it's available.",
     "bugsTitle": "Found a bug?",
-    "documentTitle": "Open Kanji | FAQ",
+    "documentTitle": "FAQ / Open Kanji",
     "helpAndFaq": "Help and FAQ",
     "requests": "Please do not send me translation requests. I'm only a software developer and not qualified as a translator.",
     "requestsTitle": "Can you help me with something?",
@@ -36,7 +36,7 @@
   "kanjiInfo": {
     "deepl": "DeepL",
     "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
-    "documentTitle": "Open Kanji | Info",
+    "documentTitle": "Info / Open Kanji",
     "english": "Engl/英",
     "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
     "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
@@ -67,7 +67,7 @@
   "legal": {
     "codeLegal": "The code that runs this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own.",
     "codeLegalTitle": "Code",
-    "documentTitle": "Open Kanji | Legal",
+    "documentTitle": "Legal / Open Kanji",
     "aboutAndLegalInformation": "Legal Information",
     "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses.",
     "edrdgLegalTitle": "EDRDG",
@@ -84,14 +84,14 @@
     "skipLink": "http://www.kanji.org/"
   },
   "multi": {
-    "documentTitle": "Open Kanji | Multiradical",
+    "documentTitle": "Multiradical / Open Kanji",
     "instructions": "Click a radical to get started, kanji composed of selected radicals will appear on the right",
     "reset": "Reset",
     "searchHistory": "Search History",
     "strokes": "Strokes"
   },
   "multiType": {
-    "documentTitle": "Open Kanji | Multiradical by Type",
+    "documentTitle": "Multiradical Type / Open Kanji",
     "enclose": "Enclose",
     "left": "Left",
     "right": "Right",
@@ -100,7 +100,7 @@
   },
   "settings": {
     "dark": "Dark",
-    "documentTitle": "Open Kanji | Settings",
+    "documentTitle": "Settings / Open Kanji",
     "history": "History",
     "historySizeDesc": "Sets maximum history size (0 - 100)",
     "historyClear": "Clear",
@@ -113,7 +113,7 @@
     "themeDesc": "Changes the display theme (requires refresh for now)"
   },
   "skip": {
-    "documentTitle": "Open Kanji | SKIP",
+    "documentTitle": "SKIP / Open Kanji",
     "main": "Main",
     "plusminus": "±",
     "shape": "Shape",

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
-import { Anchor } from "../common";
+import { Button } from "../buttons";
+import { useNavigate } from "react-router-dom";
 
 const Body = styled.div`
   background: ${({theme}) => theme.colors.foreground};
@@ -9,25 +10,36 @@ const Body = styled.div`
   flex-direction: column;
   margin: 0 auto;
   min-width: 1024px;
-  padding: 10px;
+  padding: 20px 15px 10px 15px;
   width: 50%;
 `;
 
 const Title = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
+  padding-bottom: 10px;
 `;
 
 const Message = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
+  padding-bottom: 10px;
+`;
+
+const ButtonWrapper = styled.div`
+  padding-bottom: 10px;
 `;
 
 const Error: React.FC<WithTranslation> = ({ t }) => {
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = t("error.documentTitle");
   }, []);
+
+  const handleClick = () => {
+    navigate(`/`);
+  };
 
   return (
     <Body>
@@ -37,7 +49,9 @@ const Error: React.FC<WithTranslation> = ({ t }) => {
       <Message>
         {t("error.message")}
       </Message>
-      <Anchor target="_self" href={"/"}>{t("error.home")}</Anchor>
+      <ButtonWrapper>
+        <Button height={30} width={85} onClick={handleClick}>{t("error.goBack")}</Button>
+      </ButtonWrapper>
     </Body>
   );
 };
