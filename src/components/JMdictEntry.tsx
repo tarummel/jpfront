@@ -15,7 +15,6 @@ const EntryRow = styled.div`
   justify-content: center;
   padding-bottom: 15px;
   padding-top: 15px;
-  
 `;
 
 // const RowNum = styled.div`

@@ -15,6 +15,8 @@ const Rows = styled.div`
   height: 100%;
   overflow-y: scroll;
   row-gap: 2px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 `;
 
 const Row = styled.div`
