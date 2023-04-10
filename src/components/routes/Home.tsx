@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
@@ -58,7 +58,7 @@ const OptionButtonWrapper = styled.div`
 const Home: React.FC<WithTranslation> = ({ t }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("home.documentTitle");
   }, []);
 

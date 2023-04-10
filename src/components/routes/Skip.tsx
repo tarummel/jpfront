@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
@@ -124,7 +124,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("skip.documentTitle");
   }, []);
 

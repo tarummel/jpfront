@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
@@ -102,7 +102,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const [entry, setEntry] = useState<JEntry[]>([]);
   const [kdk, setKdk] = useState<KDKanji>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = kanjiParam || t("kanjiInfo.documentTitle");
   }, []);
 

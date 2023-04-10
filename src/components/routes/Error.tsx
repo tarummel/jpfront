@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { Button } from "../buttons";
@@ -33,7 +33,7 @@ const ButtonWrapper = styled.div`
 const Error: React.FC<WithTranslation> = ({ t }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("error.documentTitle");
   }, []);
 

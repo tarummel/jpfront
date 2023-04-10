@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
@@ -203,14 +203,17 @@ const HistoryWrapper = styled.div`
 `;
 
 const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [radicalsLoading, setRadicalsLoading] = useState(false);
+  const [kanjiLoading, setKanjiLoading] = useState(false);
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE});
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([]);
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
-  const [radicalsLoading, setRadicalsLoading] = useState(false);
-  const [kanjiLoading, setKanjiLoading] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("multiType.documentTitle");
+    setRadicalsState({...DEFAULT_STATE});
+    // setInitialLoading(false);
   }, []);
 
   useEffect(() => {

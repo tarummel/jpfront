@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
   
@@ -45,7 +45,7 @@ const Section = styled.p`
 
 const Help: React.FC<WithTranslation> = ({ t }) => {
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("help.documentTitle");
   }, []);
 
@@ -55,11 +55,11 @@ const Help: React.FC<WithTranslation> = ({ t }) => {
       <Card>
         <SectionTitle>1. {t("help.whatIsThisSiteTitle")}</SectionTitle>
         <Section>{t("help.whatIsThisSite")}</Section>
-        <SectionTitle>3. {t("help.requestsTitle")}</SectionTitle>
+        <SectionTitle>2. {t("help.requestsTitle")}</SectionTitle>
         <Section>{t("help.requests")}</Section>
-        <SectionTitle>4. {t("help.bugsTitle")}</SectionTitle>
+        <SectionTitle>3. {t("help.bugsTitle")}</SectionTitle>
         <Section>{t("help.bugs")}</Section>
-        <SectionTitle>5. {t("help.suggestionsTitle")}</SectionTitle>
+        <SectionTitle>4. {t("help.suggestionsTitle")}</SectionTitle>
         <Section>{t("help.suggestions")}</Section>
       </Card>
     </Body>

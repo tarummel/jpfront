@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { Anchor } from "../common";
@@ -51,7 +51,7 @@ const AnchorWrapper = styled.div`
 
 const Legal: React.FC<WithTranslation> = ({ t }) => {
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("legal.documentTitle");
   }, []);
 

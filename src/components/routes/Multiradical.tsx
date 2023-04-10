@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
@@ -104,20 +104,23 @@ const HistoryWrapper = styled.div`
 `;
 
 const Multiradical: React.FC<WithTranslation> = ({ t }) => {
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [disabledRadicalsLoading, setDisabledRadicalsLoading] = useState(false);
+  const [kanjiLoading, setKanjiLoading] = useState(false);
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE});
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([]);
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
-  const [radicalsLoading, setRadicalsLoading] = useState(false);
-  const [kanjiLoading, setKanjiLoading] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("multi.documentTitle");
+    setRadicalsState({...DEFAULT_STATE});
+    setInitialLoading(false);
   }, []);
 
   useEffect(() => {
     const newState = {...DEFAULT_STATE};
     const getAndSetDisabledRadicals = async () => {
-      setRadicalsLoading(true);
+      setDisabledRadicalsLoading(true);
       const params = { simple: true, invert: true } as RelatedRadicalsParams;
       const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params);
       const data = response.data.data;
@@ -127,7 +130,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
       }
 
       setRadicalsState({...newState});
-      setRadicalsLoading(false);
+      setDisabledRadicalsLoading(false);
     };
 
     if (selectedRadicals.length) {
@@ -180,13 +183,15 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   };
 
   return (
+    <>
+    { !initialLoading &&
     <Body>
       <ContentContainer>
         {/* <Instructions>*{t("multi.instructions")}*</Instructions> */}
         <RadicalHeaders>
           <StrokesText>{t("multi.strokes")}</StrokesText>
           <SpinnerButtonPair>
-            { radicalsLoading && (
+            { disabledRadicalsLoading && (
               <MiniSpinner>
                 <Spinner size={20} />
               </MiniSpinner>
@@ -213,6 +218,8 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
         </RowContainer>
       </ContentContainer>
     </Body>
+    }
+    </>
   );
 };
 

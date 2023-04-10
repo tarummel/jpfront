@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
@@ -87,7 +87,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
   const [theme, setTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME);
   const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("settings.documentTitle");
   }, []);
 
