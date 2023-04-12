@@ -6,6 +6,7 @@ import * as paramTypes from "apiParamTypes";
 
 axios.defaults.baseURL = config.backend.jpcoreUrl;
 axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
+axios.defaults.timeout = 20 * 1000; // in milliseconds
 
 const getPromiseRejection = (error: any): Promise<any> => {
   if (error.response) {

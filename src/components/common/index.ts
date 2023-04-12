@@ -1,4 +1,5 @@
 export { default as Anchor } from "./Anchor";
+export { default as Collapsible } from "./Collapsible";
 export { default as ColumnSpacer } from "./ColumnSpacer";
 export { default as HorizontalDivider } from "./HorizontalDivider";
 export { default as NumberInput } from "./NumberInput";

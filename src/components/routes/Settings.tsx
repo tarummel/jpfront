@@ -8,7 +8,6 @@ import { NumberInput } from "../common";
 
 const DEFAULT_LANGUAGE = "en";
 const DEFAULT_THEME = "dark";
-const DEFAULT_HISTORY_SIZE = 12;
 const WIDGET_HEIGHT = 36;
 const WIDGET_WIDTH = 100;
 

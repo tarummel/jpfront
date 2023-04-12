@@ -15,6 +15,7 @@ import Config from './constants/Config';
 
 // Stuff any debugging logs in production
 if (Config.env === "production") {
+  console.log("disabling logging")
   window.console = console;
   // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
   const noop = () => {};
