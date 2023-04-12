@@ -1,22 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import styled from "styled-components";
 
 import { JEntry, JGlossary, JKanji, JReading, JSense, JSource } from "jmdict";
 import { Collapsible } from "./common";
 
-const SHOW_DEFS_COUNT_DEFAULT = 4;
+// const SHOW_DEFS_COUNT_DEFAULT = 4;
 
 interface Props {
   entry: JEntry;
   num: number;
 }
-
-const Entry = styled.div`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.medium};
-  padding-top: 8px;
-`;
 
 const BulletedList = styled.ul`
   list-style-type: circle;
@@ -41,13 +35,8 @@ const Footnote = styled.div`
   padding-top: 8px;
 `;
 
-const CollapsibleWrapper = styled.div`
-  padding-bottom: 10px;
-`;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => {
-  const [showMore, setShowMore] = useState(false);
+  // const [showMore, setShowMore] = useState(false);
 
   const getProperty = (name: string, data: [JKanji]|[JReading]|[JSense]|[JGlossary]|[JSource]|undefined): any => {
     let values = null;
@@ -70,20 +59,17 @@ const JEntryDisplay: React.FC<Props & WithTranslation> = ({ entry, num, t }) => 
   }) || [];
 
   return (
-    <CollapsibleWrapper>
-      <Collapsible number={num} title={rcontents}>
-        <Suffixes>[ {suffixes} ]</Suffixes>
-        {/* <Entry>{glosses}</Entry> */}
-        <BulletedList>
-          { glossesList.map((gloss, i) => {
-            return <li key={i}>{gloss}</li>
-          })}
-        </BulletedList>
-        {fields.length && ( <Footnote>{t("kanjiInfo.jmdict.contexts")}: {fields}</Footnote> )}
-        {information.length && ( <Footnote>{t("kanjiInfo.jmdict.notes")}: {information}</Footnote> )}
-        {misc.length && ( <Footnote>{t("kanjiInfo.jmdict.other")}: {misc}</Footnote> )}
-      </Collapsible>
-    </CollapsibleWrapper>
+    <Collapsible number={num} title={rcontents}>
+      <Suffixes>[ {suffixes} ]</Suffixes>
+      <BulletedList>
+        { glossesList.map((gloss, i) => {
+          return <li key={i}>{gloss}</li>;
+        })}
+      </BulletedList>
+      {fields.length && ( <Footnote>{t("kanjiInfo.jmdict.contexts")}: {fields}</Footnote> )}
+      {information.length && ( <Footnote>{t("kanjiInfo.jmdict.notes")}: {information}</Footnote> )}
+      {misc.length && ( <Footnote>{t("kanjiInfo.jmdict.other")}: {misc}</Footnote> )}
+    </Collapsible>
   );
 };
 

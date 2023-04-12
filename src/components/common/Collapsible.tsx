@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ChevronDownIcon } from "../../assets/icons/chevron-down.svg";
-import { ReactComponent as ChevronRightIcon } from "../../assets/icons/chevron-right.svg";
+import { ReactComponent as ChevronLeftIcon } from "../../assets/icons/chevron-left.svg";
 
 const DEFAULT_OPEN = false;
 
@@ -21,33 +21,42 @@ const Box = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
 `;
 
-const Header = styled.button<HeaderProps>`
+const HeaderButton = styled.button<HeaderProps>`
   background: ${({theme}) => theme.colors.buttonPrimary};
   border: none;
-  color ${({theme}) => theme.colors.textPrimary};
   border-bottom-left-radius ${({collapsed}) => collapsed ? "5px" : "0px"};
   border-bottom-right-radius: ${({collapsed}) => collapsed ? "5px" : "0px"};
   border-top-left-radius 5px;
   border-top-right-radius: 5px;
   display: flex;
-  font-size ${({theme}) => theme.fontSizes.large};
   height: 36px;
+  justify-content: space-between;
   width: 100%;
+
+  &:hover {
+    background-color: ${({theme}) => theme.colors.buttonHover};
+  }
+`;
+
+const TitleWrapper = styled.div`
+  color ${({theme}) => theme.colors.textPrimary};
+  font-size ${({theme}) => theme.fontSizes.large};
+  line-height: 36px;
+  padding-left: 10px;
 `;
 
 const ChevronWrapper = styled.div`
   aspect-ratio: 1;
-  padding: 5px;
+  height: 26px;
+  padding: 4px;
 `;
 
 const StyledChevronDownIcon = styled(ChevronDownIcon)`
   color: ${({theme}) => theme.colors.textPrimary};
-  fill: ${({theme}) => theme.colors.textPrimary};
 `;
 
-const StyledChevronRightIcon = styled(ChevronRightIcon)`
+const StyledChevronLeftIcon = styled(ChevronLeftIcon)`
   color: ${({theme}) => theme.colors.textPrimary};
-  fill: ${({theme}) => theme.colors.textPrimary};
 `;
 
 const Contents = styled.div`
@@ -57,24 +66,23 @@ const Contents = styled.div`
 const ColumnSpacer: React.FC<Props> = ({ children, open, number, title }) => {
   const [collapsed, setCollapsed] = useState(open || DEFAULT_OPEN);
 
-  const numberPrefix = number ? `${number} | ` : "";
-  const fullTitle = `${numberPrefix}${title}`;
-
-  const handleClick = () => {
+  const handleCollapseClick = () => {
     setCollapsed(!collapsed);
   };
 
+  const fullTitle = number ? `${number}. ${title}` : "";
+
   return (
     <Box>
-      <Header onClick={handleClick} collapsed={collapsed}>
+      <HeaderButton onClick={handleCollapseClick} collapsed={collapsed}>
+        <TitleWrapper>{fullTitle}</TitleWrapper>
         <ChevronWrapper>
-        { collapsed 
-          ? <StyledChevronRightIcon />
-          : <StyledChevronDownIcon /> 
-        }
+          { collapsed
+            ? <StyledChevronLeftIcon />
+            : <StyledChevronDownIcon />
+          }
         </ChevronWrapper>
-        {fullTitle}
-      </Header>
+      </HeaderButton>
       { collapsed
         ? null
         : <Contents>{children}</Contents>

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 import API from "../../API";
-import { Anchor, Collapsible, HorizontalDivider } from "../common";
+import { Anchor } from "../common";
 import Config from "../../constants/Config";
 import { JEntry } from "jmdict";
 import { KDKanji } from "kanjidic";
@@ -20,14 +20,9 @@ const Body = styled.div`
   height: 100%;
   margin: 0 auto;
   min-width: 1024px;
+  overflow-y: scroll;
   padding: 10px;
   width: 50%;
-`;
-
-const Card = styled.div`
-  background: ${({theme}) => theme.colors.elementPrimary};
-  border-radius: 5px;
-  padding: 10px;
 `;
 
 const MetaInfoContainer = styled.div`
@@ -80,17 +75,15 @@ const ExtLinksTable = styled.ul`
   }
 `;
 
-const Entries = styled.div``;
-
 const EntryContainer = styled.div`
-  overflow-y: scroll;
+  display: grid;
+  row-gap: 10px;
 `;
 
 const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const { kanjiParam } = useParams();
   const [jmLoading, setJmLoading] = useState(true);
   const [kdLoading, setKdLoading] = useState(true);
-  // const [error, setError] = useState("");
   const [entry, setEntry] = useState<JEntry[]>([]);
   const [kdk, setKdk] = useState<KDKanji>();
 
@@ -122,6 +115,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
       console.log(getAndSetKDKanji.name, e);
     });
 
+    // get and set this page's kanji into the localStorage history
     const localHistory = localStorage.getItem(Config.localStorage.history);
     if (typeof localHistory === "string") {
 
@@ -131,6 +125,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
         historyArray.push(kanjiParam);
         const historySize = localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault;
         if (historyArray.length > historySize) {
+          // toss the oldest elements first
           historyArray = historyArray.slice(-historySize);
         }
         localStorage.setItem(Config.localStorage.history, JSON.stringify(historyArray));
@@ -155,55 +150,55 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
         ? null
         :
         <>
-            <MetaInfoContainer>
-              <SymbolWrapper>
-                <KanjiSymbol>{kanjiParam}</KanjiSymbol>
-              </SymbolWrapper>
-              <GridTable>
-                <Meta>{t("kanjiInfo.on")}: </Meta>
-                <Meta>{onyomi}</Meta>
-                <Meta>{t("kanjiInfo.kun")}: </Meta>
-                <Meta>{kunyomi}</Meta>
-              </GridTable>
-              <GridTable>
-                <Meta>{t("kanjiInfo.strokes")}: </Meta>
-                <Meta>{strokes}</Meta>
-                <Meta>{t("kanjiInfo.skip")}: </Meta>
-                <Meta>{skip}</Meta>
-              </GridTable>
-              <GridTable>
-                <Meta>{t("kanjiInfo.grade")}: </Meta>
-                <Meta>{grade}</Meta>
-                <Meta>{t("kanjiInfo.jlpt")}: </Meta>
-                <Meta>{jlpt}</Meta>
-                <Meta>{t("kanjiInfo.freq")}: </Meta>
-                <Meta>{frequency}</Meta>
-                <Meta>{t("kanjiInfo.ucs")}: </Meta>
-                <Meta>{unicode}</Meta>
-              </GridTable>
-              <ExtLinksTable>
-                <li>{t("kanjiInfo.externalLinks")}</li>
-                <li>
-                  {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
-                </li>
-                <li>
-                  {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
-                </li>
-                <li>
-                  {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
-                </li>
-                <li>
-                  {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.deepl")}</Anchor>
-                </li>
-              </ExtLinksTable>
-            </MetaInfoContainer>
-            <EntryContainer>
-              { entry && (entry.map((e, i) => {
-                return (
-                  <JMdictEntry key={i} entry={e} num={i+1} />
-                );
-              }))}
-            </EntryContainer>
+          <MetaInfoContainer>
+            <SymbolWrapper>
+              <KanjiSymbol>{kanjiParam}</KanjiSymbol>
+            </SymbolWrapper>
+            <GridTable>
+              <Meta>{t("kanjiInfo.on")}: </Meta>
+              <Meta>{onyomi}</Meta>
+              <Meta>{t("kanjiInfo.kun")}: </Meta>
+              <Meta>{kunyomi}</Meta>
+            </GridTable>
+            <GridTable>
+              <Meta>{t("kanjiInfo.strokes")}: </Meta>
+              <Meta>{strokes}</Meta>
+              <Meta>{t("kanjiInfo.skip")}: </Meta>
+              <Meta>{skip}</Meta>
+            </GridTable>
+            <GridTable>
+              <Meta>{t("kanjiInfo.grade")}: </Meta>
+              <Meta>{grade}</Meta>
+              <Meta>{t("kanjiInfo.jlpt")}: </Meta>
+              <Meta>{jlpt}</Meta>
+              <Meta>{t("kanjiInfo.freq")}: </Meta>
+              <Meta>{frequency}</Meta>
+              <Meta>{t("kanjiInfo.ucs")}: </Meta>
+              <Meta>{unicode}</Meta>
+            </GridTable>
+            <ExtLinksTable>
+              <li>{t("kanjiInfo.externalLinks")}</li>
+              <li>
+                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
+              </li>
+              <li>
+                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
+              </li>
+              <li>
+                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
+              </li>
+              <li>
+                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.deepl")}</Anchor>
+              </li>
+            </ExtLinksTable>
+          </MetaInfoContainer>
+          <EntryContainer>
+            { entry && (entry.map((e, i) => {
+              return (
+                <JMdictEntry key={i} entry={e} num={i+1} />
+              );
+            }))}
+          </EntryContainer>
         </>
       }
       <LicenseAgreement krad={true} jmdict={true} />
