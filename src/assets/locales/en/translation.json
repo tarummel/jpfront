@@ -1,6 +1,6 @@
 {
   "error": {
-    "documentTitle": "Error / Open Kanji",
+    "documentTitle": "404 / Open Kanji",
     "pageNotFound": "Page Not Found",
     "message": "Sorry! The page you were looking for may have moved or you may have been redirected here by mistake.",
     "goBack": "< Back"
@@ -22,13 +22,13 @@
     "settings": "Settings"
   },
   "help": {
-    "bugs": "At this time I don't have an official bug tracker to submit to. Sorry! This entry ~will~ be updated accordingly when it's available.",
+    "bugs": "Please send any bug reports to the email 'bugs@openkanji.com'. Add as much information as you can including a description of the issue, your web browser type and version, steps to reproduce, screenshots, etc. Everything helps.",
     "bugsTitle": "Found a bug?",
     "documentTitle": "FAQ / Open Kanji",
     "helpAndFaq": "Help and FAQ",
-    "requests": "Please do not send me translation requests. I'm only a software developer and not qualified as a translator.",
-    "requestsTitle": "Can you help me with something?",
-    "whatIsThisSite": "I built this website to be a collection of Japanese translation tools I hope will be of use to others as it is for me. Please enjoy.",
+    "requests": "Please do not ask me to translate anything. I am NOT qualified as a translator.",
+    "requestsTitle": "Can you help me with translating something?",
+    "whatIsThisSite": "Open Kanji is a series of Japanese-to-English companion tools designed to help solve the universal issue every learner faces - looking up unknown kanji. And while Open Kanji does pull from online dictionaries, I would still encourage using established resources like Jisho if you require even better results.",
     "whatIsThisSiteTitle": "What is this site?",
     "suggestions": "At this time I'm not accepting feature requests as I already have a lot planned. When that changes I will update this entry with more information. Sorry!",
     "suggestionsTitle": "I have a suggestion for the website!"
@@ -37,6 +37,7 @@
     "deepl": "DeepL",
     "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
     "documentTitle": "Info / Open Kanji",
+    "documentTitleKanji": "{{kanji}} / Open Kanji",
     "english": "Engl/英",
     "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
     "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",

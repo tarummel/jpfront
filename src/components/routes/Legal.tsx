@@ -25,7 +25,6 @@ const Banner = styled.h1`
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  border-bottom: 1px solid ${({theme}) => theme.colors.textSecondary};;
   margin-left: 10px;
   margin-right: 10px;
   padding-top: 30px;

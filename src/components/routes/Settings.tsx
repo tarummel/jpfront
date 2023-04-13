@@ -33,7 +33,6 @@ const Banner = styled.h1`
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  border-bottom: 1px solid ${({theme}) => theme.colors.textSecondary};;
   margin-left: 10px;
   margin-right: 10px;
   padding-top: 20px;
@@ -109,15 +108,15 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
 
   const handleHistorySize = (e: any) => {
     const value = e.target.value;
-    let num = parseInt(value);
-    if (!(typeof num === "number")) {
+    let size = parseInt(value);
+    if (!(typeof size === "number")) {
       setHistorySize(12);
       return;
     }
 
-    num = Math.min(Math.max(num, 0), 100);
-    localStorage.setItem(Config.localStorage.historySize, String(num));
-    setHistorySize(num);
+    size = Math.min(Math.max(size, 0), 100);
+    localStorage.setItem(Config.localStorage.historySize, String(size));
+    setHistorySize(size);
   };
 
   return (

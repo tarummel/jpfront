@@ -22,7 +22,9 @@ const Body = styled.div`
   min-width: 1024px;
   overflow-y: scroll;
   padding: 10px;
+  scrollbar-width: none;
   width: 50%;
+  -ms-overflow-style: none;
 `;
 
 const MetaInfoContainer = styled.div`
@@ -88,7 +90,9 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const [kdk, setKdk] = useState<KDKanji>();
 
   useEffect(() => {
-    document.title = `${kanjiParam} | Open Kanji` || t("kanjiInfo.documentTitle");
+    // document.title = `${kanjiParam} / Open Kanji` || t("kanjiInfo.documentTitle");
+    document.title = `${t("kanjiInfo.documentTitleKanji", { kanji: kanjiParam })}`;
+    // `${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`
   }, []);
 
   useEffect(() => {

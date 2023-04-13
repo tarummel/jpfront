@@ -24,7 +24,6 @@ const Banner = styled.h1`
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  border-bottom: 1px solid ${({theme}) => theme.colors.textSecondary};;
   margin-left: 10px;
   margin-right: 10px;
   padding-top: 30px;
@@ -55,12 +54,12 @@ const Help: React.FC<WithTranslation> = ({ t }) => {
       <Card>
         <SectionTitle>1. {t("help.whatIsThisSiteTitle")}</SectionTitle>
         <Section>{t("help.whatIsThisSite")}</Section>
-        <SectionTitle>3. {t("help.requestsTitle")}</SectionTitle>
-        <Section>{t("help.requests")}</Section>
-        <SectionTitle>4. {t("help.bugsTitle")}</SectionTitle>
+        <SectionTitle>2. {t("help.bugsTitle")}</SectionTitle>
         <Section>{t("help.bugs")}</Section>
-        <SectionTitle>5. {t("help.suggestionsTitle")}</SectionTitle>
+        <SectionTitle>3. {t("help.suggestionsTitle")}</SectionTitle>
         <Section>{t("help.suggestions")}</Section>
+        <SectionTitle>4. {t("help.requestsTitle")}</SectionTitle>
+        <Section>{t("help.requests")}</Section>
       </Card>
     </Body>
   );
