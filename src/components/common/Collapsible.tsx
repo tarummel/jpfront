@@ -47,7 +47,6 @@ const TitleWrapper = styled.div`
 
 const ChevronWrapper = styled.div`
   aspect-ratio: 1;
-  
   padding: 4px;
 `;
 

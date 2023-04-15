@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 import API from "../../API";
-import { Anchor } from "../common";
+import { Anchor, Tooltip } from "../common";
 import Config from "../../constants/Config";
 import { JEntry } from "jmdict";
 import { KDKanji } from "kanjidic";
@@ -16,7 +16,6 @@ import LicenseAgreement from "../LicenseAgreement";
 const Body = styled.div`
   background: ${({theme}) => theme.colors.foreground};
   display: flex;
-  flex-direction: column;
   height: 100%;
   margin: 0 auto;
   min-width: 1024px;
@@ -27,54 +26,54 @@ const Body = styled.div`
   -ms-overflow-style: none;
 `;
 
-const MetaInfoContainer = styled.div`
+const LeftContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  flex-direction: column;
+  padding-right: 10px;
+  width: 160px;
+  flex-shrink: 0;
 `;
 
-const SymbolWrapper = styled.div`
+const GiantStamp = styled.h1`
   background: ${({theme}) => theme.colors.textPrimary};
   border-radius: 5px;
-  width: 100px;
-  height: 100px;
-`;
-
-const KanjiSymbol = styled.h1`
   color: ${({theme}) => theme.colors.textNegative};
-  font-size: 70px;
-  margin: auto;
-  line-height: 100px;
+  font-size: 120px;
+  line-height: 160px;
+  height: 160px;
   text-align: center;
+  width: 100%;
 `;
 
-const GridTable = styled.div`
+const MetaTable = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
   column-gap: 6px;
   display: grid;
-  grid-template-columns: auto minmax(auto, 1fr);
-  grid-template-rows: repeat(5, auto);
-  max-width: 160px;
+  grid-template-columns: auto auto;
+  padding-top: 10px;
   row-gap: 1px;
   text-align: end;
-  word-wrap: break-word;
-  word-break: normal;
-`;
-
-const Meta = styled.div`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.medium};
+  
+  div {
+    font-size: ${({theme}) => theme.fontSizes.medium};
+  }
 `;
 
 const ExtLinksTable = styled.ul`
-  padding-left: 20px;
-  padding-right: 20px;
-
+  margin: 10px auto;
+  background: ${({theme}) => theme.colors.elementPrimary};
+  padding: 10px;
+  border-radius: 5px;
+  
   li {
     color: ${({theme}) => theme.colors.textPrimary};
     font-size: ${({theme}) => theme.fontSizes.medium};
     word-break: keep-all;
   }
+`;
+
+const RightContainer = styled.div`
+  width: 100%;
 `;
 
 const EntryContainer = styled.div`
@@ -90,9 +89,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const [kdk, setKdk] = useState<KDKanji>();
 
   useEffect(() => {
-    // document.title = `${kanjiParam} / Open Kanji` || t("kanjiInfo.documentTitle");
-    document.title = `${t("kanjiInfo.documentTitleKanji", { kanji: kanjiParam })}`;
-    // `${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`
+    document.title = `${t("kanjiInfo.documentTitleKanji", { kanji: kanjiParam })}` || t("kanjiInfo.documentTitleKanji");
   }, []);
 
   useEffect(() => {
@@ -139,6 +136,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
     }
   }, [kanjiParam]);
 
+  // Kanjidic info
   const unicode = kdk?.codepoint?.[0].ucs || kanjiParam?.charCodeAt(0) || "n/a";
   const grade = kdk?.misc?.[0].grade || "n/a";
   const jlpt = kdk?.misc?.[0].jlpt || "n/a";
@@ -148,64 +146,73 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const onyomi = kdk?.reading?.[0].ja_on || "n/a";
   const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || "n/a";
 
+  // Meta info table fields
+  const fieldSuffix = ": ";
+  const onyomiName = `${t("kanjiInfo.onyomi")}${fieldSuffix}`;
+  const kunyomiName = `${t("kanjiInfo.kunyomi")}${fieldSuffix}`;
+  const strokesName = `${t("kanjiInfo.strokes")}${fieldSuffix}`;
+  const skipName = `${t("kanjiInfo.skip")}${fieldSuffix}`;
+  const gradeName = `${t("kanjiInfo.grade")}${fieldSuffix}`;
+  const jlptName = `${t("kanjiInfo.jlpt")}${fieldSuffix}`;
+  const freqName = `${t("kanjiInfo.freq")}${fieldSuffix}`;
+  const ucsName = `${t("kanjiInfo.ucs")}${fieldSuffix}`;
+
+  const externalLinkPrefix = "--> ";
+
   return (
     <Body>
       { jmLoading && kdLoading
         ? null
         :
         <>
-          <MetaInfoContainer>
-            <SymbolWrapper>
-              <KanjiSymbol>{kanjiParam}</KanjiSymbol>
-            </SymbolWrapper>
-            <GridTable>
-              <Meta>{t("kanjiInfo.on")}: </Meta>
-              <Meta>{onyomi}</Meta>
-              <Meta>{t("kanjiInfo.kun")}: </Meta>
-              <Meta>{kunyomi}</Meta>
-            </GridTable>
-            <GridTable>
-              <Meta>{t("kanjiInfo.strokes")}: </Meta>
-              <Meta>{strokes}</Meta>
-              <Meta>{t("kanjiInfo.skip")}: </Meta>
-              <Meta>{skip}</Meta>
-            </GridTable>
-            <GridTable>
-              <Meta>{t("kanjiInfo.grade")}: </Meta>
-              <Meta>{grade}</Meta>
-              <Meta>{t("kanjiInfo.jlpt")}: </Meta>
-              <Meta>{jlpt}</Meta>
-              <Meta>{t("kanjiInfo.freq")}: </Meta>
-              <Meta>{frequency}</Meta>
-              <Meta>{t("kanjiInfo.ucs")}: </Meta>
-              <Meta>{unicode}</Meta>
-            </GridTable>
+          <LeftContainer>
+            <GiantStamp>{kanjiParam}</GiantStamp>
+            <MetaTable>
+              <Tooltip name={onyomiName}>{t("kanjiInfo.onyomiHint")}</Tooltip>
+              <div>{onyomi}</div>
+              <Tooltip name={kunyomiName}>{t("kanjiInfo.kunyomiHint")}</Tooltip>
+              <div>{kunyomi}</div>
+              <Tooltip name={strokesName}>{t("kanjiInfo.strokesHint")}</Tooltip>
+              <div>{strokes}</div>
+              <Tooltip name={skipName}>{t("kanjiInfo.skipHint")}</Tooltip>
+              <div>{skip}</div>
+              <Tooltip name={gradeName}>{t("kanjiInfo.gradeHint")}</Tooltip>
+              <div>{grade}</div>
+              <Tooltip name={jlptName}>{t("kanjiInfo.jlptHint")}</Tooltip>
+              <div>{jlpt}</div>
+              <Tooltip name={freqName}>{t("kanjiInfo.freqHint")}</Tooltip>
+              <div>{frequency}</div>
+              <Tooltip name={ucsName}>{t("kanjiInfo.ucsHint")}</Tooltip>
+              <div>{unicode}</div>
+            </MetaTable>
             <ExtLinksTable>
               <li>{t("kanjiInfo.externalLinks")}</li>
               <li>
-                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
+                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
               </li>
               <li>
-                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
+                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
               </li>
               <li>
-                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
+                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
               </li>
               <li>
-                {"--> "}<Anchor target="_blank" href={`${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.deepl")}</Anchor>
+                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.deepl")}</Anchor>
               </li>
             </ExtLinksTable>
-          </MetaInfoContainer>
-          <EntryContainer>
-            { entry && (entry.map((e, i) => {
-              return (
-                <JMdictEntry key={i} entry={e} num={i+1} />
-              );
-            }))}
-          </EntryContainer>
+          </LeftContainer>
+          <RightContainer>
+            <EntryContainer>
+              { entry && (entry.map((e, i) => {
+                return (
+                  <JMdictEntry key={i} entry={e} num={i+1} />
+                );
+              }))}
+            </EntryContainer>
+            <LicenseAgreement krad={true} jmdict={true} />
+          </RightContainer>
         </>
       }
-      <LicenseAgreement krad={true} jmdict={true} />
     </Body>
   );
 };
