@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 import Config from "../../constants/Config";
@@ -37,11 +37,33 @@ const GlobalStyle = createGlobalStyle`
 //   }
 // `;
 
-const Theme: React.FC<Props> = ({ children }) => (
-  <>
-    <GlobalStyle />
-    <ThemeProvider theme={localStorage.getItem(Config.localStorage.theme) === "light" ? lightTheme : darkTheme}>{children}</ThemeProvider>
-  </>
-);
+const Theme: React.FC<Props> = ({ children }) => {
+
+  const getThemeFromStorage = () => {
+    const stored = localStorage.getItem(Config.localStorage.theme);
+    if (!stored || stored === "dark") {
+      return darkTheme;
+    } else if (stored === "light") {
+      return lightTheme;
+    }
+  };
+
+  const [theme, setTheme] = useState(getThemeFromStorage());
+
+  // const updateTheme = (newTheme:string) => {
+  //   if (newTheme === "dark") {
+  //     setTheme(darkTheme);
+  //   } else if (newTheme === "light") {
+  //     setTheme(lightTheme);
+  //   }
+  // };
+
+  return (
+    <>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </>
+  );
+};
 
 export default Theme;

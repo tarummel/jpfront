@@ -82,7 +82,7 @@ const StyledOption = styled.option`
 const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
   // TODO: use i18n default
   const [language, setLanguage] = useState(localStorage.getItem(Config.localStorage.language) || DEFAULT_LANGUAGE);
-  const [theme, setTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME);
+  const [localTheme, setLocalTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME);
   const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault);
 
   useEffect(() => {
@@ -97,9 +97,9 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
   };
 
   const handleTheme = (e: any) => {
-    const theme = e.target.value;
-    localStorage.setItem(Config.localStorage.theme, theme);
-    setTheme(theme);
+    const newTheme = e.target.value;
+    localStorage.setItem(Config.localStorage.theme, newTheme);
+    setLocalTheme(newTheme);
   };
 
   const handleClearHistory = () => {
@@ -137,7 +137,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
           <SettingTitle>{'>'} {t("settings.theme")}</SettingTitle>
           <Setting>
             <Description>- {t("settings.themeDesc")}</Description>
-            <StyledSelect onChange={handleTheme} placeholder={""} value={theme}>
+            <StyledSelect onChange={handleTheme} placeholder={""} value={localTheme}>
               <StyledOption value="dark">{t("settings.dark")}</StyledOption>
               <StyledOption value="light">{t("settings.light")}</StyledOption>
             </StyledSelect>
