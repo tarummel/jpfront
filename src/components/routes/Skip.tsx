@@ -47,7 +47,6 @@ const CodeInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 10px;
 `;
 
 const Title = styled.h1`
@@ -63,7 +62,7 @@ const ButtonPair = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 2px;
+  padding-top: 5px;
 `;
 
 const Dash = styled.div`
@@ -78,6 +77,7 @@ const CategoryButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 5px;
 `;
 
 const KanjiContainer = styled.div`
