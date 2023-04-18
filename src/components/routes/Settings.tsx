@@ -22,12 +22,9 @@ const Body = styled.div`
 `;
 
 const Banner = styled.h1`
-  background: ${({theme}) => theme.colors.elementPrimary};
-  border-radius: 5px;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  margin: 10px auto;
-  padding: 10px 20px 10px 20px;
+  padding: 20px 0px 20px 30px;
 `;
 
 const Card = styled.div`
@@ -56,7 +53,7 @@ const Setting = styled.div`
   flex-direction: row;
   justify-content: space-between;
   height: ${WIDGET_HEIGHT}px;
-  margin: 10px 60px 10px 60px;
+  padding: 10px 60px 10px 60px;
 `;
 
 const Description = styled.p`

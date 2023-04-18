@@ -14,12 +14,9 @@ const Body = styled.div`
 `;
 
 const Banner = styled.h1`
-  background: ${({theme}) => theme.colors.elementPrimary};
-  border-radius: 5px;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  margin: 10px auto;
-  padding: 10px 20px 10px 20px;
+  padding: 20px 0px 20px 30px;
 `;
 
 const Card = styled.div`
@@ -27,25 +24,20 @@ const Card = styled.div`
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  padding-top: 30px;
+  padding-top: 20px;
 `;
 
 const SectionTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
-  margin-left: 20px;
-  margin-right: 45px;
+  padding-left: 20px;
+  padding-top: 5px;
 `;
 
 const Section = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  margin: 5px 45px 20px 45px;
-`;
-
-const AnchorWrapper = styled.div`
-  margin-top: 5px;
-  margin-left: 45px;
+  padding: 10px 60px 10px 60px;
 `;
 
 const Legal: React.FC<WithTranslation> = ({ t }) => {
@@ -54,18 +46,19 @@ const Legal: React.FC<WithTranslation> = ({ t }) => {
     document.title = t("legal.documentTitle");
   }, []);
 
+  const prefix = "";
+
   return (
     <Body>
       <Banner>{t("legal.aboutAndLegalInformation")}</Banner>
       <Card>
-        <SectionTitle>- {t("legal.codeLegalTitle")}</SectionTitle>
+        <SectionTitle>{prefix}{t("legal.codeLegalTitle")}</SectionTitle>
         <Section>{t("legal.codeLegal")}</Section>
-        <SectionTitle>- {t("legal.edrdgLegalTitle")}</SectionTitle>
-        <AnchorWrapper>
+        <SectionTitle>{prefix}{t("legal.edrdgLegalTitle")}</SectionTitle>
+        <Section>{t("legal.edrdgLegal")}
           <Anchor target="_blank" href={`${t("legal.edrdgLink")}`}>{t("legal.edrdgLink")}</Anchor>
-        </AnchorWrapper>
-        <Section>{t("legal.edrdgLegal")}</Section>
-        <SectionTitle>- {t("legal.skip")}</SectionTitle>
+        </Section>
+        <SectionTitle>{prefix}{t("legal.skip")}</SectionTitle>
         <Section>{t("legal.skipLegal")}</Section>
       </Card>
     </Body>

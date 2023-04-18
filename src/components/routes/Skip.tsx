@@ -104,7 +104,7 @@ const SVG = styled.svg`
 `;
 
 const SpinnerWrapper = styled.div`
-  margin: auto;
+  margin: calc(50% + 20px) auto;
 `;
 
 const HistoryWrapper = styled.div`

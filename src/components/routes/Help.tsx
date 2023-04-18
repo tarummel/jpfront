@@ -13,12 +13,9 @@ const Body = styled.div`
 `;
 
 const Banner = styled.h1`
-  background: ${({theme}) => theme.colors.elementPrimary};
-  border-radius: 5px;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  margin: 10px auto;
-  padding: 10px 20px 10px 20px;
+  padding: 20px 0px 20px 30px;
 `;
 
 const Card = styled.div`
@@ -26,20 +23,19 @@ const Card = styled.div`
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  padding-top: 30px;
+  padding-top: 20px;
 `;
 
 const SectionTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
-  margin-left: 20px;
-  margin-right: 45px;
+  padding-left: 20px;
 `;
 
 const Section = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  margin: 5px 45px 20px 45px;
+  padding: 10px 60px 10px 60px;
 `;
 
 const Help: React.FC<WithTranslation> = ({ t }) => {

@@ -66,13 +66,13 @@ const RadicalHeaders = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 32px;
 `;
 
 const StrokesText = styled.div`
+  align-self: flex-end;
   color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.small};
-  line-height: 48px;
+  font-size: ${({theme}) => theme.fontSizes.medium};
+  padding-left: 5px;
 `;
 
 const RowContainer = styled.div`
@@ -82,18 +82,8 @@ const RowContainer = styled.div`
   padding: 5px;
 `;
 
-const SpinnerButtonPair = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const MiniSpinner = styled.div`
-  margin-right: 10px;
-  margin-top: 4px;
-`;
-
 const BigSpinner = styled.div`
-  margin: auto;
+  margin: calc(50% + 20px) auto;
 `;
 
 const HistoryWrapper = styled.div`
@@ -107,7 +97,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE});
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([]);
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
-  const [radicalsLoading, setRadicalsLoading] = useState(false);
+  // const [radicalsLoading, setRadicalsLoading] = useState(false);
   const [kanjiLoading, setKanjiLoading] = useState(false);
 
   useEffect(() => {
@@ -117,7 +107,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
   useEffect(() => {
     const newState = {...DEFAULT_STATE};
     const getAndSetDisabledRadicals = async () => {
-      setRadicalsLoading(true);
+      // setRadicalsLoading(true);
       const params = { simple: true, invert: true } as RelatedRadicalsParams;
       const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params);
       const data = response.data.data;
@@ -127,7 +117,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
       }
 
       setRadicalsState({...newState});
-      setRadicalsLoading(false);
+      // setRadicalsLoading(false);
     };
 
     if (selectedRadicals.length) {
@@ -185,14 +175,7 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
         {/* <Instructions>*{t("multi.instructions")}*</Instructions> */}
         <RadicalHeaders>
           <StrokesText>{t("multi.strokes")}</StrokesText>
-          <SpinnerButtonPair>
-            { radicalsLoading && (
-              <MiniSpinner>
-                <Spinner size={20} />
-              </MiniSpinner>
-            )}
-            <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
-          </SpinnerButtonPair>
+          <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
         </RadicalHeaders>
         <RowContainer>
           <NumberedRadicalRow handleClick={handleSelection} radicalsData={ALL_RADICALS} radicalsState={radicalsState} />

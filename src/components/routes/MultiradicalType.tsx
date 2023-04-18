@@ -143,23 +143,20 @@ const TopTypeGrid = styled.div`
   row-gap: 2px;
 `;
 
+const ResetButtonWrapper = styled.div`
+  align-self: flex-end;
+  display: flex;
+  width: 100px;
+  height: 36px;
+`;
+
 const RadicalsHeaders = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 94px;
-  margin-bottom: 5px;
-`;
-
-const SpinnerButtonPair = styled.div`
-  display: flex;
-  flex-direction: row;
+  padding-bottom: 5px;
   margin: auto 0 0 0;
-`;
-
-const MiniSpinner = styled.div`
-  margin-right: 10px;
-  margin-top: 4px;
 `;
 
 const CommonContainer = styled.div`
@@ -184,8 +181,7 @@ const UncommonRowContainer = styled.div`
 `;
 
 const BigSpinner = styled.div`
-  display: flex;
-  margin: 20px auto;
+  margin: calc(50% + 20px) auto;
 `;
 
 const KanjiRowContainer = styled.div`
@@ -198,15 +194,13 @@ const HistoryWrapper = styled.div`
   align-items: baseline;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: 94px;
 `;
 
 const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
   const [radicalsState, setRadicalsState] = useState<RadicalsState>({...DEFAULT_STATE});
   const [selectedRadicals, setSelectedRadicals] = useState<string[]>([]);
   const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
-  const [radicalsLoading, setRadicalsLoading] = useState(false);
+  // const [radicalsLoading, setRadicalsLoading] = useState(false);
   const [kanjiLoading, setKanjiLoading] = useState(false);
 
   useEffect(() => {
@@ -216,7 +210,7 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
   useEffect(() => {
     const newState = {...DEFAULT_STATE};
     const getAndSetDisabledRadicals = async () => {
-      setRadicalsLoading(true);
+      // setRadicalsLoading(true);
 
       const params = { simple: true, invert: true } as RelatedRadicalsParams;
       const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params);
@@ -227,7 +221,7 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
       }
 
       setRadicalsState({...newState});
-      setRadicalsLoading(false);
+      // setRadicalsLoading(false);
     };
 
     if (selectedRadicals.length) {
@@ -302,7 +296,6 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
               </LeftTypeGrid>
             </TitledContainer>
           </LeftContainer>
-
           <RightContainer>
             <RadicalsHeaders>
               <TitledContainer>
@@ -313,14 +306,9 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
                   })}
                 </TopTypeGrid>
               </TitledContainer>
-              <SpinnerButtonPair>
-                { radicalsLoading && (
-                  <MiniSpinner>
-                    <Spinner size={20} />
-                  </MiniSpinner>
-                )}
+              <ResetButtonWrapper>
                 <Button height={32} onClick={handleClickReset} width={100}>{t("multi.reset")}</Button>
-              </SpinnerButtonPair>
+              </ResetButtonWrapper>
             </RadicalsHeaders>
             <CommonContainer>
               <NumberedRadicalRow handleClick={handleSelection} radicalsData={SORTED_RADICALS["r"]} radicalsState={radicalsState} />
@@ -335,7 +323,6 @@ const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {
         </UncommonContainer>
         <LicenseAgreement krad={true} />
       </ContentContainer>
-
       <ContentContainer>
         <HistoryWrapper>
           <History />
