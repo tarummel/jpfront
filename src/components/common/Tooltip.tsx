@@ -17,17 +17,6 @@ const TooltipHint = styled.div`
   position: absolute;
   transform: translateY(calc(-50% + 30px));
   visibility: hidden;
-  
-  &:before {
-    content: "";
-    height: 0;
-    left: calc(50% - 10px);
-    position: absolute;
-    top: -10px;
-    transform: rotate(135deg);
-    transition: border 0.3s ease-in-out;
-    width: 0;
-  }
 `;
 
 const TooltipText = styled.div`
@@ -42,15 +31,11 @@ const Tool = styled.div`
   text-decoration: underline dotted;
 
   &:hover ${TooltipHint} {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: ${({theme}) => theme.colors.textNegative};
     color: ${({theme}) => theme.colors.textPrimary};
     font-size: ${({theme}) => theme.fontSizes.small};
+    opacity: 0.9;
     visibility: visible;
-
-    &:before {
-      border-color: transparent transparent rgba(0, 0, 0, 0.9)
-        rgba(0, 0, 0, 0.9);
-    }
   }
 `;
 

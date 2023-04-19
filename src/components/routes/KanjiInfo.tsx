@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 import API from "../../API";
-import { Anchor, Tooltip } from "../common";
+import { Anchor, HorizontalDivider, Tooltip } from "../common";
 import Config from "../../constants/Config";
 import { JEntry } from "jmdict";
 import { KDKanji } from "kanjidic";
@@ -20,18 +20,20 @@ const Body = styled.div`
   margin: 0 auto;
   min-width: 1024px;
   overflow-y: scroll;
-  padding: 10px;
+  padding-top: 20px;
   scrollbar-width: none;
   width: 50%;
   -ms-overflow-style: none;
+  
 `;
 
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-right: 10px;
+  padding-right: 20px;
   width: 160px;
   flex-shrink: 0;
+  padding-left: 20px;
 `;
 
 const GiantStamp = styled.h1`
@@ -45,30 +47,32 @@ const GiantStamp = styled.h1`
   width: 100%;
 `;
 
-const MetaTable = styled.div`
+const MetaGrid = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
-  column-gap: 6px;
+  column-gap: 5px;
   display: grid;
   grid-template-columns: auto auto;
+  padding-bottom: 10px;
   padding-top: 10px;
-  row-gap: 1px;
-  text-align: end;
+  row-gap: 5px;
+  justify-content: space-between;
   
   div {
     font-size: ${({theme}) => theme.fontSizes.medium};
   }
 `;
 
-const ExtLinksTable = styled.ul`
-  margin: 10px auto;
-  background: ${({theme}) => theme.colors.elementPrimary};
-  padding: 10px;
-  border-radius: 5px;
-  
-  li {
-    color: ${({theme}) => theme.colors.textPrimary};
+const LinksGrid = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
+  column-gap: 5px;
+  display: grid;
+  grid-template-columns: auto;
+  padding-top: 10px;
+  row-gap: 5px;
+  justify-content: space-between;
+
+  div {
     font-size: ${({theme}) => theme.fontSizes.medium};
-    word-break: keep-all;
   }
 `;
 
@@ -157,8 +161,6 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const freqName = `${t("kanjiInfo.freq")}${fieldSuffix}`;
   const ucsName = `${t("kanjiInfo.ucs")}${fieldSuffix}`;
 
-  const externalLinkPrefix = "--> ";
-
   return (
     <Body>
       { jmLoading && kdLoading
@@ -167,7 +169,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
         <>
           <LeftContainer>
             <GiantStamp>{kanjiParam}</GiantStamp>
-            <MetaTable>
+            <MetaGrid>
               <Tooltip name={onyomiName}>{t("kanjiInfo.onyomiHint")}</Tooltip>
               <div>{onyomi}</div>
               <Tooltip name={kunyomiName}>{t("kanjiInfo.kunyomiHint")}</Tooltip>
@@ -184,22 +186,15 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
               <div>{frequency}</div>
               <Tooltip name={ucsName}>{t("kanjiInfo.ucsHint")}</Tooltip>
               <div>{unicode}</div>
-            </MetaTable>
-            <ExtLinksTable>
-              <li>{t("kanjiInfo.externalLinks")}</li>
-              <li>
-                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
-              </li>
-              <li>
-                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
-              </li>
-              <li>
-                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
-              </li>
-              <li>
-                {externalLinkPrefix}<Anchor target="_blank" href={`${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.deepl")}</Anchor>
-              </li>
-            </ExtLinksTable>
+            </MetaGrid>
+            <HorizontalDivider/>
+            <LinksGrid>
+              <div>{t("kanjiInfo.externalLinks")}:</div>
+              <Anchor target="_blank" href={`${t("kanjiInfo.wiktionaryLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wiktionary")}</Anchor>
+              <Anchor target="_blank" href={`${t("kanjiInfo.jishoLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.jisho")}</Anchor>
+              <Anchor target="_blank" href={`${t("kanjiInfo.wwwjdicLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.wwwjdic")}</Anchor>
+              <Anchor target="_blank" href={`${t("kanjiInfo.deeplLink", { kanji: kanjiParam })}`}>{t("kanjiInfo.deepl")}</Anchor>
+            </LinksGrid>
           </LeftContainer>
           <RightContainer>
             <EntryContainer>
