@@ -78,6 +78,7 @@ const LinksGrid = styled.div`
 
 const RightContainer = styled.div`
   width: 100%;
+  padding-right: 20px;
 `;
 
 const EntryContainer = styled.div`
