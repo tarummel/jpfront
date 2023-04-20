@@ -10,24 +10,27 @@ const Body = styled.div`
   flex-direction: column;
   margin: 0 auto;
   min-width: 1024px;
-  padding: 20px 15px 10px 15px;
   width: 50%;
 `;
 
 const Title = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-top: 20px;
 `;
 
 const Message = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
 `;
 
 const ButtonWrapper = styled.div`
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
 `;
 
 const Error: React.FC<WithTranslation> = ({ t }) => {
@@ -50,7 +53,7 @@ const Error: React.FC<WithTranslation> = ({ t }) => {
         {t("error.message")}
       </Message>
       <ButtonWrapper>
-        <Button height={30} width={85} onClick={handleClick}>{t("error.goBack")}</Button>
+        <Button height={30} width={90} onClick={handleClick}>{t("error.goBack")}</Button>
       </ButtonWrapper>
     </Body>
   );

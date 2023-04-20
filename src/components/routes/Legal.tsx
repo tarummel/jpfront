@@ -16,28 +16,28 @@ const Body = styled.div`
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  padding: 20px 0px 20px 30px;
+  padding: 20px;
 `;
 
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-bottom: 20px;
 `;
 
 const SectionTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
   padding-left: 20px;
-  padding-top: 5px;
+  padding-top: 20px;
 `;
 
 const Section = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding: 10px 60px 10px 60px;
+  padding: 10px 60px 0 60px;
 `;
 
 const Legal: React.FC<WithTranslation> = ({ t }) => {
@@ -53,7 +53,10 @@ const Legal: React.FC<WithTranslation> = ({ t }) => {
       <Banner>{t("legal.aboutAndLegalInformation")}</Banner>
       <Card>
         <SectionTitle>{prefix}{t("legal.codeLegalTitle")}</SectionTitle>
-        <Section>{t("legal.codeLegal")}</Section>
+        <Section>
+          {t("legal.codeLegal")}
+          <Anchor target="_blank" href={`${t("legal.codeLegalLink")}`}>{t("legal.codeLegalLink")}</Anchor>  
+        </Section>
         <SectionTitle>{prefix}{t("legal.edrdgLegalTitle")}</SectionTitle>
         <Section>{t("legal.edrdgLegal")}
           <Anchor target="_blank" href={`${t("legal.edrdgLink")}`}>{t("legal.edrdgLink")}</Anchor>

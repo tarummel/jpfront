@@ -24,16 +24,16 @@ const Body = styled.div`
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  padding: 20px 0px 20px 30px;
+  padding: 20px;
 `;
 
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
 `;
 
 const SettingContainer = styled.div`
@@ -44,8 +44,8 @@ const SettingContainer = styled.div`
 const SettingTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
-  margin-top: 5px;
-  margin-left: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
 `;
 
 const Setting = styled.div`
@@ -53,7 +53,7 @@ const Setting = styled.div`
   flex-direction: row;
   justify-content: space-between;
   height: ${WIDGET_HEIGHT}px;
-  padding: 10px 60px 10px 60px;
+  padding: 10px 60px 0 60px;
 `;
 
 const Description = styled.p`

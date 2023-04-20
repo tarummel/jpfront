@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
-import { ColumnSpacer, NumberInput, Spinner } from "../common";
+import { NumberInput, Spinner } from "../common";
 import { Button, StateButton } from "../buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
@@ -27,20 +27,22 @@ const Body = styled.div`
   flex-grow: 1;
   min-width: 1024px;
   margin: 0 auto;
-  padding: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
   width: 50%;
 `;
 
 const CodeBuilder = styled.div`
   display: flex;
   flex-direction: row;
+  flex-grow: 0;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const CodeBuilderColumn = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
-  flex-grow: 0;
 `;
 
 const CodeInputContainer = styled.div`
@@ -74,22 +76,23 @@ const Dash = styled.div`
 `;
 
 const CategoryButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  justify-items: center;
   padding-top: 5px;
+  row-gap: 2px;
 `;
 
 const KanjiContainer = styled.div`
   border-radius: 5px;
   flex-direction: column;
   flex-grow: 1;
-  height: 85%;
+  height: 100%;
+  padding-right: 20px;
 `;
 
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
-  height: 100%;
+  height: 80%;
   padding: 5px;
   margin-top: 5px;
 `;
@@ -294,7 +297,6 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
           </CodeInputContainer>
         </CodeBuilderColumn>
       </CodeBuilder>
-      <ColumnSpacer minWidth={"4px"} width={"1%"} />
       <KanjiContainer>
         <HistoryWrapper>
           <History />

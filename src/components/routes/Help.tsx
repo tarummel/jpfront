@@ -15,14 +15,15 @@ const Body = styled.div`
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.header};
-  padding: 20px 0px 20px 30px;
+  padding: 20px;
 `;
 
 const Card = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-bottom: 20px;
   padding-top: 20px;
 `;
 
@@ -35,7 +36,7 @@ const SectionTitle = styled.h2`
 const Section = styled.p`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding: 10px 60px 10px 60px;
+  padding: 10px 45px 10px 45px;
 `;
 
 const Help: React.FC<WithTranslation> = ({ t }) => {
