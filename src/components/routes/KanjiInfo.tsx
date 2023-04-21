@@ -54,8 +54,6 @@ const MetaGrid = styled.div`
   padding-bottom: 10px;
   padding-top: 10px;
   row-gap: 5px;
-
-  justify-content: space-between;
   
   div {
     font-size: ${({theme}) => theme.fontSizes.medium};
@@ -69,11 +67,16 @@ const LinksGrid = styled.div`
   grid-template-columns: auto;
   padding-top: 10px;
   row-gap: 5px;
-  justify-content: space-between;
 
   div {
     font-size: ${({theme}) => theme.fontSizes.medium};
   }
+`;
+
+const MetaValue = styled.div`
+  justify-self: end;
+  text-align: right;
+  word-spacing: 9999px;
 `;
 
 const RightContainer = styled.div`
@@ -149,14 +152,14 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   }, [kanjiParam]);
 
   // Kanjidic info
-  const unicode = kdk?.codepoint?.[0].ucs || kanjiParam?.charCodeAt(0) || "n/a";
-  const grade = kdk?.misc?.[0].grade || "n/a";
-  const jlpt = kdk?.misc?.[0].jlpt || "n/a";
+  const onyomi = kdk?.reading?.[0].ja_on || "n/a";
+  const kunyomi = kdk?.reading?.[0].ja_kun?.join(" ") || "n/a";
   const strokes = kdk?.misc?.[0].strokes || "n/a";
   const frequency = kdk?.misc?.[0].frequency || "n/a";
+  const grade = kdk?.misc?.[0].grade || "n/a";
+  const jlpt = kdk?.misc?.[0].jlpt || "n/a";
   const skip = kdk?.querycode?.[0].skip || "n/a";
-  const onyomi = kdk?.reading?.[0].ja_on || "n/a";
-  const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || "n/a";
+  const unicode = kdk?.codepoint?.[0].ucs || kanjiParam?.charCodeAt(0) || "n/a";
 
   // JMdict
   const hasJmdict = !!entry.length;
@@ -182,21 +185,21 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
             <GiantStamp>{kanjiParam}</GiantStamp>
             <MetaGrid>
               <div><Tooltip name={onyomiName}>{t("kanjiInfo.onyomiHint")}</Tooltip></div>
-              <div>{onyomi}</div>
+              <MetaValue>{onyomi}</MetaValue>
               <div><Tooltip name={kunyomiName}>{t("kanjiInfo.kunyomiHint")}</Tooltip></div>
-              <div>{kunyomi}</div>
+              <MetaValue>{kunyomi}</MetaValue>
               <div><Tooltip name={strokesName}>{t("kanjiInfo.strokesHint")}</Tooltip></div>
-              <div>{strokes}</div>
-              <div><Tooltip name={skipName}>{t("kanjiInfo.skipHint")}</Tooltip></div>
-              <div>{skip}</div>
-              <div><Tooltip name={gradeName}>{t("kanjiInfo.gradeHint")}</Tooltip></div>
-              <div>{grade}</div>
-              <div><Tooltip name={jlptName}>{t("kanjiInfo.jlptHint")}</Tooltip></div>
-              <div>{jlpt}</div>
+              <MetaValue>{strokes}</MetaValue>
               <div><Tooltip name={freqName}>{t("kanjiInfo.freqHint")}</Tooltip></div>
-              <div>{frequency}</div>
+              <MetaValue>{frequency}</MetaValue>
+              <div><Tooltip name={gradeName}>{t("kanjiInfo.gradeHint")}</Tooltip></div>
+              <MetaValue>{grade}</MetaValue>
+              <div><Tooltip name={jlptName}>{t("kanjiInfo.jlptHint")}</Tooltip></div>
+              <MetaValue>{jlpt}</MetaValue>
+              <div><Tooltip name={skipName}>{t("kanjiInfo.skipHint")}</Tooltip></div>
+              <MetaValue>{skip}</MetaValue>
               <div><Tooltip name={ucsName}>{t("kanjiInfo.ucsHint")}</Tooltip></div>
-              <div>{unicode}</div>
+              <MetaValue>{unicode}</MetaValue>
             </MetaGrid>
             <HorizontalDivider/>
             <LinksGrid>

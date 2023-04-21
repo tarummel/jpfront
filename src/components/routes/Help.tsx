@@ -24,13 +24,14 @@ const Card = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   padding-bottom: 20px;
-  padding-top: 20px;
+  padding-top: 10px;
 `;
 
 const SectionTitle = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.xlarge};
   padding-left: 20px;
+  padding-top: 10px;
 `;
 
 const Section = styled.p`

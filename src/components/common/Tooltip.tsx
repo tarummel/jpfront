@@ -22,12 +22,8 @@ const TooltipText = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
   cursor: pointer;
   font-size: ${({theme}) => theme.fontSizes.medium};
-`;
-
-const Tool = styled.div`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: ${({theme}) => theme.fontSizes.medium};
   text-decoration: underline dotted;
+  display: table;
 
   &:hover ${TooltipHint} {
     background-color: ${({theme}) => theme.colors.textNegative};
@@ -40,14 +36,12 @@ const Tool = styled.div`
 
 const Tooltip: React.FC<Props> = ({ children, name }) => { 
   return (
-    <Tool>
-      <TooltipText>
-        {name}
-      </TooltipText>
+    <TooltipText>
+      {name}
       <TooltipHint>
         {children}
       </TooltipHint>
-    </Tool>
+    </TooltipText>
   );
 };
   
