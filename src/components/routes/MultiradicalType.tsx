@@ -94,7 +94,7 @@ const RadicalsContainer = styled.div`
 `;
 
 const LeftContainer = styled.div`
-  padding-top: 85px;
+  padding-top: 84px;
 `;
 
 const LeftSpacer = styled.div`
@@ -163,21 +163,20 @@ const CommonContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   margin-top: 5px;
   height: 100%;
-  max-height: 607px;
 `;
 
 const UncommonContainer = styled.div`
   text-align: center;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  margin-top: 15px;
+  padding-top: 10px;
 `;
 
 const UncommonRowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   display: grid;
   height: 100%;
-  max-height: 150px;
+  max-height: 156px;
 `;
 
 const BigSpinner = styled.div`
@@ -187,7 +186,7 @@ const BigSpinner = styled.div`
 const KanjiRowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   margin-top: 5px;
-  height: 90%;
+  height: 85%;
 `;
 
 const HistoryWrapper = styled.div`

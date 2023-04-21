@@ -10,7 +10,6 @@ const TooltipHint = styled.div`
   background-color: transparent;
   border: 2px solid gray;
   border-radius: 5px;
-  break-text: loose;
   color: transparent;
   font-size: ${({theme}) => theme.fontSizes.medium};
   padding: 10px;

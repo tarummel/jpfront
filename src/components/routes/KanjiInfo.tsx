@@ -24,7 +24,6 @@ const Body = styled.div`
   scrollbar-width: none;
   width: 50%;
   -ms-overflow-style: none;
-  
 `;
 
 const LeftContainer = styled.div`
@@ -55,6 +54,7 @@ const MetaGrid = styled.div`
   padding-bottom: 10px;
   padding-top: 10px;
   row-gap: 5px;
+
   justify-content: space-between;
   
   div {
@@ -86,12 +86,18 @@ const EntryContainer = styled.div`
   row-gap: 10px;
 `;
 
+const Error = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.medium};
+`;
+
 const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const { kanjiParam } = useParams();
   const [jmLoading, setJmLoading] = useState(true);
   const [kdLoading, setKdLoading] = useState(true);
   const [entry, setEntry] = useState<JEntry[]>([]);
   const [kdk, setKdk] = useState<KDKanji>();
+
 
   useEffect(() => {
     document.title = `${t("kanjiInfo.documentTitleKanji", { kanji: kanjiParam })}` || t("kanjiInfo.documentTitleKanji");
@@ -101,13 +107,11 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
     const getAndSetEntry = async (kanji: string) => {
       const response = await API.getJMdictEntryByKanji(kanji);
       setEntry(response.data.data);
-      setJmLoading(false);
     };
     
     const getAndSetKDKanji = async (kanji: string) => {
       const response = await API.getKDKanjiByKanji(kanji);
       setKdk(response.data.data);
-      setKdLoading(false);
     };
 
     if (typeof kanjiParam !== "string" || kanjiParam.length !== 1) {
@@ -117,9 +121,12 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
     getAndSetEntry(kanjiParam).catch((e) => {
       console.log(getAndSetEntry.name, e);
     });
+    setJmLoading(false);
+
     getAndSetKDKanji(kanjiParam).catch((e) => {
       console.log(getAndSetKDKanji.name, e);
     });
+    setKdLoading(false);
 
     // get and set this page's kanji into the localStorage history
     const localHistory = localStorage.getItem(Config.localStorage.history);
@@ -151,6 +158,9 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const onyomi = kdk?.reading?.[0].ja_on || "n/a";
   const kunyomi = kdk?.reading?.[0].ja_kun?.join("; ") || "n/a";
 
+  // JMdict
+  const hasJmdict = !!entry.length;
+
   // Meta info table fields
   const fieldSuffix = ": ";
   const onyomiName = `${t("kanjiInfo.onyomi")}${fieldSuffix}`;
@@ -164,28 +174,28 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
 
   return (
     <Body>
-      { jmLoading && kdLoading
+      { jmLoading || kdLoading
         ? null
         :
         <>
           <LeftContainer>
             <GiantStamp>{kanjiParam}</GiantStamp>
             <MetaGrid>
-              <Tooltip name={onyomiName}>{t("kanjiInfo.onyomiHint")}</Tooltip>
+              <div><Tooltip name={onyomiName}>{t("kanjiInfo.onyomiHint")}</Tooltip></div>
               <div>{onyomi}</div>
-              <Tooltip name={kunyomiName}>{t("kanjiInfo.kunyomiHint")}</Tooltip>
+              <div><Tooltip name={kunyomiName}>{t("kanjiInfo.kunyomiHint")}</Tooltip></div>
               <div>{kunyomi}</div>
-              <Tooltip name={strokesName}>{t("kanjiInfo.strokesHint")}</Tooltip>
+              <div><Tooltip name={strokesName}>{t("kanjiInfo.strokesHint")}</Tooltip></div>
               <div>{strokes}</div>
-              <Tooltip name={skipName}>{t("kanjiInfo.skipHint")}</Tooltip>
+              <div><Tooltip name={skipName}>{t("kanjiInfo.skipHint")}</Tooltip></div>
               <div>{skip}</div>
-              <Tooltip name={gradeName}>{t("kanjiInfo.gradeHint")}</Tooltip>
+              <div><Tooltip name={gradeName}>{t("kanjiInfo.gradeHint")}</Tooltip></div>
               <div>{grade}</div>
-              <Tooltip name={jlptName}>{t("kanjiInfo.jlptHint")}</Tooltip>
+              <div><Tooltip name={jlptName}>{t("kanjiInfo.jlptHint")}</Tooltip></div>
               <div>{jlpt}</div>
-              <Tooltip name={freqName}>{t("kanjiInfo.freqHint")}</Tooltip>
+              <div><Tooltip name={freqName}>{t("kanjiInfo.freqHint")}</Tooltip></div>
               <div>{frequency}</div>
-              <Tooltip name={ucsName}>{t("kanjiInfo.ucsHint")}</Tooltip>
+              <div><Tooltip name={ucsName}>{t("kanjiInfo.ucsHint")}</Tooltip></div>
               <div>{unicode}</div>
             </MetaGrid>
             <HorizontalDivider/>
@@ -199,13 +209,14 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
           </LeftContainer>
           <RightContainer>
             <EntryContainer>
-              { entry && (entry.map((e, i) => {
-                return (
-                  <JMdictEntry key={i} entry={e} num={i+1} />
-                );
-              }))}
+              { !hasJmdict
+                ? <Error>{t("kanjiInfo.noEntryFound")}</Error>
+                : entry.map((e, i) => {
+                  return ( <JMdictEntry key={i} entry={e} num={i+1} /> );
+                })
+              }
             </EntryContainer>
-            <LicenseAgreement krad={true} jmdict={true} />
+            <LicenseAgreement krad={true} jmdict={hasJmdict} />
           </RightContainer>
         </>
       }
