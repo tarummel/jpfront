@@ -1,30 +1,94 @@
 {
+  "error": {
+    "documentTitle": "404 / Open Kanji",
+    "pageNotFound": "Page Not Found",
+    "message": "Sorry! The page you were looking for may have moved or you may have been redirected here by mistake.",
+    "goBack": "< Back"
+  },
   "header": {
-    "about": "よくある質問",
     "help": "ヘルプ",
     "home": "ホーム",
+    "legal": "法的",
     "settings": "設定"
   },
+  "help": {
+    "bugs": "Please send any bug reports to the email 'bugs@openkanji.com'. Add as much information as you can including a description of the issue, your web browser type and version, steps to reproduce, screenshots, etc. Everything helps.",
+    "bugsTitle": "Found a bug?",
+    "documentTitle": "FAQ / Open Kanji",
+    "helpAndFaq": "Help and FAQ",
+    "requests": "Please do not ask me to translate anything. I am NOT qualified as a translator.",
+    "requestsTitle": "Can you help me with translating something?",
+    "whatIsThisSite": "Open Kanji is a series of Japanese-to-English companion tools designed to help solve the universal issue every learner faces - looking up unknown kanji. And while Open Kanji does pull from online dictionaries, I would still encourage using established resources like Jisho if you require even better results.",
+    "whatIsThisSiteTitle": "What is this site?",
+    "suggestions": "At this time I'm not accepting feature requests as I already have a lot planned. When that changes I will update this entry with more information. Sorry!",
+    "suggestionsTitle": "I have a suggestion for the website!"
+  },
+  "home": {
+    "documentTitle": "ホーム / Open Kanji",
+    "random": "ランダムページ",
+    "multiradicalSearch": "マルチ部首",
+    "multiradicalSearchByType": "マルチ部首 (タイプ)",
+    "openKanji": "Open 漢字",
+    "searchByRadical": "検索部首",
+    "searchKanji": "検索漢字",
+    "skip": "SKIP"
+  },
   "kanjiInfo": {
-    "english": "Engl/英",
-    "error400": "エラー 400：バックエンドへの不正なリクエスト",
-    "error404": "エラー 404：エントリーが見つかりません",
-    "externalLinks": "外部リンク",
-    "kanji": "Kanji/漢字",
+    "deepl": "DeepL",
+    "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
+    "documentTitle": "Info / Open Kanji",
+    "documentTitleKanji": "{{kanji}} / Open Kanji",
+    "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
+    "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
+    "externalLinks": "外部ウェブリンク",
+    "freq": "Freq",
+    "freqHint": "Frequency ranking",
+    "grade": "Grade",
+    "gradeHint": "Japanese school grade level",
+    "kunyomi": "Kun",
+    "kunyomiHint": "Kun'yomi reading is the Japanese reading",
     "jisho": "Jisho",
     "jishoLink": "https://jisho.org/search/{{kanji}}",
-    "meaning": "Mean/意味",
-    "noEntryFound": "エントリが見つかりません :(",
+    "jlpt": "JLPT",
+    "jlptHint": "Japanese Language Proficiency Test level",
+    "noEntryFound": "追加のエントリーは見つかりませんでした。",
+    "onyomi": "On",
+    "onyomiHint": "On'yomi reading is the Chinese reading",
+    "strokes": "Strokes",
+    "strokesHint": "Stroke count of the kanji",
+    "skip": "SKIP",
+    "skipHint": "Kanji's corresponding SKIP code",
+    "ucs": "UCS",
+    "ucsHint": "Unicode encoding",
     "wiktionary": "Wiktionary",
     "wiktionaryLink": "https://en.wiktionary.org/wiki/{{kanji}}",
     "wwwjdic": "WWWJDIC",
-    "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}"
+    "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}",
+    "jmdict": {
+      "notes": "Notes",
+      "contexts": "Contexts",
+      "other": "Other"
+    }
   },
   "legal": {
+    "codeLegal": "The code that runs this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own. Source code can be found at: ",
+    "codeLegalLink": "https://github.com/tarummel/jpfront",
+    "codeLegalTitle": "Source Code license",
+    "documentTitle": "Legal / Open Kanji",
+    "aboutAndLegalInformation": "Legal Information",
+    "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses. More information can be found on their website at: ",
+    "edrdgLegalTitle": "Electronic Dictionary Research and Development Group licenses",
+    "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
+    "edrdg": "To EDRDG Wiki",
+    "kanjidic": "KANJIDIC is copyright under the EDRDG licence.",
+    "kanjidicLink": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
     "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG licence.",
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
     "jmdict": "JMdict is copyright under the EDRDG licence.",
-    "jmdictLink": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project"
+    "jmdictLink": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project",
+    "skip": "SKIP Method license",
+    "skipLegal": "The SKIP (System of Kanji Indexing by Patterns) system and codes were developed by Jack Halpern and are used with his permission.",
+    "skipLink": "http://www.kanji.org/"
   },
   "mainMenu": {
     "multiradicalSearch": "マルチ部首検索",
@@ -36,6 +100,13 @@
     "reset": "リセット",
     "searchHistory": "検索履歴",
     "strokes": "行数"
+  },
+  "multiType": {
+    "documentTitle": "マルチ部首 (タイプ) / Open Kanji",
+    "enclose": "かまえ",
+    "left": "へん",
+    "top": "かんむり",
+    "uncommon": "(91) 最頻出部首"
   },
   "settings": {
     "dark": "ダーク",
@@ -49,5 +120,12 @@
     "settings": "設定",
     "theme": "テーマ",
     "themeDesc": "表示テーマを変更する(現時点ではリフレッシュが必要)"
+  },
+  "skip": {
+    "documentTitle": "SKIP / Open Kanji",
+    "main": "主",
+    "plusminus": "±",
+    "shape": "形",
+    "sub": "終"
   }
 }

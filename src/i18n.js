@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import Config from "./constants/Config";
 
-const languages = ['en', 'jp'];
+const languages = ["en", "jp"];
 const translations = {
   en: { translation: require("./assets/locales/en/translation.json"), },
   jp: { translation: require("./assets/locales/jp/translation.json"), },
@@ -31,7 +31,7 @@ i18n
     whitelist: languages,
     lng: window.localStorage.getItem(Config.localStorage.language || "en"),
     fallbackLng: false,
-    debug: Config.env === 'dev' || Config.env === 'development',
+    debug: Config.env === "development",
     keySeparator: ".",
     ns: ["translation"],
     defaultNS: "translation",
@@ -40,8 +40,8 @@ i18n
       escapeValue: false, // not needed for react as it escapes by default
     },
     backend: {
-      loadPath: `./assets/locales/{{lng}}/{{ns}}.json`,
-      addPath: `./assets/locales/add/{{lng}}/{{ns}}`,
+      loadPath: "./assets/locales/{{lng}}/{{ns}}.json",
+      addPath: "./assets/locales/add/{{lng}}/{{ns}}",
     },
   });
 

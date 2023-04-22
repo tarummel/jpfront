@@ -5,16 +5,6 @@
     "message": "Sorry! The page you were looking for may have moved or you may have been redirected here by mistake.",
     "goBack": "< Back"
   },
-  "home": {
-    "documentTitle": "Home / Open Kanji",
-    "random": "Random Page",
-    "multiradicalSearch": "Multi-Radical",
-    "multiradicalSearchByType": "Multi-Radical (Type)",
-    "openKanji": "Open Kanji",
-    "searchByRadical": "Search by Radicals",
-    "searchKanji": "Search Kanji",
-    "skip": "SKIP"
-  },
   "header": {
     "legal": "Legal",
     "help": "Help",
@@ -33,12 +23,21 @@
     "suggestions": "At this time I'm not accepting feature requests as I already have a lot planned. When that changes I will update this entry with more information. Sorry!",
     "suggestionsTitle": "I have a suggestion for the website!"
   },
+  "home": {
+    "documentTitle": "Home / Open Kanji",
+    "random": "Random Page",
+    "multiradicalSearch": "Multi-Radical",
+    "multiradicalSearchByType": "Multi-Radical (Type)",
+    "openKanji": "Open Kanji",
+    "searchByRadical": "Search by Radicals",
+    "searchKanji": "Search Kanji",
+    "skip": "SKIP"
+  },
   "kanjiInfo": {
     "deepl": "DeepL",
     "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
     "documentTitle": "Info / Open Kanji",
     "documentTitleKanji": "{{kanji}} / Open Kanji",
-    "english": "Engl/英",
     "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
     "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
     "externalLinks": "External Links",
@@ -46,14 +45,12 @@
     "freqHint": "Frequency ranking",
     "grade": "Grade",
     "gradeHint": "Japanese school grade level",
-    "kanji": "Kanji/漢字",
     "kunyomi": "Kun",
     "kunyomiHint": "Kun'yomi reading is the Japanese reading",
     "jisho": "Jisho",
     "jishoLink": "https://jisho.org/search/{{kanji}}",
-    "jlpt": "JLTP",
+    "jlpt": "JLPT",
     "jlptHint": "Japanese Language Proficiency Test level",
-    "meaning": "Mean/意味",
     "noEntryFound": "No additional dictionary references found for this kanji.",
     "onyomi": "On",
     "onyomiHint": "On'yomi reading is the Chinese reading",
@@ -104,7 +101,6 @@
     "documentTitle": "Multiradical Type / Open Kanji",
     "enclose": "Enclose",
     "left": "Left",
-    "right": "Right",
     "top": "Top",
     "uncommon": "(91) most infrequently used radicals"
   },
