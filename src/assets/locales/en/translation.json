@@ -38,8 +38,6 @@
     "deeplLink": "https://www.deepl.com/translator#ja/en/{{kanji}}",
     "documentTitle": "Info / Open Kanji",
     "documentTitleKanji": "{{kanji}} / Open Kanji",
-    "error400": "Error 400: Bad Request to backend (try refreshing the page?)",
-    "error404": "Error 404: Entry not found (some kanji may be incomplete, please check the external links instead)",
     "externalLinks": "External Links",
     "freq": "Freq",
     "freqHint": "Frequency ranking",
