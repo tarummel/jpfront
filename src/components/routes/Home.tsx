@@ -22,16 +22,26 @@ const Body = styled.div`
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: 48px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding-top: 20px;
+`;
+
+const LogoWrapper = styled.div`
+  padding-bottom: 30px;
+  padding-top: 30px;
+
+  img {
+    aspect-ratio: 1;
+    width: 192px;
+    object-fit: cover;
+  }
 `;
 
 const SearchBarWrapper = styled.div`
-  margin-bottom: 10px;
+  padding-bottom: 10px;
 `;
 
 const RandomButtonWrapper = styled.div`
-  margin-bottom: 40px;
+  padding-bottom: 30px;
 `;
 
 const RadicalsContainer = styled.div`
@@ -52,7 +62,7 @@ const OptionsTitle = styled.h2`
 `;
 
 const OptionButtonWrapper = styled.div`
-  margin-top: 10px;
+  padding-top: 10px;
 `;
 
 const Home: React.FC<WithTranslation> = ({ t }) => {
@@ -90,6 +100,9 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
   return (
     <Body>
       <Banner>{t("home.openKanji")}</Banner>
+      <LogoWrapper>
+        <img src="logo512.png" alt="Italian Trulli" />
+      </LogoWrapper>
       <SearchBarWrapper>
         <SearchBar text={`${t("home.searchKanji")}...`}/>
       </SearchBarWrapper>
