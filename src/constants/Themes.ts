@@ -10,8 +10,8 @@ const fontSizes = {
 const darkTheme = {
   fontSizes,
   colors: {
-    background: "#0B0029",
-    foreground: "#180845",
+    background: "#080217",
+    foreground: "#10052e",
     borderPrimary: "#180845",
     borderError: "#FF0000",
     buttonDisabled: "#878787",
@@ -20,7 +20,7 @@ const darkTheme = {
     buttonSecondary: "#000000",
     buttonSelected: "#D4AF37",
     buttonSelectedHover: "#B0912C",
-    elementPrimary: "#1E0959",
+    elementPrimary: "#180746",
     link: "#FFF8E0",
     linkVisited: "#F8CD40",
     linkHover: "#FFEBA8",
