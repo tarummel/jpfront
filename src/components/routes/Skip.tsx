@@ -10,6 +10,10 @@ import { StrokeCharactersMap } from "dataTypes";
 import API from "../../API";
 import LicenseAgreement from "../LicenseAgreement";
 
+import { ReactComponent as LeftRightIcon } from "../../assets/icons/left-right-skip.svg";
+import { ReactComponent as UpDownIcon } from "../../assets/icons/up-down-skip.svg";
+import { ReactComponent as EncloseIcon } from "../../assets/icons/enclose-skip.svg";
+import { ReactComponent as OtherIcon } from "../../assets/icons/other-skip.svg";
 
 const CATEGORY_HEIGHT = 44;
 const CATEGORY_WIDTH = CATEGORY_HEIGHT;
@@ -90,6 +94,15 @@ const CategoryButtonContainer = styled.div`
   row-gap: 2px;
 `;
 
+const SVG = styled.div`
+  svg {
+    color: ${({theme}) => theme.colors.textPrimary};
+    display: block;
+    margin: auto;
+    padding: 2px;
+  }
+`;
+
 const KanjiContainer = styled.div`
   border-radius: 5px;
   flex-direction: column;
@@ -103,15 +116,6 @@ const RowContainer = styled.div`
   height: 80%;
   padding: 5px;
   margin-top: 5px;
-`;
-
-const SVG = styled.svg`
-  color: ${({theme}) => theme.colors.textPrimary};
-  display: flex;
-  height: auto;
-  justify-content: center;
-  padding: 2px;
-  width: auto;
 `;
 
 const SpinnerWrapper = styled.div`
@@ -227,37 +231,24 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
             <NumberInput height={INPUT_HEIGHT} onChange={handleCategoryChange} value={category} width={INPUT_WIDTH}/>
           </CodeInputContainer>
           <CategoryButtonContainer>
-            {/* Left/Right */}
             <StateButton callback={1} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 1 ? 2 : 1} width={CATEGORY_WIDTH}>
-              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <path d="M 0 0 L 50 0 L 50 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                <path d="M 50 0 L 95 0 L 95 5 L 50 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                <path d="M 95 0 L 100 0 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                <path d="M 50 95 L 95 95 L 100 100 L 50 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
+              <SVG>
+                <LeftRightIcon />
               </SVG>
             </StateButton>
-            {/* Up/Down */}
             <StateButton callback={2} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 2 ? 2 : 1} width={CATEGORY_WIDTH}>
-              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <path d="M 0 0 L 100 0 L 100 50 L 0 50 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                <path d="M 0 50 L 5 50 L 5 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                <path d="M 5 95 L 95 95 L 95 100 L 5 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)"/>
-                <path d="M 95 50 L 100 50 L 100 100 L 95 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+              <SVG>
+                <UpDownIcon />
               </SVG>
             </StateButton>
-            {/* Enclose */}
             <StateButton callback={3} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 3 ? 2 : 1} width={CATEGORY_WIDTH}>
-              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <path d="M 0 0 L 100 0 L 100 5 L 0 5 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                <path d="M 95 5 L 100 5 L 100 95 L 95 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                <path d="M 0 95 L 100 95 L 100 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
-                <path d="M 0 5 L 5 5 L 5 95 L 0 95 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+              <SVG>
+                <EncloseIcon />
               </SVG>
             </StateButton>
-            {/* Other */}
             <StateButton callback={4} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 4 ? 2 : 1} width={CATEGORY_WIDTH}>
-              <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <path d="M 0 0 L 100 0 L 100 100 L 0 100 z" fill="currentColor" stroke="currentColor" transform="translate(0, 0)" />
+              <SVG>
+                <OtherIcon />
               </SVG>
             </StateButton>
           </CategoryButtonContainer>

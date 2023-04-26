@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { ReactComponent as SearchIcon } from "../../assets/icons/search-outline.svg";
+
 interface Props {
   text: string;
 }
@@ -38,14 +40,14 @@ const SearchButton = styled.button`
   border-bottom-right-radius: 20px;
   display: flex;
   justify-content: center;
-  padding: 8px;
+  padding: 8px 10px 8px 6px;
   width: 40px;
   &:hover {
     background-color: ${({theme}) => theme.colors.buttonHover};
   }
 `;
 
-const Icon = styled.svg`
+const StyledIcon = styled(SearchIcon)`
   color: ${({theme}) => theme.colors.textPrimary};
 `;
 
@@ -74,7 +76,7 @@ const SearchBar: React.FC<Props> = ({ text }) => {
       <Container textLength={searchInput.length}>
         <Search type="search" placeholder={text} value={searchInput} onChange={handleChange} onKeyDown={handleKeyDown} />
         <SearchButton onClick={handleClick}>
-          <Icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32"/><path fill="none" stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M338.29 338.29L448 448"/></Icon>
+          <StyledIcon />
         </SearchButton>
       </Container>
     </>
