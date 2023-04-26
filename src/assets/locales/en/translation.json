@@ -114,7 +114,7 @@
     "light": "Light",
     "settings": "Settings",
     "theme": "Theme",
-    "themeDesc": "Changes the display theme (requires refresh for now)"
+    "themeDesc": "Changes the display theme"
   },
   "skip": {
     "documentTitle": "SKIP / Open Kanji",

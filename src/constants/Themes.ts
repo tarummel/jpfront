@@ -12,7 +12,7 @@ const darkTheme = {
   colors: {
     background: "#0d0d0d",
     foreground: "#130b28",
-    borderPrimary: "#180845",
+    borderPrimary: "#FFFFFF",
     borderError: "#FF0000",
     buttonDisabled: "#878787",
     buttonHover: "#4E27BB",

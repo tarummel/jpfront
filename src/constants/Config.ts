@@ -7,6 +7,7 @@ const Config = {
     historySizeDefault: 24,
     language: "lang",
     theme: "theme",
+    themeDefault: "dark",
   },
   backend: {
     jpcoreUrl: process.env.REACT_APP_JPCORE_URL,

@@ -1,21 +1,18 @@
+import { BrowserRouter } from 'react-router-dom';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
-import { BrowserRouter } from 'react-router-dom';
 
-import App from "./components/App";
-import i18n from './i18n';
 import './index.css';
-// import reportWebVitals from './reportWebVitals';
-import Router from './Router';
-import Theme from "./components/utils/Theme";
+import App from "./components/App";
 import Config from './constants/Config';
+import i18n from './i18n';
 
 <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js" />;
 
 // Stuff any debugging logs in production
 if (Config.env === "production") {
-  console.log("disabling logging");
+  // console.log("disabling logging");
   window.console = console;
   // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
   const noop = () => {};
@@ -29,20 +26,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Theme>
-        <Suspense fallback={<div />}>
-          <I18nextProvider i18n={i18n}>
-            <App>
-              <Router />
-            </App>
-          </I18nextProvider>
-        </Suspense>
-      </Theme>
+      <Suspense fallback={<div />}>
+        <I18nextProvider i18n={i18n}>
+          <App />
+        </I18nextProvider>
+      </Suspense>
     </BrowserRouter>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+import Config from "../constants/Config";
 import Header from "./Header";
+import Router from "./Router";
+import Theme from "./utils/Theme";
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-const Container = styled.div`
+const AppContainer = styled.div`
   background: ${props => props.theme.colors.background};
   height: 100%;
   left: 0;
@@ -16,12 +16,20 @@ const Container = styled.div`
   z-index: 10;
 `;
 
-const App: React.FC<Props> = ({ children }) => { 
+const App: React.FC = () => {
+  const getThemeFromStorage = () => {
+    return localStorage.getItem(Config.localStorage.theme) || Config.localStorage.themeDefault;
+  };
+
+  const [theme, setTheme] = useState(getThemeFromStorage());
+
   return (
-    <Container className="App">
-      <Header />
-      {children}
-    </Container>
+    <Theme theme={theme}>
+      <AppContainer className="App">
+        <Header />
+        <Router setTheme={setTheme} theme={theme} />
+      </AppContainer>
+    </Theme>
   );
 };
 

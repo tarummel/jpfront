@@ -119,7 +119,7 @@
     "light": "ライト",
     "settings": "設定",
     "theme": "テーマ",
-    "themeDesc": "表示テーマを変更する(現時点ではリフレッシュが必要)"
+    "themeDesc": "表示テーマを変更する"
   },
   "skip": {
     "documentTitle": "SKIP / Open Kanji",

@@ -7,9 +7,13 @@ import Config from "../../constants/Config";
 import { NumberInput } from "../common";
 
 const DEFAULT_LANGUAGE = "en";
-const DEFAULT_THEME = "dark";
 const WIDGET_HEIGHT = 36;
 const WIDGET_WIDTH = 100;
+
+interface Props {
+  setTheme: (theme: string) => void;
+  theme: string;
+}
 
 const Body = styled.div`
   background: ${({theme}) => theme.colors.foreground};
@@ -76,10 +80,9 @@ const StyledOption = styled.option`
   width: ${WIDGET_WIDTH}px;
 `;
 
-const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
+const Settings: React.FC<Props & WithTranslation> = ({ i18n, setTheme, t, theme }) => {
   // TODO: use i18n default
   const [language, setLanguage] = useState(localStorage.getItem(Config.localStorage.language) || DEFAULT_LANGUAGE);
-  const [localTheme, setLocalTheme] = useState(localStorage.getItem(Config.localStorage.theme) || DEFAULT_THEME);
   const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault);
 
   useEffect(() => {
@@ -96,7 +99,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
   const handleTheme = (e: any) => {
     const newTheme = e.target.value;
     localStorage.setItem(Config.localStorage.theme, newTheme);
-    setLocalTheme(newTheme);
+    setTheme(newTheme);
   };
 
   const handleClearHistory = () => {
@@ -134,7 +137,7 @@ const Settings: React.FC<WithTranslation> = ({ i18n, t }) => {
           <SettingTitle>{'>'} {t("settings.theme")}</SettingTitle>
           <Setting>
             <Description>- {t("settings.themeDesc")}</Description>
-            <StyledSelect onChange={handleTheme} placeholder={""} value={localTheme}>
+            <StyledSelect onChange={handleTheme} placeholder={""} value={theme}>
               <StyledOption value="dark">{t("settings.dark")}</StyledOption>
               <StyledOption value="light">{t("settings.light")}</StyledOption>
             </StyledSelect>
