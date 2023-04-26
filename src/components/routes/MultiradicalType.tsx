@@ -80,10 +80,8 @@ const Body = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
-  border-radius: 5px;
   flex-direction: column;
   flex-basis: 50%;
-  height: 90%;
   margin-left: 10px;
   margin-right: 10px;
 `;
@@ -94,11 +92,11 @@ const RadicalsContainer = styled.div`
 `;
 
 const LeftContainer = styled.div`
-  padding-top: 84px;
+  padding-top: 79px;
 `;
 
 const LeftSpacer = styled.div`
-  height: 22px
+  height: 16px
 `;
 
 const EncloseTypeGrid = styled.div`
@@ -117,6 +115,7 @@ const TitledContainer = styled.div`
 const Title = styled.h2`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
+  padding-bottom: 5px;
   text-align: center;
 `;
 
@@ -147,29 +146,26 @@ const ResetButtonWrapper = styled.div`
   align-self: flex-end;
   display: flex;
   width: 100px;
-  height: 36px;
+  height: 32px;
 `;
 
 const RadicalsHeaders = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 94px;
   padding-bottom: 5px;
-  margin: auto 0 0 0;
 `;
 
 const CommonContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
-  margin-top: 5px;
   height: 100%;
 `;
 
 const UncommonContainer = styled.div`
-  text-align: center;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
   padding-top: 10px;
+  text-align: center;
 `;
 
 const UncommonRowContainer = styled.div`
@@ -185,14 +181,11 @@ const BigSpinner = styled.div`
 
 const KanjiRowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
-  margin-top: 5px;
   height: 85%;
+  margin-top: 5px;
 `;
 
 const HistoryWrapper = styled.div`
-  align-items: baseline;
-  display: flex;
-  flex-direction: column;
 `;
 
 const MultiradicalType: React.FC<WithTranslation> = ({ t }) => {

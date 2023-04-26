@@ -10,8 +10,7 @@ const HistoryContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   display: flex;
   flex-direction: row;
-  padding: 5px;
-  height: 20px;
+  padding: 7px;
 `;
 
 const Text = styled.div`
@@ -20,9 +19,10 @@ const Text = styled.div`
 `;
 
 const Links = styled.div`
-  margin-left: 8px;
+  padding-left: 5px;
+
   a {
-    margin-right: 4px;
+    padding-right: 5px;
   }
 `;
 

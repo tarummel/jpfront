@@ -56,8 +56,16 @@ const Title = styled.h1`
   display: flex;
   font-size: ${({theme}) => theme.fontSizes.medium};
   justify-content: center;
-  padding-bottom: 4px;
+  padding-bottom: 5px;
   white-space: nowrap;
+`;
+
+const PlusMinus = styled.div`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: ${({theme}) => theme.fontSizes.large};
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center;
 `;
 
 const ButtonPair = styled.div`
@@ -111,10 +119,6 @@ const SpinnerWrapper = styled.div`
 `;
 
 const HistoryWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-grow: 0;
-  min-height: 32px;
 `;
 
 const Skip: React.FC<WithTranslation> = ({ t }) => {
@@ -269,7 +273,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
             </ButtonPair>
           </CodeInputContainer>
           <CodeInputContainer>
-            <Title>{t("skip.plusminus")}</Title>
+            <PlusMinus>{t("skip.plusminus")}</PlusMinus>
             <NumberInput height={INPUT_HEIGHT} onChange={handleMainRangeChange} value={mainRange} width={INPUT_WIDTH}/>
             <ButtonPair>
               <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractMainRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>
@@ -288,7 +292,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
             </ButtonPair>
           </CodeInputContainer>
           <CodeInputContainer>
-            <Title>{t("skip.plusminus")}</Title>
+            <PlusMinus>{t("skip.plusminus")}</PlusMinus>
             <NumberInput height={INPUT_HEIGHT} onChange={handleSubRangeChange} value={subRange} width={INPUT_WIDTH}/>
             <ButtonPair>
               <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractSubRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>

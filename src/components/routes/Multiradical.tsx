@@ -87,10 +87,6 @@ const BigSpinner = styled.div`
 `;
 
 const HistoryWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-grow: 0;
-  min-height: 32px;
 `;
 
 const Multiradical: React.FC<WithTranslation> = ({ t }) => {
