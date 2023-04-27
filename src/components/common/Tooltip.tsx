@@ -8,7 +8,7 @@ interface Props {
 
 const TooltipHint = styled.div`
   background-color: transparent;
-  border: 2px solid gray;
+  border: 2px solid ${({theme}) => theme.colors.borderPrimary};
   border-radius: 5px;
   color: transparent;
   font-size: ${({theme}) => theme.fontSizes.medium};
@@ -34,7 +34,7 @@ const TooltipText = styled.div`
   }
 `;
 
-const Tooltip: React.FC<Props> = ({ children, name }) => { 
+const Tooltip: React.FC<Props> = ({ children, name }) => {
   return (
     <TooltipText>
       {name}

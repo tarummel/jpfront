@@ -140,6 +140,7 @@ const Settings: React.FC<Props & WithTranslation> = ({ i18n, setTheme, t, theme 
             <StyledSelect onChange={handleTheme} placeholder={""} value={theme}>
               <StyledOption value="dark">{t("settings.dark")}</StyledOption>
               <StyledOption value="light">{t("settings.light")}</StyledOption>
+              {/* <StyledOption value="purpleism">{t("settings.purpleism")}</StyledOption> */}
             </StyledSelect>
           </Setting>
         </SettingContainer>

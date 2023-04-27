@@ -117,6 +117,7 @@
     "language": "言語",
     "languageDesc": "表示言語を変更します",
     "light": "ライト",
+    "purpleism": "Purpleism",
     "settings": "設定",
     "theme": "テーマ",
     "themeDesc": "表示テーマを変更する"
@@ -126,6 +127,6 @@
     "main": "主",
     "plusminus": "±",
     "shape": "形",
-    "sub": "終"
+    "sub": "終" 
   }
 }

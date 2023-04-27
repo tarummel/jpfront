@@ -22,7 +22,7 @@ const Body = styled.div`
 const Banner = styled.h1`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: 48px;
-  padding-top: 20px;
+  padding-top: 30px;
 `;
 
 const LogoWrapper = styled.div`

@@ -58,8 +58,11 @@ const ContentContainer = styled.div`
   border-radius: 5px;
   flex-direction: column;
   flex: 1;
+  flex-shrink: 0;
+  width: 100%;
   margin-left: 10px;
   margin-right: 10px;
+  height: 100%;
 `;
 
 const RadicalHeaders = styled.div`
@@ -72,18 +75,17 @@ const StrokesText = styled.div`
   align-self: flex-end;
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
-  padding-left: 5px;
 `;
 
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   height: 85%;
   margin-top: 5px;
-  padding: 5px;
+  padding-top: 1px;
 `;
 
 const BigSpinner = styled.div`
-  margin: calc(50% + 20px) auto;
+  margin: 50% auto;
 `;
 
 const HistoryWrapper = styled.div`

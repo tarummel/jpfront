@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Line = styled.div<Props>`
-  background: ${({theme}) => theme.colors.buttonDisabled};
+  background: ${({theme}) => theme.colors.borderPrimary};
   height: ${({height}) => height ? height : 2}px;
 `;
 

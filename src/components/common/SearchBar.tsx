@@ -12,15 +12,12 @@ interface ContainerProps {
   textLength: number;
 }
 
-
 const Container = styled.div<ContainerProps>`
   border-radius: 40px;
   display: flex;
   flex-direction: row;
   height: 40px;
-  outline-color: ${({theme, textLength}) => textLength > 1 ? theme.colors.borderError : theme.colors.borderPrimary};
-  outline-width: 2px;
-  outline-style: solid;
+  outline: solid 2px ${({theme, textLength}) => textLength > 1 ? theme.colors.borderError : "transparent"};
 `;
 
 const Search = styled.input`
@@ -72,14 +69,12 @@ const SearchBar: React.FC<Props> = ({ text }) => {
   };
 
   return (
-    <>
-      <Container textLength={searchInput.length}>
-        <Search type="search" placeholder={text} value={searchInput} onChange={handleChange} onKeyDown={handleKeyDown} />
-        <SearchButton onClick={handleClick}>
-          <StyledIcon />
-        </SearchButton>
-      </Container>
-    </>
+    <Container textLength={searchInput.length}>
+      <Search type="search" placeholder={text} value={searchInput} onChange={handleChange} onKeyDown={handleKeyDown} />
+      <SearchButton onClick={handleClick}>
+        <StyledIcon />
+      </SearchButton>
+    </Container>
   );
 };
 

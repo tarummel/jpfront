@@ -3,7 +3,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 // import NotoSansJP from "../../assets/fonts/NotoSansJP/NotoSansJP-Regular.otf";
 import Roboto from "../../assets/fonts/Roboto/Roboto-Regular.ttf";
-import { darkTheme, lightTheme } from "../../constants/Themes";
+import { dark, light, purpleism } from "../../constants/Themes";
 
 interface Props {
   children?: React.ReactNode;
@@ -41,9 +41,11 @@ const Theme: React.FC<Props> = ({ children, theme }) => {
 
   const getThemeProfile = (theme: string) => {
     if (theme === "dark") {
-      return darkTheme;
+      return dark;
     } else if (theme === "light") {
-      return lightTheme;
+      return light;
+    } else if (theme === "purpleism") {
+      return purpleism;
     }
   };
 

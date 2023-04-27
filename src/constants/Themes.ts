@@ -7,36 +7,36 @@ const fontSizes = {
   header: "2.4rem",
 };
 
-const darkTheme = {
+const dark = {
   fontSizes,
   colors: {
     background: "#0d0d0d",
-    foreground: "#130b28",
-    borderPrimary: "#FFFFFF",
+    foreground: "#1a1a1a",
+    borderPrimary: "#e6e6e6",
     borderError: "#FF0000",
     buttonDisabled: "#878787",
-    buttonHover: "#4E27BB",
-    buttonPrimary: "#623DCA",
+    buttonHover: "#b30077",
+    buttonPrimary: "#861360",
     buttonSecondary: "#000000",
     buttonSelected: "#D4AF37",
     buttonSelectedHover: "#B0912C",
-    elementPrimary: "#1b0d3f",
-    link: "#FFF8E0",
+    elementPrimary: "#262626",
+    link: "#fff3cc",
     linkVisited: "#F8CD40",
-    linkHover: "#FFEBA8",
-    rowPrimary: "#C3BCD6",
+    linkHover: "#ffe799",
+    rowPrimary: "#e6e6e6",
     textNegative: "#000000",
-    textPrimary: "#FFFFFF",
-    textSecondary: "#C3BCD6",
-    spinnerPrimary: "#C3BCD6",
-    spinnerSecondary: "#FFFFFF",
+    textPrimary: "#e6e6e6",
+    textSecondary: "#fce9f5",
+    spinnerPrimary: "#e6e6e6",
+    spinnerSecondary: "#b30077",
   },
 };
 
-const lightTheme = {
+const light = {
   fontSizes,
   colors: {
-    background: "#F1F1F6",
+    background: "#F1F1F1",
     foreground: "#E1CCEC",
     borderPrimary: "#000000",
     borderError: "#FF0000",
@@ -51,15 +51,42 @@ const lightTheme = {
     linkVisited: "#623DCA",
     linkHover: "#BE0029",
     rowPrimary: "#000000",
-    textNegative: "#FFFFFF",
+    textNegative: "#F1F1F1",
     textPrimary: "#000000",
     textSecondary: "#3e0548",
-    spinnerPrimary: "#000000",
-    spinnerSecondary: "#FFFFFF",
+    spinnerPrimary: "#F1F1F1",
+    spinnerSecondary: "#000000",
+  },
+};
+
+const purpleism = {
+  fontSizes,
+  colors: {
+    background: "#0d0d0d",
+    foreground: "#130b28",
+    borderPrimary: "#e6e6e6",
+    borderError: "#FF0000",
+    buttonDisabled: "#878787",
+    buttonHover: "#593ea3",
+    buttonPrimary: "#6b4ebc",
+    buttonSecondary: "#000000",
+    buttonSelected: "#D4AF37",
+    buttonSelectedHover: "#B0912C",
+    elementPrimary: "#1b0d3f",
+    link: "#fff3cc",
+    linkVisited: "#F8CD40",
+    linkHover: "#ffe799",
+    rowPrimary: "#C3BCD6",
+    textNegative: "#000000",
+    textPrimary: "#e6e6e6",
+    textSecondary: "#C3BCD6",
+    spinnerPrimary: "#C3BCD6",
+    spinnerSecondary: "#e6e6e6",
   },
 };
 
 export {
-  darkTheme,
-  lightTheme,
+  dark,
+  light,
+  purpleism,
 };

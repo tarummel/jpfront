@@ -114,7 +114,6 @@ const KanjiContainer = styled.div`
 const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   height: 80%;
-  padding: 5px;
   margin-top: 5px;
 `;
 
