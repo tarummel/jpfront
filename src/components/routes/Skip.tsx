@@ -115,6 +115,7 @@ const RowContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
   height: 80%;
   margin-top: 5px;
+  padding-top: 1px;
 `;
 
 const SpinnerWrapper = styled.div`
