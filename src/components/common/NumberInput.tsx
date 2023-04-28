@@ -12,6 +12,7 @@ interface Props {
 }
 
 const StyledInput = styled.input<Props>`
+  background-color: ${({theme}) => theme.colors.textPrimary};
   border: none;
   border-radius: 20px;
   font-size: ${({fontSize, theme}) => fontSize ? theme.fontSizes[fontSize] : theme.fontSizes.large};

@@ -58,11 +58,15 @@ const Legal: React.FC<WithTranslation> = ({ t }) => {
           <Anchor target="_blank" href={`${t("legal.codeLegalLink")}`}>{t("legal.codeLegalLink")}</Anchor>  
         </Section>
         <SectionTitle>{prefix}{t("legal.edrdgLegalTitle")}</SectionTitle>
-        <Section>{t("legal.edrdgLegal")}
+        <Section>
+          {t("legal.edrdgLegal")}
           <Anchor target="_blank" href={`${t("legal.edrdgLink")}`}>{t("legal.edrdgLink")}</Anchor>
         </Section>
         <SectionTitle>{prefix}{t("legal.skip")}</SectionTitle>
-        <Section>{t("legal.skipLegal")}</Section>
+        <Section>
+          {t("legal.skipLegal")}
+          <Anchor target="_blank" href={`${t("legal.skipLink")}`}>{t("legal.skipLink")}</Anchor>
+        </Section>
       </Card>
     </Body>
   );

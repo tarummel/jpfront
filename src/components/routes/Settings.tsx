@@ -67,6 +67,7 @@ const Description = styled.p`
 `;
 
 const StyledSelect = styled.select`
+  background-color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
   height: ${WIDGET_HEIGHT}px;
   text-align: center;
@@ -74,6 +75,7 @@ const StyledSelect = styled.select`
 `;
 
 const StyledOption = styled.option`
+  background-color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.medium};
   height: ${WIDGET_HEIGHT}px;
   text-align: center;

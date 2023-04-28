@@ -15,21 +15,16 @@ const Container = styled.nav`
 const HeaderButton = styled.button`
   background: ${({theme}) => theme.colors.buttonPrimary};
   border: none;
-  display: flex;
-  flex-direction: row;
-  width: 100px;
-  &:hover {
-    background-color: ${({theme}) => theme.colors.buttonHover};
-    border-left: 1px solid ${({theme}) => theme.colors.textPrimary};
-    border-right: 1px solid ${({theme}) => theme.colors.textPrimary};
-  }
-`;
-
-const ButtonText = styled.div`
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: ${({theme}) => theme.fontSizes.small};
-  line-height: 24px;
-  margin: 0 auto;
+  line-height: 20px;
+  width: 100px;
+
+  &:hover {
+    background-color: ${({theme}) => theme.colors.buttonHover};
+    border-left: 1px dotted ${({theme}) => theme.colors.textPrimary};
+    border-right: 1px dotted ${({theme}) => theme.colors.textPrimary};
+  }
 `;
 
 const Header: React.FC<WithTranslation> = ({ t }) => {
@@ -54,16 +49,16 @@ const Header: React.FC<WithTranslation> = ({ t }) => {
   return (
     <Container>
       <HeaderButton onClick={handleHomeNavClick}>
-        <ButtonText>{t("header.home")}</ButtonText>
-      </HeaderButton>
-      <HeaderButton onClick={handleLegalNavClick}>
-        <ButtonText>{t("header.legal")}</ButtonText>
-      </HeaderButton>
-      <HeaderButton onClick={handleSettingsNavClick}>
-        <ButtonText>{t("header.settings")}</ButtonText>
+        {t("header.home")}
       </HeaderButton>
       <HeaderButton onClick={handleHelpNavClick}>
-        <ButtonText>{t("header.help")}</ButtonText>
+        {t("header.help")}
+      </HeaderButton>
+      <HeaderButton onClick={handleLegalNavClick}>
+        {t("header.legal")}
+      </HeaderButton>
+      <HeaderButton onClick={handleSettingsNavClick}>
+        {t("header.settings")}
       </HeaderButton>
     </Container>
   );

@@ -152,7 +152,9 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
     };
 
     if (category > 0 && category < 5 && main > 0 && sub > 0 && mainRange > -1 && subRange > -1) {
-      getAndSetKanjiData().catch((e) => { console.log(e); });
+      getAndSetKanjiData().catch((e) => { 
+        console.log(getAndSetKanjiData.name, e);
+      });
     } else {
       setKanjiData({});
     }
