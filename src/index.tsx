@@ -15,8 +15,10 @@ if (Config.env === "production") {
   // console.log("disabling logging");
   window.console = console;
   // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
-  const noop = () => {};
+  const noop = function () {};
   console.log = noop;
+  console.warn = noop;
+  console.error = noop;
 }
 
 const root = ReactDOM.createRoot(
