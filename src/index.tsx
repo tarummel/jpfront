@@ -14,16 +14,15 @@ import i18n from './i18n';
 if (Config.env === "production") {
   // console.log("disabling logging");
   window.console = console;
-  // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
-  const noop = function () {};
+  // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
+  const noop = (...args: any) => {};
   console.log = noop;
   console.warn = noop;
   console.error = noop;
 }
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+// Create the HTML root element and
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>

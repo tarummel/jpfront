@@ -69,12 +69,12 @@
     }
   },
   "legal": {
-    "codeLegal": "The code that powers this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own. Source code can be found at: ",
+    "codeLegal": "The code that powers this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own. ",
     "codeLegalLink": "https://github.com/tarummel/jpfront",
     "codeLegalTitle": "Source Code license",
     "documentTitle": "Legal / Open Kanji",
     "aboutAndLegalInformation": "Legal Information",
-    "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses. More information can be found at: ",
+    "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses. ",
     "edrdgLegalTitle": "Electronic Dictionary Research and Development Group licenses",
     "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
     "edrdg": "To EDRDG Wiki",
