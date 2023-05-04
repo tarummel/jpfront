@@ -18,7 +18,7 @@ const AppContainer = styled.div`
 
 const App: React.FC = () => {
   const getThemeFromStorage = () => {
-    return localStorage.getItem(Config.localStorage.theme) || Config.localStorage.themeDefault;
+    return Config.getStorage(Config.localStorage.theme) || Config.localStorage.themeDefault;
   };
 
   const [theme, setTheme] = useState(getThemeFromStorage());

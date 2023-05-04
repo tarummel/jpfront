@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
-import { Button } from "../buttons";
+import { Button } from "../common/buttons";
 import { useNavigate } from "react-router-dom";
 
 const Body = styled.div`

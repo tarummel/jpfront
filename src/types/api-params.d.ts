@@ -21,6 +21,11 @@ declare module 'apiParamTypes' {
     sub_range?: number;
     simple?: boolean;
   }
+
+  interface VisualClosenessByKanjiParams {
+    sensitivity?: string;
+    simple?: boolean;
+  }
 }
 
 module.exports = {
@@ -29,4 +34,5 @@ module.exports = {
   RelatedRadicalsParams,
   KDKanjiRandomParams,
   KDKanjiBySkipcodeParams,
+  VisualClosenessByKanjiParams,
 };

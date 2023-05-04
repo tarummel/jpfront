@@ -61,6 +61,14 @@ async function getKDKanjiBySkipcode(skip:string, params: paramTypes.KDKanjiBySki
   }
 }
 
+async function getVisualClosenessByKanji(kanji: string, params: paramTypes.VisualClosenessByKanjiParams = {}): Promise<AxiosResponse<any>> {
+  try {
+    return await axios.get(`kanjidic/kanji/${kanji}/visualcloseness/`, { params });
+  } catch (error: any) {
+    return getPromiseRejection(error);
+  }
+}
+
 async function getKDKanjiRandom(params: paramTypes.KDKanjiRandomParams = {}): Promise<AxiosResponse<any>> {
   try {
     return await axios.get(`kanjidic/random/`, { params });
@@ -83,6 +91,7 @@ const API = {
   getRelatedRadicalsByRadicals,
   getKDKanjiByKanji,
   getKDKanjiBySkipcode,
+  getVisualClosenessByKanji,
   getKDKanjiRandom,
   getJMdictEntryByKanji,
 };

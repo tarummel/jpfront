@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
-import { MainMenuButton } from "../buttons";
+import { MainMenuButton } from "../common/buttons";
 import SearchBar from "../common/SearchBar";
 import { KDKanjiRandomParams } from "apiParamTypes";
 

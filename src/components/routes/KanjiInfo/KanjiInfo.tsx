@@ -4,13 +4,16 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
-import API from "../../API";
-import { Anchor, HorizontalDivider, Tooltip } from "../common";
-import Config from "../../constants/Config";
+import API from "../../../API";
+import { Anchor, HorizontalDivider, Tooltip } from "../../common";
+import Config from "../../../constants/Config";
 import { JEntry } from "jmdict";
 import { KDKanji } from "kanjidic";
-import JMdictEntry from "../JMdictEntry";
-import LicenseAgreement from "../LicenseAgreement";
+import JMdictEntry from "./JMdictEntry";
+import LicenseAgreement from "../../LicenseAgreement";
+import VisualCloseness from "./VisualCloseness";
+import { VisualClosenessTupleArray } from "dataTypes";
+import { VisualClosenessByKanjiParams } from "apiParamTypes";
 
 
 const Body = styled.div`
@@ -84,6 +87,10 @@ const RightContainer = styled.div`
   padding-right: 20px;
 `;
 
+const VisualClosenessWrapper = styled.div`
+  padding-bottom: 10px;
+`;
+
 const EntryContainer = styled.div`
   display: grid;
   row-gap: 10px;
@@ -96,60 +103,85 @@ const Error = styled.div`
 
 const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const { kanjiParam } = useParams();
-  const [jmLoading, setJmLoading] = useState(true);
-  const [kdLoading, setKdLoading] = useState(true);
-  const [entry, setEntry] = useState<JEntry[]>([]);
-  const [kdk, setKdk] = useState<KDKanji>();
 
+  const [jmLoading, setJmLoading] = useState(false);
+  const [entry, setEntry] = useState<JEntry[]>([]);
+
+  const [kdLoading, setKdLoading] = useState(false);
+  const [kdk, setKdk] = useState<KDKanji>();
+  
+  // const [vcLoading, setVcLoading] = useState(false);
+  const [sensitivity, setSensitivity] = useState(Config.getStorage(Config.localStorage.vcSensitivity) || "0.000");
+  const [vc, setVc] = useState<VisualClosenessTupleArray>([]);
 
   useEffect(() => {
     document.title = `${t("kanjiInfo.documentTitleKanji", { kanji: kanjiParam })}` || t("kanjiInfo.documentTitleKanji");
   }, []);
 
-  useEffect(() => {
-    const getAndSetEntry = async (kanji: string) => {
-      const response = await API.getJMdictEntryByKanji(kanji);
-      setEntry(response.data.data);
-    };
-    
-    const getAndSetKDKanji = async (kanji: string) => {
-      const response = await API.getKDKanjiByKanji(kanji);
-      setKdk(response.data.data);
-    };
+  const getAndSetEntry = async (kanji: string) => {
+    const response = await API.getJMdictEntryByKanji(kanji);
+    setEntry(response.data.data);
+  };
+  
+  const getAndSetKDKanji = async (kanji: string) => {
+    const response = await API.getKDKanjiByKanji(kanji);
+    setKdk(response.data.data);
+  };
 
+  const getAndSetVisualCloseness = async (kanji: string) => {
+    const params = { simple: true, sensitivity } as VisualClosenessByKanjiParams;
+    const response = await API.getVisualClosenessByKanji(kanji, params);
+    setVc(response.data.data);
+  };
+
+  useEffect(() => {
     if (typeof kanjiParam !== "string" || kanjiParam.length !== 1) {
       return;
     }
 
+    setJmLoading(true);
     getAndSetEntry(kanjiParam).catch((e) => {
       console.log(getAndSetEntry.name, e);
     });
     setJmLoading(false);
 
+    setKdLoading(true);
     getAndSetKDKanji(kanjiParam).catch((e) => {
       console.log(getAndSetKDKanji.name, e);
     });
     setKdLoading(false);
 
+    // setVcLoading(true);
+    getAndSetVisualCloseness(kanjiParam).catch((e) => {
+      console.log(getAndSetVisualCloseness.name, e);
+      setVc([]);
+    });
+    // setVcLoading(false);
+
     // get and set this page's kanji into the localStorage history
-    const localHistory = localStorage.getItem(Config.localStorage.history);
+    const localHistory = Config.getStorage(Config.localStorage.history);
     if (typeof localHistory === "string") {
 
       let historyArray = JSON.parse(localHistory);
       if (!historyArray.includes(kanjiParam)) {
 
         historyArray.push(kanjiParam);
-        const historySize = localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault;
+        const historySize = Config.getStorage(Config.localStorage.historySize) || Config.localStorage.historySizeDefault;
         if (historyArray.length > historySize) {
           // toss the oldest elements first
           historyArray = historyArray.slice(-historySize);
         }
-        localStorage.setItem(Config.localStorage.history, JSON.stringify(historyArray));
+        Config.setStorage(Config.localStorage.history, JSON.stringify(historyArray));
       }
     } else {
-      localStorage.setItem(Config.localStorage.history, JSON.stringify([kanjiParam]));
+      Config.setStorage(Config.localStorage.history, JSON.stringify([kanjiParam]));
     }
   }, [kanjiParam]);
+
+  const handleSensitivityChange = (value: string) => {
+    Config.setStorage(Config.localStorage.vcSensitivity, value);
+    setSensitivity(value);
+  };
 
   // Kanjidic info
   const onyomi = kdk?.reading?.[0].ja_on || "n/a";
@@ -174,6 +206,9 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const jlptName = `${t("kanjiInfo.jlpt")}${fieldSuffix}`;
   const freqName = `${t("kanjiInfo.freq")}${fieldSuffix}`;
   const ucsName = `${t("kanjiInfo.ucs")}${fieldSuffix}`;
+
+  // default behavior is to have the box open
+  const openVcByDefault = Config.getStorage(Config.localStorage.vcOpen) === "false" ? false : true;
 
   return (
     <Body>
@@ -211,6 +246,9 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
             </LinksGrid>
           </LeftContainer>
           <RightContainer>
+            <VisualClosenessWrapper>
+              <VisualCloseness data={vc} loading={false} onSensitivityChange={handleSensitivityChange} open={!openVcByDefault} sensitivity={sensitivity} />
+            </VisualClosenessWrapper>
             <EntryContainer>
               { !hasJmdict
                 ? <Error>{t("kanjiInfo.noEntryFound")}</Error>

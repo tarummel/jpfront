@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import Button from "../buttons/Button";
+import Button from "../common/buttons/Button";
 import Config from "../../constants/Config";
 import { NumberInput } from "../common";
 
@@ -84,8 +84,8 @@ const StyledOption = styled.option`
 
 const Settings: React.FC<Props & WithTranslation> = ({ i18n, setTheme, t, theme }) => {
   // TODO: use i18n default
-  const [language, setLanguage] = useState(localStorage.getItem(Config.localStorage.language) || DEFAULT_LANGUAGE);
-  const [historySize, setHistorySize] = useState(localStorage.getItem(Config.localStorage.historySize) || Config.localStorage.historySizeDefault);
+  const [language, setLanguage] = useState(Config.getStorage(Config.localStorage.language) || DEFAULT_LANGUAGE);
+  const [historySize, setHistorySize] = useState(Config.getStorage(Config.localStorage.historySize) || Config.localStorage.historySizeDefault);
 
   useEffect(() => {
     document.title = t("settings.documentTitle");
@@ -93,19 +93,19 @@ const Settings: React.FC<Props & WithTranslation> = ({ i18n, setTheme, t, theme 
 
   const handleLanguage = (e: any) => {
     const lang = e.target.value;
-    localStorage.setItem(Config.localStorage.language, lang);
+    Config.setStorage(Config.localStorage.language, lang);
     i18n.changeLanguage(lang);
     setLanguage(lang);
   };
 
   const handleTheme = (e: any) => {
     const newTheme = e.target.value;
-    localStorage.setItem(Config.localStorage.theme, newTheme);
+    Config.setStorage(Config.localStorage.theme, newTheme);
     setTheme(newTheme);
   };
 
   const handleClearHistory = () => {
-    localStorage.removeItem(Config.localStorage.history);
+    Config.setStorage(Config.localStorage.history, "[]");
   };
 
   const handleHistorySize = (e: any) => {
@@ -117,7 +117,7 @@ const Settings: React.FC<Props & WithTranslation> = ({ i18n, setTheme, t, theme 
     }
 
     size = Math.min(Math.max(size, 0), 100);
-    localStorage.setItem(Config.localStorage.historySize, String(size));
+    Config.setStorage(Config.localStorage.historySize, String(size));
     setHistorySize(size);
   };
 

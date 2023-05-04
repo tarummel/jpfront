@@ -4,7 +4,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 
 import API from "../../API";
 import { Spinner } from "../common";
-import { Button } from "../buttons";
+import { Button } from "../common/buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import NumberedRadicalRow from "../NumberedRadicalRow";

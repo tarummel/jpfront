@@ -29,7 +29,7 @@ i18n
   .init({
     resources: translations,
     whitelist: languages,
-    lng: window.localStorage.getItem(Config.localStorage.language || "en"),
+    lng: Config.getStorage(Config.localStorage.language || "en"),
     fallbackLng: false,
     debug: Config.env === "development",
     keySeparator: ".",

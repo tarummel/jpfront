@@ -1,3 +1,4 @@
+import { DefaultTFuncReturn } from "i18next";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ChevronDownIcon } from "../../assets/icons/chevron-down.svg";
@@ -9,7 +10,7 @@ interface Props {
   children?: React.ReactNode;
   open?: boolean;
   number?: number | string;
-  title?: string;
+  title?: string | DefaultTFuncReturn;
 }
 
 interface HeaderProps {
@@ -69,7 +70,7 @@ const ColumnSpacer: React.FC<Props> = ({ children, open, number, title }) => {
     setCollapsed(!collapsed);
   };
 
-  const fullTitle = number ? `${number}. ${title}` : "";
+  const fullTitle = number ? `${number}. ${title}` : title;
 
   return (
     <Box>

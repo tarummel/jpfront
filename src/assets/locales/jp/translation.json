@@ -62,6 +62,11 @@
     "wiktionaryLink": "https://en.wiktionary.org/wiki/{{kanji}}",
     "wwwjdic": "WWWJDIC",
     "wwwjdicLink": "http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic?1MMJ{{kanji}}",
+    "visualCloseness": {
+      "defaultOpen": "デフォルトのオープン",
+      "sensitivity": "感度 (0.000 - 1.000)",
+      "visualCloseness": "形状類似性"
+    },
     "jmdict": {
       "notes": "Notes",
       "contexts": "Contexts",
@@ -74,7 +79,7 @@
     "codeLegalTitle": "Source Code license",
     "documentTitle": "Legal / Open Kanji",
     "aboutAndLegalInformation": "Legal Information",
-    "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses. More information can be found at: ",
+    "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses. ",
     "edrdgLegalTitle": "Electronic Dictionary Research and Development Group licenses",
     "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
     "edrdg": "To EDRDG Wiki",

@@ -6,7 +6,7 @@ import Help from "./routes/Help";
 import Home from "./routes/Home";
 import Multiradical from "./routes/Multiradical";
 import MultradicalType from "./routes/MultiradicalType";
-import KanjiInfo from "./routes/KanjiInfo";
+import KanjiInfo from "./routes/KanjiInfo/KanjiInfo";
 import Settings from "./routes/Settings";
 import Skip from "./routes/Skip";
 

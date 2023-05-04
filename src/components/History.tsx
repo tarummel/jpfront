@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
 import { StyledLink } from "./common";
+import Config from "../constants/Config";
 
-const HISTORY_LC = "history";
 
 const HistoryContainer = styled.div`
   background: ${({theme}) => theme.colors.elementPrimary};
@@ -30,8 +30,8 @@ const History: React.FC<WithTranslation> = ({ t }) => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    const localHistory = localStorage.getItem(HISTORY_LC);
-    if (typeof localHistory === 'string') {
+    const localHistory = Config.getStorage(Config.localStorage.history);
+    if (localHistory) {
       const historyArray = JSON.parse(localHistory);
       setHistory(historyArray);
     }

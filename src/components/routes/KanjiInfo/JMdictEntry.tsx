@@ -3,7 +3,7 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import styled from "styled-components";
 
 import { JEntry, JGlossary, JKanji, JReading, JSense, JSource } from "jmdict";
-import { Collapsible } from "./common";
+import { Collapsible } from "../../common";
 
 // const SHOW_DEFS_COUNT_DEFAULT = 4;
 

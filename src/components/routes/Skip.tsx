@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 import { NumberInput, Spinner } from "../common";
-import { Button, StateButton } from "../buttons";
+import { Button, StateButton } from "../common/buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import { StrokeCharactersMap } from "dataTypes";

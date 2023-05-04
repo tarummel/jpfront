@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { RadicalsState, StrokeCharactersMap } from "dataTypes";
-import StateButton from "./buttons/StateButton";
+import StateButton from "./common/buttons/StateButton";
 
 interface Props {
   handleClick: (radical: string) => void;
