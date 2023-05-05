@@ -71,7 +71,8 @@ const Value = styled.div`
 
 const VisualCloseness: React.FC<Props & WithTranslation> = ({ data, onSensitivityChange, open, sensitivity, t }) => {
 
-  const [checked, setChecked] = useState(Config.getStorage(Config.localStorage.vcOpen) === "true" ? true : false);
+  // default behavior is to have the box open
+  const [checked, setChecked] = useState(Config.getStorage(Config.localStorage.vcOpen) === "false" ? false : true);
 
   // intermediate step for checking input
   const checkSensitivity = (e: any) => {
