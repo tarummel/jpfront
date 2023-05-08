@@ -67,6 +67,11 @@ const Legal: React.FC<WithTranslation> = ({ t }) => {
           {t("legal.skipLegal")}
           <Anchor target="_blank" href={`${t("legal.skipLink")}`}>{t("legal.skipLink")}</Anchor>
         </Section>
+        <SectionTitle>{prefix}{t("legal.yenckenTitle")}</SectionTitle>
+        <Section>
+          {t("legal.yencken")}
+          <Anchor target="_blank" href={`${t("legal.yenckenLink")}`}>{t("legal.yenckenLink")}</Anchor>
+        </Section>
       </Card>
     </Body>
   );
