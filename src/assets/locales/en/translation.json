@@ -6,7 +6,7 @@
     "goBack": "< Back"
   },
   "header": {
-    "legal": "Legal",
+    "legal": "About",
     "help": "Help",
     "home": "Home",
     "settings": "Settings"
@@ -29,6 +29,7 @@
     "multiradicalSearch": "Multi-Radical",
     "multiradicalSearchByType": "Multi-Radical (Type)",
     "openKanji": "Open Kanji",
+    "openKanjiSub": "オープン漢字",
     "searchByRadical": "Search by Radicals",
     "searchKanji": "Search Kanji",
     "skip": "SKIP"
@@ -77,8 +78,7 @@
     "codeLegal": "The code that powers this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own. ",
     "codeLegalLink": "https://github.com/tarummel/jpfront",
     "codeLegalTitle": "Source Code license",
-    "documentTitle": "Legal / Open Kanji",
-    "aboutAndLegalInformation": "Legal Information",
+    "documentTitle": "About / Open Kanji",
     "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses. ",
     "edrdgLegalTitle": "Electronic Dictionary Research and Development Group licenses",
     "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
@@ -89,12 +89,14 @@
     "kanjidicLink": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
     "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG license.",
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
-    "logoLegal": "",
-    "logoLink": "",
-    "logoTitle": "",
+    "legalInformation": "Legal Information",
+    "logoLegal": "Designed by Pawata Designs. ",
+    "logoLink": "https://twitter.com/pawatadesigns",
+    "logoTitle": "Open Kanji logo",
     "skip": "SKIP license",
     "skipLegal": "The SKIP (System of Kanji Indexing by Patterns) for ordering kanji was developed by Jack Halpern (Kanji Dictionary Publishing Society), and is used with his permission. ",
     "skipLink": "http://www.kanji.org/",
+    "specialThanks": "Special Thanks",
     "yencken": "The strokeEditDistance.csv and yehAndLiRadical.csv files are the products of Dr. Lars Yencken's kanji similarity research, and are used with his permission. ",
     "yenckenLink": "https://lars.yencken.org/",
     "yenckenTitle": "Kanji Similarity license"

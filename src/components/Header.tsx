@@ -5,7 +5,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 
 const Container = styled.nav`
   background: ${({theme}) => theme.colors.buttonPrimary};
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   justify-content: center;
   height: 24px;
@@ -15,10 +15,15 @@ const Container = styled.nav`
 const HeaderButton = styled.button`
   background: ${({theme}) => theme.colors.buttonPrimary};
   border: none;
+  border-left: 1px solid ${({theme}) => theme.colors.buttonPrimary};
+  border-right: 1px solid ${({theme}) => theme.colors.buttonPrimary};
   color: ${({theme}) => theme.colors.textPrimary};
+  display: flex;
+  text-align: center;
+  align-items: center;
   font-size: ${({theme}) => theme.fontSizes.small};
-  line-height: 20px;
-  width: 100px;
+  padding-left: 19px;
+  padding-right: 19px;
 
   &:hover {
     background-color: ${({theme}) => theme.colors.buttonHover};

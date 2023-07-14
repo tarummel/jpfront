@@ -24,6 +24,7 @@ const Card = styled.div`
   border-radius: 5px;
   margin-left: 20px;
   margin-right: 20px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
 `;
 
@@ -50,7 +51,7 @@ const Legal: React.FC<WithTranslation> = ({ t }) => {
 
   return (
     <Body>
-      <Banner>{t("legal.aboutAndLegalInformation")}</Banner>
+      <Banner>{t("legal.legalInformation")}</Banner>
       <Card>
         <SectionTitle>{prefix}{t("legal.codeLegalTitle")}</SectionTitle>
         <Section>
@@ -71,6 +72,14 @@ const Legal: React.FC<WithTranslation> = ({ t }) => {
         <Section>
           {t("legal.yencken")}
           <Anchor target="_blank" href={`${t("legal.yenckenLink")}`}>{t("legal.yenckenLink")}</Anchor>
+        </Section>
+      </Card>
+      <Banner>{t("legal.specialThanks")}</Banner>
+      <Card>
+        <SectionTitle>{prefix}{t("legal.logoTitle")}</SectionTitle>
+        <Section>
+          {t("legal.logoLegal")}
+          <Anchor target="_blank" href={`${t("legal.logoLink")}`}>{t("legal.logoLink")}</Anchor>
         </Section>
       </Card>
     </Body>

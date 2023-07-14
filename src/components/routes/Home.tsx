@@ -19,24 +19,27 @@ const Body = styled.div`
   width: 50%;
 `;
 
-const Banner = styled.h1`
-  color: ${({theme}) => theme.colors.textPrimary};
-  font-size: 48px;
-  padding-top: 30px;
+const Logo = styled.img`
+  aspect-ratio: 1;
+  padding-bottom: 24px;
+  padding-top: 24px;
+  width: 192px;
 `;
 
-const LogoWrapper = styled.div`
-  padding-bottom: 30px;
-  padding-top: 30px;
+const Title = styled.h1`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: 56px;
+`;
 
-  img {
-    aspect-ratio: 1;
-    width: 192px;
-    object-fit: cover;
-  }
+const SubTitle = styled.h2`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: 26px;
+  font-weight: 100;
+  padding-top: 3px;
 `;
 
 const SearchBarWrapper = styled.div`
+  padding-top: 40px;
   padding-bottom: 10px;
 `;
 
@@ -99,10 +102,9 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
 
   return (
     <Body>
-      <Banner>{t("home.openKanji")}</Banner>
-      <LogoWrapper>
-        <img src="logo512.png" alt="Italian Trulli" />
-      </LogoWrapper>
+      <Logo src="logo192.png" />
+      <Title>{t("home.openKanji")}</Title>
+      <SubTitle>{t("home.openKanjiSub")}</SubTitle>
       <SearchBarWrapper>
         <SearchBar text={`${t("home.searchKanji")}...`}/>
       </SearchBarWrapper>

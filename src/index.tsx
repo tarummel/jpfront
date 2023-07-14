@@ -10,6 +10,8 @@ import i18n from './i18n';
 
 <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js" />;
 
+<link rel="icon" href="%PUBLIC_URL%/logo32.png" />
+
 // Stuff any debugging logs in production
 if (Config.env === "production") {
   // console.log("disabling logging");

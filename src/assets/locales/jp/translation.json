@@ -8,8 +8,8 @@
   "header": {
     "help": "ヘルプ",
     "home": "ホーム",
-    "legal": "法的",
-    "settings": "設定"
+    "legal": "サイトについて",
+    "settings": "セッテイ"
   },
   "help": {
     "bugs": "Please send any bug reports to the email 'bugs@openkanji.com'. Add as much information as you can including a description of the issue, your web browser type and version, steps to reproduce, screenshots, etc. Everything helps.",
@@ -28,7 +28,8 @@
     "random": "ランダムページ",
     "multiradicalSearch": "マルチ部首",
     "multiradicalSearchByType": "マルチ部首 (タイプ)",
-    "openKanji": "Open 漢字",
+    "openKanji": "オープン漢字",
+    "openKanjiSub": "Open Kanji",
     "searchByRadical": "検索部首",
     "searchKanji": "検索漢字",
     "skip": "SKIP"
@@ -77,8 +78,7 @@
     "codeLegal": "The code that powers this website is under the GNU GENERAL PUBLIC LICENSE. All other copyrights are their own. ",
     "codeLegalLink": "https://github.com/tarummel/jpfront",
     "codeLegalTitle": "Source Code license",
-    "documentTitle": "Legal / Open Kanji",
-    "aboutAndLegalInformation": "Legal Information",
+    "documentTitle": "サイトについて / Open Kanji",
     "edrdgLegal": "KRADFILE/RADKFILE, JMDICT and KANJIDIC are copyright by the Electronic Dictionary Research and Development Group (EDRDG) under their respective licenses. ",
     "edrdgLegalTitle": "Electronic Dictionary Research and Development Group licenses",
     "edrdgLink": "http://www.edrdg.org/wiki/index.php/Main_Page",
@@ -89,12 +89,14 @@
     "kanjidicLink": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
     "kradfile": "KRADFILE/RADKFILE are copyright under the EDRDG license.",
     "kradfileLink": "http://www.edrdg.org/edrdg/licence.html",
-    "logoLegal": "",
-    "logoLink": "",
-    "logoTitle": "",
+    "legalInformation": "Legal Information",
+    "logoLegal": "Designed by Pawata Designs. ",
+    "logoLink": "https://twitter.com/pawatadesigns",
+    "logoTitle": "Open Kanji logo",
     "skip": "SKIP license",
     "skipLegal": "The SKIP (System of Kanji Indexing by Patterns) for ordering kanji was developed by Jack Halpern (Kanji Dictionary Publishing Society), and is used with his permission. ",
     "skipLink": "http://www.kanji.org/",
+    "specialThanks": "Special Thanks",
     "yencken": "The strokeEditDistance.csv and yehAndLiRadical.csv files are the products of Dr. Lars Yencken's kanji similarity research, and are used with his permission. ",
     "yenckenLink": "https://lars.yencken.org/",
     "yenckenTitle": "Kanji Similarity license"
@@ -120,7 +122,7 @@
   },
   "settings": {
     "dark": "ダーク",
-    "documentTitle": "設定 / Open Kanji",
+    "documentTitle": "セッテイ / Open Kanji",
     "history": "検索履歴",
     "historySizeDesc": "履歴の最大サイズを設定",
     "historyClear": "クリア",
