@@ -5,22 +5,26 @@
     {
       "src": "logo32.png",
       "type": "image/png",
-      "sizes": "32x32"
+      "sizes": "32x32",
+      "href": "favicon.ico"
     },
     {
       "src": "logo128.png",
       "type": "image/png",
-      "sizes": "128x128"
+      "sizes": "128x128",
+      "href": "favicon-128.png"
     },
     {
       "src": "logo180.png",
       "type": "image/png",
-      "sizes": "180x180"
+      "sizes": "180x180",
+      "href": "favicon-180.png"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "href": "favicon-192.png"
     },
     {
       "src": "logo512.png",
