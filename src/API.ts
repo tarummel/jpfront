@@ -1,91 +1,98 @@
-import axios from 'axios';
-import { AxiosResponse } from "axios";
+
+import axios, { AxiosResponse } from "axios";
 
 import config from "./constants/Config";
 import * as paramTypes from "apiParamTypes";
+import { getErrorMessage } from "./components/utils/helpers_funcs";
 
-axios.defaults.baseURL = config.backend.jpcoreUrl;
-axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
-axios.defaults.timeout = 20 * 1000; // in milliseconds
+const API = axios.create({
+  baseURL: config.backend.jpcoreUrl,
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+  },
+  timeout: 20 * 1000,
+});
 
-const getPromiseRejection = (error: any): Promise<any> => {
-  if (error.response) {
-    // The request was made and the server responded with a status code that falls out of the range of 2xx
-    return Promise.reject(error.response);
-  } else if (error.request) {
-    // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser 
-    // and an instance of http.ClientRequest in node.js
-    return Promise.reject(error.request);
-  }
-  // Something happened in setting up the request that triggered an Error
-  return Promise.reject(error);
-};
-
-async function getRadicalsList(params: paramTypes.RadicalsListParams = {}): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get('krad/radicals/', { params });
-  } catch (error: any) {
-    return getPromiseRejection(error);
-  }
+interface ValidationError {
+  message: string;
+  errors: Record<string, string[]>
 }
 
-async function getMatchingKDKanjiByRadicals(radicals: string[], params: paramTypes.MatchingKanjiByRadicalsParams = {}): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`kanjidic/radicals/${radicals.join(",")}/kanji/`, { params });
-  } catch (error: any) {
-    return getPromiseRejection(error);
+// const getPromiseRejection = (error: any): Promise<never> => {
+//   if (error.response) {
+//     return Promise.reject(error.response);
+//   } else if (error.request) {
+//     return Promise.reject(error.request);
+//   }
+//   return Promise.reject(getErrorMessage(error));
+// };
+
+function getAPIError(error: unknown): string {
+  let status = 500;
+  let message = 'Internal API Error';
+
+  if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
+    if (error.response && typeof error.response.data === 'object') {
+      console.error('Error in Response:', error.response);
+      status = error.response.status;
+      message = error.response.data.message;
+    } else if (error.request && typeof error.request.data === 'object') {
+      console.error('Error in Request:', error.request);
+      status = error.request.status;
+      message = error.request.data.message;
+    } else {
+      message = getErrorMessage(error);
+      console.error('Axios API error:', message);
+    }
+  } else {
+    message = getErrorMessage(error);
+    console.error('General API error:', message);
   }
+
+  return JSON.stringify({ status, message });
 }
 
-async function getRelatedRadicalsByRadicals(radicals: string[], params: paramTypes.RelatedRadicalsParams = {}): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`krad/radicals/${radicals.join(",")}/related/`, { params });
-  } catch (error: any) {
-    return getPromiseRejection(error);
-  }
+API.interceptors.response.use(
+  response => response,
+  error => { 
+    throw new Error(getAPIError(error));
+  });
+
+export default API;
+
+async function getRadicalsList(params: paramTypes.RadicalsListParams = {}): Promise<AxiosResponse<any, any>> {
+  return await API.get('krad/radicals/', { params });
 }
 
-async function getKDKanjiByKanji(kanji: string): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`kanjidic/kanji/${kanji}/`);
-  } catch (error: any) {
-    return getPromiseRejection(error);
-  }
+async function getMatchingKDKanjiByRadicals(radicals: string[], params: paramTypes.MatchingKanjiByRadicalsParams = {}, signal: AbortSignal): Promise<AxiosResponse<any, any>> {
+  return await API.get(`kanjidic/radicals/${radicals.join(",")}/kanji/`, { signal, params });
 }
 
-async function getKDKanjiBySkipcode(skip:string, params: paramTypes.KDKanjiBySkipcodeParams = {}): Promise<AxiosResponse<any, any>> {
-  try {
-    return await axios.get(`kanjidic/kanji/skipcode/${skip}/`, { params });
-  } catch (error: any) {
-    return getPromiseRejection(error);
-  }
+async function getRelatedRadicalsByRadicals(radicals: string[], params: paramTypes.RelatedRadicalsParams = {}, signal: AbortSignal): Promise<AxiosResponse<any, any>> {
+  return await API.get(`krad/radicals/${radicals.join(",")}/related/`, { signal, params });
 }
 
-async function getVisualClosenessByKanji(kanji: string, params: paramTypes.VisualClosenessByKanjiParams = {}): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`kanjidic/kanji/${kanji}/visualcloseness/`, { params });
-  } catch (error: any) {
-    return getPromiseRejection(error);
-  }
+async function getKDKanjiByKanji(kanji: string): Promise<AxiosResponse<any, any>> {
+  return await API.get(`kanjidic/kanji/${kanji}/`);
 }
 
-async function getKDKanjiRandom(params: paramTypes.KDKanjiRandomParams = {}): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`kanjidic/random/`, { params });
-  } catch (error: any) {
-    return getPromiseRejection(error);
-  } 
+async function getKDKanjiBySkipcode(skip: string, params: paramTypes.KDKanjiBySkipcodeParams = {}, signal: AbortSignal): Promise<AxiosResponse<any, any>> {
+  return await API.get(`kanjidic/kanji/skipcode/${skip}/`, { signal, params });
 }
 
-async function getJMdictEntryByKanji(kanji: string): Promise<AxiosResponse<any>> {
-  try {
-    return await axios.get(`jmdict/kanji/${kanji}/`);
-  } catch (error: any) {
-    return getPromiseRejection(error);
-  }
+async function getVisualClosenessByKanji(kanji: string, params: paramTypes.VisualClosenessByKanjiParams = {}): Promise<AxiosResponse<any, any>> {
+  return await API.get(`kanjidic/kanji/${kanji}/visualcloseness/`, { params });
 }
 
-const API = {
+async function getKDKanjiRandom(params: paramTypes.KDKanjiRandomParams = {}): Promise<AxiosResponse<any, any>> {
+  return await API.get(`kanjidic/random/`, { params });
+}
+
+async function getJMdictEntryByKanji(kanji: string): Promise<AxiosResponse<any, any>> {
+  return await API.get(`jmdict/kanji/${kanji}/`);
+}
+
+export {
   getRadicalsList,
   getMatchingKDKanjiByRadicals,
   getRelatedRadicalsByRadicals,
@@ -95,5 +102,3 @@ const API = {
   getKDKanjiRandom,
   getJMdictEntryByKanji,
 };
-
-export default API;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Config from "../constants/Config";
 import Header from "./Header";
 import Router from "./Router";
-import Theme from "./utils/Theme";
+import Theme from "./Theme";
 
 const AppContainer = styled.div`
   background: ${props => props.theme.colors.background};

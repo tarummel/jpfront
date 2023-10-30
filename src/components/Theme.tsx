@@ -2,8 +2,8 @@ import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 // import NotoSansJP from "../../assets/fonts/NotoSansJP/NotoSansJP-Regular.otf";
-import Roboto from "../../assets/fonts/Roboto/Roboto-Regular.ttf";
-import { dark, light, purpleism } from "../../constants/Themes";
+import Roboto from "../assets/fonts/Roboto/Roboto-Regular.ttf";
+import { dark, light, purpleism } from "../constants/Themes";
 
 interface Props {
   children?: React.ReactNode;

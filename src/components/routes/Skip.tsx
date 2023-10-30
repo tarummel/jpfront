@@ -7,13 +7,15 @@ import { Button, StateButton } from "../common/buttons";
 import History from "../History";
 import NumberedKanjiRow from "../NumberedKanjiRow";
 import { StrokeCharactersMap } from "dataTypes";
-import API from "../../API";
+import { getKDKanjiBySkipcode } from "../../API";
 import LicenseAgreement from "../LicenseAgreement";
 
 import { ReactComponent as LeftRightIcon } from "../../assets/icons/left-right-skip.svg";
 import { ReactComponent as UpDownIcon } from "../../assets/icons/up-down-skip.svg";
 import { ReactComponent as EncloseIcon } from "../../assets/icons/enclose-skip.svg";
 import { ReactComponent as OtherIcon } from "../../assets/icons/other-skip.svg";
+import { KDKanjiBySkipcodeParams } from "apiParamTypes";
+import { getErrorMessage } from "../utils/helpers_funcs";
 
 const CATEGORY_HEIGHT = 44;
 const CATEGORY_WIDTH = CATEGORY_HEIGHT;
@@ -21,6 +23,28 @@ const INPUT_HEIGHT = 40;
 const INPUT_WIDTH = 60;
 const MATH_BUTTONS_HEIGHT = 30;
 const MATH_BUTTONS_WIDTH = MATH_BUTTONS_HEIGHT;
+
+interface Form {
+  category: number,
+  main: number,
+  sub: number,
+  mainRange: number,
+  subRange: number
+}
+
+const CATEGORY = 'category';
+const MAIN = 'main';
+const MAIN_RANGE = 'mainRange';
+const SUB = 'sub';
+const SUB_RANGE = 'subRange';
+
+const DEFAULT_FORM = {
+  'category': 0,
+  'main': 1,
+  'sub': 1,
+  'mainRange': 0,
+  'subRange': 0,
+};
 
 const Body = styled.div`
   background: ${({theme}) => theme.colors.foreground};
@@ -126,102 +150,75 @@ const HistoryWrapper = styled.div`
 `;
 
 const Skip: React.FC<WithTranslation> = ({ t }) => {
-  // 0 = no selection, 1-4 = selected
-  const [category, setCategory] = useState(0);
-  const [main, setMain] = useState(1);
-  const [mainRange, setMainRange] = useState(0);
-  const [sub, setSub] = useState(1);
-  const [subRange, setSubRange] = useState(0);
-  const [kanjiData, setKanjiData] = useState<StrokeCharactersMap>({});
+  const [form, setForm] = useState(DEFAULT_FORM);
+  const [data, setData] = useState<StrokeCharactersMap>({});
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [error, setError] = useState(false);
+
+  const { category, main, sub, mainRange, subRange } = form;
 
   useEffect(() => {
     document.title = t("skip.documentTitle");
   }, []);
 
   useEffect(() => {
-    const getAndSetKanjiData = async () => {
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      const skipcode = [category, main, sub].join('-');
+      const params = { main_range: mainRange, sub_range: subRange, simple: true } as KDKanjiBySkipcodeParams;
+      
       setLoading(true);
 
-      const skipcode = [category, main, sub].join('-');
-      const params = { main_range: mainRange, sub_range: subRange, simple: true};
-      const response = await API.getKDKanjiBySkipcode(skipcode, params);
-      setKanjiData(response.data.data);
-
+      try {
+        const response = await getKDKanjiBySkipcode(skipcode, params, controller.signal);
+        setData(response.data.data as StrokeCharactersMap);
+        setError(false);
+      } catch (e: unknown) {
+        console.log(getErrorMessage(e));
+        setError(true);
+      }
+      
       setLoading(false);
     };
 
     if (category > 0 && category < 5 && main > 0 && sub > 0 && mainRange > -1 && subRange > -1) {
-      getAndSetKanjiData().catch((e) => { 
-        console.log(getAndSetKanjiData.name, e);
-      });
+      fetchData();
     } else {
-      setKanjiData({});
+      setData({});
+      setError(false);
     }
-  }, [category, main, mainRange, sub, subRange]);
 
+    return () => {
+      controller.abort();
+    };
+  }, [form]);
+
+  // 0 = no selection, 1-4 = selected
   const handleSelection = (categoryValue: number): void => {
-    if (category === categoryValue) {
-      setCategory(0);
-    } else {
-      setCategory(categoryValue);
-    }
+    setForm(prev => {
+      // select that value if not already selected, otherwise deselect
+      const newValue = form.category !== categoryValue ? categoryValue : 0;
+      return { ...prev, 'category': newValue };
+    });
   };
 
-  const handleCategoryChange = (e: any): void => {
-    setCategory(parseInput(e.target.value));
+  const handleInputChange = (valueName: string, e: any): void => {
+    setForm(prev => {
+      const newValue = e.target.value === '' ? '' : parseInt(e.target.value) || 0;
+      return { ...prev, [valueName as keyof Form]: newValue, };
+    });
   };
 
-  const handleMainChange = (e: any): void => {
-    setMain(parseInput(e.target.value));
-  };
-
-  const handleSubChange = (e: any): void => {
-    setSub(parseInput(e.target.value));
-  };
-
-  const handleMainRangeChange = (e: any): void => {
-    setMainRange(parseInput(e.target.value));
-  };
-
-  const handleSubRangeChange = (e: any): void => {
-    setSubRange(parseInput(e.target.value));
-  };
-
-  const parseInput = (input: string): any => {
-    return input === "" ? "" : parseInt(input) || 0;
-  };
-
-  const handleAdditionMainClick = () => {
-    setMain(main + 1);
-  };
-
-  const handleAdditionSubClick = () => {
-    setSub(sub + 1);
-  };
-
-  const handleAdditionMainRangeClick = () => {
-    setMainRange(mainRange + 1);
-  };
-
-  const handleAdditionSubRangeClick = () => {
-    setSubRange(subRange + 1);
-  };
-
-  const handleSubtractMainClick = () => {
-    setMain(Math.max(main - 1, 1));
-  };
-
-  const handleSubtractSubClick = () => {
-    setSub(Math.max(sub - 1, 1));
-  };
-
-  const handleSubtractMainRangeClick = () => {
-    setMainRange(Math.max(mainRange - 1, 0));
-  };
-
-  const handleSubtractSubRangeClick = () => {
-    setSubRange(Math.max(subRange - 1, 0));
+  const handleClick = (valueName: string, amount: number, ) => {
+    setForm(prev => {
+      const key: keyof Form = valueName as keyof Form;
+      console.log(key);
+      const newForm = { ...prev, [key]: prev[key] + amount };
+      console.log(newForm);
+      return newForm;
+    });
   };
 
   return (
@@ -230,25 +227,25 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
         <CodeBuilderColumn>
           <CodeInputContainer>
             <Title>{t("skip.shape")}</Title>
-            <NumberInput height={INPUT_HEIGHT} onChange={handleCategoryChange} value={category} width={INPUT_WIDTH}/>
+            <NumberInput height={INPUT_HEIGHT} onChange={(e) => handleInputChange(CATEGORY, e)} value={category} width={INPUT_WIDTH}/>
           </CodeInputContainer>
           <CategoryButtonContainer>
-            <StateButton callback={1} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 1 ? 2 : 1} width={CATEGORY_WIDTH}>
+            <StateButton handleClick={() => handleSelection(1)} height={CATEGORY_HEIGHT} state={category === 1 ? 2 : 1} width={CATEGORY_WIDTH}>
               <SVG>
                 <LeftRightIcon />
               </SVG>
             </StateButton>
-            <StateButton callback={2} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 2 ? 2 : 1} width={CATEGORY_WIDTH}>
+            <StateButton handleClick={() => handleSelection(2)} height={CATEGORY_HEIGHT} state={category === 2 ? 2 : 1} width={CATEGORY_WIDTH}>
               <SVG>
                 <UpDownIcon />
               </SVG>
             </StateButton>
-            <StateButton callback={3} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 3 ? 2 : 1} width={CATEGORY_WIDTH}>
+            <StateButton handleClick={() => handleSelection(3)} height={CATEGORY_HEIGHT} state={category === 3 ? 2 : 1} width={CATEGORY_WIDTH}>
               <SVG>
                 <EncloseIcon />
               </SVG>
             </StateButton>
-            <StateButton callback={4} handleClick={handleSelection} height={CATEGORY_HEIGHT} state={category === 4 ? 2 : 1} width={CATEGORY_WIDTH}>
+            <StateButton handleClick={() => handleSelection(4)} height={CATEGORY_HEIGHT} state={category === 4 ? 2 : 1} width={CATEGORY_WIDTH}>
               <SVG>
                 <OtherIcon />
               </SVG>
@@ -259,18 +256,18 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
         <CodeBuilderColumn>
           <CodeInputContainer>
             <Title>{t("skip.main")}</Title>
-            <NumberInput height={INPUT_HEIGHT} onChange={handleMainChange} value={main} width={INPUT_WIDTH}/>
+            <NumberInput height={INPUT_HEIGHT} onChange={(e) => handleInputChange(MAIN, e)} value={main} width={INPUT_WIDTH}/>
             <ButtonPair>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractMainClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionMainClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(MAIN, -1)} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(MAIN, 1)} width={MATH_BUTTONS_WIDTH}>+</Button>
             </ButtonPair>
           </CodeInputContainer>
           <CodeInputContainer>
             <PlusMinus>{t("skip.plusminus")}</PlusMinus>
-            <NumberInput height={INPUT_HEIGHT} onChange={handleMainRangeChange} value={mainRange} width={INPUT_WIDTH}/>
+            <NumberInput height={INPUT_HEIGHT} onChange={(e) => handleInputChange(MAIN_RANGE, e)} value={mainRange} width={INPUT_WIDTH}/>
             <ButtonPair>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractMainRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionMainRangeClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(MAIN_RANGE, -1)} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(MAIN_RANGE, 1)} width={MATH_BUTTONS_WIDTH}>+</Button>
             </ButtonPair>
           </CodeInputContainer>
         </CodeBuilderColumn>
@@ -278,18 +275,18 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
         <CodeBuilderColumn>
           <CodeInputContainer>
             <Title>{t("skip.sub")}</Title>
-            <NumberInput height={INPUT_HEIGHT} onChange={handleSubChange} value={sub} width={INPUT_WIDTH}/>
+            <NumberInput height={INPUT_HEIGHT} onChange={(e) => handleInputChange(SUB, e)} value={sub} width={INPUT_WIDTH}/>
             <ButtonPair>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractSubClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionSubClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(SUB, -1)} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(SUB, 1)} width={MATH_BUTTONS_WIDTH}>+</Button>
             </ButtonPair>
           </CodeInputContainer>
           <CodeInputContainer>
             <PlusMinus>{t("skip.plusminus")}</PlusMinus>
-            <NumberInput height={INPUT_HEIGHT} onChange={handleSubRangeChange} value={subRange} width={INPUT_WIDTH}/>
+            <NumberInput height={INPUT_HEIGHT} onChange={(e) => handleInputChange(SUB_RANGE, e)} value={subRange} width={INPUT_WIDTH}/>
             <ButtonPair>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleSubtractSubRangeClick} width={MATH_BUTTONS_WIDTH}>-</Button>
-              <Button height={MATH_BUTTONS_HEIGHT} onClick={handleAdditionSubRangeClick} width={MATH_BUTTONS_WIDTH}>+</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(SUB_RANGE, -1)} width={MATH_BUTTONS_WIDTH}>-</Button>
+              <Button height={MATH_BUTTONS_HEIGHT} onClick={() => handleClick(SUB_RANGE, 1)} width={MATH_BUTTONS_WIDTH}>+</Button>
             </ButtonPair>
           </CodeInputContainer>
         </CodeBuilderColumn>
@@ -304,7 +301,7 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
               <Spinner size={40} />
             </SpinnerWrapper>
           )}
-          { !loading && kanjiData && ( <NumberedKanjiRow kanjiData={kanjiData} /> )}
+          { !loading && data && ( <NumberedKanjiRow kanjiData={data} /> )}
         </RowContainer>
         <LicenseAgreement krad={true} skip={true} />
       </KanjiContainer>

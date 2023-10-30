@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import API from "../../API";
+import { getMatchingKDKanjiByRadicals, getRelatedRadicalsByRadicals } from "../../API";
 import { Spinner } from "../common";
 import { Button } from "../common/buttons";
 import History from "../History";
@@ -104,10 +104,12 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
 
   useEffect(() => {
     const newState = {...DEFAULT_STATE};
+    const controller = new AbortController();
+
     const getAndSetDisabledRadicals = async () => {
       // setRadicalsLoading(true);
       const params = { simple: true, invert: true } as RelatedRadicalsParams;
-      const response = await API.getRelatedRadicalsByRadicals(selectedRadicals, params);
+      const response = await getRelatedRadicalsByRadicals(selectedRadicals, params, controller.signal);
       const data = response.data.data;
 
       for (let i = 0; i < data.length; i++) {
@@ -118,6 +120,15 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
       // setRadicalsLoading(false);
     };
 
+    const getAndSetMatchingKanji = async () => {
+      setKanjiLoading(true);
+      
+      const params = { simple: true } as MatchingKanjiByRadicalsParams;
+      const response = await getMatchingKDKanjiByRadicals(selectedRadicals, params, controller.signal);
+      setKanjiData(response.data.data);
+      setKanjiLoading(false);
+    };
+
     if (selectedRadicals.length) {
       for (let i = 0; i < selectedRadicals.length; i++) {
         newState[selectedRadicals[i]] = 2;
@@ -126,25 +137,18 @@ const Multiradical: React.FC<WithTranslation> = ({ t }) => {
       getAndSetDisabledRadicals().catch((e) => {
         console.log(getAndSetDisabledRadicals.name, e);
       });
-    } else {
-      setRadicalsState({...newState});
-    }
 
-    const getAndSetMatchingKanji = async () => {
-      setKanjiLoading(true);
-      const params = { simple: true } as MatchingKanjiByRadicalsParams;
-      const response = await API.getMatchingKDKanjiByRadicals(selectedRadicals, params);
-      setKanjiData(response.data.data);
-      setKanjiLoading(false);
-    };
-
-    if (selectedRadicals.length) {
       getAndSetMatchingKanji().catch((e) => {
         console.log(getAndSetMatchingKanji.name, e);
       });
     } else {
+      setRadicalsState({...newState});
       setKanjiData({});
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [selectedRadicals]);
 
   const arrayRemove = (arr: string[], val: string): string[] => { 

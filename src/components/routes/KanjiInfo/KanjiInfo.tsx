@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { withTranslation, WithTranslation } from "react-i18next";
 
-import API from "../../../API";
 import { Anchor, HorizontalDivider, Tooltip } from "../../common";
 import Config from "../../../constants/Config";
 import { JEntry } from "jmdict";
@@ -14,6 +13,7 @@ import LicenseAgreement from "../../LicenseAgreement";
 import VisualCloseness from "./VisualCloseness";
 import { VisualClosenessTupleArray } from "dataTypes";
 import { VisualClosenessByKanjiParams } from "apiParamTypes";
+import { getJMdictEntryByKanji, getKDKanjiByKanji, getVisualClosenessByKanji } from "../../../API";
 
 
 const Body = styled.div`
@@ -119,18 +119,18 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   }, []);
 
   const getAndSetEntry = async (kanji: string) => {
-    const response = await API.getJMdictEntryByKanji(kanji);
+    const response = await getJMdictEntryByKanji(kanji);
     setEntry(response.data.data);
   };
   
   const getAndSetKDKanji = async (kanji: string) => {
-    const response = await API.getKDKanjiByKanji(kanji);
+    const response = await getKDKanjiByKanji(kanji);
     setKdk(response.data.data);
   };
 
   const getAndSetVisualCloseness = async (kanji: string) => {
     const params = { simple: true, sensitivity } as VisualClosenessByKanjiParams;
-    const response = await API.getVisualClosenessByKanji(kanji, params);
+    const response = await getVisualClosenessByKanji(kanji, params);
     setVc(response.data.data);
   };
 
@@ -154,7 +154,6 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
     // setVcLoading(true);
     getAndSetVisualCloseness(kanjiParam).catch((e) => {
       console.log(getAndSetVisualCloseness.name, e);
-      setVc([]);
     });
     // setVcLoading(false);
 
@@ -184,7 +183,7 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   };
 
   // Kanjidic info
-  const onyomi = kdk?.reading?.[0].ja_on || "n/a";
+  const onyomi = kdk?.reading?.[0].ja_on?.join(" ") || "n/a";
   const kunyomi = kdk?.reading?.[0].ja_kun?.join(" ") || "n/a";
   const strokes = kdk?.misc?.[0].strokes || "n/a";
   const frequency = kdk?.misc?.[0].frequency || "n/a";
@@ -193,8 +192,9 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
   const skip = kdk?.querycode?.[0].skip || "n/a";
   const unicode = kdk?.codepoint?.[0].ucs || kanjiParam?.charCodeAt(0) || "n/a";
 
-  // JMdict
+  
   const hasJmdict = !!entry.length;
+  const hasVisualCloseness = !!vc.length;
 
   // Meta info table fields
   const fieldSuffix = ": ";
@@ -246,15 +246,18 @@ const KanjiInfo: React.FC<WithTranslation> = ({ t }) => {
             </LinksGrid>
           </LeftContainer>
           <RightContainer>
-            <VisualClosenessWrapper>
-              <VisualCloseness data={vc} loading={false} onSensitivityChange={handleSensitivityChange} open={!openVcByDefault} sensitivity={sensitivity} />
-            </VisualClosenessWrapper>
+            { hasVisualCloseness ?
+              <VisualClosenessWrapper>
+                <VisualCloseness data={vc} loading={false} onSensitivityChange={handleSensitivityChange} open={!openVcByDefault} sensitivity={sensitivity} />
+              </VisualClosenessWrapper>
+              : null
+            }
             <EntryContainer>
-              { !hasJmdict
-                ? <Error>{t("kanjiInfo.noEntryFound")}</Error>
-                : entry.map((e, i) => {
+              { hasJmdict ?
+                entry.map((e, i) => {
                   return ( <JMdictEntry key={i} entry={e} num={i+1} /> );
                 })
+                : <Error>{t("kanjiInfo.noEntryFound")}</Error>
               }
             </EntryContainer>
             <LicenseAgreement krad={true} jmdict={hasJmdict} />

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import API from "../../API";
+import { getKDKanjiRandom } from "../../API";
 import { MainMenuButton } from "../common/buttons";
 import SearchBar from "../common/SearchBar";
 import { KDKanjiRandomParams } from "apiParamTypes";
@@ -78,7 +78,7 @@ const Home: React.FC<WithTranslation> = ({ t }) => {
   const handleRandomNav = () => {
     const getAndNavigateRandom = async () => {
       const params = { kanji_only: true } as KDKanjiRandomParams;
-      const response = await API.getKDKanjiRandom(params);
+      const response = await getKDKanjiRandom(params);
       const data = response.data.data;
       navigate(`/kanji/${data}`);
     };
