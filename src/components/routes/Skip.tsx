@@ -38,6 +38,13 @@ const MAIN_RANGE = 'mainRange';
 const SUB = 'sub';
 const SUB_RANGE = 'subRange';
 
+const CATEGORY_MAX = 4;
+const CATEGORY_MIN = 0;
+const PART_MAX = 34;
+const PART_MIN = 1;
+const RANGE_MAX = PART_MAX;
+const RANGE_MIN = 0;
+
 const DEFAULT_FORM = {
   'category': 0,
   'main': 1,
@@ -204,20 +211,36 @@ const Skip: React.FC<WithTranslation> = ({ t }) => {
     });
   };
 
+  const between = (value: number, min: number, max: number): number => {
+    return Math.min(Math.max(value, min), max) || min;
+  };
+
+  const getNewValue = (valueName: string, amount: number): number => {
+    let newValue;
+
+    if (valueName === CATEGORY) {
+      newValue = between(amount, CATEGORY_MIN, CATEGORY_MAX);
+    } else if (valueName === MAIN || valueName === SUB) {
+      newValue = between(amount, PART_MIN, PART_MAX);
+    } else {
+      newValue = between(amount, RANGE_MIN, RANGE_MAX);
+    }
+
+    return newValue;
+  };
+
   const handleInputChange = (valueName: string, e: any): void => {
     setForm(prev => {
-      const newValue = e.target.value === '' ? '' : parseInt(e.target.value) || 0;
+      const newValue = getNewValue(valueName, parseInt(e.target.value));
       return { ...prev, [valueName as keyof Form]: newValue, };
     });
   };
 
   const handleClick = (valueName: string, amount: number, ) => {
-    setForm(prev => {
-      const key: keyof Form = valueName as keyof Form;
-      console.log(key);
-      const newForm = { ...prev, [key]: prev[key] + amount };
-      console.log(newForm);
-      return newForm;
+    const key: keyof Form = valueName as keyof Form;
+    setForm(prev => { 
+      const newValue = getNewValue(valueName, prev[key] + amount);
+      return { ...prev, [key]: newValue };
     });
   };
 
